@@ -1,5 +1,4 @@
-abstract class AppAssetSvg {
-  AppAssetSvg._();
+ class AppAssetSvg {
 
   static const String svgOnBoarding = "asset/svg/on_Boarding.svg";
 }
