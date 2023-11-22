@@ -1,5 +1,7 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/modules/login/login_contreoller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,13 +15,19 @@ class LoginView extends GetView<LoginController> {
         body: SafeArea(
           child: ListView(
             children: [
-              Text(
-                AppStrings.loginIntoAccount,
-                style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700),
+              SizedBox(
+                height: context.screenHeight * 0.1,
+              ),
+              Center(
+                child: Text(
+                  AppStrings.loginIntoAccount,
+                  style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w700),
+                ),
               )
+              CustomTextField(title: AppStrings.email, text: AppStrings.insertEmail, obscureText: false, inputType: TextInputType.emailAddress, icon: )
             ],
           ),
         ));
