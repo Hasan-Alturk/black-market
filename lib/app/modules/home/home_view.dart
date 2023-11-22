@@ -21,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: AppColors.blackLightActive,
+                color: AppColors.gray,
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(32),
                     bottomRight: Radius.circular(32))),
@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
                                 Text(
                                   AppStrings.hello,
                                   style: TextStyle(
-                                    color: AppColors.blackDarkActive,
+                                    color: AppColors.blackLightActive,
                                   ),
                                 ),
                                 Text(
