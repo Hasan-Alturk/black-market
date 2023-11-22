@@ -27,7 +27,7 @@ class LoginView extends GetView<LoginController> {
                       fontWeight: FontWeight.w700),
                 ),
               )
-              CustomTextField(title: AppStrings.email, text: AppStrings.insertEmail, obscureText: false, inputType: TextInputType.emailAddress, icon: )
+           //   CustomTextField(title: AppStrings.email, text: AppStrings.insertEmail, obscureText: false, inputType: TextInputType.emailAddress, icon: )
             ],
           ),
         ));
