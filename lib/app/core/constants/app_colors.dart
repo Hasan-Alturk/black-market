@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   static Color white = const Color(0xffFFFFFF);
   static Color gray = const Color(0xff2A2A2A);
+  static Color graylight = const Color.fromRGBO(255, 255, 255, 0.7);
 
   //Black
 

@@ -1,43 +1,89 @@
+import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String title;
-  final String text;
-  final bool obscureText;
-  final TextInputType inputType;
-  final IconButton icon;
-
   const CustomTextField({
-    super.key,
-    required this.title,
-    required this.text,
-    required this.obscureText,
-    required this.inputType,
+    //  required this.controller,
+    required this.label,
+    required this.hint,
     required this.icon,
-  });
+    // required this.onChanged,
+    this.validator,
+    this.textInputType = TextInputType.text,
+    this.obscureText = false,
+    this.disable = false,
+    this.showBorder = false,
+    Key? key,
+  }) : super(key: key);
+  //final TextEditingController controller;
+  final String label;
+  final String hint;
+  final Image icon;
+
+  final bool showBorder;
+  final bool disable;
+  final TextInputType textInputType;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+  //final void Function(String) onChanged;
+  OutlineInputBorder outlineInputBorder() {
+    if (showBorder) {
+      return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.circular(15),
+      );
+    } else {
+      return OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(15),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: TextField(
-            style: Theme.of(context).textTheme.labelMedium,
-            keyboardType: inputType,
-            obscureText: obscureText,
-            cursorColor: Theme.of(context).primaryColor,
-            textAlign: TextAlign.right,
-            decoration: InputDecoration(
-                suffixIcon: icon,
-                labelText: text,
-                labelStyle: Theme.of(context).textTheme.displayMedium,
-                contentPadding: const EdgeInsets.all(16),
-                focusedBorder:
-                    Theme.of(context).inputDecorationTheme.focusedBorder,
-                enabledBorder:
-                    Theme.of(context).inputDecorationTheme.enabledBorder),
-          )),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: Text(
+                label,
+                style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+        TextFormField(
+          enabled: !disable,
+          keyboardType: textInputType,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            suffixIcon: icon,
+            filled: true,
+            enabledBorder: outlineInputBorder(),
+            focusedBorder: outlineInputBorder(),
+            errorBorder: outlineInputBorder(),
+            focusedErrorBorder: outlineInputBorder(),
+            disabledBorder: outlineInputBorder(),
+            border: outlineInputBorder(),
+            fillColor: AppColors.gray,
+            hintText: hint,
+            hintStyle: TextStyle(
+                fontSize: 12,
+                color: AppColors.blackLight,
+                fontWeight: FontWeight.w400),
+          ),
+          // controller: controller,
+          validator: validator,
+          //  onChanged: onChanged,
+        ),
+      ],
     );
   }
 }
