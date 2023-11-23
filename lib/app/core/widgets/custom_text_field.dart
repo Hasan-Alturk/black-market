@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
   OutlineInputBorder outlineInputBorder() {
     if (showBorder) {
       return OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.blue),
+        borderSide: const BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(15),
       );
     } else {
@@ -43,45 +43,49 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Text(
-                label,
-                style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w700),
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 14,
+              color: AppColors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        Directionality(
+          //  onChanged: onChanged,
+          // controller: controller,
+          textDirection: TextDirection.rtl,
+          child: TextFormField(
+            enabled: !disable,
+            keyboardType: textInputType,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              suffixIcon: icon,
+              filled: true,
+              enabledBorder: outlineInputBorder(),
+              focusedBorder: outlineInputBorder(),
+              errorBorder: outlineInputBorder(),
+              focusedErrorBorder: outlineInputBorder(),
+              disabledBorder: outlineInputBorder(),
+              border: outlineInputBorder(),
+              fillColor: AppColors.gray,
+              hintText: hint,
+              hintStyle: TextStyle(
+                fontSize: 12,
+                color: AppColors.graylight,
+                fontWeight: FontWeight.w400,
               ),
             ),
-          ],
-        ),
-        TextFormField(
-          enabled: !disable,
-          keyboardType: textInputType,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            suffixIcon: icon,
-            filled: true,
-            enabledBorder: outlineInputBorder(),
-            focusedBorder: outlineInputBorder(),
-            errorBorder: outlineInputBorder(),
-            focusedErrorBorder: outlineInputBorder(),
-            disabledBorder: outlineInputBorder(),
-            border: outlineInputBorder(),
-            fillColor: AppColors.gray,
-            hintText: hint,
-            hintStyle: TextStyle(
-                fontSize: 12,
-                color: AppColors.blackLight,
-                fontWeight: FontWeight.w400),
+            validator: validator,
           ),
-          // controller: controller,
-          validator: validator,
-          //  onChanged: onChanged,
         ),
       ],
     );
