@@ -13,4 +13,8 @@ abstract class AppStrings {
   static String lastUpdate = "اخر تحديث";
   static String bankPrice = "سعر البنك";
   static String remember = "تذكرني";
+  static String dontHaveAccount = "لا تمتلك حساب  ؟";
+  static String createAccount = "انشاء حساب";
+  static String or = "أو";
+  static String completeWithGoogle = "أكمل باستخدام جوجل";
 }

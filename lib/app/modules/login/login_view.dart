@@ -97,7 +97,7 @@ class LoginView extends GetView<LoginController> {
               ],
             ),
             SizedBox(
-              height: context.screenHeight * 0.01,
+              height: context.screenHeight * 0.03,
             ),
             StateButton(
               isLoading: false,
@@ -105,6 +105,87 @@ class LoginView extends GetView<LoginController> {
               onPressed: () => controller.login(),
               buttonColor: AppColors.yellowNormal,
               radius: 14,
+            ),
+            SizedBox(
+              height: context.screenHeight * 0.03,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppStrings.createAccount,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.yellowLightActive,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(
+                  width: context.screenWidth * 0.05,
+                ),
+                Text(
+                  AppStrings.dontHaveAccount,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.graylight,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: context.screenHeight * 0.05,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(thickness: 1, color: AppColors.gray),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.screenWidth * 0.08),
+                  child: Text(
+                    AppStrings.or,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.yellowLightActive,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Divider(thickness: 1, color: AppColors.gray),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: context.screenHeight * 0.05,
+            ),
+            Container(
+              height: context.screenHeight * 0.1,
+              decoration: BoxDecoration(
+                color: AppColors.gray,
+                border:
+                    Border.all(color: AppColors.gray), // تحديد لون الحدود هنا
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.completeWithGoogle,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.blackLightHover,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  SizedBox(
+                    width: context.screenHeight * 0.02,
+                  ),
+                  Image.asset(AppAssetIcons.google),
+                ],
+              ),
             ),
           ],
         ),
