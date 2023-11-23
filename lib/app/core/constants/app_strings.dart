@@ -6,8 +6,11 @@ abstract class AppStrings {
   static String howMuchInBlackMarket = "!بكام فى السوق السوداء؟";
   static String email = "البريد الالكتروني";
   static String insertEmail = "أدخل البريد الالكتروني";
-
+  static String password = "كلمة المرور";
+  static String insertPassword = "أدخل كلمة المرور ";
+  static String didYouForgetPassword = " هل نسيت كلمة المرور ؟";
   static String blackMarket = "السوق السوداء";
   static String lastUpdate = "اخر تحديث";
   static String bankPrice = "سعر البنك";
+  static String remember = "تذكرني";
 }

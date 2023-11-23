@@ -1,3 +1,5 @@
+import 'package:black_market/app/modules/home/home_view.dart';
+import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/login/login_view.dart';
 import 'package:black_market/app/modules/onBoarding/on_boarding_view.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,12 @@ List<GetPage> approuts = [
   GetPage(
     name: "/login",
     page: () => const LoginView(),
-    //binding: LoginBinding(),
+    binding: LoginBinding(),
+  ),
+  GetPage(
+    name: "/home",
+    page: () => const HomeView(),
+    //binding: (),
   ),
   // GetPage(
   //   name: "/register",

@@ -60,13 +60,18 @@ class CustomTextField extends StatelessWidget {
           height: 15,
         ),
         Directionality(
-          //  onChanged: onChanged,
-          // controller: controller,
           textDirection: TextDirection.rtl,
           child: TextFormField(
+            //  onChanged: onChanged,
+            // controller: controller,
             enabled: !disable,
             keyboardType: textInputType,
             obscureText: obscureText,
+            style: TextStyle(
+              fontSize: 14,
+              color: AppColors.yellowNormal,
+              fontWeight: FontWeight.bold,
+            ),
             decoration: InputDecoration(
               suffixIcon: icon,
               filled: true,
