@@ -8,4 +8,8 @@ class LoginController extends GetxController {
       Get.offAllNamed("/home");
     } catch (e) {}
   }
+
+  void goToRegister() {
+    Get.offNamed("/register");
+  }
 }

@@ -4,7 +4,7 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
-import 'package:black_market/app/modules/login/login_contreoller.dart';
+import 'package:black_market/app/modules/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class LoginView extends GetView<LoginController> {
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(context.screenWidth * 0.01),
           children: [
             SizedBox(
               height: context.screenHeight * 0.1,
@@ -101,7 +101,7 @@ class LoginView extends GetView<LoginController> {
             ),
             StateButton(
               isLoading: false,
-              text: "تسجيل الدخول",
+              text: AppStrings.login,
               onPressed: () => controller.login(),
               buttonColor: AppColors.yellowNormal,
               radius: 14,
@@ -112,19 +112,22 @@ class LoginView extends GetView<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  AppStrings.createAccount,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.yellowLightActive,
-                    fontWeight: FontWeight.w700,
+                GestureDetector(
+                  onTap: () => controller.goToRegister(),
+                  child: Text(
+                    AppStrings.createAccount,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.yellowLightActive,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: context.screenWidth * 0.05,
                 ),
                 Text(
-                  AppStrings.dontHaveAccount,
+                  AppStrings.dontHaveAnAccount,
                   style: TextStyle(
                     fontSize: 12,
                     color: AppColors.graylight,
@@ -165,8 +168,7 @@ class LoginView extends GetView<LoginController> {
               height: context.screenHeight * 0.1,
               decoration: BoxDecoration(
                 color: AppColors.gray,
-                border:
-                    Border.all(color: AppColors.gray), // تحديد لون الحدود هنا
+                border: Border.all(color: AppColors.gray),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
