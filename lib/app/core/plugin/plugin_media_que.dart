@@ -6,5 +6,4 @@ extension MyMedia on BuildContext {
   double get screenHeight => MediaQuery.of(this).size.height;
   SizedBox get responsiveHeight => SizedBox(height: screenHeight);
   SizedBox get responsiveWidth => SizedBox(width: screenWidth);
-  EdgeInsetsGeometry get screenPadding => MediaQuery.of(this).padding;
 }
