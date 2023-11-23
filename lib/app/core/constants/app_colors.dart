@@ -4,9 +4,15 @@ abstract class AppColors {
   static Color white = const Color(0xffFFFFFF);
   // Grey
   static Color gray = const Color(0xff2A2A2A);
+<<<<<<< HEAD
   static Color lightGrey = const Color(0xff828282);
   static Color lighterGrey = const Color(0xffE0E0E0);
   static Color darkGrey = const Color(0xff4F4F4F);
+=======
+  static Color graylight = const Color.fromRGBO(255, 255, 255, 0.7);
+
+  //Black
+>>>>>>> ab0c43e447b79687871f76d4516b55ac2f89498f
 
   static Color blackLight = const Color(0xffe7e7e7);
   static Color blackLightHover = const Color(0xffdbdbdb);
