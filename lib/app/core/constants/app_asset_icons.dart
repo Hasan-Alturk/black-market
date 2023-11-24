@@ -5,4 +5,5 @@ class AppAssetIcons {
   static const String google = "asset/icons/google.png";
   static const String arrowLeft = "asset/icons/ArrowLeft.png";
   static const String profile = "asset/icons/Profile.png";
+  static const String note = "asset/icons/Note.png";
 }

@@ -16,11 +16,19 @@ abstract class AppStrings {
   static String dontHaveAnAccount = "لا تمتلك حساب  ؟";
   static String createAccount = "انشاء حساب";
   static String login = "تسجيل الدخول ";
-
   static String or = "أو";
   static String completeWithGoogle = "أكمل باستخدام جوجل";
   static String createAccountNew = "إنشاء حساب جديد";
   static String fullName = "الاسم بالكامل";
   static String insertFullName = "ادخل الاسم بالكامل";
   static String confirmPassword = "تأكيد كلمة المرور";
+  static String resetPassword = " إسترجاع كلمة المرور";
+  static String otp =
+      "سنرسل رمز OTP إلى بريدك الإلكتروني للأمان عند نسيان كلمة المرور الخاصة بك";
+  static String complete = "متابعة";
+  static String insertOtp = "قم بإدخال الكود المرسل";
+  static String weSendOtp = "لقد قمنا بإرسال رمز التأكيد الى";
+  static String emailFake = " aliatwan@gmail.com";
+  static String dontReciveOtp = "لم تتلقى الرمز";
+  static String reSendOtp = "إعادة الإرسال";
 }

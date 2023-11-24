@@ -3,8 +3,9 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, required this.text});
+  const CustomAppBar({super.key, required this.text, required this.onTap});
   final String text;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,8 @@ class CustomAppBar extends StatelessWidget {
             border: Border.all(color: AppColors.gray),
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Image.asset(AppAssetIcons.arrowLeft),
+          child: GestureDetector(
+              onTap: onTap, child: Image.asset(AppAssetIcons.arrowLeft)),
         ),
       ],
     );

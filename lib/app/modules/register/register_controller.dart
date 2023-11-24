@@ -11,4 +11,8 @@ class RegisterController extends GetxController {
     ///storage.saveUser(user);
     // Get.to(Home());
   }
+
+  void goToLogin() {
+    Get.offNamed("/login");
+  }
 }

@@ -55,12 +55,15 @@ class LoginView extends GetView<LoginController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  AppStrings.didYouForgetPassword,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.yellowLightActive,
-                    fontWeight: FontWeight.w700,
+                GestureDetector(
+                  onTap: () => controller.goToSendOtp(),
+                  child: Text(
+                    AppStrings.didYouForgetPassword,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.yellowLightActive,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 Row(
