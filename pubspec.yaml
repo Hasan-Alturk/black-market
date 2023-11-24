@@ -34,6 +34,8 @@ dependencies:
   flutter_svg: ^2.0.9 
   flutter_otp_text_field: ^1.1.1
   otp_timer_button: ^1.1.0
+  fl_chart: ^0.64.0
+
 
 
 
