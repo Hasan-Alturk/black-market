@@ -132,7 +132,7 @@ class InsertOtpView extends GetView<InsertOtpController> {
         child: StateButton(
           isLoading: false,
           text: AppStrings.complete,
-          onPressed: () => (),
+          onPressed: () => controller.goToResetPassword(),
           buttonColor: AppColors.yellowNormal,
           radius: 14,
         ),

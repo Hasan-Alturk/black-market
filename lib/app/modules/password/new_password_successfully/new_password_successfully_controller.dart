@@ -1,13 +1,10 @@
 import 'package:get/get.dart';
 
-class ResetPasswordController extends GetxController {
+class NewPasswordSuccessfullyController extends GetxController {
   void goToLogin() {
     Get.offNamed("/login");
   }
-
-  void goToNewPasswordSuccessfully() {
-    Get.offNamed("/new_password_successfully");
-  }
+  
 
   Future<void> goToHmoe() async {
     try {

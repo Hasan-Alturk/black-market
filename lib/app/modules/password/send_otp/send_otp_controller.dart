@@ -4,7 +4,8 @@ class SendOtpController extends GetxController {
   void goToLogin() {
     Get.offNamed("/login");
   }
+
   void goToInsertOtp() {
-    Get.offNamed("/insert");
+    Get.offNamed("/insert_otp");
   }
 }

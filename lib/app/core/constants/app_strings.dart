@@ -31,4 +31,7 @@ abstract class AppStrings {
   static String emailFake = " aliatwan@gmail.com";
   static String dontReciveOtp = "لم تتلقى الرمز";
   static String reSendOtp = "إعادة الإرسال";
+  static String createNewPassword = " إنشاء كلمة المرور الجديدة";
+  static String newPasswordSuccessfully = " تم إنشاء كلمة مرور جديدة بنجاح";
+  static String main = "الرئيسية";
 }
