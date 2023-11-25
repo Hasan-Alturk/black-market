@@ -40,4 +40,11 @@ abstract class AppStrings {
   static String gold = "الذهب";
   static String favourite = "المفضلة";
   static String profile = "البروفايل";
+  static String userName = "حسن الترك";
+  static String editProfile = "تعديل الملف الشخصي";
+  static String shareTheApp = "مشاركة التطبيق";
+  static String aboutApp = "عن التطبيق";
+  static String mainCurrency = "العملة الاساسية";
+  static String setting = "الاعدادات";
+  static String logout = "تسجيل الخروج";
 }

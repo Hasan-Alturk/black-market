@@ -10,6 +10,8 @@ import 'package:black_market/app/modules/password/reset_password/reset_password_
 import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
+import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
+import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:get/get.dart';
@@ -54,5 +56,10 @@ List<GetPage> approuts = [
     name: "/new_password_successfully",
     page: () => const NewPasswordSuccessfullyView(),
     binding: NewPasswordSuccessfullyBinding(),
+  ),
+  GetPage(
+    name: "/main_profile",
+    page: () => const MainProfileView(),
+    binding: MainProfileBinding(),
   ),
 ];
