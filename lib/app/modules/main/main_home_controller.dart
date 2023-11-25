@@ -14,6 +14,7 @@ class MainHomeController extends GetxController {
     pageController.jumpToPage(pageIndex);
 
     update(["MainHomeViewGetBuilder"]);
+
     if (pageIndex == 1) {
       GoldBinding().dependencies();
     } else if (pageIndex == 2) {
