@@ -43,9 +43,8 @@ class FavouriteView extends GetView<FavouriteController> {
                 mainAxisSpacing: 10),
             itemCount: 6,
             itemBuilder: (ctx, i) => GestureDetector(
-              child: const CardItem(),
-              onTap: () => controller.goToBankDetails(),
-            ),
+                child: const CardItem(),
+                onTap: () => controller.goToBankDetails()),
           )
         ],
       )),

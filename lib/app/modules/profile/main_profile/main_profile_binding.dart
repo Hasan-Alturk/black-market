@@ -1,4 +1,4 @@
-import 'package:black_market/app/modules/profile/main_profile/main_profile_successfully_controller.dart';
+import 'package:black_market/app/modules/profile/main_profile/main_profile_controller.dart';
 import 'package:get/get.dart';
 
 class MainProfileBinding extends Bindings {

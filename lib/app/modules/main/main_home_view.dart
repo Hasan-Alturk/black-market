@@ -20,8 +20,8 @@ class MainHomeView extends GetView<MainHomeController> {
         controller: controller.pageController,
         children: const [
           CurrenciesView(),
-          FavouriteView(),
           GoldView(),
+          FavouriteView(),
           MainProfileView(),
         ],
       ),
