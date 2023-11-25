@@ -1,11 +1,9 @@
-import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/modules/home/card_item.dart';
 import 'package:black_market/app/modules/home/line_chart.dart';
-
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -166,7 +164,7 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   // Instead Of Text There is A drop down list
-                  Text("دولار امريكى"),
+                  const Text("دولار امريكى"),
                   SizedBox(
                     height: context.screenHeight * 0.01,
                   ),
@@ -229,7 +227,7 @@ class _HomeViewState extends State<HomeView> {
         SizedBox(
           height: context.screenHeight * 0.02,
         ),
-        LineChartSample2(),
+        const LineChartSample2(),
         SizedBox(
           height: context.screenHeight * 0.02,
         ),
