@@ -12,7 +12,9 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.darkGrey, borderRadius: BorderRadius.circular(20)),
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
