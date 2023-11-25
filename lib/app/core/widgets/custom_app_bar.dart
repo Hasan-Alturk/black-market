@@ -10,7 +10,6 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Spacer(flex: 3),
         Center(
@@ -21,20 +20,15 @@ class CustomAppBar extends StatelessWidget {
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
         const Spacer(flex: 2),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            color: AppColors.gray,
-            border: Border.all(color: AppColors.gray),
-            borderRadius: BorderRadius.circular(16),
-          ),
+        Expanded(
+          flex: 1,
           child: GestureDetector(
-              onTap: onTap, child: Image.asset(AppAssetIcons.arrowLeft)),
-        ),
+              onTap: onTap, child: Image.asset(AppAssetIcons.back)),
+        )
       ],
     );
   }
