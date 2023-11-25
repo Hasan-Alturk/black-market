@@ -1,15 +1,14 @@
+import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class GoldView extends StatefulWidget {
+class GoldView extends GetView<MainHomeController> {
   const GoldView({super.key});
 
   @override
-  State<GoldView> createState() => _GoldViewState();
-}
-
-class _GoldViewState extends State<GoldView> {
-  @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Gold"));
+    return const Scaffold(
+      body: Text("Gold"),
+    );
   }
 }

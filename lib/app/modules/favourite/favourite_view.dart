@@ -1,15 +1,14 @@
+import 'package:black_market/app/modules/favourite/favourite_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class FavouriteView extends StatefulWidget {
+class FavouriteView extends GetView<FavouriteController> {
   const FavouriteView({super.key});
 
   @override
-  State<FavouriteView> createState() => _FavouriteViewState();
-}
-
-class _FavouriteViewState extends State<FavouriteView> {
-  @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Favourite"));
+    return const Scaffold(
+      body: Text("Favorite"),
+    );
   }
 }

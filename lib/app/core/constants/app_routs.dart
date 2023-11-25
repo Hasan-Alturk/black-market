@@ -1,6 +1,13 @@
-import 'package:black_market/app/modules/home/home_view.dart';
+import 'package:black_market/app/modules/favourite/favourite_binding.dart';
+import 'package:black_market/app/modules/favourite/favourite_view.dart';
+import 'package:black_market/app/modules/gold/gold_binding.dart';
+import 'package:black_market/app/modules/gold/gold_view.dart';
+import 'package:black_market/app/modules/currencies/currencies_binding.dart';
+import 'package:black_market/app/modules/currencies/currencies_view.dart';
 import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/login/login_view.dart';
+import 'package:black_market/app/modules/main/main_home_binding.dart';
+import 'package:black_market/app/modules/main/main_home_view.dart';
 import 'package:black_market/app/modules/onBoarding/on_boarding_view.dart';
 import 'package:black_market/app/modules/password/insert_otp/insert_otp%20controller_binding.dart';
 import 'package:black_market/app/modules/password/insert_otp/insert_otp_view.dart';
@@ -28,11 +35,6 @@ List<GetPage> approuts = [
     binding: LoginBinding(),
   ),
   GetPage(
-    name: "/home",
-    page: () => const HomeView(),
-    //binding: (),
-  ),
-  GetPage(
     name: "/register",
     page: () => const RegisterView(),
     binding: RegisterBinding(),
@@ -56,6 +58,26 @@ List<GetPage> approuts = [
     name: "/new_password_successfully",
     page: () => const NewPasswordSuccessfullyView(),
     binding: NewPasswordSuccessfullyBinding(),
+  ),
+  GetPage(
+    name: "/mainHome",
+    page: () => const MainHomeView(),
+    binding: MainHomeBinding(),
+  ),
+  GetPage(
+    name: "/currencies",
+    page: () => const CurrenciesView(),
+    binding: CurrenciesBinding(),
+  ),
+  GetPage(
+    name: "/gold",
+    page: () => const GoldView(),
+    binding: GoldBinding(),
+  ),
+  GetPage(
+    name: "/favourite",
+    page: () => const FavouriteView(),
+    binding: FavouriteBinding(),
   ),
   GetPage(
     name: "/main_profile",
