@@ -1,3 +1,5 @@
+import 'package:black_market/app/modules/bank_details/bank_details_binding.dart';
+import 'package:black_market/app/modules/bank_details/bank_details_view.dart';
 import 'package:black_market/app/modules/favourite/favourite_binding.dart';
 import 'package:black_market/app/modules/favourite/favourite_view.dart';
 import 'package:black_market/app/modules/gold/gold_binding.dart';
@@ -83,5 +85,10 @@ List<GetPage> approuts = [
     name: "/main_profile",
     page: () => const MainProfileView(),
     binding: MainProfileBinding(),
+  ),
+  GetPage(
+    name: "/bank_details",
+    page: () => const BankDetailsView(),
+    binding: BankDetailsBinding(),
   ),
 ];

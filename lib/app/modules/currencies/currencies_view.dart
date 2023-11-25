@@ -293,12 +293,12 @@ class CurrenciesView extends GetView<CurrenciesController> {
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 10),
                     itemCount: 10,
-                    itemBuilder: (ctx, i) => const CardItem()),
+                    itemBuilder: (ctx, i) => GestureDetector(
+                        child: CardItem(),
+                        onTap: () => controller.goToBankDetails())),
               )
             ],
           ),
-        )
-        // ),
-        );
+        ));
   }
 }
