@@ -22,8 +22,8 @@ class MainHomeView extends GetView<MainHomeController> {
         children: const [
           CurrenciesView(),
           GoldView(),
-          MainProfileView(),
           FavouriteView(),
+          MainProfileView(),
         ],
       ),
       bottomNavigationBar: GetBuilder<MainHomeController>(
@@ -53,7 +53,7 @@ class MainHomeView extends GetView<MainHomeController> {
                 BottomNavigationBarItem(
                   icon: Image.asset(AppAssetIcons.gold),
                   label: AppStrings.gold,
-                  activeIcon: Image.asset(AppAssetIcons.yellowProfile),
+                  activeIcon: Image.asset(AppAssetIcons.yellowGold),
                   backgroundColor: AppColors.gray,
                 ),
                 BottomNavigationBarItem(

@@ -20,18 +20,17 @@ class MainHomeController extends GetxController {
     update();
     if (pageIndex == 0) {
       print(pageIndex);
-
-      FavouriteBinding().dependencies();
+      MainProfileBinding().dependencies();
     } else if (pageIndex == 1) {
-      GoldBinding().dependencies();
+      FavouriteBinding().dependencies();
+
       print(pageIndex);
     } else if (pageIndex == 2) {
       print(pageIndex);
 
-      MainProfileBinding().dependencies();
+      GoldBinding().dependencies();
     } else if (pageIndex == 3) {
       print(pageIndex);
-
       CurrenciesBinding().dependencies();
     }
   }
