@@ -15,55 +15,57 @@ class MainHomeView extends GetView<MainHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.gray,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         children: const [
           CurrenciesView(),
-          GoldView(),
           FavouriteView(),
+          GoldView(),
           MainProfileView(),
         ],
       ),
       bottomNavigationBar: GetBuilder<MainHomeController>(
+        id: "MainHomeViewGetBuilder",
         builder: (_) {
-          return ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(18),
-              topLeft: Radius.circular(18),
-            ),
-            child: BottomNavigationBar(
-              onTap: controller.changePage,
-              currentIndex: controller.pageIndex,
-              //  selectedLabelStyle: ,
-              selectedItemColor: AppColors.yellowNormalActive,
-              items: [
-                BottomNavigationBarItem(
-                    icon: Image.asset(AppAssetIcons.profile),
-                    label: AppStrings.profile,
-                    backgroundColor: AppColors.gray,
-                    activeIcon: Image.asset(AppAssetIcons.yellowProfile)),
-                BottomNavigationBarItem(
-                  icon: Image.asset(AppAssetIcons.heart),
-                  label: AppStrings.favourite,
-                  activeIcon: Image.asset(AppAssetIcons.yellowHeart),
+          //  ClipRRect(
+          //   borderRadius: const BorderRadius.only(
+          //     topRight: Radius.circular(18),
+          //     topLeft: Radius.circular(18),
+          //   ),
+          //   child:
+          return BottomNavigationBar(
+            onTap: controller.changePage,
+
+            currentIndex: controller.pageIndex,
+
+            //  selectedLabelStyle: ,
+            selectedItemColor: AppColors.yellowNormalActive,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(AppAssetIcons.dollar),
+                label: AppStrings.coins,
+                activeIcon: Image.asset(AppAssetIcons.yellowDollar),
+                backgroundColor: AppColors.gray,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(AppAssetIcons.gold),
+                label: AppStrings.gold,
+                activeIcon: Image.asset(AppAssetIcons.yellowGold),
+                backgroundColor: AppColors.gray,
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(AppAssetIcons.heart),
+                label: AppStrings.favourite,
+                activeIcon: Image.asset(AppAssetIcons.yellowHeart),
+                backgroundColor: AppColors.gray,
+              ),
+              BottomNavigationBarItem(
+                  icon: Image.asset(AppAssetIcons.profile),
+                  label: AppStrings.profile,
                   backgroundColor: AppColors.gray,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(AppAssetIcons.gold),
-                  label: AppStrings.gold,
-                  activeIcon: Image.asset(AppAssetIcons.yellowGold),
-                  backgroundColor: AppColors.gray,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(AppAssetIcons.dollar),
-                  label: AppStrings.coins,
-                  activeIcon: Image.asset(AppAssetIcons.yellowDollar),
-                  backgroundColor: AppColors.gray,
-                ),
-              ],
-            ),
+                  activeIcon: Image.asset(AppAssetIcons.yellowProfile)),
+            ],
           );
         },
       ),
