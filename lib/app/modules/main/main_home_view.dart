@@ -37,7 +37,6 @@ class MainHomeView extends GetView<MainHomeController> {
               onTap: controller.changePage,
               currentIndex: controller.pageIndex,
               //  selectedLabelStyle: ,
-              backgroundColor: AppColors.gray,
               selectedItemColor: AppColors.yellowNormalActive,
               items: [
                 BottomNavigationBarItem(

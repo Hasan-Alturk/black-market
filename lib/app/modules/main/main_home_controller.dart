@@ -20,7 +20,6 @@ class MainHomeController extends GetxController {
     update();
     if (pageIndex == 0) {
       print(pageIndex);
-      
 
       FavouriteBinding().dependencies();
     } else if (pageIndex == 1) {
