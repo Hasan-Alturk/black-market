@@ -6,4 +6,9 @@ class AppAssetIcons {
   static const String arrowLeft = "asset/icons/ArrowLeft.png";
   static const String profile = "asset/icons/Profile.png";
   static const String note = "asset/icons/Note.png";
+  static const String dollar = "asset/icons/Dollar.png";
+  static const String info = "asset/icons/Info.png";
+  static const String logout = "asset/icons/Logout.png";
+  static const String setting = "asset/icons/Setting.png";
+  static const String share = "asset/icons/Share.png";
 }

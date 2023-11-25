@@ -34,4 +34,12 @@ abstract class AppStrings {
   static String createNewPassword = " إنشاء كلمة المرور الجديدة";
   static String newPasswordSuccessfully = " تم إنشاء كلمة مرور جديدة بنجاح";
   static String main = "الرئيسية";
+  static String profile = "البروفايل";
+  static String userName = "حسن الترك";
+  static String editProfile = "تعديل الملف الشخصي";
+  static String shareTheApp = "مشاركة التطبيق";
+  static String aboutApp = "عن التطبيق";
+  static String mainCurrency = "العملة الاساسية";
+  static String setting = "الاعدادات";
+  static String logout = "تسجيل الخروج";
 }
