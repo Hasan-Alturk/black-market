@@ -16,4 +16,5 @@ class AppAssetIcons {
   static const String info = "asset/icons/Info.png";
   static const String logout = "asset/icons/Logout.png";
   static const String setting = "asset/icons/Setting.png";
+  static const String calculator = "asset/icons/calculator.png";
 }

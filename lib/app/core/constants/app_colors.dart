@@ -9,6 +9,7 @@ abstract class AppColors {
   static Color darkGrey = const Color(0xff4F4F4F);
   static Color graylight = const Color.fromRGBO(255, 255, 255, 0.7);
   static Color greyMoreLight = const Color(0xffB1BCCD);
+  static Color darkBlack = const Color(0xff362727);
   //Black
 
   static Color blackLight = const Color(0xffe7e7e7);

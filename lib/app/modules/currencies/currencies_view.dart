@@ -1,3 +1,4 @@
+import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
@@ -145,6 +146,11 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                   )
                                 ],
                               ),
+                              Container(
+                                height: context.screenHeight * 0.04,
+                                width: 1,
+                                color: AppColors.lighterGrey,
+                              ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -160,6 +166,11 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                         fontWeight: FontWeight.w700),
                                   )
                                 ],
+                              ),
+                              Container(
+                                height: context.screenHeight * 0.04,
+                                width: 1,
+                                color: AppColors.lighterGrey,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -189,6 +200,83 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 height: context.screenHeight * 0.02,
               ),
               const LineChartSample2(),
+              Container(
+                height: context.screenHeight * 0.12,
+                width: context.screenWidth * 0.87,
+                decoration: BoxDecoration(
+                  color: AppColors.yellowNormal,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: context.screenHeight * 0.01,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Image.asset(AppAssetIcons.calculator),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppStrings.sell,
+                                style: TextStyle(
+                                    color: AppColors.darkBlack,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Text(
+                                "40 ج.م ",
+                                style: TextStyle(
+                                    color: AppColors.darkBlack,
+                                    fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                          Container(
+                            height: context.screenHeight * 0.04,
+                            width: 1,
+                            color: AppColors.yellowDark,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppStrings.buy,
+                                style: TextStyle(
+                                    color: AppColors.darkBlack,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Text(
+                                "40 ج.م ",
+                                style: TextStyle(
+                                    color: AppColors.darkBlack,
+                                    fontWeight: FontWeight.w700),
+                              )
+                            ],
+                          ),
+                          Container(
+                            height: context.screenHeight * 0.04,
+                            width: 1,
+                            color: AppColors.yellowDark,
+                          ),
+                          Text(
+                            AppStrings.avgPrice,
+                            style: TextStyle(
+                                color: AppColors.darkBlack,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
               SizedBox(
                 height: context.screenHeight * 0.02,
               ),

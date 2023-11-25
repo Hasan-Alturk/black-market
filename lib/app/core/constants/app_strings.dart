@@ -47,4 +47,5 @@ abstract class AppStrings {
   static String mainCurrency = "العملة الاساسية";
   static String setting = "الاعدادات";
   static String logout = "تسجيل الخروج";
+  static String avgPrice = "متوسط السعر ";
 }
