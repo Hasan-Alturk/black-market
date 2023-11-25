@@ -34,4 +34,10 @@ abstract class AppStrings {
   static String createNewPassword = " إنشاء كلمة المرور الجديدة";
   static String newPasswordSuccessfully = " تم إنشاء كلمة مرور جديدة بنجاح";
   static String main = "الرئيسية";
+  static String sell = "بيع";
+  static String buy = "شراء";
+  static String coins = "العملات";
+  static String gold = "الذهب";
+  static String favourite = "المفضلة";
+  static String profile = "البروفايل";
 }
