@@ -22,7 +22,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1.70,
+          aspectRatio: 1.5,
           child: Padding(
             padding: const EdgeInsets.only(
               right: 18,
@@ -35,46 +35,59 @@ class _LineChartSample2State extends State<LineChartSample2> {
             ),
           ),
         ),
-        SizedBox(
-          width: 60,
-          height: 34,
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                showAvg = !showAvg;
-              });
-            },
-            child: Text(
-              'avg',
-              style: TextStyle(
-                fontSize: 12,
-                color: showAvg ? Colors.white.withOpacity(0.5) : Colors.white,
-              ),
-            ),
-          ),
-        ),
+        // SizedBox(
+        //   width: 60,
+        //   height: 34,
+        //   child: TextButton(
+        //     onPressed: () {
+        //       setState(() {
+        //         showAvg = !showAvg;
+        //       });
+        //     },
+        //     child: Text(
+        //       'avg',
+        //       style: TextStyle(
+        //         fontSize: 12,
+        //         color: showAvg ? Colors.white.withOpacity(0.5) : Colors.white,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
+    var style = TextStyle(
+      color: AppColors.greyMoreLight,
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
     Widget text;
     switch (value.toInt()) {
-      case 2:
-        text = const Text('MAR', style: style);
+      case 1:
+        text = Text('سبت', style: style);
+        break;
+      case 3:
+        text = Text('حد', style: style);
         break;
       case 5:
-        text = const Text('JUN', style: style);
+        text = Text('اتنين', style: style);
         break;
-      case 8:
-        text = const Text('SEP', style: style);
+      case 7:
+        text = Text('ثلاثاء', style: style);
+        break;
+      case 9:
+        text = Text('اربع', style: style);
+        break;
+      case 11:
+        text = Text('خميس', style: style);
+        break;
+      case 13:
+        text = Text('جمعة', style: style);
         break;
       default:
-        text = const Text('', style: style);
+        text = Text('', style: style);
         break;
     }
 
@@ -111,6 +124,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return LineChartData(
       gridData: FlGridData(
         show: true,
+        drawHorizontalLine: false,
         drawVerticalLine: true,
         horizontalInterval: 1,
         verticalInterval: 1,
@@ -122,7 +136,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: AppColors.yellowDark,
+            color: value % 2 != 0 ? AppColors.yellowDark : AppColors.blackDark,
             strokeWidth: 1,
           );
         },
@@ -143,21 +157,20 @@ class _LineChartSample2State extends State<LineChartSample2> {
             getTitlesWidget: bottomTitleWidgets,
           ),
         ),
-        leftTitles: AxisTitles(
+        leftTitles: const AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
+            showTitles: false,
             interval: 1,
-            getTitlesWidget: leftTitleWidgets,
             reservedSize: 42,
           ),
         ),
       ),
       borderData: FlBorderData(
-        show: true,
+        show: false,
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: 13,
       minY: 0,
       maxY: 6,
       lineBarsData: [
@@ -170,6 +183,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
             FlSpot(8, 4),
             FlSpot(9.5, 3),
             FlSpot(11, 4),
+            FlSpot(13, 5),
+            FlSpot(14, 0),
           ],
           isCurved: true,
           gradient: LinearGradient(
@@ -197,7 +212,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return LineChartData(
       lineTouchData: const LineTouchData(enabled: false),
       gridData: FlGridData(
-        show: true,
+        show: false,
         drawHorizontalLine: true,
         verticalInterval: 1,
         horizontalInterval: 1,
@@ -226,8 +241,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
-            getTitlesWidget: leftTitleWidgets,
+            showTitles: false,
+            // getTitlesWidget: leftTitleWidgets,
             reservedSize: 42,
             interval: 1,
           ),
@@ -244,7 +259,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: 13,
       minY: 0,
       maxY: 6,
       lineBarsData: [
@@ -257,6 +272,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             FlSpot(8, 3.44),
             FlSpot(9.5, 3.44),
             FlSpot(11, 3.44),
+            FlSpot(13, 3.44),
           ],
           isCurved: true,
           gradient: LinearGradient(
