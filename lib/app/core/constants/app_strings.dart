@@ -48,4 +48,6 @@ abstract class AppStrings {
   static String setting = "الاعدادات";
   static String logout = "تسجيل الخروج";
   static String avgPrice = "متوسط السعر ";
+  static String changePhoto = "تغيير الصورة";
+  static String change = "تعديل";
 }

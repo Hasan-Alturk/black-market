@@ -18,4 +18,7 @@ class AppAssetIcons {
   static const String setting = "asset/icons/Setting.png";
   static const String calculator = "asset/icons/calculator.png";
   static const String back = "asset/icons/back.png";
+  static const String arrowRight = "asset/icons/ArrowRight.png";
+  static const String messageGold = "asset/icons/MessageGold.png";
+  static const String profileGold = "asset/icons/ProfileGold.png";
 }

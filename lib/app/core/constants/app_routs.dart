@@ -18,6 +18,8 @@ import 'package:black_market/app/modules/password/reset_password/reset_password_
 import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
+import 'package:black_market/app/modules/profile/edit_profile/edit_profile_binding.dart';
+import 'package:black_market/app/modules/profile/edit_profile/edit_profile_view.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
@@ -62,7 +64,7 @@ List<GetPage> approuts = [
     binding: NewPasswordSuccessfullyBinding(),
   ),
   GetPage(
-    name: "/mainHome",
+    name: "/main_home",
     page: () => const MainHomeView(),
     binding: MainHomeBinding(),
   ),
@@ -90,5 +92,10 @@ List<GetPage> approuts = [
     name: "/bank_details",
     page: () => const BankDetailsView(),
     binding: BankDetailsBinding(),
+  ),
+  GetPage(
+    name: "/edit_profile",
+    page: () => const EditProfileView(),
+    binding: EditProfileBinding(),
   ),
 ];

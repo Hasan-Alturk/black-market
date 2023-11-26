@@ -16,16 +16,16 @@ class RegisterView extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
+      appBar: CustomAppBar(
+        text: AppStrings.createAccountNew,
+        onTap: () => controller.goToLogin(),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.all(context.screenWidth * 0.01),
           children: [
             SizedBox(
               height: context.screenHeight * 0.05,
-            ),
-            CustomAppBar(
-              text: AppStrings.createAccountNew,
-              onTap: () => controller.goToLogin(),
             ),
             SizedBox(
               height: context.screenHeight * 0.04,
@@ -42,7 +42,9 @@ class RegisterView extends GetView<RegisterController> {
             CustomTextField(
               label: AppStrings.email,
               hint: AppStrings.insertEmail,
-              icon: Image.asset(AppAssetIcons.message),
+              icon: Image.asset(
+                AppAssetIcons.message,
+              ),
               textInputType: TextInputType.emailAddress,
             ),
             SizedBox(

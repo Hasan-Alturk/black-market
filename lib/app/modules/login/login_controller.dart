@@ -5,7 +5,7 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     try {
-      Get.offAllNamed("/mainHome");
+      Get.offAllNamed("/main_home");
     } catch (e) {}
   }
 

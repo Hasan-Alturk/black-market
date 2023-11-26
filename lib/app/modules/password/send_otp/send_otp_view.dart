@@ -16,16 +16,16 @@ class SendOtpView extends GetView<SendOtpController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
+      appBar: CustomAppBar(
+        text: AppStrings.resetPassword,
+        onTap: () => controller.goToLogin(),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.all(context.screenWidth * 0.01),
           children: [
             SizedBox(
               height: context.screenHeight * 0.05,
-            ),
-            CustomAppBar(
-              text: AppStrings.resetPassword,
-              onTap: () => controller.goToLogin(),
             ),
             SizedBox(
               height: context.screenHeight * 0.04,

@@ -26,9 +26,10 @@ class LoginView extends GetView<LoginController> {
               child: Text(
                 AppStrings.loginIntoAccount,
                 style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700),
+                  color: AppColors.white,
+                  fontSize: 26 * context.textScale,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             SizedBox(
@@ -60,7 +61,7 @@ class LoginView extends GetView<LoginController> {
                   child: Text(
                     AppStrings.didYouForgetPassword,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 12 * context.textScale,
                       color: AppColors.yellowLightActive,
                       fontWeight: FontWeight.w700,
                     ),
@@ -71,7 +72,7 @@ class LoginView extends GetView<LoginController> {
                     Text(
                       AppStrings.remember,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14 * context.textScale,
                         color: AppColors.white,
                         fontWeight: FontWeight.w700,
                       ),
@@ -168,7 +169,7 @@ class LoginView extends GetView<LoginController> {
               height: context.screenHeight * 0.05,
             ),
             Container(
-              height: context.screenHeight * 0.1,
+              height: context.screenHeight * 0.08,
               decoration: BoxDecoration(
                 color: AppColors.gray,
                 border: Border.all(color: AppColors.gray),

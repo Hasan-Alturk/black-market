@@ -2,11 +2,10 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class CustomEditTextField extends StatelessWidget {
+  const CustomEditTextField({
     //  required this.controller,
     required this.label,
-    required this.hint,
     required this.icon,
     // required this.onChanged,
     this.validator,
@@ -15,11 +14,12 @@ class CustomTextField extends StatelessWidget {
     this.disable = false,
     this.showBorder = false,
     Key? key,
+    required this.text,
   }) : super(key: key);
   //final TextEditingController controller;
   final String label;
-  final String hint;
   final Image icon;
+  final String text;
 
   final bool showBorder;
   final bool disable;
@@ -31,12 +31,12 @@ class CustomTextField extends StatelessWidget {
     if (showBorder) {
       return OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(11),
       );
     } else {
       return OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(color: AppColors.yellowDark),
+        borderRadius: BorderRadius.circular(11),
       );
     }
   }
@@ -52,12 +52,12 @@ class CustomTextField extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 14*context.textScale,
-              color: AppColors.white,
+              color: AppColors.graylight,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
-          SizedBox(
+        SizedBox(
           height: context.screenHeight * 0.015,
         ),
         Directionality(
@@ -65,13 +65,14 @@ class CustomTextField extends StatelessWidget {
           child: TextFormField(
             //  onChanged: onChanged,
             // controller: controller,
+            initialValue: text,
             enabled: !disable,
             keyboardType: textInputType,
             obscureText: obscureText,
             style: TextStyle(
               fontSize: 14*context.textScale,
-              color: AppColors.yellowNormal,
-              fontWeight: FontWeight.bold,
+              color: AppColors.white,
+              fontWeight: FontWeight.w700,
             ),
             decoration: InputDecoration(
               suffixIcon: icon,
@@ -82,13 +83,7 @@ class CustomTextField extends StatelessWidget {
               focusedErrorBorder: outlineInputBorder(),
               disabledBorder: outlineInputBorder(),
               border: outlineInputBorder(),
-              fillColor: AppColors.gray,
-              hintText: hint,
-              hintStyle: TextStyle(
-                fontSize: 12*context.textScale,
-                color: AppColors.graylight,
-                fontWeight: FontWeight.w400,
-              ),
+              fillColor: AppColors.blackNormalHover,
             ),
             validator: validator,
           ),

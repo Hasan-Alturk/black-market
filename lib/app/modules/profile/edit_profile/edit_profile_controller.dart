@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
 
-class MainProfileController extends GetxController {
-  void goToEditProfile() {
-    Get.offNamed("/edit_profile");
-  }
-
+class EditProfileController extends GetxController {
   void goToHome() {
     Get.offNamed("/main_home");
   }

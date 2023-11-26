@@ -1,4 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 
 class StateButton extends StatelessWidget {
@@ -32,7 +33,7 @@ class StateButton extends StatelessWidget {
           : Text(
               text,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16 * context.textScale,
                 color: AppColors.blackDark,
                 fontWeight: FontWeight.w800,
               ),

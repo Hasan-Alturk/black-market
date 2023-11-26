@@ -7,7 +7,7 @@ class NewPasswordSuccessfullyController extends GetxController {
 
   Future<void> goToHmoe() async {
     try {
-      Get.offAllNamed("/mainHome");
+      Get.offAllNamed("/main_home");
     } catch (e) {
       print(e);
     }
