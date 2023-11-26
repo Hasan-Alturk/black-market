@@ -1,5 +1,5 @@
 import 'package:black_market/app/core/constants/app_routs.dart';
-import 'package:black_market/app/modules/onBoarding/on_boarding_view.dart';
+import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const OnBoardingView(),
+      home: const SpalshView(),
       getPages: approuts,
     );
   }
