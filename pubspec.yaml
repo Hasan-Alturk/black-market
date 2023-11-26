@@ -36,6 +36,8 @@ dependencies:
   otp_timer_button: ^1.1.0
   fl_chart: ^0.64.0
   flutter_screenutil: ^5.9.0
+  currency_picker: ^2.0.19
+  data_table_2: ^2.5.9
 
 
 

@@ -21,4 +21,6 @@ class AppAssetIcons {
   static const String arrowRight = "asset/icons/ArrowRight.png";
   static const String messageGold = "asset/icons/MessageGold.png";
   static const String profileGold = "asset/icons/ProfileGold.png";
+  static const String arrowDown = "asset/icons/arrow_down.png";
+  static const String equal = "asset/icons/equal.png";
 }
