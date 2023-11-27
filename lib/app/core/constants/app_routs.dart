@@ -32,6 +32,8 @@ import 'package:black_market/app/modules/profile/setting/language/language_bindi
 import 'package:black_market/app/modules/profile/setting/language/language_view.dart';
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_binding.dart';
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_view.dart';
+import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_binding.dart';
+import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_view.dart';
@@ -132,5 +134,10 @@ List<GetPage> approuts = [
     name: "/change_password",
     page: () => const ChangePasswordView(),
     binding: ChangePasswordBinding(),
+  ),
+  GetPage(
+    name: "/notifications_setting",
+    page: () => const NotificationsSettingView(),
+    binding: NotificationsSettingBinding(),
   ),
 ];

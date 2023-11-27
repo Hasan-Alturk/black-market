@@ -1,13 +1,15 @@
 import 'package:get/get.dart';
 
-class ChangePasswordController extends GetxController {
+class NotificationsSettingController extends GetxController {
+  RxBool isSwitched = false.obs;
+  void toggleSwitch() {
+    isSwitched.value = !isSwitched.value;
+  }
+
   void goToMainSetting() {
     Get.offNamed("/main_setting");
   }
 
-  void goToMainHome() {
-    Get.offNamed("/main_home");
-  }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");
   // }
