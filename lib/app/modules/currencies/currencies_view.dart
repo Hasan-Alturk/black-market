@@ -38,11 +38,14 @@ class CurrenciesView extends GetView<CurrenciesController> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircleAvatar(
-                                  backgroundColor: AppColors.blackDarkHover,
-                                  child: Icon(
-                                    Icons.notifications_none_outlined,
-                                    color: AppColors.blackLight,
+                                GestureDetector(
+                                  onTap: () => controller.goToNotification(),
+                                  child: CircleAvatar(
+                                    backgroundColor: AppColors.blackDarkHover,
+                                    child: Icon(
+                                      Icons.notifications_none_outlined,
+                                      color: AppColors.blackLight,
+                                    ),
                                   ),
                                 ),
                                 Row(
@@ -294,7 +297,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                             mainAxisSpacing: 10),
                     itemCount: 10,
                     itemBuilder: (ctx, i) => GestureDetector(
-                        child: CardItem(),
+                        child: const CardItem(),
                         onTap: () => controller.goToBankDetails())),
               )
             ],

@@ -56,4 +56,5 @@ abstract class AppStrings {
   static String enterAmount = "ادخل المبلغ";
   static String calculate = "حساب";
   static String calculator = "الحاسبة";
+  static String notifications = "الاشعارات";
 }

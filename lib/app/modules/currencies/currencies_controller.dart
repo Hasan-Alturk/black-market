@@ -4,4 +4,8 @@ class CurrenciesController extends GetxController {
   void goToBankDetails() {
     Get.toNamed("/bank_details");
   }
+
+  void goToNotification() {
+    Get.toNamed("/notifications");
+  }
 }
