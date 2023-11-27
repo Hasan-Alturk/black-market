@@ -25,4 +25,8 @@ class AppAssetIcons {
   static const String close = "asset/icons/close.png";
   static const String arrowDown = "asset/icons/arrow_down.png";
   static const String equal = "asset/icons/equal.png";
+  static const String bank = "asset/icons/bank.png";
+  static const String global = "asset/icons/global.png";
+  static const String notification = "asset/icons/notification.png";
+  static const String delete = "asset/icons/delete.png";
 }

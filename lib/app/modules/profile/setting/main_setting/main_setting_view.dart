@@ -1,21 +1,25 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
-import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_alarte_dialog.dart';
+import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
-import 'package:black_market/app/modules/profile/main_profile/main_profile_controller.dart';
+import 'package:black_market/app/modules/profile/setting/main_setting/main_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainProfileView extends GetView<MainProfileController> {
-  const MainProfileView({Key? key}) : super(key: key);
+class MainSettingView extends GetView<MainSettingController> {
+  const MainSettingView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
+      appBar: CustomAppBar(
+        text: AppStrings.setting,
+        onTap: () => controller.goToMainProfile(),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.all(context.screenWidth * 0.01),
@@ -23,77 +27,46 @@ class MainProfileView extends GetView<MainProfileController> {
             Column(
               children: [
                 SizedBox(
-                  height: context.screenHeight * 0.01,
+                  height: context.screenHeight * 0.06,
                 ),
-                Center(
-                  child: Text(
-                    AppStrings.profile,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.05,
-                ),
-                const CircleAvatar(
-                  radius: 41.0,
-                  backgroundImage: AssetImage(AppAssetImage.avatar),
+                CustomContainerProfile(
+                  text: AppStrings.changePassword,
+                  stringIcon: AppAssetIcons.lock,
+                  onTap: () => controller.goToChangePassword(),
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.02,
                 ),
-                Text(
-                  AppStrings.userName,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.yellowNormal,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.05,
-                ),
                 CustomContainerProfile(
-                  text: AppStrings.editProfile,
-                  stringIcon: AppAssetIcons.profile,
-                  onTap: () => controller.goToEditProfile(),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.shareTheApp,
-                  stringIcon: AppAssetIcons.share,
+                  text: AppStrings.preferredBanks,
+                  stringIcon: AppAssetIcons.bank,
                   onTap: () {},
                 ),
                 SizedBox(
-                  height: context.screenHeight * 0.01,
+                  height: context.screenHeight * 0.02,
                 ),
                 CustomContainerProfile(
-                  text: AppStrings.aboutApp,
-                  stringIcon: AppAssetIcons.info,
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.mainCurrency,
+                  text: AppStrings.preferredCurrencies,
                   stringIcon: AppAssetIcons.dollar,
-                  onTap: () => controller.goToMainCuurency(),
+                  onTap: () {},
                 ),
                 SizedBox(
-                  height: context.screenHeight * 0.01,
+                  height: context.screenHeight * 0.02,
                 ),
                 CustomContainerProfile(
-                  text: AppStrings.setting,
-                  stringIcon: AppAssetIcons.setting,
+                  text: AppStrings.language,
+                  stringIcon: AppAssetIcons.global,
                   onTap: () {
-                    controller.goToMainSetting();
+                    controller.goToLanguage();
                   },
+                ),
+                SizedBox(
+                  height: context.screenHeight * 0.02,
+                ),
+                CustomContainerProfile(
+                  text: AppStrings.notificationsSetting,
+                  stringIcon: AppAssetIcons.note,
+                  onTap: () {},
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.05,
@@ -104,8 +77,8 @@ class MainProfileView extends GetView<MainProfileController> {
                       context: context,
                       builder: (BuildContext context) {
                         return CustomAlarteDialog(
-                          text: AppStrings.areYouSureToLogout,
-                          contentButton: AppStrings.logout,
+                          text: AppStrings.areYouSureTodDeleteAccount,
+                          contentButton: AppStrings.deleteAccount,
                           onTap: Get.back,
                           onPressed: () => (),
                         );
@@ -116,7 +89,7 @@ class MainProfileView extends GetView<MainProfileController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppStrings.logout,
+                        AppStrings.deleteAccount,
                         style: TextStyle(
                           color: AppColors.red,
                           fontSize: 14 * context.textScale,
@@ -127,7 +100,7 @@ class MainProfileView extends GetView<MainProfileController> {
                         width: context.screenWidth * 0.02,
                       ),
                       Image.asset(
-                        AppAssetIcons.logout,
+                        AppAssetIcons.delete,
                       ),
                     ],
                   ),

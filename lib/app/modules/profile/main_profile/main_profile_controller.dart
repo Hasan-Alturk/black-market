@@ -13,6 +13,14 @@ class MainProfileController extends GetxController {
     Get.offNamed("/main_home");
   }
 
+  void goToMainCuurency() {
+    Get.offNamed("/main_cuurency");
+  }
+
+  void goToMainSetting() {
+    Get.offNamed("/main_setting");
+  }
+
   ///storage.saveUser(user);
   // Get.to(Home());
 }

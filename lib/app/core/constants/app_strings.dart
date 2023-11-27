@@ -57,4 +57,21 @@ abstract class AppStrings {
   static String calculate = "حساب";
   static String calculator = "الحاسبة";
   static String notifications = "الاشعارات";
+  static String selectTheBaseCurrency = "حدد العملة الأساسية";
+  static String currencyMasr = "جنيه مصري / EGP";
+  static String changePassword = "تغيير كلمه المرور";
+
+  static String preferredBanks = "الترتيب المفضل للبنوك";
+  static String preferredCurrencies = "الترتيب المفضل للعملات";
+  static String language = "اللغة";
+  static String notificationsSetting = "اعدادات الاشعارات";
+  static String deleteAccount = "حذف الحساب";
+  static String areYouSureTodDeleteAccount = "هل أنت متأكد من حذف الحساب";
+  static String languageArabic = "العربية";
+  static String languageEnglish = "الانكليزية";
+  static String selectLanguage = "حدد اللغة الأساسية";
+  static String nowPassword = "كلمة المرور الحالية";
+  static String newPassword = "كلمة المرور الجديدة";
+  static String confirmPasswordNew = "تأكيد كلمة المرور الجديدة";
+  static String changePasswordSuccessfully = "تم تغيير كلمة المرور بنجاح!";
 }

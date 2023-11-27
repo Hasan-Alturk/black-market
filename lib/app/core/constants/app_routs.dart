@@ -22,8 +22,16 @@ import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
 import 'package:black_market/app/modules/profile/edit_profile/edit_profile_binding.dart';
 import 'package:black_market/app/modules/profile/edit_profile/edit_profile_view.dart';
+import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_binding.dart';
+import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_view.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
+import 'package:black_market/app/modules/profile/setting/change_password/change_password_binding.dart';
+import 'package:black_market/app/modules/profile/setting/change_password/change_password_view.dart';
+import 'package:black_market/app/modules/profile/setting/language/language_binding.dart';
+import 'package:black_market/app/modules/profile/setting/language/language_view.dart';
+import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_binding.dart';
+import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_view.dart';
@@ -104,5 +112,25 @@ List<GetPage> approuts = [
     name: "/notifications",
     page: () => const NotificationsView(),
     binding: NotificationsBinding(),
+  ),
+  GetPage(
+    name: "/main_cuurency",
+    page: () => const MainCurencyView(),
+    binding: MainCurencyBinding(),
+  ),
+  GetPage(
+    name: "/main_setting",
+    page: () => const MainSettingView(),
+    binding: MainSettingBinding(),
+  ),
+  GetPage(
+    name: "/language",
+    page: () => const LanguageView(),
+    binding: LanguageBinding(),
+  ),
+  GetPage(
+    name: "/change_password",
+    page: () => const ChangePasswordView(),
+    binding: ChangePasswordBinding(),
   ),
 ];

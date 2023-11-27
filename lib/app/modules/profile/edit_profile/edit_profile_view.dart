@@ -18,7 +18,7 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       appBar: CustomAppBar(
         text: AppStrings.editProfile,
-        onTap: controller.goToHome,
+        onTap: controller.goToMainProfile,
       ),
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(

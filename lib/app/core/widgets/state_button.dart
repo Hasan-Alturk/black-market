@@ -1,4 +1,3 @@
-import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,8 @@ class StateButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.buttonColor,
-    required this.radius, required this.textColor,
+    required this.radius,
+    required this.textColor,
   }) : super(key: key);
   final bool isLoading;
   final String text;
@@ -23,7 +23,7 @@ class StateButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
-        fixedSize: const Size(200, 50),
+        fixedSize: Size(context.screenWidth, context.screenHeight * 0.065),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius),
         ),
@@ -35,7 +35,7 @@ class StateButton extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 16 * context.textScale,
-                color:textColor ,
+                color: textColor,
                 fontWeight: FontWeight.w800,
               ),
             ),

@@ -4,4 +4,6 @@ class AppAssetImage {
   static const String completeResetPassword =
       "asset/images/CompleteResetPassword.png";
   static const String bankMasr = "asset/images/bankEgypt.png";
+  static const String completeChangePassword =
+      "asset/images/CompleteChangePassword.png";
 }
