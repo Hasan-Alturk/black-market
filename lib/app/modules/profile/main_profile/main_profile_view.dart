@@ -3,6 +3,7 @@ import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/core/widgets/custom_alarte_dialog.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,18 @@ class MainProfileView extends GetView<MainProfileController> {
                   height: context.screenHeight * 0.05,
                 ),
                 GestureDetector(
-                  onTap: () => (),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomAlarteDialog(
+                          onTap: Get.back,
+                          content: "content",
+                          onPressed: () => (),
+                        );
+                      },
+                    );
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -5,6 +5,8 @@ class EditProfileController extends GetxController {
     Get.offNamed("/main_home");
   }
 
+ 
+
   ///storage.saveUser(user);
   // Get.to(Home());
 }

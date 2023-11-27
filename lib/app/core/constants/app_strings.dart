@@ -50,4 +50,5 @@ abstract class AppStrings {
   static String avgPrice = "متوسط السعر ";
   static String changePhoto = "تغيير الصورة";
   static String change = "تعديل";
+  static String areYouSureToLogout = "هل أنت متأكد من تسجيل الخروج";
 }

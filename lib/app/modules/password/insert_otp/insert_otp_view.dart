@@ -16,16 +16,16 @@ class InsertOtpView extends GetView<InsertOtpController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
+      appBar: CustomAppBar(
+        text: AppStrings.resetPassword,
+        onTap: () => controller.goToLogin(),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.all(context.screenWidth * 0.01),
           children: [
             SizedBox(
               height: context.screenHeight * 0.05,
-            ),
-            CustomAppBar(
-              text: AppStrings.resetPassword,
-              onTap: () => controller.goToLogin(),
             ),
             SizedBox(
               height: context.screenHeight * 0.1,
@@ -130,6 +130,7 @@ class InsertOtpView extends GetView<InsertOtpController> {
         padding: EdgeInsets.all(context.screenWidth * 0.06),
         color: AppColors.blackNormalHover,
         child: StateButton(
+          textColor: AppColors.blackDark,
           isLoading: false,
           text: AppStrings.complete,
           onPressed: () => controller.goToResetPassword(),

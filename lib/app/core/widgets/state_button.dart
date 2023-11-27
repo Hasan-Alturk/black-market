@@ -9,13 +9,14 @@ class StateButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.buttonColor,
-    required this.radius,
+    required this.radius, required this.textColor,
   }) : super(key: key);
   final bool isLoading;
   final String text;
   final void Function() onPressed;
-  final Color? buttonColor;
+  final Color buttonColor;
   final double radius;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class StateButton extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 16 * context.textScale,
-                color: AppColors.blackDark,
+                color:textColor ,
                 fontWeight: FontWeight.w800,
               ),
             ),

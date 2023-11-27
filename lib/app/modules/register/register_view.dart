@@ -75,6 +75,7 @@ class RegisterView extends GetView<RegisterController> {
         padding: EdgeInsets.all(context.screenWidth * 0.06),
         color: AppColors.blackNormalHover,
         child: StateButton(
+          textColor: AppColors.blackDark,
           isLoading: false,
           text: AppStrings.complete,
           onPressed: () => controller.register(),

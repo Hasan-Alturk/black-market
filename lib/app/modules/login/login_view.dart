@@ -104,6 +104,7 @@ class LoginView extends GetView<LoginController> {
               height: context.screenHeight * 0.03,
             ),
             StateButton(
+              textColor: AppColors.blackDark,
               isLoading: false,
               text: AppStrings.login,
               onPressed: () => controller.login(),

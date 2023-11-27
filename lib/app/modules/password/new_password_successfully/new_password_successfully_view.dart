@@ -16,29 +16,34 @@ class NewPasswordSuccessfullyView
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(AppAssetImage.completeResetPassword),
-            SizedBox(
-              height: context.screenHeight * 0.07,
-            ),
-            Text(
-              AppStrings.newPasswordSuccessfully,
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.yellowNormal,
-                fontWeight: FontWeight.w800,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: context.screenHeight * 0.3,
               ),
-            ),
-          ],
-        )),
+              Center(child: Image.asset(AppAssetImage.completeResetPassword)),
+              SizedBox(
+                height: context.screenHeight * 0.07,
+              ),
+              Text(
+                AppStrings.newPasswordSuccessfully,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.yellowNormal,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(context.screenWidth * 0.06),
         color: AppColors.blackNormalHover,
         child: StateButton(
+          textColor: AppColors.blackDark,
           isLoading: false,
           text: AppStrings.main,
           onPressed: () => controller.goToHmoe(),

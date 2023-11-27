@@ -18,7 +18,7 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       appBar: CustomAppBar(
         text: AppStrings.editProfile,
-        onTap: () => controller.goToHome(),
+        onTap: controller.goToHome,
       ),
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
@@ -74,6 +74,7 @@ class EditProfileView extends GetView<EditProfileController> {
         padding: EdgeInsets.all(context.screenWidth * 0.06),
         color: AppColors.blackNormalHover,
         child: StateButton(
+          textColor: AppColors.blackDark,
           isLoading: false,
           text: AppStrings.change,
           onPressed: () => (),
