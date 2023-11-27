@@ -4,8 +4,8 @@ import 'package:black_market/app/modules/currencies/currencies_binding.dart';
 import 'package:black_market/app/modules/currencies/currencies_view.dart';
 import 'package:black_market/app/modules/favourite/favourite_binding.dart';
 import 'package:black_market/app/modules/favourite/favourite_view.dart';
-import 'package:black_market/app/modules/gold/gold_binding.dart';
-import 'package:black_market/app/modules/gold/gold_view.dart';
+import 'package:black_market/app/modules/gold/main_gold_binding.dart';
+import 'package:black_market/app/modules/gold/main_gold_view.dart';
 import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/login/login_view.dart';
 import 'package:black_market/app/modules/main/main_home_binding.dart';
@@ -84,9 +84,9 @@ List<GetPage> approuts = [
     binding: CurrenciesBinding(),
   ),
   GetPage(
-    name: "/gold",
-    page: () => const GoldView(),
-    binding: GoldBinding(),
+    name: "/main_gold",
+    page: () => const MainGoldView(),
+    binding: MainGoldBinding(),
   ),
   GetPage(
     name: "/favourite",
