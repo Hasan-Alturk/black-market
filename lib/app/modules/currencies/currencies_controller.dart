@@ -2,6 +2,6 @@ import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
   void goToBankDetails() {
-    Get.offNamed("/bank_details");
+    Get.toNamed("/bank_details");
   }
 }

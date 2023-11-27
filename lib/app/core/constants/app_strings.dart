@@ -37,6 +37,8 @@ abstract class AppStrings {
   static String sell = "بيع";
   static String buy = "شراء";
   static String coins = "العملات";
+  static String coin = "العملة";
+
   static String gold = "الذهب";
   static String favourite = "المفضلة";
   static String profile = "البروفايل";
@@ -51,4 +53,7 @@ abstract class AppStrings {
   static String changePhoto = "تغيير الصورة";
   static String change = "تعديل";
   static String areYouSureToLogout = "هل أنت متأكد من تسجيل الخروج";
+  static String enterAmount = "ادخل المبلغ";
+  static String calculate = "حساب";
+  static String calculator = "الحاسبة";
 }

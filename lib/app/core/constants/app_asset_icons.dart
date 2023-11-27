@@ -23,4 +23,6 @@ class AppAssetIcons {
   static const String profileGold = "asset/icons/ProfileGold.png";
   static const String wrong = "asset/icons/wrong.png";
   static const String close = "asset/icons/close.png";
+  static const String arrowDown = "asset/icons/arrow_down.png";
+  static const String equal = "asset/icons/equal.png";
 }
