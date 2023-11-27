@@ -21,13 +21,39 @@ class NotificationsSettingView extends GetView<NotificationsSettingController> {
         child: ListView(
           padding: EdgeInsets.all(context.screenWidth * 0.03),
           children: [
-            SizedBox(
-              height: context.screenHeight * 0.05,
+            SizedBox(height: context.screenHeight * 0.03),
+            GetX<NotificationsSettingController>(
+              builder: (controller) => Switch(
+                activeTrackColor: AppColors.greenLight,
+                activeColor: AppColors.white,
+                value: controller.isSwitchedCoins.value,
+                onChanged: (value) {
+                  controller.isSwitchedCoins.value = value;
+                },
+              ),
             ),
-            Switch(
-              value: false,
-              onChanged: (value) => controller.isSwitched,
-            )
+            SizedBox(height: context.screenHeight * 0.03),
+            GetX<NotificationsSettingController>(
+              builder: (controller) => Switch(
+                activeTrackColor: AppColors.greenLight,
+                activeColor: AppColors.white,
+                value: controller.isSwitchedGold.value,
+                onChanged: (value) {
+                  controller.isSwitchedGold.value = value;
+                },
+              ),
+            ),
+            SizedBox(height: context.screenHeight * 0.03),
+            GetX<NotificationsSettingController>(
+              builder: (controller) => Switch(
+                activeTrackColor: AppColors.greenLight,
+                activeColor: AppColors.white,
+                value: controller.isSwitchedNews.value,
+                onChanged: (value) {
+                  controller.isSwitchedNews.value = value;
+                },
+              ),
+            ),
           ],
         ),
       ),

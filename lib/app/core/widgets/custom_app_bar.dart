@@ -22,15 +22,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Image.asset(AppAssetIcons.back),
         ),
       ],
-      title: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 18 * context.textScale,
-            fontWeight: FontWeight.w700,
+      centerTitle: true,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 18 * context.textScale,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
+        ],
       ),
       backgroundColor: AppColors.blackNormalHover,
     );

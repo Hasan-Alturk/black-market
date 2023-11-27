@@ -45,17 +45,14 @@ class CustomAlarteDialog extends StatelessWidget {
                 SizedBox(
                   height: context.screenHeight * 0.02,
                 ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                    ),
-                    textAlign: TextAlign.center,
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.03,

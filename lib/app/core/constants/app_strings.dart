@@ -73,6 +73,6 @@ abstract class AppStrings {
   static String nowPassword = "كلمة المرور الحالية";
   static String newPassword = "كلمة المرور الجديدة";
   static String confirmPasswordNew = "تأكيد كلمة المرور الجديدة";
-  static String changePasswordSuccessfully = "تم تغيير كلمة المرور بنجاح!";
+  static String changePasswordSuccessfully = "تم تغيير كلمة المرور بنجاح";
   static String news = "الأخبار";
 }
