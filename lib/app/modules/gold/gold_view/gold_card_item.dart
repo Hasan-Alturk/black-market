@@ -5,8 +5,8 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 
-class CardItem extends StatelessWidget {
-  const CardItem({super.key});
+class GoldCardItem extends StatelessWidget {
+  const GoldCardItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +22,8 @@ class CardItem extends StatelessWidget {
             height: context.screenHeight * 0.02,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.blackDark),
-                ),
-                child: CircleAvatar(
-                  backgroundColor: AppColors.darkGrey,
-                  radius: 15,
-                  child: Image.asset(AppAssetIcons.heart),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: AppColors.darkGrey,
-                radius: 25,
-                child: Image.asset(AppAssetImage.bankMasr),
-              ),
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -50,7 +34,14 @@ class CardItem extends StatelessWidget {
                   radius: 15,
                   child: Image.asset(AppAssetIcons.share),
                 ),
-              )
+              ),
+              Center(
+                child: CircleAvatar(
+                  backgroundColor: AppColors.darkGrey,
+                  radius: 25,
+                  child: Image.asset(AppAssetImage.bankMasr),
+                ),
+              ),
             ],
           ),
           Text(

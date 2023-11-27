@@ -38,7 +38,6 @@ abstract class AppStrings {
   static String buy = "شراء";
   static String coins = "العملات";
   static String coin = "العملة";
-
   static String gold = "الذهب";
   static String favourite = "المفضلة";
   static String profile = "البروفايل";
@@ -60,6 +59,7 @@ abstract class AppStrings {
   static String selectTheBaseCurrency = "حدد العملة الأساسية";
   static String currencyMasr = "جنيه مصري / EGP";
   static String changePassword = "تغيير كلمه المرور";
+  static String alloys = "السبائك";
 
   static String preferredBanks = "الترتيب المفضل للبنوك";
   static String preferredCurrencies = "الترتيب المفضل للعملات";

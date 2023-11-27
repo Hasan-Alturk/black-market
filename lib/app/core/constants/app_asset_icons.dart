@@ -29,4 +29,5 @@ class AppAssetIcons {
   static const String global = "asset/icons/global.png";
   static const String notification = "asset/icons/notification.png";
   static const String delete = "asset/icons/delete.png";
+  static const String yellowCalculator = "asset/icons/yellow_calculator.png";
 }
