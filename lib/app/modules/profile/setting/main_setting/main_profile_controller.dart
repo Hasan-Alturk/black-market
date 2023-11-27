@@ -12,6 +12,10 @@ class MainSettingController extends GetxController {
   void goToChangePassword() {
     Get.offNamed("/change_password");
   }
+
+  void goToNotificationsSetting() {
+    Get.offNamed("/notifications_setting");
+  }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");
   // }

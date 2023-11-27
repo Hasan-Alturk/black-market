@@ -19,7 +19,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.setting,
-        onTap: () => controller.goToMainProfile(),
+        onTap: () => controller.goToMainSetting(),
       ),
       body: SafeArea(
         child: ListView(

@@ -66,7 +66,9 @@ class MainSettingView extends GetView<MainSettingController> {
                 CustomContainerProfile(
                   text: AppStrings.notificationsSetting,
                   stringIcon: AppAssetIcons.note,
-                  onTap: () {},
+                  onTap: () {
+                    controller.goToNotificationsSetting();
+                  },
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.05,

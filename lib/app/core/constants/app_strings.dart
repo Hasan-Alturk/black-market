@@ -64,7 +64,7 @@ abstract class AppStrings {
   static String preferredBanks = "الترتيب المفضل للبنوك";
   static String preferredCurrencies = "الترتيب المفضل للعملات";
   static String language = "اللغة";
-  static String notificationsSetting = "اعدادات الاشعارات";
+  static String notificationsSetting = "إعدادات الإشعارات";
   static String deleteAccount = "حذف الحساب";
   static String areYouSureTodDeleteAccount = "هل أنت متأكد من حذف الحساب";
   static String languageArabic = "العربية";
@@ -74,4 +74,5 @@ abstract class AppStrings {
   static String newPassword = "كلمة المرور الجديدة";
   static String confirmPasswordNew = "تأكيد كلمة المرور الجديدة";
   static String changePasswordSuccessfully = "تم تغيير كلمة المرور بنجاح!";
+  static String news = "الأخبار";
 }
