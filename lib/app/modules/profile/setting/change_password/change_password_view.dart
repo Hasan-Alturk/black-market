@@ -64,7 +64,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               context: context,
               builder: (BuildContext context) {
                 return CustomAlarteDialogPassword(
-                  text: AppStrings.changePasswordSuccessfully,
+                  text: AppStrings.aboutApp,
                   contentButton: AppStrings.main,
                   onPressed: () => controller.goToMainHome(),
                 );

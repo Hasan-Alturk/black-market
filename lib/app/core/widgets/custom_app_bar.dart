@@ -22,15 +22,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Image.asset(AppAssetIcons.back),
         ),
       ],
-      title: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 18 * context.textScale,
-            fontWeight: FontWeight.w700,
+      centerTitle: true,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 18 * context.textScale,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
+        ],
       ),
       backgroundColor: AppColors.blackNormalHover,
     );
@@ -39,26 +44,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
-// Row(
-//   children: [
-//     const Spacer(flex: 3),
-//     Center(
-//       child: Text(
-//         text,
-//         style: TextStyle(
-//           color: AppColors.white,
-//           fontSize: 18,
-//           fontWeight: FontWeight.w700,
-//         ),
-//         textAlign: TextAlign.center,
-//       ),
-//     ),
-//     const Spacer(flex: 2),
-//     Expanded(
-//       flex: 1,
-//       child: GestureDetector(
-//           onTap: onTap, child: Image.asset(AppAssetIcons.back)),
-//     )
-//   ],
-// );
