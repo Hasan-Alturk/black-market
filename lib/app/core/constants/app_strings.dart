@@ -79,4 +79,11 @@ abstract class AppStrings {
   static String totalWeightInGram = "إجمالي الوزن بالجرام";
   static String caliber = "العيار";
   static String calculateGoldManufacturing = "حساب مصنعية الذهب";
+  static String gramPrice = "سعر الجرام ";
+  static String gramManufacturing = "مصنعية الجرام";
+  static String totalTax = " الضربية الكلية";
+  static String totalPriceWithManufacturingAndTax =
+      "السعر شامل الضريبة و المصنعية";
+  static String importAmount = "مبلغ الاستيراد";
+  static String difference = "الفرق ";
 }

@@ -6,4 +6,5 @@ class AppAssetImage {
   static const String bankMasr = "asset/images/bankEgypt.png";
   static const String completeChangePassword =
       "asset/images/CompleteChangePassword.png";
+  static const String goldImage = "asset/images/goldImage.png";
 }
