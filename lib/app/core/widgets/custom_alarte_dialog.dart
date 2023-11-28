@@ -39,7 +39,7 @@ class CustomAlarteDialog extends StatelessWidget {
                   onTap: onTap,
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: Image.asset(AppAssetIcons.close),
+                    child: Image.asset(AppAssetIcons.redClose),
                   ),
                 ),
                 SizedBox(

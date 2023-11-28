@@ -22,7 +22,7 @@ class AppAssetIcons {
   static const String messageGold = "asset/icons/MessageGold.png";
   static const String profileGold = "asset/icons/ProfileGold.png";
   static const String wrong = "asset/icons/wrong.png";
-  static const String close = "asset/icons/close.png";
+  static const String redClose = "asset/icons/red_close.png";
   static const String arrowDown = "asset/icons/arrow_down.png";
   static const String equal = "asset/icons/equal.png";
   static const String bank = "asset/icons/bank.png";
@@ -30,4 +30,5 @@ class AppAssetIcons {
   static const String notification = "asset/icons/notification.png";
   static const String delete = "asset/icons/delete.png";
   static const String yellowCalculator = "asset/icons/yellow_calculator.png";
+  static const String close = "asset/icons/close.png";
 }

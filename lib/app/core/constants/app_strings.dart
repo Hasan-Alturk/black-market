@@ -75,4 +75,8 @@ abstract class AppStrings {
   static String confirmPasswordNew = "تأكيد كلمة المرور الجديدة";
   static String changePasswordSuccessfully = "تم تغيير كلمة المرور بنجاح!";
   static String news = "الأخبار";
+  static String totalPaidAmount = "إجمالي المبلغ المدفوع";
+  static String totalWeightInGram = "إجمالي الوزن بالجرام";
+  static String caliber = "العيار";
+  static String calculateGoldManufacturing = "حساب مصنعية الذهب";
 }
