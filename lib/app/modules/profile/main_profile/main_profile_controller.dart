@@ -6,6 +6,8 @@ class MainProfileController extends GetxController {
   }
 
   void goToMainProfile() {
+    // Get.to(Home());
+
     Get.offNamed("/main_profile");
   }
 
