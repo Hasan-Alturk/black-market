@@ -86,4 +86,5 @@ abstract class AppStrings {
       "السعر شامل الضريبة و المصنعية";
   static String importAmount = "مبلغ الاستيراد";
   static String difference = "الفرق ";
+  static String articles = "المقالات ";
 }

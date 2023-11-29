@@ -26,12 +26,7 @@ class MainGoldView extends GetView<MainGoldController> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return GoldCalculatorDialog(
-                        // text: AppStrings.areYouSureToLogout,
-                        // contentButton: AppStrings.logout,
-                        // onTap: Get.back,
-                        // onPressed: () => (),
-                        );
+                    return const GoldCalculatorDialog();
                   },
                 );
               },
@@ -82,9 +77,6 @@ class MainGoldView extends GetView<MainGoldController> {
                 ),
               ),
             ),
-            // SizedBox(
-            //   height: context.screenHeight * 0.001,
-            // ),
             const Expanded(
                 child: TabBarView(
               children: [
@@ -95,7 +87,6 @@ class MainGoldView extends GetView<MainGoldController> {
             ))
           ],
         ),
-        // body: Center(child: Text("Gold")),
       ),
     );
   }
