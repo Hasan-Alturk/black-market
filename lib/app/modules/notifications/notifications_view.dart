@@ -1,8 +1,8 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/modules/gold/alloy_view/alloy_view.dart';
-import 'package:black_market/app/modules/gold/gold_currency_view/gold_currency_view.dart';
+import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/core/widgets/line_painter.dart';
 import 'package:black_market/app/modules/notifications/notification_view.dart';
 import 'package:black_market/app/modules/notifications/notifications_controller.dart';
 import 'package:flutter/material.dart';
@@ -67,13 +67,49 @@ class NotificationsView extends GetView<NotificationsController> {
                 ),
               ),
             ),
-            const Expanded(
-                child: TabBarView(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NotificationView(),
-                NotificationView(),
+                Expanded(
+                  child: CustomPaint(
+                    painter: LinePainter(),
+                    child: SizedBox(
+                      height: context.screenHeight * 0.05,
+                    ),
+                  ),
+                ),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Padding(
+                    padding: EdgeInsets.all(context.screenWidth * 0.05),
+                    child: Text(
+                      AppStrings.date,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 18 * context.textScale,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: CustomPaint(
+                    painter: LinePainter(),
+                    child: SizedBox(
+                      height: context.screenHeight * 0.07,
+                    ),
+                  ),
+                ),
               ],
-            ))
+            ),
+            const Expanded(
+              child: TabBarView(
+                children: [
+                  NotificationView(),
+                  NotificationView(),
+                ],
+              ),
+            ),
           ],
         ),
       ),

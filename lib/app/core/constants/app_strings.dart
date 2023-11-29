@@ -87,4 +87,5 @@ abstract class AppStrings {
   static String importAmount = "مبلغ الاستيراد";
   static String difference = "الفرق ";
   static String articles = "المقالات ";
+  static String date = " 26 أكتوبر 2023";
 }
