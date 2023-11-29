@@ -2,6 +2,7 @@ import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/line_painter.dart';
 import 'package:black_market/app/modules/notifications/notification_view.dart';
 import 'package:black_market/app/modules/notifications/notifications_controller.dart';
@@ -17,21 +18,7 @@ class NotificationsView extends GetView<NotificationsController> {
       length: 2,
       initialIndex: 1,
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          actions: [
-            IconButton(onPressed: () {}, icon: Image.asset(AppAssetIcons.back)),
-          ],
-          title: Text(
-            AppStrings.notifications,
-            style: TextStyle(
-              fontSize: 18,
-              color: AppColors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          backgroundColor: AppColors.blackNormalHover,
-        ),
+        appBar:CustomAppBar(text: AppStrings.notifications, onTap: () => controller.goToHome(),),
         backgroundColor: AppColors.blackNormalHover,
         body: Column(
           children: [

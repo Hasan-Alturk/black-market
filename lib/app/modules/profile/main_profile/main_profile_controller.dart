@@ -2,25 +2,15 @@ import 'package:get/get.dart';
 
 class MainProfileController extends GetxController {
   void goToEditProfile() {
-    Get.offNamed("/edit_profile");
-  }
-
-  void goToMainProfile() {
-    // Get.to(Home());
-
-    Get.offNamed("/main_profile");
-  }
-
-  void goToHome() {
-    Get.offNamed("/main_home");
+    Get.toNamed("/edit_profile");
   }
 
   void goToMainCuurency() {
-    Get.offNamed("/main_cuurency");
+    Get.toNamed("/main_cuurency");
   }
 
   void goToMainSetting() {
-    Get.offNamed("/main_setting");
+    Get.toNamed("/main_setting");
   }
 
   ///storage.saveUser(user);

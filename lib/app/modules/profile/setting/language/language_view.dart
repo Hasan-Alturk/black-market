@@ -15,7 +15,7 @@ class LanguageView extends GetView<LanguagegController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.setting,
-        onTap: () => controller.goToMainSetting(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: Padding(

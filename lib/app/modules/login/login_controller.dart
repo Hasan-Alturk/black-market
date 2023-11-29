@@ -10,10 +10,10 @@ class LoginController extends GetxController {
   }
 
   void goToRegister() {
-    Get.offNamed("/register");
+    Get.toNamed("/register");
   }
 
   void goToSendOtp() {
-    Get.offNamed("/send_otp");
+    Get.toNamed("/send_otp");
   }
 }

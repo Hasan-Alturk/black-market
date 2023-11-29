@@ -16,7 +16,7 @@ class NotificationsSettingView extends GetView<NotificationsSettingController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.notificationsSetting,
-        onTap: () => controller.goToMainSetting(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView(

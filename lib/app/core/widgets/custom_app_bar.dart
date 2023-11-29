@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Image.asset(AppAssetIcons.back),
         ),
       ],
+      automaticallyImplyLeading: false,
       centerTitle: true,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

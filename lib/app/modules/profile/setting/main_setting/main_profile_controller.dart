@@ -1,20 +1,17 @@
 import 'package:get/get.dart';
 
 class MainSettingController extends GetxController {
-  void goToMainProfile() {
-    Get.offNamed("/main_profile");
-  }
 
   void goToLanguage() {
-    Get.offNamed("/language");
+    Get.toNamed("/language");
   }
 
   void goToChangePassword() {
-    Get.offNamed("/change_password");
+    Get.toNamed("/change_password");
   }
 
   void goToNotificationsSetting() {
-    Get.offNamed("/notifications_setting");
+    Get.toNamed("/notifications_setting");
   }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");

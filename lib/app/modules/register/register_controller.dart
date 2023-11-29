@@ -12,7 +12,4 @@ class RegisterController extends GetxController {
     // Get.to(Home());
   }
 
-  void goToLogin() {
-    Get.offNamed("/login");
-  }
 }

@@ -18,7 +18,7 @@ class InsertOtpView extends GetView<InsertOtpController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.resetPassword,
-        onTap: () => controller.goToLogin(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView(

@@ -18,7 +18,7 @@ class RegisterView extends GetView<RegisterController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.createAccountNew,
-        onTap: () => controller.goToLogin(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView(

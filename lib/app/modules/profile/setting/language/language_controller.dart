@@ -8,9 +8,6 @@ class LanguagegController extends GetxController {
     AppStrings.languageEnglish,
   ];
 
-  void goToMainSetting() {
-    Get.offNamed("/main_setting");
-  }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");
   // }

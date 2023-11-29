@@ -18,7 +18,7 @@ class SendOtpView extends GetView<SendOtpController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.resetPassword,
-        onTap: () => controller.goToLogin(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView(

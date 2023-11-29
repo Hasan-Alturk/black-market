@@ -18,7 +18,7 @@ class MainSettingView extends GetView<MainSettingController> {
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
         text: AppStrings.setting,
-        onTap: () => controller.goToMainProfile(),
+        onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: ListView(

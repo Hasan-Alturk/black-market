@@ -14,7 +14,7 @@ class MainCurencyView extends GetView<MainCurencyController> {
     return Scaffold(
       appBar: CustomAppBar(
         text: AppStrings.mainCurrency,
-        onTap: controller.goToMainProfile,
+        onTap: () => Get.back(),
       ),
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
