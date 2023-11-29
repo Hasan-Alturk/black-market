@@ -26,6 +26,8 @@ import 'package:black_market/app/modules/profile/setting/main_setting/main_setti
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_view.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_binding.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
+import 'package:black_market/app/modules/register/register_binding.dart';
+import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:get/get.dart';
 
@@ -40,11 +42,11 @@ List<GetPage> approuts = [
     page: () => LoginView(),
     binding: LoginBinding(),
   ),
-  // GetPage(
-  //   name: "/register",
-  //   page: () => const RegisterView(),
-  //   binding: RegisterBinding(),
-  // ),
+  GetPage(
+    name: "/register",
+    page: () => RegisterView(),
+    binding: RegisterBinding(),
+  ),
   // GetPage(
   //   name: "/send_otp",
   //   page: () => const SendOtpView(),

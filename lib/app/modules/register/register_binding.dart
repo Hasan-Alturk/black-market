@@ -1,3 +1,4 @@
+import 'package:black_market/app/core/repo/auth_repo.dart';
 import 'package:black_market/app/modules/register/register_controller.dart';
 import 'package:get/get.dart';
 
@@ -6,8 +7,8 @@ class RegisterBinding extends Bindings {
   void dependencies() {
     // Get.put(AuthRepo(Get.find<Dio>()), permanent: true);
     Get.put(RegisterController(
-        //authRepo: Get.find<AuthRepo>(),
-        // storageService: Get.find<StorageService>(),
-        ));
+      authRepo: Get.find<AuthRepo>(),
+      // storageService: Get.find<StorageService>(),
+    ));
   }
 }
