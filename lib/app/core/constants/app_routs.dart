@@ -12,30 +12,20 @@ import 'package:black_market/app/modules/main/main_home_binding.dart';
 import 'package:black_market/app/modules/main/main_home_view.dart';
 import 'package:black_market/app/modules/notifications/notifications_binding.dart';
 import 'package:black_market/app/modules/notifications/notifications_view.dart';
-import 'package:black_market/app/modules/password/insert_otp/insert_otp%20controller_binding.dart';
-import 'package:black_market/app/modules/password/insert_otp/insert_otp_view.dart';
 import 'package:black_market/app/modules/password/new_password_successfully/new_password_successfully_binding.dart';
 import 'package:black_market/app/modules/password/new_password_successfully/new_password_successfully_view.dart';
-import 'package:black_market/app/modules/password/reset_password/reset_password_binding.dart';
-import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
-import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
-import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
 import 'package:black_market/app/modules/profile/edit_profile/edit_profile_binding.dart';
 import 'package:black_market/app/modules/profile/edit_profile/edit_profile_view.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_binding.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_view.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
-import 'package:black_market/app/modules/profile/setting/change_password/change_password_binding.dart';
-import 'package:black_market/app/modules/profile/setting/change_password/change_password_view.dart';
 import 'package:black_market/app/modules/profile/setting/language/language_binding.dart';
 import 'package:black_market/app/modules/profile/setting/language/language_view.dart';
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_binding.dart';
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_view.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_binding.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
-import 'package:black_market/app/modules/register/register_binding.dart';
-import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:get/get.dart';
 
@@ -47,29 +37,29 @@ List<GetPage> approuts = [
   ),
   GetPage(
     name: "/login",
-    page: () => const LoginView(),
+    page: () => LoginView(),
     binding: LoginBinding(),
   ),
-  GetPage(
-    name: "/register",
-    page: () => const RegisterView(),
-    binding: RegisterBinding(),
-  ),
-  GetPage(
-    name: "/send_otp",
-    page: () => const SendOtpView(),
-    binding: SendOtpBinding(),
-  ),
-  GetPage(
-    name: "/insert_otp",
-    page: () => const InsertOtpView(),
-    binding: InsertOtpBinding(),
-  ),
-  GetPage(
-    name: "/reset_password",
-    page: () => const ResetPasswordView(),
-    binding: ResetPasswordBinding(),
-  ),
+  // GetPage(
+  //   name: "/register",
+  //   page: () => const RegisterView(),
+  //   binding: RegisterBinding(),
+  // ),
+  // GetPage(
+  //   name: "/send_otp",
+  //   page: () => const SendOtpView(),
+  //   binding: SendOtpBinding(),
+  // ),
+  // GetPage(
+  //   name: "/insert_otp",
+  //   page: () => const InsertOtpView(),
+  //   binding: InsertOtpBinding(),
+  // ),
+  // GetPage(
+  //   name: "/reset_password",
+  //   page: () => const ResetPasswordView(),
+  //   binding: ResetPasswordBinding(),
+  // ),
   GetPage(
     name: "/new_password_successfully",
     page: () => const NewPasswordSuccessfullyView(),
@@ -130,11 +120,11 @@ List<GetPage> approuts = [
     page: () => const LanguageView(),
     binding: LanguageBinding(),
   ),
-  GetPage(
-    name: "/change_password",
-    page: () => const ChangePasswordView(),
-    binding: ChangePasswordBinding(),
-  ),
+  // GetPage(
+  //   name: "/change_password",
+  //   page: () => const ChangePasswordView(),
+  //   binding: ChangePasswordBinding(),
+  // ),
   GetPage(
     name: "/notifications_setting",
     page: () => const NotificationsSettingView(),

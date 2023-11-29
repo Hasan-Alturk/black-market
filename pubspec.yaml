@@ -39,6 +39,8 @@ dependencies:
   currency_picker: ^2.0.19
   data_table_2: ^2.5.9
   reorderables: ^0.6.0
+  dio: ^5.3.4
+
 
 
 

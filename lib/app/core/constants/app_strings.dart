@@ -88,4 +88,7 @@ abstract class AppStrings {
   static String difference = "الفرق ";
   static String articles = "المقالات ";
   static String date = " 26 أكتوبر 2023";
+  static String emailRequired = "الايميل مطلوب";
+  static String characterCountRequirement =
+      "البريد الالكتروني يجب أن يكون عدد الاحرف فوق 20";
 }

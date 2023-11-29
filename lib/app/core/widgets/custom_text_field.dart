@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    //  required this.controller,
+    required this.controller,
     required this.label,
     required this.hint,
     required this.icon,
-    // required this.onChanged,
+    required this.onChanged,
     this.validator,
     this.textInputType = TextInputType.text,
     this.obscureText = false,
@@ -16,17 +16,16 @@ class CustomTextField extends StatelessWidget {
     this.showBorder = false,
     Key? key,
   }) : super(key: key);
-  //final TextEditingController controller;
+  final TextEditingController controller;
   final String label;
   final String hint;
   final Image icon;
-
   final bool showBorder;
   final bool disable;
   final TextInputType textInputType;
   final bool obscureText;
   final String? Function(String?)? validator;
-  //final void Function(String) onChanged;
+  final void Function(String) onChanged;
   OutlineInputBorder outlineInputBorder() {
     if (showBorder) {
       return OutlineInputBorder(
@@ -51,25 +50,25 @@ class CustomTextField extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14*context.textScale,
+              fontSize: 14 * context.textScale,
               color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
-          SizedBox(
+        SizedBox(
           height: context.screenHeight * 0.015,
         ),
         Directionality(
           textDirection: TextDirection.rtl,
           child: TextFormField(
-            //  onChanged: onChanged,
-            // controller: controller,
+            onChanged: onChanged,
+            controller: controller,
             enabled: !disable,
             keyboardType: textInputType,
             obscureText: obscureText,
             style: TextStyle(
-              fontSize: 14*context.textScale,
+              fontSize: 14 * context.textScale,
               color: AppColors.yellowNormal,
               fontWeight: FontWeight.bold,
             ),
@@ -85,7 +84,7 @@ class CustomTextField extends StatelessWidget {
               fillColor: AppColors.gray,
               hintText: hint,
               hintStyle: TextStyle(
-                fontSize: 12*context.textScale,
+                fontSize: 12 * context.textScale,
                 color: AppColors.graylight,
                 fontWeight: FontWeight.w400,
               ),
