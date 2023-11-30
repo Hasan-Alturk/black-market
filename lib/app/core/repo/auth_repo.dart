@@ -29,8 +29,9 @@ class AuthRepo {
           throw ExceptionHandler("Wrong password");
         }
       }
+
+      throw ExceptionHandler("Unknown error");
     }
-    throw ExceptionHandler("Unknown error");
   }
 
 // <User>
@@ -62,7 +63,7 @@ class AuthRepo {
           throw ExceptionHandler("المستحدم موجود مسبقاََ");
         }
       }
+      throw ExceptionHandler("Unknown error");
     }
-    throw ExceptionHandler("Unknown error");
   }
 }

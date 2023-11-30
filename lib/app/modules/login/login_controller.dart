@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/repo/auth_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:flutter/widgets.dart';
@@ -30,9 +32,11 @@ class LoginController extends GetxController {
       isLoading = false;
       update(["ElevatedButton"]);
     } on ExceptionHandler catch (e) {
-      print("Error: $e");
+      log("Error: $e");
       isLoading = false;
       error = e.error;
+      log(error!);
+
       update(["TextError", "ElevatedButton"]);
     }
   }
