@@ -1,12 +1,11 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
-import 'package:black_market/app/modules/gold/alloy_view/alloy_view.dart';
 import 'package:black_market/app/core/widgets/gold_calculator_dialog.dart';
-import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
+import 'package:black_market/app/modules/gold/alloy_view/alloy_view.dart';
 import 'package:black_market/app/modules/gold/gold_currency_view/gold_currency_view.dart';
 import 'package:black_market/app/modules/gold/gold_view/gold_view.dart';
+import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
