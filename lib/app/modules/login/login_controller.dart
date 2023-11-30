@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/user.dart';
 import 'package:black_market/app/core/repo/auth_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:flutter/widgets.dart';
@@ -22,11 +23,11 @@ class LoginController extends GetxController {
       error = null;
       isLoading = true;
       update(["TextError", "ElevatedButton"]);
-      //  User user =
-      await authRepo.login(
+      MainUser mainUser = await authRepo.login(
         email: emailController.text,
         password: passwordController.text,
       );
+      log(mainUser.accessToken.toString());
 
       Get.offAllNamed("/main_home");
       isLoading = false;

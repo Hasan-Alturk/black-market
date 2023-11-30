@@ -155,12 +155,11 @@ class LoginView extends GetView<LoginController> {
                       isLoading: controller.isLoading,
                       text: AppStrings.login,
                       onPressed: () {
-                        controller.goToHome();
-                        // if (formKey.currentState!.validate()) {
-                        //   controller.login();
-                        // } else {
-                        //   print("Error From validate");
-                        // }
+                        if (formKey.currentState!.validate()) {
+                          controller.login();
+                        } else {
+                          print("Error From validate");
+                        }
                       },
                       buttonColor: AppColors.yellowNormal,
                       radius: 14,

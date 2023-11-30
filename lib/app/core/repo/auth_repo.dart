@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/user.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
@@ -9,17 +10,19 @@ class AuthRepo {
   AuthRepo(this.dio);
   final Dio dio;
 
-  // <User>
-  Future login({required String email, required String password}) async {
+  Future<MainUser> login(
+      {required String email, required String password}) async {
     try {
-      var response = await dio.post("$baseUrl/login", data: {
-        "email": email,
-        "password": password,
-      });
-      log(response.data.toString());
+      var response = await dio.post(
+        "$baseUrl/login",
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
 
-      //   User user = User.fromMap(response.data);
-      //   return user;
+      MainUser mainUser = MainUser.fromJson(response.data);
+      return mainUser;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {
@@ -43,7 +46,7 @@ class AuthRepo {
   }) async {
     try {
       Response response = await dio.post(
-        "https://voipsys.space/api/register",
+        "$baseUrl/register",
         data: {
           "name": name,
           "email": email,
@@ -51,9 +54,8 @@ class AuthRepo {
           "password_confirmation": passwordConfirmation,
         },
       );
-      log(response.statusCode as String); // طباعة رمز الاستجابة
-      log(response.headers as String); // طباعة رؤوس الاستجابة
-      log(response.data); // طباعة بيانات الاستجابة
+      log(response.statusCode.toString()); // طباعة رمز الاستجابة
+      log(response.headers.toString()); // طباعة رؤوس الاستجابة
       log(response.data.toString());
       //   return User.fromMap(response.data);
     } on DioException catch (e) {

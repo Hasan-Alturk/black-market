@@ -9,14 +9,14 @@ class Gold {
     required this.updatedAt,
     required this.price,
   });
-  late final int id;
-  late final String icon;
-  late final String name;
-  late final String karat;
-  late final int sort;
-  late final String? createdAt;
-  late final String updatedAt;
-  late final Price price;
+   final int id;
+   final String icon;
+   final String name;
+   final String karat;
+   final int sort;
+   final String? createdAt;
+   final String updatedAt;
+   final Price price;
 
   static List<Gold> goldList(List data) =>
       data.map((gold) => Gold.fromJson(gold)).toList();
@@ -32,16 +32,16 @@ class Gold {
       );
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['icon'] = icon;
-    _data['name'] = name;
-    _data['karat'] = karat;
-    _data['sort'] = sort;
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
-    _data['price'] = price.toJson();
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['icon'] = icon;
+    data['name'] = name;
+    data['karat'] = karat;
+    data['sort'] = sort;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['price'] = price.toJson();
+    return data;
   }
 }
 
@@ -80,16 +80,16 @@ class Price {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['gold_id'] = goldId;
-    _data['currency_id'] = currencyId;
-    _data['date'] = date;
-    _data['hour'] = hour;
-    _data['price'] = price;
-    _data['buy_price'] = buyPrice;
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['gold_id'] = goldId;
+    data['currency_id'] = currencyId;
+    data['date'] = date;
+    data['hour'] = hour;
+    data['price'] = price;
+    data['buy_price'] = buyPrice;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
   }
 }
