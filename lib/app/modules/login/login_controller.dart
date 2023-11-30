@@ -45,6 +45,10 @@ class LoginController extends GetxController {
     Get.toNamed("/register");
   }
 
+  void goToHome() {
+    Get.offAllNamed("/main_home");
+  }
+
   void goToSendOtp() {
     Get.toNamed("/send_otp");
   }
