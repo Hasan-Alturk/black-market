@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 class LoginView extends GetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   bool isChanged = false;
 
   @override
