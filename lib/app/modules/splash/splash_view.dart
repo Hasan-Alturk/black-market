@@ -48,7 +48,7 @@ void checkToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
   bool? rememberMe = prefs.getBool("rememberMe");
-
+// ||
   if (token != null && token.isNotEmpty && rememberMe == true) {
     Get.offAllNamed("/main_home");
   } else {

@@ -27,10 +27,10 @@ class MainUser {
 class User {
   User({
     required this.id,
-    required this.roleId,
+    this.roleId,
     required this.name,
     required this.email,
-    required this.avatar,
+    this.avatar,
     this.emailVerifiedAt,
     this.token,
     this.provider,
@@ -41,14 +41,14 @@ class User {
   });
 
   final int id;
-  final int roleId;
+  final int? roleId;
   final String name;
   final String email;
-  final String avatar;
+  final String? avatar;
   final dynamic emailVerifiedAt;
   final dynamic token;
   final dynamic provider;
-  final List<dynamic> settings;
+  final List<dynamic>? settings;
   final dynamic otp;
   final String createdAt;
   final String updatedAt;
