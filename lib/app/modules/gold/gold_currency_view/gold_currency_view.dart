@@ -1,17 +1,15 @@
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class GoldCurrencyView extends StatefulWidget {
+class GoldCurrencyView extends GetView<MainGoldController> {
   const GoldCurrencyView({super.key});
 
-  @override
-  State<GoldCurrencyView> createState() => _GoldCurrencyViewState();
-}
-
-class _GoldCurrencyViewState extends State<GoldCurrencyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,33 +21,38 @@ class _GoldCurrencyViewState extends State<GoldCurrencyView> {
           children: [
             SizedBox(
               height: context.screenHeight * 0.12,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const CircleAvatar(
-                            radius: 30,
-                            backgroundImage:
-                                AssetImage(AppAssetImage.goldImage),
-                          ),
-                          SizedBox(
-                            height: context.screenHeight * 0.005,
-                          ),
-                          Text(
-                            "Gold Era",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    );
+              child: GetBuilder<MainGoldController>(
+                  id: "goldCompany",
+                  builder: (_) {
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.goldCompanyList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                    radius: 30,
+                                    child: Image.network(BaseUrls.storageUrl +
+                                        controller
+                                            .goldCompanyList[index].image)),
+                                SizedBox(
+                                  height: context.screenHeight * 0.005,
+                                ),
+                                Text(
+                                  controller.goldCompanyList[index].name,
+                                  style: TextStyle(
+                                      fontSize: 12 * context.textScale,
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                          );
+                        });
                   }),
             ),
             ListView.builder(
