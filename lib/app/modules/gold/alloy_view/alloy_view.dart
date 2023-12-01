@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
@@ -12,6 +14,7 @@ class AlloyView extends GetView<MainGoldController> {
 
   @override
   Widget build(BuildContext context) {
+    int selectedCompanyId = controller.goldCompanyList[0].id;
     return Scaffold(
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(
@@ -34,11 +37,18 @@ class AlloyView extends GetView<MainGoldController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                    radius: 30,
-                                    child: Image.network(BaseUrls.storageUrl +
-                                        controller
-                                            .goldCompanyList[index].image)),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller
+                                        .updateWidgetOnClickingOnCompany(6);
+                                    print(selectedCompanyId);
+                                  },
+                                  child: CircleAvatar(
+                                      radius: 30,
+                                      child: Image.network(BaseUrls.storageUrl +
+                                          controller
+                                              .goldCompanyList[index].image)),
+                                ),
                                 SizedBox(
                                   height: context.screenHeight * 0.005,
                                 ),
@@ -55,54 +65,60 @@ class AlloyView extends GetView<MainGoldController> {
                         });
                   }),
             ),
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const ScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.gray,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: ExpansionTile(
-                              shape: RoundedRectangleBorder(
-                                  side:
-                                      BorderSide(color: AppColors.yellowNormal),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              iconColor: AppColors.white,
-                              collapsedIconColor: AppColors.white,
-                              title: Text(
-                                "${(index + 1) * 5} جرام ",
-                                style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              children: [
-                                _buildTileDetails(AppStrings.gramPrice,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.gramManufacturing,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.totalTax,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(
-                                    AppStrings
-                                        .totalPriceWithManufacturingAndTax,
-                                    "2500 ج.م",
-                                    AppColors.yellowNormal),
-                                _buildTileDetails(AppStrings.importAmount,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.difference,
-                                    "2500 ج.م", AppColors.white),
-                              ]))),
-                );
-              },
-              itemCount: 10,
-            ),
+            GetBuilder<MainGoldController>(
+                id: "ingotListView",
+                builder: (_) {
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: AppColors.gray,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: ExpansionTile(
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: AppColors.yellowNormal),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12))),
+                                    iconColor: AppColors.white,
+                                    collapsedIconColor: AppColors.white,
+                                    title: Text(
+                                      controller.ingots[index].name!,
+                                      style: TextStyle(
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    children: [
+                                      _buildTileDetails(AppStrings.gramPrice,
+                                          "2500 ج.م", AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings.gramManufacturing,
+                                          "",
+                                          AppColors.white),
+                                      _buildTileDetails(AppStrings.totalTax,
+                                          "2500 ج.م", AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings
+                                              .totalPriceWithManufacturingAndTax,
+                                          "2500 ج.م",
+                                          AppColors.yellowNormal),
+                                      _buildTileDetails(AppStrings.importAmount,
+                                          "2500 ج.م", AppColors.white),
+                                      _buildTileDetails(AppStrings.difference,
+                                          "2500 ج.م", AppColors.white),
+                                    ]))),
+                      );
+                    },
+                    itemCount: controller.ingots.length,
+                  );
+                }),
           ],
         ),
       )),

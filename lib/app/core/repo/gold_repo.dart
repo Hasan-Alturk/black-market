@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/alloy_coins_reponse.dart';
 import 'package:black_market/app/core/model/gold.dart';
 import 'package:black_market/app/core/model/gold_company.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
@@ -10,6 +11,28 @@ String baseUrl = "https://voipsys.space/api";
 class GoldRepo {
   GoldRepo(this.dio);
   final Dio dio;
+
+  Future<AlloyCoinResponse> getAlloyCoin() async {
+    try {
+      var response = await dio.get("$baseUrl/ingots-coins");
+      log(response.data.toString());
+
+      AlloyCoinResponse alloyCoinResponse =
+          AlloyCoinResponse.fromJson(response.data);
+      // log(alloyCoinResponse.ingots..name);
+
+      return alloyCoinResponse;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Gold Company not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
 
   Future<List<GoldCompany>> getGoldCompanies() async {
     try {
