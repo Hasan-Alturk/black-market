@@ -115,4 +115,5 @@ class AuthRepo {
       throw ExceptionHandler("Unknown error");
     }
   }
+
 }

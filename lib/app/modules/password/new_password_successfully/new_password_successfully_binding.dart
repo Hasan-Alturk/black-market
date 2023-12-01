@@ -5,7 +5,10 @@ import 'package:get/get.dart';
 class NewPasswordSuccessfullyBinding extends Bindings {
   @override
   void dependencies() {
-    // Get.put(AuthRepo(Get.find<Dio>()), permanent: true);
-    Get.put(NewPasswordSuccessfullyController(authRepo: Get.find<AuthRepo>()));
+    Get.put(
+      NewPasswordSuccessfullyController(
+        authRepo: Get.find<AuthRepo>(),
+      ),
+    );
   }
 }

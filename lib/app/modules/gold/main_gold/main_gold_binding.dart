@@ -9,7 +9,6 @@ class MainGoldBinding extends Bindings {
     Get.put(GoldRepo(Dio()), permanent: true);
     Get.put(MainGoldController(
       goldRepo: Get.find<GoldRepo>(),
-      // storageService: Get.find<StorageService>(),
     ));
   }
 }

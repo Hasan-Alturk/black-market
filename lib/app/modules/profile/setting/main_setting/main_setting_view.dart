@@ -79,6 +79,7 @@ class MainSettingView extends GetView<MainSettingController> {
                       context: context,
                       builder: (BuildContext context) {
                         return CustomAlarteDialog(
+                          isLoading: false,
                           text: AppStrings.areYouSureTodDeleteAccount,
                           contentButton: AppStrings.deleteAccount,
                           onTap: Get.back,

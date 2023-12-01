@@ -34,13 +34,20 @@ import 'package:black_market/app/modules/profile/setting/notifications_setting/n
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
+import 'package:black_market/app/modules/splash/splash_binding.dart';
 import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:get/get.dart';
 
 List<GetPage> approuts = [
+  // GetPage(
+  //   name: "/wrapper",
+  //   page: () => const WrapperView(),
+  //   binding: WrapperBinding(),
+  // ),
   GetPage(
     name: "/splash",
-    page: () => const SpalshView(),
+    page: () => const SplashView(),
+    binding: SplashBinding(),
   ),
   GetPage(
     name: "/login",
@@ -64,7 +71,7 @@ List<GetPage> approuts = [
   ),
   GetPage(
     name: "/reset_password",
-    page: () =>  ResetPasswordView(),
+    page: () => ResetPasswordView(),
     binding: ResetPasswordBinding(),
   ),
   GetPage(

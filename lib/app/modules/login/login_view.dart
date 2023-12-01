@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
@@ -163,17 +165,17 @@ class LoginView extends GetView<LoginController> {
                       text: AppStrings.login,
                       buttonColor: AppColors.yellowNormal,
                       radius: 14,
-                      onPressed: () {
-                        controller.goToHome();
-                      },
                       // onPressed: () {
-                      //   isChanged = true;
-                      //   if (formKey.currentState!.validate()) {
-                      //     controller.login();
-                      //   } else {
-                      //     log("Error From validate");
-                      //   }
+                      //   controller.goToHome();
                       // },
+                      onPressed: () {
+                        isChanged = true;
+                        if (formKey.currentState!.validate()) {
+                          controller.login();
+                        } else {
+                          log("Error From validate");
+                        }
+                      },
                     );
                   }),
               SizedBox(

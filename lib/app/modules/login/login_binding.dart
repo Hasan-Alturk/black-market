@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(Dio(), permanent: true);
     Get.put(AuthRepo(Dio()), permanent: true);
-    Get.put(LoginController(
-      authRepo: Get.find<AuthRepo>(),
-      // storageService: Get.find<StorageService>(),
-    ));
+    Get.put(
+      LoginController(
+        authRepo: Get.find<AuthRepo>(),
+      ),
+    );
   }
 }
