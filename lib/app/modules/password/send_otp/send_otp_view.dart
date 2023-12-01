@@ -108,7 +108,7 @@ class SendOtpView extends GetView<SendOtpController> {
               onPressed: () {
                 isChanged = true;
                 if (formKey.currentState!.validate()) {
-                  controller.goToInsertOtp();
+                  controller.goToInsertOtp(controller.emailController.text);
                 } else {
                   log("Error From validate");
                 }

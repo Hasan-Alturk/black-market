@@ -16,6 +16,8 @@ import 'package:black_market/app/modules/password/insert_otp/insert_otp%20contro
 import 'package:black_market/app/modules/password/insert_otp/insert_otp_view.dart';
 import 'package:black_market/app/modules/password/new_password_successfully/new_password_successfully_binding.dart';
 import 'package:black_market/app/modules/password/new_password_successfully/new_password_successfully_view.dart';
+import 'package:black_market/app/modules/password/reset_password/reset_password_binding.dart';
+import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
 import 'package:black_market/app/modules/profile/edit_profile/edit_profile_binding.dart';
@@ -60,11 +62,11 @@ List<GetPage> approuts = [
     page: () => const InsertOtpView(),
     binding: InsertOtpBinding(),
   ),
-  // GetPage(
-  //   name: "/reset_password",
-  //   page: () => const ResetPasswordView(),
-  //   binding: ResetPasswordBinding(),
-  // ),
+  GetPage(
+    name: "/reset_password",
+    page: () =>  ResetPasswordView(),
+    binding: ResetPasswordBinding(),
+  ),
   GetPage(
     name: "/new_password_successfully",
     page: () => const NewPasswordSuccessfullyView(),

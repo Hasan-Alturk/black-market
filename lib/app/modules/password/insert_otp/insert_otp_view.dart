@@ -2,8 +2,7 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
-import 'package:black_market/app/core/widgets/state_button.dart';
-import 'package:black_market/app/modules/password/insert_otp/insert_otp%20controller.dart';
+import 'package:black_market/app/modules/password/insert_otp/insert_otp_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,7 @@ class InsertOtpView extends GetView<InsertOtpController> {
 
   @override
   Widget build(BuildContext context) {
+    String otp;
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
@@ -56,7 +56,7 @@ class InsertOtpView extends GetView<InsertOtpController> {
                   height: context.screenHeight * 0.01,
                 ),
                 Text(
-                  AppStrings.emailFake,
+                  controller.email,
                   style: TextStyle(
                     color: AppColors.yellowNormal,
                     fontSize: 12,
@@ -86,12 +86,12 @@ class InsertOtpView extends GetView<InsertOtpController> {
                 fontWeight: FontWeight.w600,
               ),
               fillColor: AppColors.gray,
-              //runs when a code is typed in
-              onCodeChanged: (String code) {
-                //handle validation or checks here if necessary
-              },
+
               //runs when every textfield is filled
-              onSubmit: (String verificationCode) {},
+              onSubmit: (String code) {
+                otp = code;
+                controller.goToResetPassword(otp);
+              },
             ),
             SizedBox(
               height: context.screenHeight * 0.02,
@@ -99,20 +99,26 @@ class InsertOtpView extends GetView<InsertOtpController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                OtpTimerButton(
-                  backgroundColor: AppColors.gray,
-                  height: 48,
-                  onPressed: () {},
-                  text: Text(
-                    AppStrings.reSendOtp,
-                    style: TextStyle(
-                      color: AppColors.yellowNormal,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  duration: 3,
-                ),
+                GetBuilder<InsertOtpController>(
+                    id: "ReSendOtp",
+                    builder: (_) {
+                      return OtpTimerButton(
+                        backgroundColor: AppColors.gray,
+                        height: 48,
+                        onPressed: () {
+                          controller.reSendOtp();
+                        },
+                        text: Text(
+                          AppStrings.reSendOtp,
+                          style: TextStyle(
+                            color: AppColors.yellowNormal,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        duration: 30,
+                      );
+                    }),
                 Text(
                   AppStrings.dontReciveOtp,
                   style: TextStyle(
@@ -124,18 +130,6 @@ class InsertOtpView extends GetView<InsertOtpController> {
               ],
             ),
           ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(context.screenWidth * 0.06),
-        color: AppColors.blackNormalHover,
-        child: StateButton(
-          textColor: AppColors.blackDark,
-          isLoading: false,
-          text: AppStrings.complete,
-          onPressed: () => controller.goToResetPassword(),
-          buttonColor: AppColors.yellowNormal,
-          radius: 14,
         ),
       ),
     );

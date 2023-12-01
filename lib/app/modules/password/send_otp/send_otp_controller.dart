@@ -9,18 +9,17 @@ class SendOtpController extends GetxController {
   final AuthRepo authRepo;
   bool isLoading = false;
   TextEditingController emailController = TextEditingController();
-
   SendOtpController({required this.authRepo});
 
-  Future<void> goToInsertOtp() async {
+  Future<void> goToInsertOtp(String email) async {
     try {
       update(["ElevatedButton"]);
       isLoading = true;
       await authRepo.sendOtp(
         email: emailController.text,
       );
-
-      Get.toNamed("/insert_otp");
+      email = emailController.text;
+      Get.toNamed("/insert_otp", arguments: email);
       isLoading = false;
       update(["ElevatedButton"]);
     } on ExceptionHandler catch (e) {

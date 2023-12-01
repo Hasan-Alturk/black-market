@@ -43,7 +43,6 @@ class _SpalshViewState extends State<SpalshView> {
     );
   }
 }
-
 void checkToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
