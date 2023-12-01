@@ -20,7 +20,6 @@ class AuthRepo {
           "password": password,
         },
       );
-
       MainUser mainUser = MainUser.fromJson(response.data);
       return mainUser;
     } on DioException catch (e) {
@@ -32,12 +31,10 @@ class AuthRepo {
           throw ExceptionHandler("Wrong password");
         }
       }
-
       throw ExceptionHandler("Unknown error");
     }
   }
 
-// <User>
   Future<MainUser> register({
     required String name,
     required String email,
@@ -68,4 +65,46 @@ class AuthRepo {
       throw ExceptionHandler("Unknown error");
     }
   }
+
+  Future<void> sendOtp({required String email}) async {
+    try {
+      var response = await dio.post(
+        "$baseUrl/forget_password",
+        data: {
+          "email": email,
+        },
+      );
+      log(response.data);
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("");
+        }
+      }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
 }
+
+
+  // Future<void> goToInsertOtp({required String email}) async {
+  //   try {
+  //     var response = await dio.post(
+  //       "$baseUrl/forget_password",
+  //       data: {
+  //         "email": email,
+  //       },
+  //     );
+  //     log(response.data);
+  //   } on DioException catch (e) {
+  //     log(e.response!.statusCode.toString());
+  //     if (e.response != null) {
+  //       if (e.response!.statusCode == 404) {
+  //         throw ExceptionHandler("");
+  //       }
+  //     }
+  //     throw ExceptionHandler("Unknown error");
+  //   }
+  // }
+

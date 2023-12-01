@@ -65,6 +65,7 @@ class CustomTextField extends StatelessWidget {
             onChanged: onChanged,
             controller: controller,
             enabled: !disable,
+            validator: validator,
             keyboardType: textInputType,
             obscureText: obscureText,
             style: TextStyle(
@@ -89,7 +90,6 @@ class CustomTextField extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            validator: validator,
           ),
         ),
       ],

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 class InsertOtpBinding extends Bindings {
   @override
   void dependencies() {
-    // Get.put(AuthRepo(Get.find<Dio>()), permanent: true);
     Get.put(InsertOtpController());
   }
 }
