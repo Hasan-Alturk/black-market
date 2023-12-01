@@ -38,7 +38,7 @@ class AuthRepo {
   }
 
 // <User>
-  Future register({
+  Future<MainUser> register({
     required String name,
     required String email,
     required String password,
@@ -54,10 +54,10 @@ class AuthRepo {
           "password_confirmation": passwordConfirmation,
         },
       );
-      log(response.statusCode.toString()); // طباعة رمز الاستجابة
-      log(response.headers.toString()); // طباعة رؤوس الاستجابة
-      log(response.data.toString());
-      //   return User.fromMap(response.data);
+
+      MainUser mainUser = MainUser.fromJson(response.data);
+      log(mainUser.accessToken.toString());
+      return mainUser;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {

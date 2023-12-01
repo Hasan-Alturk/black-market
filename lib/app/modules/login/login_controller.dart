@@ -36,7 +36,7 @@ class LoginController extends GetxController {
 
       Get.offAllNamed("/main_home");
       isLoading = false;
-      update(["ElevatedButton"]);
+      update(["TextError", "ElevatedButton"]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
       isLoading = false;

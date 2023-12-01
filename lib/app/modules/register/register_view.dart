@@ -131,6 +131,15 @@ class RegisterView extends GetView<RegisterController> {
               SizedBox(
                 height: context.screenHeight * 0.1,
               ),
+              GetBuilder<RegisterController>(
+                  id: "TextError",
+                  builder: (_) {
+                    return Center(
+                        child: Text(controller.error ?? "",
+                            style: TextStyle(
+                                color: AppColors.red,
+                                fontSize: 16 * context.textScale)));
+                  }),
             ],
           ),
         ),

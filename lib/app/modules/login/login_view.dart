@@ -119,7 +119,6 @@ class LoginView extends GetView<LoginController> {
                           onChanged: (value) {
                             controller.rememberMe.value = value!;
                           },
-                          // activeColor: AppColors.yellowDark,
                           fillColor: MaterialStateColor.resolveWith(
                             (states) {
                               if (states.contains(MaterialState.disabled) ||
@@ -141,7 +140,14 @@ class LoginView extends GetView<LoginController> {
               GetBuilder<LoginController>(
                   id: "TextError",
                   builder: (_) {
-                    return Text(controller.error ?? "");
+                    return Center(
+                      child: Text(
+                        controller.error ?? "",
+                        style: TextStyle(
+                            color: AppColors.red,
+                            fontSize: 16 * context.textScale),
+                      ),
+                    );
                   }),
               SizedBox(
                 height: context.screenHeight * 0.03,
