@@ -24,7 +24,7 @@ class AlloyView extends GetView<MainGoldController> {
             SizedBox(
               height: context.screenHeight * 0.12,
               child: GetBuilder<MainGoldController>(
-                  id: "goldCompany",
+                  id: "goldCompanyInIngots",
                   builder: (_) {
                     return ListView.builder(
                         shrinkWrap: true,
