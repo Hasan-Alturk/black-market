@@ -21,7 +21,7 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 3),
       () {
         checkToken();
       },
