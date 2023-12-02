@@ -1,5 +1,5 @@
 abstract class AppStrings {
-  static String loginIntoAccount = "تسجيل الدخول الى حسابك";
+  static String loginIntoAccount = "تسجيل الدخول\nإلى حسابك";
   static String hello = "مرحباً";
   static String nameExample = "على عبدالله";
   static String blackMarketInEng = "Black Market";

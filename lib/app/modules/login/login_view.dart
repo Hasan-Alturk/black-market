@@ -24,193 +24,202 @@ class LoginView extends GetView<LoginController> {
         key: formKey,
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 120.h,
+              ),
               SizedBox(
                 height: 78.h,
                 width: 252.w,
                 child: Text(
                   AppStrings.loginIntoAccount,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 26 * context.textScale,
+                    fontSize: 26.sp,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 78.h,
               ),
-              CustomTextField(
-                controller: controller.emailController,
-                label: AppStrings.email,
-                hint: AppStrings.insertEmail,
-                icon: Image.asset(AppAssetIcons.message),
-                textInputType: TextInputType.emailAddress,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return AppStrings.emailRequired;
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (_) {
-                  if (isChanged) {
-                    formKey.currentState!.validate();
-                  }
-                },
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.02,
-              ),
-              CustomTextField(
-                controller: controller.passwordController,
-                label: AppStrings.password,
-                hint: AppStrings.insertPassword,
-                icon: Image.asset(AppAssetIcons.lock),
-                textInputType: TextInputType.emailAddress,
-                obscureText: false,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return AppStrings.passwordRequired;
-                  } else if (text.length < 8) {
-                    return AppStrings.characterCountRequirementPassword;
-                  } else if (!RegExp(
-                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
-                      .hasMatch(text)) {
-                    return AppStrings.conditionPassword;
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (_) {
-                  if (isChanged) {
-                    formKey.currentState!.validate();
-                  }
-                },
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.02,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => controller.goToSendOtp(),
-                    child: Text(
-                      AppStrings.didYouForgetPassword,
-                      style: TextStyle(
-                        fontSize: 12 * context.textScale,
-                        color: AppColors.yellowLightActive,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        AppStrings.remember,
-                        style: TextStyle(
-                          fontSize: 14 * context.textScale,
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Obx(
-                        () => Radio<bool>(
-                          value: true,
-                          groupValue: controller.rememberMe.value,
-                          onChanged: (value) {
-                            controller.rememberMe.value = value!;
-                          },
-                          fillColor: MaterialStateColor.resolveWith(
-                            (states) {
-                              if (states.contains(MaterialState.disabled) ||
-                                  !controller.rememberMe.value) {
-                                return AppColors.white;
-                              }
-                              return AppColors.yellowDark;
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.03,
-              ),
-              GetBuilder<LoginController>(
-                  id: "TextError",
-                  builder: (_) {
-                    return Center(
-                      child: Text(
-                        controller.error ?? "",
-                        style: TextStyle(
-                            color: AppColors.red,
-                            fontSize: 16 * context.textScale),
-                      ),
-                    );
-                  }),
-              SizedBox(
-                height: context.screenHeight * 0.03,
-              ),
-              GetBuilder<LoginController>(
-                  id: "ElevatedButton",
-                  builder: (_) {
-                    return StateButton(
-                      textColor: AppColors.blackDark,
-                      isLoading: controller.isLoading,
-                      text: AppStrings.login,
-                      buttonColor: AppColors.yellowNormal,
-                      radius: 14,
-                      // onPressed: () {
-                      //   controller.goToHome();
-                      // },
-                      onPressed: () {
-                        isChanged = true;
-                        if (formKey.currentState!.validate()) {
-                          controller.login();
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  children: [
+                    CustomTextField(
+                      controller: controller.emailController,
+                      label: AppStrings.email,
+                      hint: AppStrings.insertEmail,
+                      icon: Image.asset(AppAssetIcons.message),
+                      textInputType: TextInputType.emailAddress,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return AppStrings.emailRequired;
                         } else {
-                          log("Error From validate");
+                          return null;
                         }
                       },
-                    );
-                  }),
-              SizedBox(
-                height: context.screenHeight * 0.03,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () => controller.goToRegister(),
-                    child: Text(
-                      AppStrings.createAccount,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.yellowLightActive,
-                        fontWeight: FontWeight.w700,
-                      ),
+                      onChanged: (_) {
+                        if (isChanged) {
+                          formKey.currentState!.validate();
+                        }
+                      },
                     ),
-                  ),
-                  SizedBox(
-                    width: context.screenWidth * 0.05,
-                  ),
-                  Text(
-                    AppStrings.dontHaveAnAccount,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: AppColors.graylight,
-                      fontWeight: FontWeight.w700,
+                    SizedBox(
+                      height: 24.h,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.05,
+                    CustomTextField(
+                      controller: controller.passwordController,
+                      label: AppStrings.password,
+                      hint: AppStrings.insertPassword,
+                      icon: Image.asset(AppAssetIcons.lock),
+                      textInputType: TextInputType.emailAddress,
+                      obscureText: false,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return AppStrings.passwordRequired;
+                        } else if (text.length < 8) {
+                          return AppStrings.characterCountRequirementPassword;
+                        } else if (!RegExp(
+                                r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                            .hasMatch(text)) {
+                          return AppStrings.conditionPassword;
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (_) {
+                        if (isChanged) {
+                          formKey.currentState!.validate();
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 21.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () => controller.goToSendOtp(),
+                          child: Text(
+                            AppStrings.didYouForgetPassword,
+                            style: TextStyle(
+                              fontSize: 12 * context.textScale,
+                              color: AppColors.yellowLightActive,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              AppStrings.remember,
+                              style: TextStyle(
+                                fontSize: 14 * context.textScale,
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Obx(
+                              () => Radio<bool>(
+                                value: true,
+                                groupValue: controller.rememberMe.value,
+                                onChanged: (value) {
+                                  controller.rememberMe.value = value!;
+                                },
+                                fillColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    if (states
+                                            .contains(MaterialState.disabled) ||
+                                        !controller.rememberMe.value) {
+                                      return AppColors.white;
+                                    }
+                                    return AppColors.yellowDark;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    GetBuilder<LoginController>(
+                        id: "ElevatedButton",
+                        builder: (_) {
+                          return StateButton(
+                            textColor: AppColors.blackDark,
+                            isLoading: controller.isLoading,
+                            text: AppStrings.login,
+                            buttonColor: AppColors.yellowNormal,
+                            radius: 14,
+                            // onPressed: () {
+                            //   controller.goToHome();
+                            // },
+                            onPressed: () {
+                              isChanged = true;
+                              if (formKey.currentState!.validate()) {
+                                controller.login();
+                              } else {
+                                log("Error From validate");
+                              }
+                            },
+                          );
+                        }),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => controller.goToRegister(),
+                          child: Text(
+                            AppStrings.createAccount,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: AppColors.yellowLightActive,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          AppStrings.dontHaveAnAccount,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.graylight,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    GetBuilder<LoginController>(
+                      id: "TextError",
+                      builder: (_) {
+                        return Center(
+                          child: Text(
+                            controller.error ?? "",
+                            style: TextStyle(
+                                color: AppColors.red,
+                                fontSize: 16 * context.textScale),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

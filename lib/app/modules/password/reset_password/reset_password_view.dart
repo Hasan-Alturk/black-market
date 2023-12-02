@@ -1,12 +1,12 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
 import 'package:black_market/app/modules/password/reset_password/reset_password_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ResetPasswordView extends GetView<ResetPasswordController> {
@@ -26,10 +26,10 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
         key: formKey,
         child: SafeArea(
           child: ListView(
-            padding: EdgeInsets.all(context.screenWidth * 0.01),
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
             children: [
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 60.h,
               ),
               CustomTextField(
                 controller: controller.passwordController,
@@ -57,7 +57,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                 },
               ),
               SizedBox(
-                height: context.screenHeight * 0.02,
+                height: 32.h,
               ),
               CustomTextField(
                 controller: controller.confirmPasswordController,
@@ -84,15 +84,12 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                   }
                 },
               ),
-              SizedBox(
-                height: context.screenHeight * 0.1,
-              ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(context.screenWidth * 0.06),
+        padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
         color: AppColors.blackNormalHover,
         child: GetBuilder<ResetPasswordController>(
             id: "goToNewPasswordSuccessfully",
@@ -103,7 +100,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                 text: AppStrings.complete,
                 onPressed: () => controller.goToNewPasswordSuccessfully(),
                 buttonColor: AppColors.yellowNormal,
-                radius: 14,
+                radius: 14.r,
               );
             }),
       ),
