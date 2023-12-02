@@ -12,6 +12,11 @@ class IngotCompany {
   num? workManShip;
   num? tax;
   num? returnFees;
+  num? sellPrice;
+  num? buyPrice;
+  num? totalPriceIncludingtaxAndWorkmanship;
+  num? difference;
+
   IngotCompany(
       {this.id,
       this.baseGoldItem,
@@ -25,5 +30,9 @@ class IngotCompany {
       this.companyId,
       this.workManShip,
       this.tax,
-      this.returnFees});
+      this.returnFees,
+      this.sellPrice,
+      this.buyPrice,
+      this.difference,
+      this.totalPriceIncludingtaxAndWorkmanship});
 }

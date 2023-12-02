@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/alloy_coins_reponse.dart';
 import 'package:black_market/app/core/model/coins.dart';
 import 'package:black_market/app/core/model/gold.dart';
@@ -8,6 +9,7 @@ import 'package:black_market/app/core/model/ingot_company.dart';
 import 'package:black_market/app/core/model/ingots.dart';
 import 'package:black_market/app/core/repo/gold_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class MainGoldController extends GetxController {
@@ -17,26 +19,27 @@ class MainGoldController extends GetxController {
   List<GoldCompany> goldCompanyList = [];
   List<Ingots> ingots = [];
   List<Coins> coins = [];
-  List<Ingots?> filteredIngotsByCompany = [];
+  List<IngotCompany?> filteredIngotsByCompany = [];
   List<IngotCompany> btcInfo = [];
-
+  var defaultColor = AppColors.white;
   @override
   void onInit() {
     super.onInit();
     getGold();
     getGoldCompanies();
-    getAlloyAndCoins().then((_) => btcCompantInformation());
-    // updateWidgetOnClickingOnCompany(1);
+    getAlloyAndCoins().then((_) => btcCompanyInformation());
   }
 
   MainGoldController({
     required this.goldRepo,
   });
 
-  void btcCompantInformation() {
+  void btcCompanyInformation() {
+    btcInfo.clear();
     ingots.forEach((element) {
       for (var company in element.companiesData!) {
         if (company.companyId == 1) {
+          log("elements ${element.name}");
           btcInfo.add(IngotCompany(
               id: element.id,
               baseGoldItem: element.baseGoldItem,
@@ -49,57 +52,74 @@ class MainGoldController extends GetxController {
               companyId: company.companyId,
               workManShip: company.workmanship,
               tax: company.tax,
-              returnFees: company.returnFees));
+              returnFees: company.returnFees,
+              totalPriceIncludingtaxAndWorkmanship: element.price!.sellPrice! +
+                  company.tax! +
+                  company.workmanship!,
+              sellPrice: element.price?.sellPrice,
+              difference: company.workmanship! - company.returnFees!,
+              buyPrice: element.price?.buyPrice));
         } else {
           continue;
         }
       }
     });
-    // for (var ingot in ingots) {
-    //   ingot.companiesData
-    //       ?.where((element) => element.companyId == 1)
-    //       .forEach((e1) {
-    //     log(e1.workmanship.toString());
-    //     if (ingot.id == e1.ingotId && e1.companyId == 1) {
-    //       btcInfo.add(IngotCompany(
-    //           id: ingot.id,
-    //           baseGoldItem: ingot.baseGoldItem,
-    //           icon: ingot.icon,
-    //           name: ingot.name,
-    //           karat: ingot.karat,
-    //           weight: ingot.weight,
-    //           updatedAt: ingot.updatedAt,
-    //           createdAt: ingot.createdAt,
-    //           companyId: e1.companyId,
-    //           workManShip: e1.workmanship,
-    //           tax: e1.tax,
-    //           returnFees: e1.returnFees));
-    //     }
-    //   });
-    // }
-    log("length${btcInfo.length.toString()}");
+    changeTextColor(1);
+    btcInfo.forEach(
+      (element) => log(element.name.toString()),
+    );
+    log("length${btcInfo.length}");
     update(["ingotListView"]);
   }
 
   void updateWidgetOnClickingOnCompany(int companyID) {
     // update();
     filteredIngotsByCompany.clear();
-
-    for (var element in ingots) {
-      // if (element.companiesData != null) {
-// this means we have companies
-
-      element.companiesData
-          ?.where((e) => e.companyId == companyID)
-          .forEach((e1) {
-        filteredIngotsByCompany.add(element);
-      });
-    }
-    // filteredIngotsByCompany.forEach(
-    //   (element) => print("TestFilter${element.}"),
-    // );
-    // log("TestFilter${filteredIngotsByCompany.length}");
+    ingots.forEach((element) {
+      for (var company in element.companiesData!) {
+        if (company.companyId == companyID) {
+          log("elements ${element.name}");
+          filteredIngotsByCompany.add(IngotCompany(
+              id: element.id,
+              baseGoldItem: element.baseGoldItem,
+              icon: element.icon,
+              name: element.name,
+              karat: element.karat,
+              weight: element.weight,
+              updatedAt: element.updatedAt,
+              createdAt: element.createdAt,
+              companyId: company.companyId,
+              workManShip: company.workmanship,
+              tax: company.tax,
+              returnFees: company.returnFees,
+              totalPriceIncludingtaxAndWorkmanship: element.price!.sellPrice! +
+                  company.tax! +
+                  company.workmanship!,
+              sellPrice: element.price?.sellPrice,
+              difference: company.workmanship! - company.returnFees!,
+              buyPrice: element.price?.buyPrice));
+        } else {
+          continue;
+        }
+      }
+    });
+    changeTextColor(companyID);
+    filteredIngotsByCompany.forEach(
+      (element) => log("TestFilter${element!.name}"),
+    );
+    log("TestFilter${filteredIngotsByCompany.length}");
     update(["ingotListView"]);
+  }
+
+  void changeTextColor(int companyId) {
+    goldCompanyList.forEach((element) {
+      if (element.id == companyId) {
+        defaultColor = AppColors.yellowNormal;
+      } else {
+        defaultColor = AppColors.white;
+      }
+    });
+    update(["goldCompany"]);
   }
 
   Future<void> getAlloyAndCoins() async {
