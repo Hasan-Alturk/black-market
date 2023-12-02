@@ -42,14 +42,18 @@ class NewPasswordSuccessfullyView
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(context.screenWidth * 0.06),
         color: AppColors.blackNormalHover,
-        child: StateButton(
-          textColor: AppColors.blackDark,
-          isLoading: false,
-          text: AppStrings.main,
-          onPressed: () => controller.goToHmoe(),
-          buttonColor: AppColors.yellowNormal,
-          radius: 14,
-        ),
+        child: GetBuilder<NewPasswordSuccessfullyController>(
+            id: "login",
+            builder: (_) {
+              return StateButton(
+                textColor: AppColors.blackDark,
+                isLoading: controller.isLoading,
+                text: AppStrings.main,
+                onPressed: () => controller.login(),
+                buttonColor: AppColors.yellowNormal,
+                radius: 14,
+              );
+            }),
       ),
     );
   }

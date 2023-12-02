@@ -103,11 +103,17 @@ class MainProfileView extends GetView<MainProfileController> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CustomAlarteDialog(
-                          text: AppStrings.areYouSureToLogout,
-                          contentButton: AppStrings.logout,
-                          onTap: Get.back,
-                          onPressed: () => (),
+                        return GetBuilder<MainProfileController>(
+                          id: "LogOut",
+                          builder: (context) {
+                            return CustomAlarteDialog(
+                              text: AppStrings.areYouSureToLogout,
+                              contentButton: AppStrings.logout,
+                              isLoading: controller.isLoading,
+                              onTap: Get.back,
+                              onPressed: () => controller.logOut(),
+                            );
+                          },
                         );
                       },
                     );

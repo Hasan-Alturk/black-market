@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 class CustomAlarteDialog extends StatelessWidget {
   final String text;
   final String contentButton;
+  final bool isLoading;
+
   final Function() onPressed;
   final Function() onTap;
 
@@ -16,6 +18,7 @@ class CustomAlarteDialog extends StatelessWidget {
     required this.onPressed,
     required this.onTap,
     required this.text,
+    required this.isLoading,
   });
 
   @override
@@ -66,12 +69,13 @@ class CustomAlarteDialog extends StatelessWidget {
                   height: context.screenHeight * 0.03,
                 ),
                 StateButton(
-                    textColor: AppColors.white,
-                    isLoading: false,
-                    text: contentButton,
-                    onPressed: () => (),
-                    buttonColor: AppColors.red,
-                    radius: 14)
+                  textColor: AppColors.white,
+                  isLoading: isLoading,
+                  text: contentButton,
+                  onPressed: onPressed,
+                  buttonColor: AppColors.red,
+                  radius: 14,
+                )
               ],
             ),
           ),

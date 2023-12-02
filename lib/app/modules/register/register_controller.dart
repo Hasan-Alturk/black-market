@@ -42,6 +42,8 @@ class RegisterController extends GetxController {
     }
   }
 
+
+
   Future<void> saveTokenAndRememberMe(String token, bool rememberMe) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);

@@ -1,5 +1,4 @@
 import 'package:black_market/app/core/constants/app_routs.dart';
-import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Black Market',
       theme: ThemeData(
         fontFamily: 'Almarai',
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       //  locale: const Locale("en"),
       debugShowCheckedModeBanner: false,
-      home: const SpalshView(),
+      initialRoute: "/splash",
       getPages: approuts,
     );
   }

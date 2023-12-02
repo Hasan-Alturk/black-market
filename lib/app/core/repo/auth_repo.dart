@@ -13,14 +13,13 @@ class AuthRepo {
   Future<MainUser> login(
       {required String email, required String password}) async {
     try {
-      var response = await dio.post(
+      Response response = await dio.post(
         "$baseUrl/login",
         data: {
           "email": email,
           "password": password,
         },
       );
-
       MainUser mainUser = MainUser.fromJson(response.data);
       return mainUser;
     } on DioException catch (e) {
@@ -32,12 +31,10 @@ class AuthRepo {
           throw ExceptionHandler("Wrong password");
         }
       }
-
       throw ExceptionHandler("Unknown error");
     }
   }
 
-// <User>
   Future<MainUser> register({
     required String name,
     required String email,
@@ -68,4 +65,55 @@ class AuthRepo {
       throw ExceptionHandler("Unknown error");
     }
   }
+
+  Future<void> sendOtp({required String email}) async {
+    try {
+      Response response = await dio.post(
+        "$baseUrl/forget_password",
+        data: {
+          "email": email,
+        },
+      );
+      log(response.data);
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("");
+        }
+      }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<MainUser> passwordSuccessfully({
+    required String password,
+    required String passwordConfirmation,
+    required String otp,
+    required String email,
+  }) async {
+    try {
+      var response = await dio.post(
+        "$baseUrl/update_forgotten_password",
+        data: {
+          "password": password,
+          "password_confirmation": passwordConfirmation,
+          "otp": otp,
+          "email": email,
+        },
+      );
+      MainUser mainUser = MainUser.fromJson(response.data);
+      log(mainUser.accessToken.toString());
+      return mainUser;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("");
+        }
+      }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
@@ -48,8 +50,6 @@ class LoginView extends GetView<LoginController> {
                 validator: (text) {
                   if (text == null || text.isEmpty) {
                     return AppStrings.emailRequired;
-                  } else if (text.length < 20) {
-                    return AppStrings.characterCountRequirement;
                   } else {
                     return null;
                   }
@@ -69,12 +69,16 @@ class LoginView extends GetView<LoginController> {
                 hint: AppStrings.insertPassword,
                 icon: Image.asset(AppAssetIcons.lock),
                 textInputType: TextInputType.emailAddress,
-                obscureText: true,
+                obscureText: false,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
-                    return "Password is required";
+                    return AppStrings.passwordRequired;
                   } else if (text.length < 8) {
-                    return "Password must be longer than 8 char";
+                    return AppStrings.characterCountRequirementPassword;
+                  } else if (!RegExp(
+                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                      .hasMatch(text)) {
+                    return AppStrings.conditionPassword;
                   } else {
                     return null;
                   }
@@ -159,15 +163,19 @@ class LoginView extends GetView<LoginController> {
                       textColor: AppColors.blackDark,
                       isLoading: controller.isLoading,
                       text: AppStrings.login,
+                      buttonColor: AppColors.yellowNormal,
+                      radius: 14,
+                      // onPressed: () {
+                      //   controller.goToHome();
+                      // },
                       onPressed: () {
+                        isChanged = true;
                         if (formKey.currentState!.validate()) {
                           controller.login();
                         } else {
-                          print("Error From validate");
+                          log("Error From validate");
                         }
                       },
-                      buttonColor: AppColors.yellowNormal,
-                      radius: 14,
                     );
                   }),
               SizedBox(

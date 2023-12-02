@@ -89,6 +89,13 @@ abstract class AppStrings {
   static String articles = "المقالات ";
   static String date = " 26 أكتوبر 2023";
   static String emailRequired = "الايميل مطلوب";
-  static String characterCountRequirement =
-      "البريد الالكتروني يجب أن يكون عدد الاحرف فوق 20";
+  static String passwordRequired = "كلمة السر مطلوبة";
+  static String userNameRequired = "الاسم بالكامل مطلوب";
+
+  static String characterCountRequirementEmail =
+      "يجب أن يكون عدد حروف البريد الالكتروني فوق 20";
+  static String characterCountRequirementPassword =
+      "يجب أن يكون عدد حروف كلمة السر فوق 8";
+  static String conditionPassword =
+      "يجب أن تحتوي كلمة السر حرف صغير وحرف كبير و رمز على الأقل";
 }

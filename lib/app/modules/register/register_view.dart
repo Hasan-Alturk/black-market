@@ -41,9 +41,7 @@ class RegisterView extends GetView<RegisterController> {
                 textInputType: TextInputType.name,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
-                    return "Username is required";
-                  } else if (text.length > 20) {
-                    return "Username must be less than 20 char";
+                    return AppStrings.userNameRequired;
                   } else {
                     return null;
                   }
@@ -67,9 +65,7 @@ class RegisterView extends GetView<RegisterController> {
                 textInputType: TextInputType.emailAddress,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
-                    return "Email is required";
-                  } else if (text.length < 8) {
-                    return "Email must be longer than 20 char";
+                    return AppStrings.emailRequired;
                   } else {
                     return null;
                   }
@@ -91,9 +87,13 @@ class RegisterView extends GetView<RegisterController> {
                 textInputType: TextInputType.visiblePassword,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
-                    return "Password is required";
+                    return AppStrings.passwordRequired;
                   } else if (text.length < 8) {
-                    return "Password must be longer than 8 char";
+                    return AppStrings.characterCountRequirementPassword;
+                  } else if (!RegExp(
+                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                      .hasMatch(text)) {
+                    return AppStrings.conditionPassword;
                   } else {
                     return null;
                   }
@@ -115,9 +115,13 @@ class RegisterView extends GetView<RegisterController> {
                 textInputType: TextInputType.visiblePassword,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
-                    return "Password is required";
+                    return AppStrings.passwordRequired;
                   } else if (text.length < 8) {
-                    return "Password must be longer than 8 char";
+                    return AppStrings.characterCountRequirementPassword;
+                  } else if (!RegExp(
+                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                      .hasMatch(text)) {
+                    return AppStrings.conditionPassword;
                   } else {
                     return null;
                   }
@@ -135,10 +139,13 @@ class RegisterView extends GetView<RegisterController> {
                   id: "TextError",
                   builder: (_) {
                     return Center(
-                        child: Text(controller.error ?? "",
-                            style: TextStyle(
-                                color: AppColors.red,
-                                fontSize: 16 * context.textScale)));
+                      child: Text(
+                        controller.error ?? "",
+                        style: TextStyle(
+                            color: AppColors.red,
+                            fontSize: 16 * context.textScale),
+                      ),
+                    );
                   }),
             ],
           ),
