@@ -15,6 +15,8 @@ class AlloyView extends GetView<MainGoldController> {
   @override
   Widget build(BuildContext context) {
     int selectedCompanyId = controller.goldCompanyList[0].id;
+    bool filteredByCompany = false;
+
     return Scaffold(
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(
@@ -39,9 +41,12 @@ class AlloyView extends GetView<MainGoldController> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    controller
-                                        .updateWidgetOnClickingOnCompany(6);
-                                    print(selectedCompanyId);
+                                    filteredByCompany = true;
+                                    controller.updateWidgetOnClickingOnCompany(
+                                        controller.goldCompanyList[index].id);
+                                    selectedCompanyId =
+                                        controller.goldCompanyList[index].id;
+                                    print(controller.goldCompanyList[index].id);
                                   },
                                   child: CircleAvatar(
                                       radius: 30,
@@ -100,7 +105,8 @@ class AlloyView extends GetView<MainGoldController> {
                                           "2500 ج.م", AppColors.white),
                                       _buildTileDetails(
                                           AppStrings.gramManufacturing,
-                                          "",
+                                          controller.btcInfo[index].workManShip
+                                              .toString(),
                                           AppColors.white),
                                       _buildTileDetails(AppStrings.totalTax,
                                           "2500 ج.م", AppColors.white),
@@ -116,7 +122,9 @@ class AlloyView extends GetView<MainGoldController> {
                                     ]))),
                       );
                     },
-                    itemCount: controller.ingots.length,
+                    itemCount: filteredByCompany
+                        ? controller.filteredIngotsByCompany.length
+                        : controller.btcInfo.length,
                   );
                 }),
           ],
