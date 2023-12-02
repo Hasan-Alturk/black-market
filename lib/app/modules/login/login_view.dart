@@ -8,6 +8,7 @@ import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
 import 'package:black_market/app/modules/login/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -22,13 +23,13 @@ class LoginView extends GetView<LoginController> {
       body: Form(
         key: formKey,
         child: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.all(context.screenWidth * 0.01),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: context.screenHeight * 0.1,
-              ),
-              Center(
+                height: 78.h,
+                width: 252.w,
                 child: Text(
                   AppStrings.loginIntoAccount,
                   style: TextStyle(
@@ -210,56 +211,6 @@ class LoginView extends GetView<LoginController> {
               ),
               SizedBox(
                 height: context.screenHeight * 0.05,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(thickness: 1, color: AppColors.gray),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.screenWidth * 0.08),
-                    child: Text(
-                      AppStrings.or,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.yellowLightActive,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(thickness: 1, color: AppColors.gray),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.05,
-              ),
-              Container(
-                height: context.screenHeight * 0.08,
-                decoration: BoxDecoration(
-                  color: AppColors.gray,
-                  border: Border.all(color: AppColors.gray),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.completeWithGoogle,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.blackLightHover,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(
-                      width: context.screenHeight * 0.02,
-                    ),
-                    Image.asset(AppAssetIcons.google),
-                  ],
-                ),
               ),
             ],
           ),
