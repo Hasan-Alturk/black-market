@@ -11,7 +11,6 @@ class AlloyView extends GetView<MainGoldController> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedCompanyId = controller.goldCompanyList[0].id;
     bool filteredByCompany = false;
 
     return Scaffold(
@@ -39,10 +38,10 @@ class AlloyView extends GetView<MainGoldController> {
                                 GestureDetector(
                                   onTap: () {
                                     filteredByCompany = true;
-                                    controller.updateWidgetOnClickingOnCompany(
-                                        controller.goldCompanyList[index].id);
-                                    selectedCompanyId =
-                                        controller.goldCompanyList[index].id;
+                                    controller
+                                        .updateIngotWidgetOnClickingOnCompany(
+                                            controller
+                                                .goldCompanyList[index].id);
                                     print(controller.goldCompanyList[index].id);
                                   },
                                   child: CircleAvatar(
@@ -71,6 +70,8 @@ class AlloyView extends GetView<MainGoldController> {
                 id: "ingotListView",
                 builder: (_) {
                   return ListView.builder(
+                    key: Key(
+                        'builder ${controller.selected.toString()}'), //attention
                     scrollDirection: Axis.vertical,
                     physics: const ScrollPhysics(),
                     shrinkWrap: true,
@@ -84,6 +85,13 @@ class AlloyView extends GetView<MainGoldController> {
                             child: Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: ExpansionTile(
+                                    key: Key(index.toString()), //attention
+
+                                    initiallyExpanded: index ==
+                                        controller.selected, //attention
+
+                                    onExpansionChanged: (value) =>
+                                        controller.selectTile(value, index),
                                     shape: RoundedRectangleBorder(
                                         side: BorderSide(
                                             color: AppColors.yellowNormal),
@@ -97,7 +105,7 @@ class AlloyView extends GetView<MainGoldController> {
                                               .filteredIngotsByCompany[index]!
                                               .name
                                               .toString()
-                                          : controller.btcInfo[index].name
+                                          : controller.btcIngotInfo[index].name
                                               .toString(),
                                       style: TextStyle(
                                           color: AppColors.white,
@@ -108,45 +116,45 @@ class AlloyView extends GetView<MainGoldController> {
                                           AppStrings.gramPrice,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.sellPrice.toString()} ج.م"
-                                              : "${controller.btcInfo[index].sellPrice.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].sellPrice.toString()} ج.م",
                                           AppColors.white),
                                       _buildTileDetails(
                                           AppStrings.gramManufacturing,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.workManShip.toString()} ج.م"
-                                              : "${controller.btcInfo[index].workManShip.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].workManShip.toString()} ج.م",
                                           AppColors.white),
                                       _buildTileDetails(
                                           AppStrings.totalTax,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.tax.toString()} ج.م"
-                                              : "${controller.btcInfo[index].tax.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].tax.toString()} ج.م",
                                           AppColors.white),
                                       _buildTileDetails(
                                           AppStrings
                                               .totalPriceWithManufacturingAndTax,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.totalPriceIncludingtaxAndWorkmanship.toString()} ج.م"
-                                              : "${controller.btcInfo[index].totalPriceIncludingtaxAndWorkmanship.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].totalPriceIncludingtaxAndWorkmanship.toString()} ج.م",
                                           AppColors.yellowNormal),
                                       _buildTileDetails(
                                           AppStrings.importAmount,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.returnFees.toString()} ج.م"
-                                              : "${controller.btcInfo[index].returnFees.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].returnFees.toString()} ج.م",
                                           AppColors.white),
                                       _buildTileDetails(
                                           AppStrings.difference,
                                           filteredByCompany
                                               ? "${controller.filteredIngotsByCompany[index]!.difference.toString()} ج.م"
-                                              : "${controller.btcInfo[index].difference.toString()} ج.م",
+                                              : "${controller.btcIngotInfo[index].difference.toString()} ج.م",
                                           AppColors.white),
                                     ]))),
                       );
                     },
                     itemCount: filteredByCompany
                         ? controller.filteredIngotsByCompany.length
-                        : controller.btcInfo.length,
+                        : controller.btcIngotInfo.length,
                   );
                 }),
           ],
