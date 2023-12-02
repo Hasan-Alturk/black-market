@@ -26,6 +26,26 @@ class MainGoldController extends GetxController {
 
   var defaultColor = AppColors.white;
   int selected = -1;
+  int isSelected = -1;
+  int isCompanySelected = -1;
+
+  void selectCoinCompany(bool value, int i) {
+    if (value) {
+      isCompanySelected = i;
+    } else {
+      isCompanySelected = -1;
+    }
+    update(["goldCompanyInCoins"]);
+  }
+
+  void selectCompany(bool value, int i) {
+    if (value) {
+      isSelected = i;
+    } else {
+      isSelected = -1;
+    }
+    update(["goldCompanyInIngots"]);
+  }
 
 // To allow Expanding one Tile at the same time and collapsing the others
   void selectTile(bool value, int i) {
@@ -84,7 +104,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    changeTextColor(1);
     // for (var element in btcIngotInfo) {
     //   log(element.name.toString());
     // }
@@ -123,7 +142,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    changeTextColor(1);
     // for (var element in btcCoinsInfo) {
     //   log(element.name.toString());
     // }
@@ -162,7 +180,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    changeTextColor(companyID);
     for (var element in filteredIngotsByCompany) {
       log("TestFilter${element!.name}");
     }
@@ -201,7 +218,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    changeTextColor(companyID);
     for (var element in filteredCoinsByCompany) {
       log("TestFilter${element!.name}");
     }
@@ -209,17 +225,20 @@ class MainGoldController extends GetxController {
     update(["coinsListView"]);
   }
 
-// To change the text color of selected company name
-  void changeTextColor(int companyId) {
-    for (var element in goldCompanyList) {
-      if (element.id == companyId) {
-        defaultColor = AppColors.yellowNormal;
-      } else {
-        defaultColor = AppColors.white;
-      }
-    }
-    update(["goldCompany"]);
-  }
+// // To change the text color of selected company name
+//   void changeTextColor(int companyId) {
+//     for (var element in goldCompanyList) {
+//       if (element.id == companyId) {
+//         log(companyId.toString());
+//         log("element${element.id.toString()}");
+
+//         defaultColor = AppColors.yellowNormal;
+//       } else {
+//         defaultColor = AppColors.white;
+//       }
+//     }
+//     update(["goldCompany"]);
+//   }
 
   Future<void> getAlloyAndCoins() async {
     try {
@@ -235,25 +254,27 @@ class MainGoldController extends GetxController {
       log("Error: $e");
       error = e.error;
       log(error!);
-
-      update(["goldCompany"]);
     }
   }
 
   Future<void> getGoldCompanies() async {
     try {
       error = null;
-      update(["goldCompany"]);
+      update(["goldCompanyInCoins"]);
+      update(["goldCompanyInIngots"]);
+
       List<GoldCompany> goldCompany = await goldRepo.getGoldCompanies();
 
       goldCompanyList.addAll(goldCompany);
-      update(["goldCompany"]);
+      update(["goldCompanyInCoins"]);
+      update(["goldCompanyInIngots"]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
       error = e.error;
       log(error!);
 
-      update(["goldCompany"]);
+      update(["goldCompanyInCoins"]);
+      update(["goldCompanyInIngots"]);
     }
   }
 

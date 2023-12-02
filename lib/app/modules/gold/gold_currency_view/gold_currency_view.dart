@@ -13,6 +13,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
   @override
   Widget build(BuildContext context) {
     bool filteredByCompany = false;
+    controller.selectCoinCompany(true, 0);
 
     return Scaffold(
       backgroundColor: AppColors.blackNormal,
@@ -24,7 +25,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
             SizedBox(
               height: context.screenHeight * 0.12,
               child: GetBuilder<MainGoldController>(
-                  id: "goldCompany",
+                  id: "goldCompanyInCoins",
                   builder: (_) {
                     return ListView.builder(
                         shrinkWrap: true,
@@ -43,7 +44,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
                                         .updateCoinsWidgetOnClickingOnCompany(
                                             controller
                                                 .goldCompanyList[index].id);
-                                    print(controller.goldCompanyList[index].id);
+                                    controller.selectCoinCompany(true, index);
                                   },
                                   child: CircleAvatar(
                                       radius: 30,
@@ -55,10 +56,14 @@ class GoldCurrencyView extends GetView<MainGoldController> {
                                   height: context.screenHeight * 0.005,
                                 ),
                                 Text(
+                                  key: Key(index.toString()), //attention
                                   controller.goldCompanyList[index].name,
                                   style: TextStyle(
                                       fontSize: 12 * context.textScale,
-                                      color: AppColors.white,
+                                      color:
+                                          index == controller.isCompanySelected
+                                              ? AppColors.yellowNormal
+                                              : AppColors.white,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ],
