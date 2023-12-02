@@ -12,6 +12,8 @@ class GoldCurrencyView extends GetView<MainGoldController> {
 
   @override
   Widget build(BuildContext context) {
+    bool filteredByCompany = false;
+
     return Scaffold(
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(
@@ -34,11 +36,21 @@ class GoldCurrencyView extends GetView<MainGoldController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircleAvatar(
-                                    radius: 30,
-                                    child: Image.network(BaseUrls.storageUrl +
-                                        controller
-                                            .goldCompanyList[index].image)),
+                                GestureDetector(
+                                  onTap: () {
+                                    filteredByCompany = true;
+                                    controller
+                                        .updateCoinsWidgetOnClickingOnCompany(
+                                            controller
+                                                .goldCompanyList[index].id);
+                                    print(controller.goldCompanyList[index].id);
+                                  },
+                                  child: CircleAvatar(
+                                      radius: 30,
+                                      child: Image.network(BaseUrls.storageUrl +
+                                          controller
+                                              .goldCompanyList[index].image)),
+                                ),
                                 SizedBox(
                                   height: context.screenHeight * 0.005,
                                 ),
@@ -55,54 +67,96 @@ class GoldCurrencyView extends GetView<MainGoldController> {
                         });
                   }),
             ),
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const ScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.gray,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: ExpansionTile(
-                              shape: RoundedRectangleBorder(
-                                  side:
-                                      BorderSide(color: AppColors.yellowNormal),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12))),
-                              iconColor: AppColors.white,
-                              collapsedIconColor: AppColors.white,
-                              title: Text(
-                                "${(index + 1) * 5}جنيه - 1 جرام ",
-                                style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              children: [
-                                _buildTileDetails(AppStrings.gramPrice,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.gramManufacturing,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.totalTax,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(
-                                    AppStrings
-                                        .totalPriceWithManufacturingAndTax,
-                                    "2500 ج.م",
-                                    AppColors.yellowNormal),
-                                _buildTileDetails(AppStrings.importAmount,
-                                    "2500 ج.م", AppColors.white),
-                                _buildTileDetails(AppStrings.difference,
-                                    "2500 ج.م", AppColors.white),
-                              ]))),
-                );
-              },
-              itemCount: 10,
-            ),
+            GetBuilder<MainGoldController>(
+                id: "coinsListView",
+                builder: (_) {
+                  return ListView.builder(
+                    key: Key('builder ${controller.selected.toString()}'),
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: AppColors.gray,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: ExpansionTile(
+                                    key: Key(index.toString()), //attention
+
+                                    initiallyExpanded: index ==
+                                        controller.selected, //attention
+
+                                    onExpansionChanged: (value) =>
+                                        controller.selectTile(value, index),
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: AppColors.yellowNormal),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12))),
+                                    iconColor: AppColors.white,
+                                    collapsedIconColor: AppColors.white,
+                                    title: Text(
+                                      filteredByCompany
+                                          ? controller
+                                              .filteredCoinsByCompany[index]!
+                                              .name
+                                              .toString()
+                                          : controller.btcCoinsInfo[index].name
+                                              .toString(),
+                                      style: TextStyle(
+                                          color: AppColors.white,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    children: [
+                                      _buildTileDetails(
+                                          AppStrings.gramPrice,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.sellPrice.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].sellPrice.toString()} ج.م",
+                                          AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings.gramManufacturing,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.workManShip.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].workManShip.toString()} ج.م",
+                                          AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings.totalTax,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.tax.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].tax.toString()} ج.م",
+                                          AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings
+                                              .totalPriceWithManufacturingAndTax,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.totalPriceIncludingtaxAndWorkmanship.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].totalPriceIncludingtaxAndWorkmanship.toString()} ج.م",
+                                          AppColors.yellowNormal),
+                                      _buildTileDetails(
+                                          AppStrings.importAmount,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.returnFees.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].returnFees.toString()} ج.م",
+                                          AppColors.white),
+                                      _buildTileDetails(
+                                          AppStrings.difference,
+                                          filteredByCompany
+                                              ? "${controller.filteredCoinsByCompany[index]!.difference.toString()} ج.م"
+                                              : "${controller.btcCoinsInfo[index].difference.toString()} ج.م",
+                                          AppColors.white),
+                                    ]))),
+                      );
+                    },
+                    itemCount: filteredByCompany
+                        ? controller.filteredCoinsByCompany.length
+                        : controller.btcCoinsInfo.length,
+                  );
+                }),
           ],
         ),
       )),
