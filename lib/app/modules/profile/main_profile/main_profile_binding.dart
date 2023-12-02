@@ -7,6 +7,9 @@ class MainProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(SettingRepo(Dio()), permanent: true);
-    Get.put(MainProfileController(settingRepo: Get.find<SettingRepo>()));
+    Get.put(MainProfileController(
+      settingRepo: Get.find<SettingRepo>(),
+
+    ));
   }
 }

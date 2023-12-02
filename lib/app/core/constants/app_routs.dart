@@ -20,8 +20,6 @@ import 'package:black_market/app/modules/password/reset_password/reset_password_
 import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
-import 'package:black_market/app/modules/profile/edit_profile/edit_profile_binding.dart';
-import 'package:black_market/app/modules/profile/edit_profile/edit_profile_view.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_binding.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_view.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
@@ -39,11 +37,6 @@ import 'package:black_market/app/modules/splash/splash_view.dart';
 import 'package:get/get.dart';
 
 List<GetPage> approuts = [
-  // GetPage(
-  //   name: "/wrapper",
-  //   page: () => const WrapperView(),
-  //   binding: WrapperBinding(),
-  // ),
   GetPage(
     name: "/splash",
     page: () => const SplashView(),
@@ -110,11 +103,7 @@ List<GetPage> approuts = [
     page: () => const BankDetailsView(),
     binding: BankDetailsBinding(),
   ),
-  GetPage(
-    name: "/edit_profile",
-    page: () => const EditProfileView(),
-    binding: EditProfileBinding(),
-  ),
+
   GetPage(
     name: "/notifications",
     page: () => const NotificationsView(),

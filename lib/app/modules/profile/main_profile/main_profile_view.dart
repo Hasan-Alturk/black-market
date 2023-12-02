@@ -46,7 +46,7 @@ class MainProfileView extends GetView<MainProfileController> {
                   height: context.screenHeight * 0.02,
                 ),
                 Text(
-                  AppStrings.userName,
+                  controller.name.value,
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.yellowNormal,
@@ -55,14 +55,6 @@ class MainProfileView extends GetView<MainProfileController> {
                 ),
                 SizedBox(
                   height: context.screenHeight * 0.05,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.editProfile,
-                  stringIcon: AppAssetIcons.profile,
-                  onTap: () => controller.goToEditProfile(),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
                 ),
                 CustomContainerProfile(
                   text: AppStrings.shareTheApp,

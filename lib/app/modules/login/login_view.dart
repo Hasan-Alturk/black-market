@@ -43,7 +43,7 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               SizedBox(
-                height: 78.h,
+                height: 50.h,
               ),
               Expanded(
                 child: ListView(
