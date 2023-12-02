@@ -26,6 +26,16 @@ class MainGoldController extends GetxController {
 
   var defaultColor = AppColors.white;
   int selected = -1;
+  int isSelected = -1;
+
+  void selectCompany(bool value, int i) {
+    if (value) {
+      isSelected = i;
+    } else {
+      isSelected = -1;
+    }
+    update(["goldCompany"]);
+  }
 
 // To allow Expanding one Tile at the same time and collapsing the others
   void selectTile(bool value, int i) {
@@ -46,6 +56,7 @@ class MainGoldController extends GetxController {
     getAlloyAndCoins().then((_) {
       btcCompanyIngotInformation();
       btcCompanyCoinsInformation();
+      changeTextColor(1);
     });
   }
 
@@ -84,7 +95,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    changeTextColor(1);
     // for (var element in btcIngotInfo) {
     //   log(element.name.toString());
     // }
@@ -213,6 +223,9 @@ class MainGoldController extends GetxController {
   void changeTextColor(int companyId) {
     for (var element in goldCompanyList) {
       if (element.id == companyId) {
+        log(companyId.toString());
+        log("element${element.id.toString()}");
+
         defaultColor = AppColors.yellowNormal;
       } else {
         defaultColor = AppColors.white;
