@@ -36,7 +36,7 @@ class GoldCardItem extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 14.h,
+            height: 12.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
