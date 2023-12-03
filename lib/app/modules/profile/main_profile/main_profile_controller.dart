@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MainProfileController extends GetxController {
   bool isLoading = false;
   final SettingRepo settingRepo;
-  RxString name = "".obs;
-  RxString avatar = "".obs;
+  String name = "";
+  String avatar = "";
 
   MainProfileController({
     required this.settingRepo,
@@ -18,8 +18,8 @@ class MainProfileController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getUserSetting();
+    super.onInit();
   }
 
   Future<void> logOut() async {
@@ -43,7 +43,7 @@ class MainProfileController extends GetxController {
     }
   }
 
-  Future<void> getUserSetting() async {
+  Future<UserSetting> getUserSetting() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
@@ -51,10 +51,25 @@ class MainProfileController extends GetxController {
       UserSetting userSetting = await settingRepo.getUserSetting(
         token: token.toString(),
       );
-      name.value = userSetting.name;
-      avatar.value = userSetting.avatar;
+      name = userSetting.name;
+      update();
+
+      return UserSetting(
+        id: userSetting.id,
+        roleId: userSetting.roleId,
+        name: userSetting.name,
+        email: userSetting.email,
+        avatar: userSetting.avatar,
+        settings: userSetting.settings,
+        createdAt: userSetting.createdAt,
+        updatedAt: userSetting.updatedAt,
+        savings: userSetting.savings,
+        favorites: userSetting.favorites,
+      );
     } on ExceptionHandler catch (e) {
       log("Error: $e");
+
+      throw ExceptionHandler("Unknown error");
     }
   }
 
@@ -64,11 +79,5 @@ class MainProfileController extends GetxController {
 
   void goToMainSetting() {
     Get.toNamed("/main_setting");
-  }
-
-  Future<void> saveNameAndAvatar(String name, String avatar) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('name', name);
-    prefs.setString('avatar', avatar);
   }
 }

@@ -22,51 +22,55 @@ class GoldCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 156.w,
+      height: 135.h,
+      margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.gray,
         borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          width: 0.5.w,
+          color: AppColors.darkGrey,
+        ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 14.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
+                width: 25.w,
+                height: 25.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.darkGrey),
                 ),
-                margin: EdgeInsets.only(
-                  left: 9.6.w,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(5.w),
-                  child: Icon(
-                    Icons.share,
-                    size: 15.w,
-                    color: AppColors.whiteActive,
-                  ),
+                child: Icon(
+                  Icons.share,
+                  size: 12.sp,
+                  color: AppColors.whiteActive,
                 ),
               ),
               SizedBox(
-                width: 15.w,
-              ),
-              Center(
+                height: 46.h,
+                width: 46.w,
                 child: CircleAvatar(
                   backgroundColor: AppColors.darkGrey,
-                  radius: 25.r,
                   child: Image.network(BaseUrls.storageUrl + goldImage),
                 ),
+              ),
+              Container(
+                width: 25.5.w,
+                height: 25.5.h,
+                color: AppColors.gray,
               ),
             ],
           ),
           SizedBox(
-            height: context.screenHeight * 0.015,
+            height: 9.h,
           ),
           Text(
             goldName,
@@ -76,64 +80,62 @@ class GoldCardItem extends StatelessWidget {
                 fontWeight: FontWeight.w700),
           ),
           SizedBox(
-            height: context.screenHeight * 0.001,
+            height: 9.h,
           ),
-          Padding(
-            padding: EdgeInsets.all(context.screenHeight * 0.005),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.sell,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 9 * context.textScale,
-                          fontWeight: FontWeight.w700),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.sell,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w700,
                     ),
-                    SizedBox(
-                      height: context.screenHeight * 0.008,
-                    ),
-                    Text(
-                      price,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9 * context.textScale),
-                    )
-                  ],
-                ),
-                Container(
-                  height: context.screenHeight * 0.04,
-                  width: 1,
-                  color: AppColors.darkGrey,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.buy,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9 * context.textScale),
-                    ),
-                    SizedBox(
-                      height: context.screenHeight * 0.008,
-                    ),
-                    Text(
-                      buyPrice,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9 * context.textScale),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Text(
+                    price,
+                    style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 9.sp),
+                  )
+                ],
+              ),
+              Container(
+                height: 18.h,
+                width: 1.w,
+                color: AppColors.darkGrey,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.buy,
+                    style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 9.sp),
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Text(
+                    buyPrice,
+                    style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 9.sp),
+                  )
+                ],
+              ),
+            ],
           )
         ],
       ),

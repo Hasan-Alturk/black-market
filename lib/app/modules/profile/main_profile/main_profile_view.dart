@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
-import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/widgets/custom_alarte_dialog.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_controller.dart';
@@ -35,13 +35,13 @@ class MainProfileView extends GetView<MainProfileController> {
             SizedBox(
               height: 30.h,
             ),
-            const CircleAvatar(
-              radius: 41.0,
-              backgroundImage: AssetImage(AppAssetImage.avatar),
+            CircleAvatar(
+              radius: 41.0.r,
+              child: Image.network("${BaseUrls.storageUrl}users/default.png"),
             ),
             SizedBox(height: 15.h),
             Text(
-              controller.name.value,
+              controller.name,
               style: TextStyle(
                 fontSize: 16.sp,
                 color: AppColors.yellowNormal,
