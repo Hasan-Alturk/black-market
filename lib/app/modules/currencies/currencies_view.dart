@@ -285,20 +285,29 @@ class CurrenciesView extends GetView<CurrenciesController> {
               ),
               Padding(
                 padding: EdgeInsets.all(context.screenHeight * 0.01),
-                child: GridView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 1.1,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 10),
-                    itemCount: 10,
-                    itemBuilder: (ctx, i) => GestureDetector(
-                        child: const CardItem(),
-                        onTap: () => controller.goToBankDetails())),
+                child: GetBuilder<CurrenciesController>(
+                    id: "bankList",
+                    builder: (_) {
+                      return GridView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 200,
+                                  childAspectRatio: 1.1,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 10),
+                          itemCount: controller.bankList.length,
+                          itemBuilder: (ctx, i) => GestureDetector(
+                              child: CardItem(
+                                bankName:
+                                    controller.bankList[i].name.toString(),
+                                bankImage:
+                                    controller.bankList[i].icon.toString(),
+                              ),
+                              onTap: () => controller.goToBankDetails()));
+                    }),
               )
             ],
           ),

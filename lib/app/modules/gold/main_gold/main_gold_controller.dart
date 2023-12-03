@@ -24,7 +24,6 @@ class MainGoldController extends GetxController {
   List<IngotCompany> btcIngotInfo = [];
   List<IngotCompany> btcCoinsInfo = [];
 
-  var defaultColor = AppColors.white;
   int selected = -1;
   int isSelected = -1;
   int isCompanySelected = -1;
@@ -224,21 +223,6 @@ class MainGoldController extends GetxController {
     log("TestFilter${filteredCoinsByCompany.length}");
     update(["coinsListView"]);
   }
-
-// // To change the text color of selected company name
-//   void changeTextColor(int companyId) {
-//     for (var element in goldCompanyList) {
-//       if (element.id == companyId) {
-//         log(companyId.toString());
-//         log("element${element.id.toString()}");
-
-//         defaultColor = AppColors.yellowNormal;
-//       } else {
-//         defaultColor = AppColors.white;
-//       }
-//     }
-//     update(["goldCompany"]);
-//   }
 
   Future<void> getAlloyAndCoins() async {
     try {
