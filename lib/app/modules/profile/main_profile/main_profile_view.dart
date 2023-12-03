@@ -2,11 +2,11 @@ import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_alarte_dialog.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MainProfileView extends GetView<MainProfileController> {
@@ -17,121 +17,114 @@ class MainProfileView extends GetView<MainProfileController> {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.all(context.screenWidth * 0.01),
+        child: Column(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: context.screenHeight * 0.01,
+            SizedBox(
+              height: 20.h,
+            ),
+            Center(
+              child: Text(
+                AppStrings.profile,
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
                 ),
-                Center(
-                  child: Text(
-                    AppStrings.profile,
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.05,
-                ),
-                const CircleAvatar(
-                  radius: 41.0,
-                  backgroundImage: AssetImage(AppAssetImage.avatar),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.02,
-                ),
-                Text(
-                  controller.name.value,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.yellowNormal,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.05,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.shareTheApp,
-                  stringIcon: AppAssetIcons.share,
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.aboutApp,
-                  stringIcon: AppAssetIcons.info,
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.mainCurrency,
-                  stringIcon: AppAssetIcons.dollar,
-                  onTap: () => controller.goToMainCuurency(),
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
-                CustomContainerProfile(
-                  text: AppStrings.setting,
-                  stringIcon: AppAssetIcons.setting,
-                  onTap: () {
-                    controller.goToMainSetting();
-                  },
-                ),
-                SizedBox(
-                  height: context.screenHeight * 0.05,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return GetBuilder<MainProfileController>(
-                          id: "LogOut",
-                          builder: (context) {
-                            return CustomAlarteDialog(
-                              text: AppStrings.areYouSureToLogout,
-                              contentButton: AppStrings.logout,
-                              isLoading: controller.isLoading,
-                              onTap: Get.back,
-                              onPressed: () => controller.logOut(),
-                            );
-                          },
+              ),
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            const CircleAvatar(
+              radius: 41.0,
+              backgroundImage: AssetImage(AppAssetImage.avatar),
+            ),
+            SizedBox(height: 15.h),
+            Text(
+              controller.name.value,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: AppColors.yellowNormal,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(
+              height: 100.h,
+            ),
+            CustomContainerProfile(
+              text: AppStrings.shareTheApp,
+              stringIcon: AppAssetIcons.share,
+              onTap: () {},
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            CustomContainerProfile(
+              text: AppStrings.aboutApp,
+              stringIcon: AppAssetIcons.info,
+              onTap: () {},
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            CustomContainerProfile(
+              text: AppStrings.mainCurrency,
+              stringIcon: AppAssetIcons.dollar,
+              onTap: () => controller.goToMainCuurency(),
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            CustomContainerProfile(
+              text: AppStrings.setting,
+              stringIcon: AppAssetIcons.setting,
+              onTap: () {
+                controller.goToMainSetting();
+              },
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return GetBuilder<MainProfileController>(
+                      id: "LogOut",
+                      builder: (context) {
+                        return CustomAlarteDialog(
+                          text: AppStrings.areYouSureToLogout,
+                          contentButton: AppStrings.logout,
+                          isLoading: controller.isLoading,
+                          onTap: Get.back,
+                          onPressed: () => controller.logOut(),
                         );
                       },
                     );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppStrings.logout,
-                        style: TextStyle(
-                          color: AppColors.red,
-                          fontSize: 14 * context.textScale,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.screenWidth * 0.02,
-                      ),
-                      Image.asset(
-                        AppAssetIcons.logout,
-                      ),
-                    ],
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.logout,
+                    style: TextStyle(
+                      color: AppColors.red,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                )
-              ],
-            ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Image.asset(
+                    AppAssetIcons.logout,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
