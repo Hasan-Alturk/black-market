@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/bank.dart';
+import 'package:black_market/app/core/model/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
@@ -10,10 +11,12 @@ import 'package:get/get.dart';
 class CurrenciesController extends GetxController {
   final BankRepo bankRepo;
   final CurrencyRepo currencyRepo;
+  int selectedCurrencyId = 19;
 
   String? error;
   List<Bank> bankList = [];
   List<LatestCurrency> latestCurrencyList = [];
+  List<CurrencyInBank> currencyInBankList = [];
 
   CurrenciesController({required this.currencyRepo, required this.bankRepo});
   void goToBankDetails() {
@@ -28,7 +31,45 @@ class CurrenciesController extends GetxController {
   void onInit() {
     super.onInit();
     getBanks();
-    getLatestCurreny();
+    getLatestCurreny()
+        .then((value) => currenyAccordingToBankInfo(selectedCurrencyId));
+  }
+
+  void currenyAccordingToBankInfo(currencyId) {
+    currencyInBankList.clear();
+    for (var element in latestCurrencyList) {
+      for (var bank in element.bankPrices!) {
+        for (var b in bankList) {
+          if (bank.currencyId == currencyId && b.id == bank.bankId) {
+            log("elements ${element.name}");
+            currencyInBankList.add(CurrencyInBank(
+                currencyId: currencyId,
+                currencyIcon: element.icon.toString(),
+                currencyName: element.name.toString(),
+                currencyCode: element.code.toString(),
+                bankId: bank.bankId!,
+                bankIcon: b.icon.toString(),
+                bankName: b.name.toString(),
+                sellPrice: bank.sellPrice!,
+                buyPrice: bank.buyPrice!,
+                createdAt: element.createdAt.toString(),
+                updatedAt: element.updatedAt.toString()));
+          } else {
+            continue;
+          }
+        }
+      }
+    }
+
+    for (var element in currencyInBankList) {
+      log(element.currencyName.toString() +
+          element.sellPrice.toString() +
+          element.currencyId.toString());
+    }
+    log("length${currencyInBankList.length}");
+    update(["bankList"]);
+    update(["currencies"]);
+    update(["currencyList"]);
   }
 
   Future<void> getBanks() async {

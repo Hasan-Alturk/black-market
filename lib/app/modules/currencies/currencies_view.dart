@@ -2,11 +2,14 @@ import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/card_item.dart';
+import 'package:black_market/app/core/widgets/select_currency_dialog.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:black_market/app/core/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CurrenciesView extends GetView<CurrenciesController> {
@@ -124,8 +127,47 @@ class CurrenciesView extends GetView<CurrenciesController> {
                     ),
                     child: Column(
                       children: [
-                        // Instead Of Text There is A drop down list
-                        const Text("دولار امريكى"),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                          child: GetBuilder<CurrenciesController>(
+                              id: "currencies",
+                              builder: (_) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const SelectCurrencyDialog();
+                                      },
+                                    );
+                                  },
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.arrow_drop_down_sharp),
+                                        Text(controller
+                                                .currencyInBankList.isNotEmpty
+                                            ? controller.currencyInBankList[0]
+                                                .currencyName
+                                            : ""),
+                                        controller.currencyInBankList.isNotEmpty
+                                            ? Image.network(
+                                                BaseUrls.storageUrl +
+                                                    controller
+                                                        .currencyInBankList[0]
+                                                        .currencyIcon)
+                                            : Image.asset(
+                                                AppAssetImage.bankMasr)
+                                      ]),
+                                );
+                              }),
+                        ),
                         SizedBox(
                           height: context.screenHeight * 0.01,
                         ),
@@ -298,13 +340,19 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                   childAspectRatio: 1.1,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 10),
-                          itemCount: controller.bankList.length,
+                          itemCount: controller.currencyInBankList.length,
                           itemBuilder: (ctx, i) => GestureDetector(
                               child: CardItem(
-                                bankName:
-                                    controller.bankList[i].name.toString(),
-                                bankImage:
-                                    controller.bankList[i].icon.toString(),
+                                bankName: controller
+                                    .currencyInBankList[i].bankName
+                                    .toString(),
+                                bankImage: controller
+                                    .currencyInBankList[i].bankIcon
+                                    .toString(),
+                                sellPrice:
+                                    controller.currencyInBankList[i].sellPrice,
+                                buyPrice:
+                                    controller.currencyInBankList[i].buyPrice,
                               ),
                               onTap: () => controller.goToBankDetails()));
                     }),

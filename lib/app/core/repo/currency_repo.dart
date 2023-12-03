@@ -13,7 +13,6 @@ class CurrencyRepo {
   Future<List<LatestCurrency>> getLatestCurrencies() async {
     try {
       var response = await dio.get("$baseUrl/currencies/latest");
-      log("Currency${response.data.toString()}");
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);

@@ -10,8 +10,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CardItem extends StatelessWidget {
   final String bankName;
   final String bankImage;
+  final num sellPrice;
+  final num buyPrice;
 
-  const CardItem({super.key, required this.bankName, required this.bankImage});
+  const CardItem(
+      {super.key,
+      required this.bankName,
+      required this.bankImage,
+      required this.sellPrice,
+      required this.buyPrice});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,7 +92,7 @@ class CardItem extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "31.25 ج.م ",
+                      sellPrice.toString() + "ج.م",
                       style: TextStyle(
                           color: AppColors.white,
                           fontSize: 9.sp,
@@ -108,7 +116,7 @@ class CardItem extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "30.25 ج.م ",
+                      buyPrice.toString() + "ج.م",
                       style: TextStyle(
                           color: AppColors.white,
                           fontWeight: FontWeight.w700,
