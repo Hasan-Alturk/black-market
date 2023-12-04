@@ -40,14 +40,18 @@ class MainProfileView extends GetView<MainProfileController> {
               child: Image.network("${BaseUrls.storageUrl}users/default.png"),
             ),
             SizedBox(height: 15.h),
-            Text(
-              controller.name,
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: AppColors.yellowNormal,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            GetBuilder<MainProfileController>(
+                id: "name",
+                builder: (_) {
+                  return Text(
+                    controller.name,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: AppColors.yellowNormal,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  );
+                }),
             SizedBox(
               height: 100.h,
             ),

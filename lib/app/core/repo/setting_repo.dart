@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
@@ -45,6 +46,25 @@ class SettingRepo {
           throw ExceptionHandler("");
         }
       }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<List<Bank>> getBanks() async {
+    try {
+      Response response = await dio.get("$baseUrl/banks");
+
+      List<Bank> bankList = Bank.bankList(response.data);
+
+      return bankList;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Bank not found");
+        }
+      }
+
       throw ExceptionHandler("Unknown error");
     }
   }

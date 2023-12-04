@@ -12,7 +12,7 @@ class BankRepo {
 
   Future<List<Bank>> getBanks() async {
     try {
-      var response = await dio.get("$baseUrl/banks");
+      Response response = await dio.get("$baseUrl/banks");
 
       List<Bank> bankList = Bank.bankList(response.data);
 

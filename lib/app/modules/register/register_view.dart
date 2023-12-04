@@ -158,9 +158,8 @@ class RegisterView extends GetView<RegisterController> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
-        color: AppColors.blackNormalHover,
         child: GetBuilder<RegisterController>(
           id: "ElevatedButton",
           builder: (_) {

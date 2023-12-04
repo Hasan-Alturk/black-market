@@ -98,4 +98,8 @@ abstract class AppStrings {
       "يجب أن يكون عدد حروف كلمة السر فوق 8";
   static String conditionPassword =
       "يجب أن تحتوي كلمة السر حرف صغير وحرف كبير و رمز على الأقل";
+  static String noteBank =
+      "إضغط مطولاً علي أي بنك لتغيير ترتيبه.\nيمكنك تعديل هذه القائمة لاحقاََ.";
+
+  static String dragBank = "إختر الترتيب المفضل للبنوك";
 }

@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 class MainSettingController extends GetxController {
-
   void goToLanguage() {
     Get.toNamed("/language");
   }
@@ -12,6 +11,10 @@ class MainSettingController extends GetxController {
 
   void goToNotificationsSetting() {
     Get.toNamed("/notifications_setting");
+  }
+
+  void goToPreferredOfBanks() {
+    Get.toNamed("/preferred_of_banks");
   }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");

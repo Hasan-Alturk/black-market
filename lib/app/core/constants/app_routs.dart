@@ -30,6 +30,8 @@ import 'package:black_market/app/modules/profile/setting/main_setting/main_setti
 import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_view.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_binding.dart';
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
+import 'package:black_market/app/modules/profile/setting/preferred_of_banks/preferred_of_banks_binding.dart';
+import 'package:black_market/app/modules/profile/setting/preferred_of_banks/preferred_of_banks_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_binding.dart';
@@ -87,7 +89,6 @@ List<GetPage> approuts = [
     page: () => const MainGoldView(),
     binding: MainGoldBinding(),
   ),
-
   GetPage(
     name: "/favourite",
     page: () => const FavouriteView(),
@@ -103,7 +104,6 @@ List<GetPage> approuts = [
     page: () => const BankDetailsView(),
     binding: BankDetailsBinding(),
   ),
-
   GetPage(
     name: "/notifications",
     page: () => const NotificationsView(),
@@ -124,14 +124,14 @@ List<GetPage> approuts = [
     page: () => const LanguageView(),
     binding: LanguageBinding(),
   ),
-  // GetPage(
-  //   name: "/change_password",
-  //   page: () => const ChangePasswordView(),
-  //   binding: ChangePasswordBinding(),
-  // ),
   GetPage(
     name: "/notifications_setting",
     page: () => const NotificationsSettingView(),
     binding: NotificationsSettingBinding(),
+  ),
+  GetPage(
+    name: "/preferred_of_banks",
+    page: () => const PreferredOfBanksView(),
+    binding: PreferredOfBanksBinding(),
   ),
 ];

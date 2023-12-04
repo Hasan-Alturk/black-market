@@ -5,6 +5,6 @@ class LanguageBinding extends Bindings {
   @override
   void dependencies() {
     // Get.put(AuthRepo(Get.find<Dio>()), permanent: true);
-    Get.put(LanguagegController());
+    Get.put(LanguageController());
   }
 }

@@ -6,7 +6,7 @@ import 'package:black_market/app/modules/profile/setting/language/language_contr
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LanguageView extends GetView<LanguagegController> {
+class LanguageView extends GetView<LanguageController> {
   const LanguageView({Key? key}) : super(key: key);
 
   @override

@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainProfileController extends GetxController {
-  bool isLoading = false;
   final SettingRepo settingRepo;
   String name = "";
   String avatar = "";
+  bool isLoading = false;
 
   MainProfileController({
     required this.settingRepo,
@@ -52,7 +52,7 @@ class MainProfileController extends GetxController {
         token: token.toString(),
       );
       name = userSetting.name;
-      update();
+      update(["name"]);
 
       return UserSetting(
         id: userSetting.id,

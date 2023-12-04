@@ -27,17 +27,11 @@ class MainSettingView extends GetView<MainSettingController> {
               height: 38.h,
             ),
             CustomContainerProfile(
-              text: AppStrings.changePassword,
-              stringIcon: AppAssetIcons.lock,
-              onTap: () => controller.goToChangePassword(),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomContainerProfile(
               text: AppStrings.preferredBanks,
               stringIcon: AppAssetIcons.bank,
-              onTap: () {},
+              onTap: () {
+                controller.goToPreferredOfBanks();
+              },
             ),
             SizedBox(
               height: 20.h,
