@@ -39,7 +39,9 @@ class MainSettingView extends GetView<MainSettingController> {
             CustomContainerProfile(
               text: AppStrings.preferredCurrencies,
               stringIcon: AppAssetIcons.dollar,
-              onTap: () {},
+              onTap: () {
+                controller.goToPreferredOfCurrencies();
+              },
             ),
             SizedBox(
               height: 20.h,

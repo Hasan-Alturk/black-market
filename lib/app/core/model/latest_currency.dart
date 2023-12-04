@@ -1,14 +1,14 @@
 class LatestCurrency {
   int? id;
-  String? banner;
-  String? icon;
-  String? name;
+  dynamic banner;
+  late final String icon;
+  late final String name;
   String? code;
   int? canBeMain;
   int? sort;
   int? showNetworkImage;
   String? lastUpdate;
-  String? createdAt;
+  dynamic createdAt;
   String? updatedAt;
   List<CurrencyPrice>? livePrices;
   List<CurrencyPrice>? blackMarketPrices;

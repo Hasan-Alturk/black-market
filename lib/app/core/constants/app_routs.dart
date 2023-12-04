@@ -32,6 +32,8 @@ import 'package:black_market/app/modules/profile/setting/notifications_setting/n
 import 'package:black_market/app/modules/profile/setting/notifications_setting/notifications_setting_view.dart';
 import 'package:black_market/app/modules/profile/setting/preferred_of_banks/preferred_of_banks_binding.dart';
 import 'package:black_market/app/modules/profile/setting/preferred_of_banks/preferred_of_banks_view.dart';
+import 'package:black_market/app/modules/profile/setting/preferred_of_currencies/preferred_of_currencies_binding.dart';
+import 'package:black_market/app/modules/profile/setting/preferred_of_currencies/preferred_of_currencies_view.dart';
 import 'package:black_market/app/modules/register/register_binding.dart';
 import 'package:black_market/app/modules/register/register_view.dart';
 import 'package:black_market/app/modules/splash/splash_binding.dart';
@@ -133,5 +135,10 @@ List<GetPage> approuts = [
     name: "/preferred_of_banks",
     page: () => const PreferredOfBanksView(),
     binding: PreferredOfBanksBinding(),
+  ),
+  GetPage(
+    name: "/preferred_of_currencies",
+    page: () => const PreferredOfCurrenciesView(),
+    binding: PreferredOfCurrenciesBinding(),
   ),
 ];

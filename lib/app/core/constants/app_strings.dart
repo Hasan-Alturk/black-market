@@ -100,6 +100,9 @@ abstract class AppStrings {
       "يجب أن تحتوي كلمة السر حرف صغير وحرف كبير و رمز على الأقل";
   static String noteBank =
       "إضغط مطولاً علي أي بنك لتغيير ترتيبه.\nيمكنك تعديل هذه القائمة لاحقاََ.";
+  static String noteCurrency =
+      "إضغط مطولاً علي أي عملة لتغيير ترتيبها.\nيمكنك تعديل هذه القائمة لاحقاََ.";
 
   static String dragBank = "إختر الترتيب المفضل للبنوك";
+  static String dragCurrency = "إختر الترتيب المفضل للعملات";
 }

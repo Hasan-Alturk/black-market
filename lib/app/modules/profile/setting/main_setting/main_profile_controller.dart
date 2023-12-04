@@ -16,6 +16,10 @@ class MainSettingController extends GetxController {
   void goToPreferredOfBanks() {
     Get.toNamed("/preferred_of_banks");
   }
+
+  void goToPreferredOfCurrencies() {
+    Get.toNamed("/preferred_of_currencies");
+  }
   //   void goToMainProfile() {
   //   Get.offNamed("/main_profile");
   // }

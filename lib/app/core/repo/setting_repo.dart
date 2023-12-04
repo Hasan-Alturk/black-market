@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/bank.dart';
+import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
@@ -62,6 +63,27 @@ class SettingRepo {
       if (e.response != null) {
         if (e.response!.statusCode == 404) {
           throw ExceptionHandler("Bank not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<List<LatestCurrency>> getLatestCurrencies() async {
+    try {
+      Response response = await dio.get("$baseUrl/currencies/latest");
+
+      List<LatestCurrency> latestCurrencyList =
+          LatestCurrency.latestCurrencyList(response.data);
+      log(latestCurrencyList.length as String);
+
+      return latestCurrencyList;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Currency List not found");
         }
       }
 
