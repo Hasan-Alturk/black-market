@@ -67,9 +67,7 @@ class CurrenciesController extends GetxController {
           element.currencyId.toString());
     }
     log("length${currencyInBankList.length}");
-    update(["bankList"]);
-    update(["currencies"]);
-    update(["currencyList"]);
+    update(["bankList", "currencies", "currencyList"]);
   }
 
   Future<void> getBanks() async {
@@ -93,6 +91,9 @@ class CurrenciesController extends GetxController {
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
       latestCurrencyList.addAll(latestCurrencies);
+      latestCurrencyList.forEach(
+        (element) => log(element.name.toString() + element.icon.toString()),
+      );
       update([""]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");

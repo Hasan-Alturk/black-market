@@ -76,7 +76,7 @@ class SettingRepo {
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);
-      log(latestCurrencyList.length as String);
+      // log(latestCurrencyList.length as String);
 
       return latestCurrencyList;
     } on DioException catch (e) {
