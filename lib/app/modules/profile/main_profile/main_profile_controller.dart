@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
@@ -19,6 +20,7 @@ class MainProfileController extends GetxController {
   @override
   void onInit() {
     getUserSetting();
+    getSetting();
     super.onInit();
   }
 
@@ -54,23 +56,31 @@ class MainProfileController extends GetxController {
       name = userSetting.name;
       update(["name"]);
 
-      return UserSetting(
-        id: userSetting.id,
-        roleId: userSetting.roleId,
-        name: userSetting.name,
-        email: userSetting.email,
-        avatar: userSetting.avatar,
-        settings: userSetting.settings,
-        createdAt: userSetting.createdAt,
-        updatedAt: userSetting.updatedAt,
-        savings: userSetting.savings,
-        favorites: userSetting.favorites,
-      );
+      return userSetting;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
 
       throw ExceptionHandler("Unknown error");
     }
+  }
+
+  Future<void> getSetting() async {
+    try {
+      log("settingMainProfile");
+
+      Setting setting = await settingRepo.getSetting();
+      await saveAboutText(setting.abouttext);
+      log(setting.abouttext);
+      update();
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<void> saveAboutText(String aboutText) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('aboutText', aboutText);
   }
 
   void goToMainCuurency() {
@@ -79,5 +89,9 @@ class MainProfileController extends GetxController {
 
   void goToMainSetting() {
     Get.toNamed("/main_setting");
+  }
+
+  void goToAboutApp() {
+    Get.toNamed("/about_app");
   }
 }

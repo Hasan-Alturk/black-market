@@ -4,6 +4,7 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_drag.dart';
+import 'package:black_market/app/core/widgets/state_button.dart';
 import 'package:black_market/app/modules/profile/setting/preferred_of_currencies/preferred_of_currencies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,16 +108,16 @@ class PreferredOfCurrenciesView
           ),
         ),
       ),
-      // bottomNavigationBar: Padding(
-      //   padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
-      //   child: StateButton(
-      //       isLoading: controller.isLoading,
-      //       text: AppStrings.change,
-      //       onPressed: () {},
-      //       buttonColor: AppColors.yellowNormal,
-      //       radius: 14.r,
-      //       textColor: AppColors.blackDark),
-      // ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
+        child: StateButton(
+            isLoading: controller.isLoading,
+            text: AppStrings.change,
+            onPressed: () {},
+            buttonColor: AppColors.yellowNormal,
+            radius: 14.r,
+            textColor: AppColors.blackDark),
+      ),
     );
   }
 }

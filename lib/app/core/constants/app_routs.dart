@@ -20,6 +20,8 @@ import 'package:black_market/app/modules/password/reset_password/reset_password_
 import 'package:black_market/app/modules/password/reset_password/reset_password_view.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_binding.dart';
 import 'package:black_market/app/modules/password/send_otp/send_otp_view.dart';
+import 'package:black_market/app/modules/profile/about_app/about_app_binding.dart';
+import 'package:black_market/app/modules/profile/about_app/about_app_view.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_binding.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_view.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
@@ -140,5 +142,10 @@ List<GetPage> approuts = [
     name: "/preferred_of_currencies",
     page: () => const PreferredOfCurrenciesView(),
     binding: PreferredOfCurrenciesBinding(),
+  ),
+  GetPage(
+    name: "/about_app",
+    page: () => const AboutAppView(),
+    binding: AboutAppBinding(),
   ),
 ];
