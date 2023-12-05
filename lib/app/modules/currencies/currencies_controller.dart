@@ -17,10 +17,11 @@ class CurrenciesController extends GetxController {
   List<Bank> bankList = [];
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> currencyInBankList = [];
+  List<CurrencyInBank> bankData = [];
 
   CurrenciesController({required this.currencyRepo, required this.bankRepo});
-  void goToBankDetails() {
-    Get.offNamed("/bank_details");
+  void goToBankDetails(int bankId) {
+    Get.toNamed("/bank_details", arguments: bankId);
   }
 
   void goToNotification() {
@@ -35,7 +36,7 @@ class CurrenciesController extends GetxController {
         .then((value) => currenyAccordingToBankInfo(selectedCurrencyId));
   }
 
-  void currenyAccordingToBankInfo(currencyId) {
+  void currenyAccordingToBankInfo(int currencyId) {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
       for (var bank in element.bankPrices!) {
@@ -76,6 +77,7 @@ class CurrenciesController extends GetxController {
       update(["bankList"]);
       List<Bank> banks = await bankRepo.getBanks();
       bankList.addAll(banks);
+
       update(["bankList"]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
@@ -99,6 +101,34 @@ class CurrenciesController extends GetxController {
       log("Error: $e");
       error = e.error;
       log(error!);
+    }
+  }
+
+  void getBankData(int bankId) {
+    for (var element in latestCurrencyList) {
+      var x = element.bankPrices!.where((value) =>
+          DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() >
+              Duration.zero &&
+          DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() <
+              Duration(hours: 24));
+      x.forEach((p) {
+        if (p.bankId == bankId) {
+          var bank = bankList.where((w) => w.id == bankId);
+          bankData.add(CurrencyInBank(
+              currencyId: element.id!,
+              currencyIcon: element.icon,
+              currencyName: element.name,
+              currencyCode: element.code!,
+              bankId: bankId,
+              bankIcon: bank.first.icon!,
+              bankName: bank.first.name!,
+              sellPrice: p.sellPrice!,
+              buyPrice: p.buyPrice!,
+              createdAt: p.createdAt!,
+              updatedAt: p.updatedAt!));
+          log("Eman...${element.name} ${bank.first.name} : ${p.bankId} :${p.sellPrice}  ${p.createdAt.toString()}");
+        }
+      });
     }
   }
 }

@@ -140,7 +140,22 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return const SelectCurrencyDialog();
+                                        return SelectCurrencyDialog(
+                                          latestCurrencyList:
+                                              controller.latestCurrencyList,
+                                          onTap: (currencyId) {
+                                            controller.selectedCurrencyId =
+                                                currencyId;
+                                            controller
+                                                .currenyAccordingToBankInfo(
+                                                    controller
+                                                        .selectedCurrencyId);
+                                            Get.back();
+                                          },
+                                          //   onTap: () {
+                                          //   Get.back;
+                                          // }
+                                        );
                                       },
                                     );
                                   },
@@ -337,9 +352,9 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           gridDelegate:
                               const SliverGridDelegateWithMaxCrossAxisExtent(
                                   maxCrossAxisExtent: 200,
-                                  childAspectRatio: 1.1,
+                                  childAspectRatio: 1,
                                   crossAxisSpacing: 20,
-                                  mainAxisSpacing: 10),
+                                  mainAxisSpacing: 15),
                           itemCount: controller.currencyInBankList.length,
                           itemBuilder: (ctx, i) => GestureDetector(
                               child: CardItem(
@@ -354,7 +369,8 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                 buyPrice:
                                     controller.currencyInBankList[i].buyPrice,
                               ),
-                              onTap: () => controller.goToBankDetails()));
+                              onTap: () => controller.goToBankDetails(
+                                  controller.currencyInBankList[i].bankId)));
                     }),
               )
             ],

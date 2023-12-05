@@ -1,12 +1,22 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/model/currency.dart';
+import 'package:black_market/app/core/model/currency_in_bank.dart';
+import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/widgets/currency_item.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SelectCurrencyDialog extends GetView<CurrenciesController> {
-  const SelectCurrencyDialog({super.key});
+class SelectCurrencyDialog extends StatelessWidget {
+  const SelectCurrencyDialog(
+      {this.currencyList,
+      this.latestCurrencyList,
+      required this.onTap,
+      super.key});
+  final Function(int currencyId) onTap;
+  final List<LatestCurrency>? latestCurrencyList;
+  final List<CurrencyInBank>? currencyList;
 
   @override
   Widget build(BuildContext context) {
@@ -19,36 +29,39 @@ class SelectCurrencyDialog extends GetView<CurrenciesController> {
           color: AppColors.gray,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: GetBuilder<CurrenciesController>(
-            id: "currencyList",
-            builder: (_) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    itemCount: controller.latestCurrencyList.length,
-                    itemBuilder: (ctx, index) => GestureDetector(
-                      onTap: () {
-                        controller.selectedCurrencyId =
-                            controller.latestCurrencyList[index].id!.toInt();
-                        controller.currenyAccordingToBankInfo(
-                            controller.selectedCurrencyId);
-                        Get.back;
-                      },
-                      child: CurrencyItem(
-                        currencyName: controller.latestCurrencyList[index].name
-                            .toString(),
-                        currenyImage: controller.latestCurrencyList[index].icon
-                            .toString(),
-                      ),
-                    ),
-                  ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemCount: currencyList == null
+                  ? latestCurrencyList?.length
+                  : currencyList?.length,
+              // controller.latestCurrencyList.length,
+              itemBuilder: (ctx, index) => GestureDetector(
+                onTap: () {
+                  currencyList == null
+                      ? onTap(latestCurrencyList![index].id!)
+                      : onTap(currencyList![index].currencyId);
+                },
+                child: CurrencyItem(
+                  currencyName: currencyList == null
+                      ? latestCurrencyList![index].name.toString()
+                      : currencyList![index].currencyName.toString(),
+                  //  controller.latestCurrencyList[index].name
+                  //     .toString(),
+                  currenyImage: currencyList == null
+                      ? latestCurrencyList![index].icon
+                      : currencyList![index].currencyIcon,
+                  // controller.latestCurrencyList[index].icon
+                  //     .toString(),
                 ),
-              );
-            }),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

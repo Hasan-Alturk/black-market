@@ -1,18 +1,18 @@
 class LatestCurrency {
-  int? id;
+  late int id;
   dynamic banner;
   late final String icon;
   late final String name;
-  String? code;
-  int? canBeMain;
-  int? sort;
-  int? showNetworkImage;
-  String? lastUpdate;
-  dynamic createdAt;
-  String? updatedAt;
-  List<CurrencyPrice>? livePrices;
-  List<CurrencyPrice>? blackMarketPrices;
-  List<CurrencyPrice>? bankPrices;
+  late String code;
+  late int canBeMain;
+  late int sort;
+  late int showNetworkImage;
+  late String lastUpdate;
+  late dynamic createdAt;
+  late String updatedAt;
+  late List<CurrencyPrice> livePrices;
+  late List<CurrencyPrice> blackMarketPrices;
+  late List<CurrencyPrice> bankPrices;
 
   LatestCurrency({
     required this.id,

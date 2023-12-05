@@ -92,7 +92,7 @@ class CardItem extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      sellPrice.toString() + "ج.م",
+                      "$sellPriceج.م",
                       style: TextStyle(
                           color: AppColors.white,
                           fontSize: 9.sp,
@@ -116,7 +116,7 @@ class CardItem extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      buyPrice.toString() + "ج.م",
+                      "$buyPriceج.م",
                       style: TextStyle(
                           color: AppColors.white,
                           fontWeight: FontWeight.w700,
