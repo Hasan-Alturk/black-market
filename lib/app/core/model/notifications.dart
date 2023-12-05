@@ -20,6 +20,7 @@ class Notifications {
   late final dynamic prevPageUrl;
   late final int to;
 
+
   Notifications.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     data = List.from(json['data']).map((e) => Data.fromJson(e)).toList();

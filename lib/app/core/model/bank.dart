@@ -36,7 +36,6 @@ class Bank {
   Bank.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     banner = json["banner"];
-
     icon = json['icon'];
     name = json['name'];
     hotline = json['hotline'];
