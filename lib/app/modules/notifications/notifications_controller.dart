@@ -39,10 +39,10 @@ class NotificationsController extends GetxController {
       Notifications notification = await notificationRepo.getNotification();
       List<Data> notificationList = notification.data;
 
-      for (var element in notificationList) {
+      notifications.addAll(notificationList);
+      for (var element in notifications) {
         log(element.title);
       }
-
       return notification;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
