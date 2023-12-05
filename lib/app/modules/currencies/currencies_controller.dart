@@ -25,7 +25,7 @@ class CurrenciesController extends GetxController {
   }
 
   void goToNotification() {
-    Get.offNamed("/notifications");
+    Get.toNamed("/notifications");
   }
 
   @override
@@ -39,7 +39,7 @@ class CurrenciesController extends GetxController {
   void currenyAccordingToBankInfo(int currencyId) {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
-      for (var bank in element.bankPrices!) {
+      for (var bank in element.bankPrices) {
         for (var b in bankList) {
           if (bank.currencyId == currencyId && b.id == bank.bankId) {
             log("elements ${element.name}");
@@ -93,9 +93,9 @@ class CurrenciesController extends GetxController {
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
       latestCurrencyList.addAll(latestCurrencies);
-      latestCurrencyList.forEach(
-        (element) => log(element.name.toString() + element.icon.toString()),
-      );
+      for (var element in latestCurrencyList) {
+        log(element.name.toString() + element.icon.toString());
+      }
       update([""]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
@@ -106,19 +106,19 @@ class CurrenciesController extends GetxController {
 
   void getBankData(int bankId) {
     for (var element in latestCurrencyList) {
-      var x = element.bankPrices!.where((value) =>
+      var x = element.bankPrices.where((value) =>
           DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() >
               Duration.zero &&
           DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() <
-              Duration(hours: 24));
-      x.forEach((p) {
+              const Duration(hours: 24));
+      for (var p in x) {
         if (p.bankId == bankId) {
           var bank = bankList.where((w) => w.id == bankId);
           bankData.add(CurrencyInBank(
-              currencyId: element.id!,
+              currencyId: element.id,
               currencyIcon: element.icon,
               currencyName: element.name,
-              currencyCode: element.code!,
+              currencyCode: element.code,
               bankId: bankId,
               bankIcon: bank.first.icon!,
               bankName: bank.first.name!,
@@ -128,7 +128,7 @@ class CurrenciesController extends GetxController {
               updatedAt: p.updatedAt!));
           log("Eman...${element.name} ${bank.first.name} : ${p.bankId} :${p.sellPrice}  ${p.createdAt.toString()}");
         }
-      });
+      }
     }
   }
 }

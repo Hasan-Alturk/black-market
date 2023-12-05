@@ -16,10 +16,8 @@ class NotificationsController extends GetxController {
       //   GoldBinding().dependencies();
     }
 
-    ///storage.saveUser(user);
   }
 
-  // Get.to(Home());
   void goToHome() {
     Get.offNamed("/main_home");
   }
