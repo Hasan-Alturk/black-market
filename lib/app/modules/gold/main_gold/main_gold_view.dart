@@ -7,6 +7,7 @@ import 'package:black_market/app/modules/gold/gold_currency_view/gold_currency_v
 import 'package:black_market/app/modules/gold/gold_view/gold_view.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MainGoldView extends GetView<MainGoldController> {
@@ -33,7 +34,7 @@ class MainGoldView extends GetView<MainGoldController> {
           title: Text(
             AppStrings.gold,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
@@ -46,16 +47,16 @@ class MainGoldView extends GetView<MainGoldController> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Container(
-                height: 60,
+                height: 60.h,
                 decoration: BoxDecoration(
                     color: AppColors.darkGrey,
-                    borderRadius: BorderRadius.circular(16)),
+                    borderRadius: BorderRadius.circular(16.r)),
                 child: TabBar(
                   indicatorPadding: const EdgeInsets.all(5),
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
                     color: AppColors.yellowNormal,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   labelColor: Colors.black,
                   unselectedLabelColor: AppColors.white,

@@ -24,5 +24,4 @@ class MainHomeController extends GetxController {
     }
   }
 
-  void goToProfile() {}
 }

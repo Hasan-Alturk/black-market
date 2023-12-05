@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
 
 class MainCurencyController extends GetxController {
-  RxBool rememberCurrency = false.obs;
+  bool rememberCurrency = false;
   final currencies = ["swr", "asfgsagfs", "safasfdasfsfa"];
 
 
 
-  ///storage.saveUser(user);
-  // Get.to(Home());
+
 }

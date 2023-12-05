@@ -52,24 +52,21 @@ class MainCurencyView extends GetView<MainCurencyController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Obx(
-                                () => Radio<bool>(
-                                  value:
-                                      true, // ربما ترغب في تغيير هذا استنادًا إلى منطق التطبيق الخاص بك
-                                  groupValue: controller.rememberCurrency.value,
-                                  onChanged: (value) {
-                                    controller.rememberCurrency.value = value!;
+                              Radio<bool>(
+                                value: true,
+                                groupValue: controller.rememberCurrency,
+                                onChanged: (value) {
+                                  controller.rememberCurrency = value!;
+                                },
+                                fillColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    if (states
+                                            .contains(MaterialState.disabled) ||
+                                        !controller.rememberCurrency) {
+                                      return AppColors.white;
+                                    }
+                                    return AppColors.yellowDark;
                                   },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                    (states) {
-                                      if (states.contains(
-                                              MaterialState.disabled) ||
-                                          !controller.rememberCurrency.value) {
-                                        return AppColors.white;
-                                      }
-                                      return AppColors.yellowDark;
-                                    },
-                                  ),
                                 ),
                               ),
                               Directionality(
