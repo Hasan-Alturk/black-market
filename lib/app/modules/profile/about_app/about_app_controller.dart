@@ -15,5 +15,6 @@ class AboutAppController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? aboutText = prefs.getString('aboutText');
     text = aboutText!;
+    update(["AboutAppController"]);
   }
 }

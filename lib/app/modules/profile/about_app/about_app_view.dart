@@ -23,53 +23,28 @@ class AboutAppView extends GetView<AboutAppController> {
         child: Column(
           children: [
             SizedBox(
-              height: 15.h,
+              height: 25.h,
             ),
             GetBuilder<AboutAppController>(
-              builder: (_){
+              id: "AboutAppController",
+              builder: (_) {
                 return Expanded(
-                child: SingleChildScrollView(
-                  child: HtmlWidget(
-                    controller.text,
-                    textStyle: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppColors.lighterGrey,
-                      fontWeight: FontWeight.w700,
+                  child: SingleChildScrollView(
+                    child: HtmlWidget(
+                      controller.text,
+                      textStyle: TextStyle(
+                        fontSize: 15.sp,
+                        color: AppColors.lighterGrey,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
               },
             ),
           ],
-
-          
         ),
       ),
-      // body: SafeArea(
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(10),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.end,
-      //       children: [
-      //         SizedBox(
-      //           height: 15.h,
-      //         ),
-      //         Text(
-      //           controller.text,
-      //           style: TextStyle(
-      //             fontSize: 16 * context.textScale,
-      //             color: AppColors.white,
-      //             fontWeight: FontWeight.w700,
-      //           ),
-      //         ),
-      //         SizedBox(
-      //           height: context.screenHeight * 0.05,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
