@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
+import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
@@ -84,6 +85,28 @@ class SettingRepo {
       if (e.response != null) {
         if (e.response!.statusCode == 404) {
           throw ExceptionHandler("Currency List not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<Setting> getSetting() async {
+    try {
+      Response response = await dio.get(
+        "$baseUrl/settings/banners.home_global_banner,banners.home_global_yellow_banner,banners.banks_global_banner,banners.banks_global_yellow_banner,banners.above_banks_card,banners.above_banks_card_yellow,app.enable_rate_dialog,app.about_text,app.dealing_caution,ads.display_views_counter,app.min_android_version",
+      );
+      log("getSetting ");
+
+      Setting setting = Setting.fromJson(response.data);
+
+      return setting;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Setting not found");
         }
       }
 

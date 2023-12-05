@@ -66,7 +66,9 @@ class MainProfileView extends GetView<MainProfileController> {
             CustomContainerProfile(
               text: AppStrings.aboutApp,
               stringIcon: AppAssetIcons.info,
-              onTap: () {},
+              onTap: () {
+                controller.goToAboutApp();
+              },
             ),
             SizedBox(
               height: 16.h,
