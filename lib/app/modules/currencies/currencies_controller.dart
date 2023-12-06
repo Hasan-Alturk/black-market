@@ -7,11 +7,13 @@ import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrenciesController extends GetxController {
   final BankRepo bankRepo;
   final CurrencyRepo currencyRepo;
   int selectedCurrencyId = 19;
+  String name = "";
 
   String? error;
   List<Bank> bankList = [];
@@ -31,9 +33,15 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getName();
     getBanks();
     getLatestCurreny()
         .then((value) => currenyAccordingToBankInfo(selectedCurrencyId));
+  }
+
+  Future<void> getName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = prefs.getString('name')!;
   }
 
   void currenyAccordingToBankInfo(int currencyId) {

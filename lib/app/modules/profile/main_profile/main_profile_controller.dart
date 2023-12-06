@@ -82,6 +82,7 @@ class MainProfileController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('aboutText', aboutText);
   }
+  
 
   void goToMainCuurency() {
     Get.toNamed("/main_cuurency");
