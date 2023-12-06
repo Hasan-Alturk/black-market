@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:black_market/app/modules/splash/shared.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +30,8 @@ class SplashController extends GetxController {
       const Duration(seconds: 5),
       () {
         checkToken();
-        getUserSetting();
+        getSetting();
+        // getUserSetting();
       },
     );
 
@@ -43,11 +46,26 @@ class SplashController extends GetxController {
       UserSetting userSetting = await settingRepo.getUserSetting(
         token: token.toString(),
       );
-      await prefs.setString("name", userSetting.name);
+
+      await Shared.saveUserSetting(userSetting);
       return userSetting;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
 
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<Setting> getSetting() async {
+    try {
+      log("settingMainProfile");
+
+      Setting setting = await settingRepo.getSetting();
+      await Shared.saveSetting(setting);
+      log(setting.abouttext);
+      return setting;
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
       throw ExceptionHandler("Unknown error");
     }
   }

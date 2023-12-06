@@ -4,6 +4,7 @@ import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:black_market/app/modules/splash/shared.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +21,7 @@ class MainProfileController extends GetxController {
   @override
   void onInit() {
     getUserSetting();
-    getSetting();
+    //   getSetting();
     super.onInit();
   }
 
@@ -64,25 +65,12 @@ class MainProfileController extends GetxController {
     }
   }
 
-  Future<void> getSetting() async {
-    try {
-      log("settingMainProfile");
+ 
 
-      Setting setting = await settingRepo.getSetting();
-      await saveAboutText(setting.abouttext);
-      log(setting.abouttext);
-      update();
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-      throw ExceptionHandler("Unknown error");
-    }
-  }
-
-  Future<void> saveAboutText(String aboutText) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('aboutText', aboutText);
-  }
-  
+  // Future<void> saveAboutText(String aboutText) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString('aboutText', aboutText);
+  // }
 
   void goToMainCuurency() {
     Get.toNamed("/main_cuurency");

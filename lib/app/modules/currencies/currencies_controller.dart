@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
@@ -7,7 +6,6 @@ import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrenciesController extends GetxController {
   final BankRepo bankRepo;
@@ -33,16 +31,27 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getName();
+    //getName();
     getBanks();
     getLatestCurreny()
         .then((value) => currenyAccordingToBankInfo(selectedCurrencyId));
   }
 
-  Future<void> getName() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('name')!;
-  }
+  // Future<void> getName() async {
+  //   UserSetting? storedUserSetting = await Shared().getUserSettingFromPrefs();
+  //   if (storedUserSetting != null) {
+  //     name = storedUserSetting.name;
+  //   } else {
+  //     return;
+  //   }
+  // }
+
+
+
+  // Future<void> getName() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   name = prefs.getString('name')!;
+  // }
 
   void currenyAccordingToBankInfo(int currencyId) {
     currencyInBankList.clear();
