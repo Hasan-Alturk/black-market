@@ -21,19 +21,6 @@ class NotificationController extends GetxController {
     getArticles();
   }
 
-  // int pageIndex = 0;
-
-  // void changePage(int pageIndex) {
-  //   this.pageIndex = pageIndex;
-  //   pageController.jumpToPage(pageIndex);
-
-  //   update(["NotificationsViewGetBuilder"]);
-
-  //   if (pageIndex == 1) {
-  //     //   GoldBinding().dependencies();
-  //   }
-  // }
-
   Future<Notifications> getNotification() async {
     try {
       Notifications notification = await notificationRepo.getNotification();

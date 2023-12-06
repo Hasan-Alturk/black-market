@@ -3,12 +3,13 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/modules/notification/articles/articles_view.dart';
 import 'package:black_market/app/modules/notification/notification_controller.dart';
+import 'package:black_market/app/modules/notification/notifications/notifications_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NotificationsView extends GetView<NotificationController> {
-  const NotificationsView({super.key});
+class NotificationView extends GetView<NotificationController> {
+  const NotificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,8 @@ class NotificationsView extends GetView<NotificationController> {
             const Expanded(
               child: TabBarView(
                 children: [
-                  NotificationsView(),
                   ArticlesView(),
+                  NotificationsView(),
                 ],
               ),
             ),

@@ -12,9 +12,9 @@ class NotificationsView extends GetView<NotificationController> {
     return Scaffold(
       backgroundColor: AppColors.blackDark,
       body: SafeArea(
-          child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: GetBuilder<NotificationController>(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: GetBuilder<NotificationController>(
             id: "notifications",
             builder: (_) {
               return ListView.builder(
@@ -29,8 +29,10 @@ class NotificationsView extends GetView<NotificationController> {
                   );
                 },
               );
-            }),
-      )),
+            },
+          ),
+        ),
+      ),
     );
   }
 }

@@ -6,8 +6,6 @@ import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/select_currency_dialog.dart';
 import 'package:black_market/app/modules/bank_details/bank_details_controller.dart';
-import 'package:black_market/app/modules/currencies/currencies_controller.dart';
-import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
