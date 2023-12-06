@@ -1,13 +1,13 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
-import 'package:black_market/app/modules/notifications/notification_view.dart';
-import 'package:black_market/app/modules/notifications/notifications_controller.dart';
+import 'package:black_market/app/modules/notification/articles/articles_view.dart';
+import 'package:black_market/app/modules/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class NotificationsView extends GetView<NotificationsController> {
+class NotificationsView extends GetView<NotificationController> {
   const NotificationsView({super.key});
 
   @override
@@ -58,8 +58,8 @@ class NotificationsView extends GetView<NotificationsController> {
             const Expanded(
               child: TabBarView(
                 children: [
-                  NotificationView(),
-                  NotificationView(),
+                  NotificationsView(),
+                  ArticlesView(),
                 ],
               ),
             ),

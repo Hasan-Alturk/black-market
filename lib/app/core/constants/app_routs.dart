@@ -10,8 +10,8 @@ import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/login/login_view.dart';
 import 'package:black_market/app/modules/main/main_home_binding.dart';
 import 'package:black_market/app/modules/main/main_home_view.dart';
-import 'package:black_market/app/modules/notifications/notifications_binding.dart';
-import 'package:black_market/app/modules/notifications/notifications_view.dart';
+import 'package:black_market/app/modules/notification/notification_binding.dart';
+import 'package:black_market/app/modules/notification/notifications_view.dart';
 import 'package:black_market/app/modules/password/insert_otp/insert_otp%20controller_binding.dart';
 import 'package:black_market/app/modules/password/insert_otp/insert_otp_view.dart';
 import 'package:black_market/app/modules/password/new_password_successfully/new_password_successfully_binding.dart';
@@ -111,7 +111,7 @@ List<GetPage> approuts = [
   GetPage(
     name: "/notifications",
     page: () => const NotificationsView(),
-    binding: NotificationsBinding(),
+    binding: NotificationBinding(),
   ),
   GetPage(
     name: "/main_cuurency",

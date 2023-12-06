@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class CustomContainerNotifications extends StatelessWidget {
   final String title;
   final String body;
-  final DateTime notificationDate;
+  final String notificationDate;
 
   const CustomContainerNotifications({
     super.key,
@@ -26,7 +26,7 @@ class CustomContainerNotifications extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             DateFormat('yyyy/MM/dd').format(
-              DateTime(2023, 12, 05, 16, 00, 00),
+              DateTime.parse(notificationDate),
             ),
             style: TextStyle(
               fontSize: 14.sp,
@@ -49,10 +49,10 @@ class CustomContainerNotifications extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "الدينار الكويتي والريال العماني أعلي العملات سعرا أمام الجنيه المصري",
+                  title,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: AppColors.white,
@@ -63,7 +63,7 @@ class CustomContainerNotifications extends StatelessWidget {
                   height: 10.h,
                 ),
                 Text(
-                  "سجل سعر الريال العماني في السوق السوداء اليوم سعر 120 جنيه للشراء، وسعر 125 جنيه للبيع فيما سجل الدينار الكويتي  سعر 150 جنيه للشراء، وسعر 155 جنيه",
+                  body,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: AppColors.greyWhite,
