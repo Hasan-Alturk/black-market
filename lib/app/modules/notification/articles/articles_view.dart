@@ -1,5 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/widgets/custom_container_notifications.dart';
+import 'package:black_market/app/core/widgets/custom_container_articles.dart';
 import 'package:black_market/app/modules/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,10 +21,11 @@ class ArticlesView extends GetView<NotificationController> {
                 physics: const ScrollPhysics(),
                 itemCount: controller.articles.length,
                 itemBuilder: (context, index) {
-                  return CustomContainerNotifications(
+                  return CustomContainerArticles(
                     title: controller.articles[index].title,
                     body: controller.articles[index].shortDescription,
                     notificationDate: controller.articles[index].createdAt,
+                    image: controller.articles[index].thumbnail,
                   );
                 },
               );
