@@ -10,9 +10,9 @@ class LatestCurrency {
   late String lastUpdate;
   late dynamic createdAt;
   late String updatedAt;
-  late List<CurrencyPrice> livePrices;
-  late List<CurrencyPrice> blackMarketPrices;
-  late List<CurrencyPrice> bankPrices;
+  late List<LivePrice> livePrices;
+  late List<BlackMarketPrice> blackMarketPrices;
+  late List<BankPrice> bankPrices;
 
   LatestCurrency({
     required this.id,
@@ -47,21 +47,21 @@ class LatestCurrency {
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
     if (json['live_prices'] != null) {
-      livePrices = <CurrencyPrice>[];
+      livePrices = <LivePrice>[];
       json['live_prices'].forEach((v) {
-        livePrices!.add(CurrencyPrice.fromJson(v));
+        livePrices.add(LivePrice.fromJson(v));
       });
     }
     if (json['black_market_prices'] != null) {
-      blackMarketPrices = <CurrencyPrice>[];
+      blackMarketPrices = <BlackMarketPrice>[];
       json['black_market_prices'].forEach((v) {
-        blackMarketPrices!.add(CurrencyPrice.fromJson(v));
+        blackMarketPrices.add(BlackMarketPrice.fromJson(v));
       });
     }
     if (json['bank_prices'] != null) {
-      bankPrices = <CurrencyPrice>[];
+      bankPrices = <BankPrice>[];
       json['bank_prices'].forEach((v) {
-        bankPrices!.add(CurrencyPrice.fromJson(v));
+        bankPrices.add(BankPrice.fromJson(v));
       });
     }
   }
@@ -79,53 +79,129 @@ class LatestCurrency {
     data['last_update'] = lastUpdate;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    if (livePrices != null) {
-      data['live_prices'] = livePrices!.map((v) => v.toJson()).toList();
+    if (livePrices.isNotEmpty) {
+      data['live_prices'] = livePrices.map((v) => v.toJson()).toList();
     }
-    if (blackMarketPrices != null) {
+    if (blackMarketPrices.isNotEmpty) {
       data['black_market_prices'] =
-          blackMarketPrices!.map((v) => v.toJson()).toList();
+          blackMarketPrices.map((v) => v.toJson()).toList();
     }
-    if (bankPrices != null) {
-      data['bank_prices'] = bankPrices!.map((v) => v.toJson()).toList();
+    if (bankPrices.isNotEmpty) {
+      data['bank_prices'] = bankPrices.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class CurrencyPrice {
-  int? id;
-  int? bankId;
-  int? currencyId;
-  num? buyPrice;
-  num? sellPrice;
-  String? date;
-  String? createdAt;
-  String? updatedAt;
-  int? hour;
-  num? price;
+class BlackMarketPrice {
+  late int id;
+  late int currencyId;
+  late num buyPrice;
+  late num sellPrice;
+  late String date;
+  late int hour;
+  late String createdAt;
+  late String updatedAt;
+  BlackMarketPrice(
+      {required this.id,
+      required this.buyPrice,
+      required this.createdAt,
+      required this.currencyId,
+      required this.date,
+      required this.hour,
+      required this.sellPrice,
+      required this.updatedAt});
 
-  CurrencyPrice({
-    required this.id,
-    this.bankId,
-    required this.currencyId,
-    this.buyPrice,
-    this.sellPrice,
-    required this.date,
-    required this.createdAt,
-    required this.updatedAt,
-    this.hour,
-    this.price,
-  });
-  CurrencyPrice.fromJson(Map<String, dynamic> json) {
+  BlackMarketPrice.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    bankId = json['bank_id'];
     currencyId = json['currency_id'];
     buyPrice = json['buy_price'];
     sellPrice = json['sell_price'];
     hour = json['hour'];
     date = json['date'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['currency_id'] = currencyId;
+    data['buy_price'] = buyPrice;
+    data['sell_price'] = sellPrice;
+    data['hour'] = hour;
+    data['date'] = date;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class LivePrice {
+  late int id;
+  late int currencyId;
+  late num price;
+  late String date;
+  late int hour;
+  late String createdAt;
+  late String updatedAt;
+  LivePrice(
+      {required this.id,
+      required this.createdAt,
+      required this.currencyId,
+      required this.date,
+      required this.hour,
+      required this.price,
+      required this.updatedAt});
+
+  LivePrice.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    currencyId = json['currency_id'];
     price = json['price'];
+    hour = json['hour'];
+    date = json['date'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['currency_id'] = currencyId;
+    data['price'] = price;
+    data['hour'] = hour;
+    data['date'] = date;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class BankPrice {
+  late int id;
+  late int bankId;
+  late int currencyId;
+  late num buyPrice;
+  late num sellPrice;
+  late String date;
+  late String createdAt;
+  late String updatedAt;
+
+  BankPrice({
+    required this.id,
+    required this.bankId,
+    required this.currencyId,
+    required this.buyPrice,
+    required this.sellPrice,
+    required this.date,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  BankPrice.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    bankId = json['bank_id'];
+    currencyId = json['currency_id'];
+    buyPrice = json['buy_price'];
+    sellPrice = json['sell_price'];
+    date = json['date'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -137,9 +213,7 @@ class CurrencyPrice {
     data['currency_id'] = currencyId;
     data['buy_price'] = buyPrice;
     data['sell_price'] = sellPrice;
-    data['hour'] = hour;
     data['date'] = date;
-    data['price'] = price;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

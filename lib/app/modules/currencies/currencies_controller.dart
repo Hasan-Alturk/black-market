@@ -48,11 +48,13 @@ class CurrenciesController extends GetxController {
                 currencyIcon: element.icon.toString(),
                 currencyName: element.name.toString(),
                 currencyCode: element.code.toString(),
-                bankId: bank.bankId!,
+                bankId: bank.bankId,
                 bankIcon: b.icon.toString(),
                 bankName: b.name.toString(),
-                sellPrice: bank.sellPrice!,
-                buyPrice: bank.buyPrice!,
+                sellPrice: bank.sellPrice,
+                buyPrice: bank.buyPrice,
+                lastUpdate: element.lastUpdate,
+                blackMarketBuyPrice: element.blackMarketPrices.last.buyPrice,
                 createdAt: element.createdAt.toString(),
                 updatedAt: element.updatedAt.toString()));
           } else {
@@ -107,9 +109,9 @@ class CurrenciesController extends GetxController {
   void getBankData(int bankId) {
     for (var element in latestCurrencyList) {
       var x = element.bankPrices.where((value) =>
-          DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() >
+          DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
               Duration.zero &&
-          DateTime.parse(value.createdAt!).difference(DateTime.now()).abs() <
+          DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
               const Duration(hours: 24));
       for (var p in x) {
         if (p.bankId == bankId) {
@@ -122,10 +124,12 @@ class CurrenciesController extends GetxController {
               bankId: bankId,
               bankIcon: bank.first.icon!,
               bankName: bank.first.name!,
-              sellPrice: p.sellPrice!,
-              buyPrice: p.buyPrice!,
-              createdAt: p.createdAt!,
-              updatedAt: p.updatedAt!));
+              sellPrice: p.sellPrice,
+              buyPrice: p.buyPrice,
+              createdAt: p.createdAt,
+              lastUpdate: element.lastUpdate,
+              blackMarketBuyPrice: element.blackMarketPrices.last.buyPrice,
+              updatedAt: p.updatedAt));
           log("Eman...${element.name} ${bank.first.name} : ${p.bankId} :${p.sellPrice}  ${p.createdAt.toString()}");
         }
       }

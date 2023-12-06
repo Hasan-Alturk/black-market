@@ -89,124 +89,140 @@ class BankDetailsView extends GetView<BankDetailsController> {
                           ],
                         )),
                   ),
-                  Container(
-                    // height: context.screenHeight * 0.15,
-                    width: context.screenWidth * 0.87,
-                    decoration: BoxDecoration(
-                      color: AppColors.yellowLight,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: GetBuilder<BankDetailsController>(
-                        id: "bankInfo",
-                        builder: (_) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
+                  GetBuilder<BankDetailsController>(
+                      id: "bankInfo",
+                      builder: (_) {
+                        return Container(
+                            // height: context.screenHeight * 0.15,
+                            width: context.screenWidth * 0.87,
+                            decoration: BoxDecoration(
+                              color: AppColors.yellowLight,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        controller.bankData.isEmpty
+                                            ? ""
+                                            : controller
+                                                .bankData.first.bankName,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.darkGrey),
+                                      ),
                                       controller.bankData.isEmpty
-                                          ? ""
-                                          : controller.bankData.first.bankName,
-                                      style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppColors.darkGrey),
-                                    ),
-                                    controller.bankData.isEmpty
-                                        ? Image.asset(
-                                            AppAssetImage.bankMasr,
-                                            height: 25,
-                                            width: 25,
-                                          )
-                                        : Image.network(
-                                            BaseUrls.storageUrl +
-                                                controller
-                                                    .bankData.first.bankIcon,
-                                            height: 25,
-                                            width: 25,
+                                          ? Image.asset(
+                                              AppAssetImage.bankMasr,
+                                              height: 25,
+                                              width: 25,
+                                            )
+                                          : Image.network(
+                                              BaseUrls.storageUrl +
+                                                  controller
+                                                      .bankData.first.bankIcon,
+                                              height: 25,
+                                              width: 25,
+                                            ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: context.screenHeight * 0.001,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            AppStrings.blackMarket,
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColors.lightGrey),
                                           ),
-                                  ],
+                                          Text(
+                                            controller.currency.isNotEmpty
+                                                ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
+                                                : "",
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColors.yellowDark),
+                                          )
+                                        ],
+                                      ),
+                                      Container(
+                                        height: context.screenHeight * 0.04,
+                                        width: 1,
+                                        color: AppColors.lighterGrey,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            AppStrings.lastUpdate,
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColors.lightGrey),
+                                          ),
+                                          Text(
+                                            controller.currency.isNotEmpty
+                                                ? " منذ ${controller.currency.first.lastUpdate} دقيقة "
+                                                : "",
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: AppColors.darkGrey,
+                                                fontWeight: FontWeight.w700),
+                                          )
+                                        ],
+                                      ),
+                                      Container(
+                                        height: context.screenHeight * 0.03,
+                                        width: 1,
+                                        color: AppColors.lighterGrey,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            AppStrings.bankPrice,
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColors.lightGrey),
+                                          ),
+                                          Text(
+                                            controller.currency.isNotEmpty
+                                                ? "${controller.currency.first.sellPrice} ج.م"
+                                                : "",
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: AppColors.darkGrey,
+                                                fontWeight: FontWeight.w700),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: context.screenHeight * 0.01,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.blackMarket,
-                                          style: TextStyle(
-                                              color: AppColors.lightGrey),
-                                        ),
-                                        Text(
-                                          "40 ج.م ",
-                                          style: TextStyle(
-                                              color: AppColors.yellowDark),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      height: context.screenHeight * 0.04,
-                                      width: 1,
-                                      color: AppColors.lighterGrey,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.lastUpdate,
-                                          style: TextStyle(
-                                              color: AppColors.lightGrey),
-                                        ),
-                                        Text(
-                                          "منذ 15 دقيقة",
-                                          style: TextStyle(
-                                              color: AppColors.darkGrey,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      height: context.screenHeight * 0.03,
-                                      width: 1,
-                                      color: AppColors.lighterGrey,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.bankPrice,
-                                          style: TextStyle(
-                                              color: AppColors.lightGrey),
-                                        ),
-                                        Text(
-                                          "30.25 ج.م ",
-                                          style: TextStyle(
-                                              color: AppColors.darkGrey,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                        }),
-                  ),
+                              ],
+                            ));
+                      })
                 ],
               ),
               SizedBox(
@@ -223,7 +239,6 @@ class BankDetailsView extends GetView<BankDetailsController> {
                   ),
                   child: Column(
                     children: [
-                      // Instead Of Text There is dropdown list
                       SizedBox(
                         height: 12.h,
                       ),
@@ -253,10 +268,22 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const Icon(Icons.arrow_drop_down_sharp),
-                                      Text(controller.currency.isNotEmpty
-                                          ? controller.currency[0].currencyName
-                                          : ""),
+                                      const Icon(
+                                        Icons.arrow_drop_down_sharp,
+                                      ),
+                                      Text(
+                                        controller.currency.isNotEmpty
+                                            ? controller
+                                                .currency[0].currencyName
+                                            : "",
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.grey),
+                                      ),
+                                      SizedBox(
+                                        width: 6.w,
+                                      ),
                                       controller.currency.isNotEmpty
                                           ? Image.network(BaseUrls.storageUrl +
                                               controller
@@ -283,14 +310,19 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                       Text(
                                         AppStrings.sell,
                                         style: TextStyle(
+                                            fontSize: 10.sp,
                                             color: AppColors.darkBlack,
                                             fontWeight: FontWeight.w700),
                                       ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
                                       Text(
                                         controller.currency.isNotEmpty
-                                            ? "${controller.currency[0].sellPrice}ج.م"
+                                            ? "${controller.currency[0].sellPrice} ج.م"
                                             : "",
                                         style: TextStyle(
+                                            fontSize: 10.sp,
                                             color: AppColors.darkBlack,
                                             fontWeight: FontWeight.w700),
                                       )
@@ -307,14 +339,19 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                       Text(
                                         AppStrings.buy,
                                         style: TextStyle(
+                                            fontSize: 10.sp,
                                             color: AppColors.darkBlack,
                                             fontWeight: FontWeight.w700),
                                       ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
                                       Text(
                                         controller.currency.isNotEmpty
-                                            ? "${controller.currency[0].buyPrice}ج.م"
+                                            ? "${controller.currency[0].buyPrice} ج.م"
                                             : "",
                                         style: TextStyle(
+                                            fontSize: 10.sp,
                                             color: AppColors.darkBlack,
                                             fontWeight: FontWeight.w700),
                                       )
@@ -334,29 +371,33 @@ class BankDetailsView extends GetView<BankDetailsController> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                child: Container(
-                  width: context.screenWidth * 0.80,
-                  decoration: BoxDecoration(
-                    color: AppColors.gray,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        _buildCalculatorRow(context),
-                        SizedBox(
-                          height: context.screenHeight * 0.009,
+                child: GetBuilder<BankDetailsController>(
+                    id: "calculatorView",
+                    builder: (_) {
+                      return Container(
+                        width: context.screenWidth * 0.80,
+                        decoration: BoxDecoration(
+                          color: AppColors.gray,
+                          borderRadius: BorderRadius.circular(24),
                         ),
-                        _buildCalculateText(context),
-                        SizedBox(
-                          height: context.screenHeight * 0.009,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              _buildCalculatorRow(context),
+                              SizedBox(
+                                height: 11.h,
+                              ),
+                              _buildCalculateText(context),
+                              SizedBox(
+                                height: 11.h,
+                              ),
+                              _buildEqualityRow(context)
+                            ],
+                          ),
                         ),
-                        _buildEqualityRow(context)
-                      ],
-                    ),
-                  ),
-                ),
+                      );
+                    }),
               ),
               SizedBox(
                 height: context.screenHeight * 0.009,
@@ -464,43 +505,40 @@ class BankDetailsView extends GetView<BankDetailsController> {
       children: [
         Row(
           children: [
-            ElevatedButton(
-              style: ButtonStyle(
-                padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-                backgroundColor: MaterialStatePropertyAll(AppColors.white),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                        bottomLeft: Radius.circular(8),
-                        bottomRight: Radius.circular(8)),
-                  ),
-                ),
-              ),
-              onPressed: () {
-                showCurrencyPicker(
-                  context: context,
-                  showFlag: true,
-                  showSearchField: false,
-                  showCurrencyName: true,
-                  showCurrencyCode: true,
-                  favorite: ['egp', 'usd'],
-                  onSelect: (Currency currency) {
-                    print('Select currency: ${currency.name}');
-                  },
-                );
-              },
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(8)),
               child: Row(
                 children: [
-                  Image.asset(AppAssetIcons.arrowDown),
                   SizedBox(
                     width: context.screenWidth * 0.008,
                   ),
                   Text(
-                    "USD",
-                    style: TextStyle(color: AppColors.gray),
+                    controller.bankData.isNotEmpty
+                        ? controller.latestCurrencyList[0].code.toUpperCase()
+                        : "",
+                    style: TextStyle(
+                        color: AppColors.gray,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12.sp),
                   ),
+                  SizedBox(
+                    width: context.screenWidth * 0.008,
+                  ),
+                  controller.latestCurrencyList.isNotEmpty
+                      ? Image.network(
+                          BaseUrls.storageUrl +
+                              controller.latestCurrencyList[0].icon,
+                          height: 15,
+                          width: 15,
+                        )
+                      : Image.asset(
+                          AppAssetImage.bankMasr,
+                          height: 15,
+                          width: 15,
+                        ),
                 ],
               ),
             ),
@@ -511,62 +549,68 @@ class BankDetailsView extends GetView<BankDetailsController> {
             SizedBox(
               width: context.screenWidth * 0.02,
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-                backgroundColor: MaterialStatePropertyAll(AppColors.white),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                        bottomLeft: Radius.circular(8),
-                        bottomRight: Radius.circular(8)),
-                  ),
-                ),
-              ),
-              onPressed: () {
-                showCurrencyPicker(
+            GestureDetector(
+              onTap: () {
+                showDialog(
                   context: context,
-                  showFlag: true,
-                  showSearchField: false,
-                  showCurrencyName: true,
-                  showCurrencyCode: true,
-                  favorite: ['egp', 'usd'],
-                  onSelect: (Currency currency) {
-                    print('Select currency: ${currency.name}');
+                  builder: (BuildContext context) {
+                    return SelectCurrencyDialog(
+                        currencyList: controller.bankData,
+                        onTap: (currencyId) {
+                          controller.getCurrencyInBank(currencyId);
+
+                          Get.back();
+                        });
                   },
                 );
               },
-              child: Row(
-                children: [
-                  Image.asset(AppAssetIcons.arrowDown),
-                  SizedBox(
-                    width: context.screenWidth * 0.008,
-                  ),
-                  Text(
-                    "USD",
-                    style: TextStyle(color: AppColors.gray),
-                  ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(8)),
+                child: Row(
+                  children: [
+                    Image.asset(AppAssetIcons.arrowDown),
+                    SizedBox(
+                      width: context.screenWidth * 0.008,
+                    ),
+                    Text(
+                      controller.currency.isNotEmpty
+                          ? controller.currency.first.currencyCode.toUpperCase()
+                          : "",
+                      style: TextStyle(
+                          color: AppColors.gray,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12.sp),
+                    ),
+                    SizedBox(
+                      width: context.screenWidth * 0.008,
+                    ),
+                    controller.currency.isNotEmpty
+                        ? Image.network(
+                            BaseUrls.storageUrl +
+                                controller.currency.first.currencyIcon,
+                            width: 15,
+                            height: 15,
+                          )
+                        : Image.asset(
+                            AppAssetImage.avatar,
+                            height: 15,
+                            width: 15,
+                          )
+                  ],
+                ),
               ),
             ),
           ],
         ),
-        ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(AppColors.yellowNormal),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                    bottomLeft: Radius.circular(8),
-                    bottomRight: Radius.circular(8)),
-              ),
-            ),
+        Container(
+          padding: const EdgeInsets.all(9),
+          decoration: BoxDecoration(
+            color: AppColors.yellowNormal,
+            borderRadius: BorderRadius.circular(8),
           ),
-          onPressed: () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -598,7 +642,9 @@ class BankDetailsView extends GetView<BankDetailsController> {
       ),
       child: Row(children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            controller.calculateTotalPrice();
+          },
           style: ButtonStyle(
             padding: const MaterialStatePropertyAll(EdgeInsets.all(4)),
             backgroundColor: MaterialStatePropertyAll(AppColors.yellowNormal),
@@ -621,6 +667,8 @@ class BankDetailsView extends GetView<BankDetailsController> {
         SizedBox(
           width: context.screenWidth * 0.24,
           child: TextField(
+            controller: controller.amountController.value,
+            keyboardType: TextInputType.number,
             cursorColor: AppColors.yellowNormal,
             style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -641,40 +689,54 @@ class BankDetailsView extends GetView<BankDetailsController> {
   }
 
   Widget _buildEqualityRow(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: context.screenWidth * 0.3,
-          decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(8))),
-          padding: const EdgeInsets.all(5),
-          child: const Text(
-            "40.1 جنيه مصري",
-            textAlign: TextAlign.center,
-          ),
-        ),
-        SizedBox(
-          width: context.screenWidth * 0.02,
-        ),
-        Image.asset(AppAssetIcons.equal),
-        SizedBox(
-          width: context.screenWidth * 0.02,
-        ),
-        Container(
-          width: context.screenWidth * 0.3,
-          decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(8))),
-          padding: const EdgeInsets.all(5),
-          child: const Text(
-            "1 دولار أمريكي",
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    );
+    return GetBuilder<BankDetailsController>(
+        id: "totalAmount",
+        builder: (_) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: context.screenWidth * 0.3,
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(8))),
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  "${controller.totalAmount} دولار أمريكي",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: AppColors.blackNormal,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              SizedBox(
+                width: context.screenWidth * 0.02,
+              ),
+              Image.asset(AppAssetIcons.equal),
+              SizedBox(
+                width: context.screenWidth * 0.02,
+              ),
+              Container(
+                width: context.screenWidth * 0.3,
+                decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(8))),
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  controller.amountController.value.text.isNotEmpty
+                      ? " ${num.parse(controller.amountController.value.text)} جنيه مصري"
+                      : "1 جنيه مصرى",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: AppColors.blackNormal,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

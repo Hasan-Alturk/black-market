@@ -1,17 +1,17 @@
 class CurrencyInBank {
-  final int currencyId;
-  final String currencyIcon;
-  final String currencyName;
-  final String currencyCode;
-  final int bankId;
-  final String bankIcon;
-  final String bankName;
-
-  final num sellPrice;
-  final num buyPrice;
-
-  final String createdAt;
-  final String updatedAt;
+  late int currencyId;
+  late String currencyIcon;
+  late String currencyName;
+  late String currencyCode;
+  late int bankId;
+  late String bankIcon;
+  late String bankName;
+  late num sellPrice;
+  late num buyPrice;
+  late String createdAt;
+  late String updatedAt;
+  late num blackMarketBuyPrice;
+  late String lastUpdate;
 
   CurrencyInBank(
       {required this.currencyId,
@@ -24,7 +24,9 @@ class CurrencyInBank {
       required this.sellPrice,
       required this.buyPrice,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      required this.lastUpdate,
+      required this.blackMarketBuyPrice});
 
   // static List<CurrencyInBank> currencyInBankList(List data) => data
   //     .map((currencyInBank) => CurrencyInBank.fromJson(currencyInBank))
