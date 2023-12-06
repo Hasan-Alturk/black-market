@@ -29,131 +29,133 @@ class RegisterView extends GetView<RegisterController> {
         key: formKey,
         child: SafeArea(
           child: Expanded(
-            child: ListView(
+            child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
-              children: [
-                SizedBox(
-                  height: 64.h,
-                ),
-                CustomTextField(
-                  controller: controller.nameController,
-                  label: AppStrings.fullName,
-                  hint: AppStrings.insertFullName,
-                  icon: Image.asset(AppAssetIcons.profile),
-                  textInputType: TextInputType.name,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return AppStrings.userNameRequired;
-                    } else {
-                      return null;
-                    }
-                  },
-                  onChanged: (_) {
-                    if (isChanged) {
-                      formKey.currentState!.validate();
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-                CustomTextField(
-                  controller: controller.emailController,
-                  label: AppStrings.email,
-                  hint: AppStrings.insertEmail,
-                  icon: Image.asset(
-                    AppAssetIcons.message,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 64.h,
                   ),
-                  textInputType: TextInputType.emailAddress,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return AppStrings.emailRequired;
-                    } else {
-                      return null;
-                    }
-                  },
-                  onChanged: (_) {
-                    if (isChanged) {
-                      formKey.currentState!.validate();
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-                CustomTextField(
-                  controller: controller.passwordController,
-                  label: AppStrings.password,
-                  hint: AppStrings.insertPassword,
-                  icon: Image.asset(AppAssetIcons.lock),
-                  textInputType: TextInputType.visiblePassword,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return AppStrings.passwordRequired;
-                    } else if (text.length < 8) {
-                      return AppStrings.characterCountRequirementPassword;
-                    } else if (!RegExp(
-                            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
-                        .hasMatch(text)) {
-                      return AppStrings.conditionPassword;
-                    } else {
-                      return null;
-                    }
-                  },
-                  onChanged: (_) {
-                    if (isChanged) {
-                      formKey.currentState!.validate();
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-                CustomTextField(
-                  controller: controller.passwordConfirmationController,
-                  label: AppStrings.confirmPassword,
-                  hint: AppStrings.insertPassword,
-                  icon: Image.asset(AppAssetIcons.lock),
-                  textInputType: TextInputType.visiblePassword,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return AppStrings.passwordRequired;
-                    } else if (text.length < 8) {
-                      return AppStrings.characterCountRequirementPassword;
-                    } else if (!RegExp(
-                            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
-                        .hasMatch(text)) {
-                      return AppStrings.conditionPassword;
-                    } else {
-                      return null;
-                    }
-                  },
-                  onChanged: (_) {
-                    if (isChanged) {
-                      formKey.currentState!.validate();
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-                GetBuilder<RegisterController>(
-                  id: "TextError",
-                  builder: (_) {
-                    return Center(
-                      child: Text(
-                        controller.error ?? "",
-                        style: TextStyle(
-                            color: AppColors.red,
-                            fontSize: 16 * context.textScale),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: 26.h,
-                ),
-              ],
+                  CustomTextField(
+                    controller: controller.nameController,
+                    label: AppStrings.fullName,
+                    hint: AppStrings.insertFullName,
+                    icon: Image.asset(AppAssetIcons.profile),
+                    textInputType: TextInputType.name,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return AppStrings.userNameRequired;
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (_) {
+                      if (isChanged) {
+                        formKey.currentState!.validate();
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  CustomTextField(
+                    controller: controller.emailController,
+                    label: AppStrings.email,
+                    hint: AppStrings.insertEmail,
+                    icon: Image.asset(
+                      AppAssetIcons.message,
+                    ),
+                    textInputType: TextInputType.emailAddress,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return AppStrings.emailRequired;
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (_) {
+                      if (isChanged) {
+                        formKey.currentState!.validate();
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  CustomTextField(
+                    controller: controller.passwordController,
+                    label: AppStrings.password,
+                    hint: AppStrings.insertPassword,
+                    icon: Image.asset(AppAssetIcons.lock),
+                    textInputType: TextInputType.visiblePassword,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return AppStrings.passwordRequired;
+                      } else if (text.length < 8) {
+                        return AppStrings.characterCountRequirementPassword;
+                      } else if (!RegExp(
+                              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                          .hasMatch(text)) {
+                        return AppStrings.conditionPassword;
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (_) {
+                      if (isChanged) {
+                        formKey.currentState!.validate();
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  CustomTextField(
+                    controller: controller.passwordConfirmationController,
+                    label: AppStrings.confirmPassword,
+                    hint: AppStrings.insertPassword,
+                    icon: Image.asset(AppAssetIcons.lock),
+                    textInputType: TextInputType.visiblePassword,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return AppStrings.passwordRequired;
+                      } else if (text.length < 8) {
+                        return AppStrings.characterCountRequirementPassword;
+                      } else if (!RegExp(
+                              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                          .hasMatch(text)) {
+                        return AppStrings.conditionPassword;
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (_) {
+                      if (isChanged) {
+                        formKey.currentState!.validate();
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  GetBuilder<RegisterController>(
+                    id: "TextError",
+                    builder: (_) {
+                      return Center(
+                        child: Text(
+                          controller.error ?? "",
+                          style: TextStyle(
+                              color: AppColors.red,
+                              fontSize: 16 * context.textScale),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

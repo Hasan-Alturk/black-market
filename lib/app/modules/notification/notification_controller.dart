@@ -12,6 +12,7 @@ class NotificationController extends GetxController {
   final NotificationRepo notificationRepo;
   List<DataNotifications> notifications = [];
   List<DataArticles> articles = [];
+
   NotificationController({required this.notificationRepo});
 
   @override

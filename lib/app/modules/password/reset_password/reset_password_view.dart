@@ -25,66 +25,68 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
       body: Form(
         key: formKey,
         child: SafeArea(
-          child: ListView(
+          child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
-            children: [
-              SizedBox(
-                height: 60.h,
-              ),
-              CustomTextField(
-                controller: controller.passwordController,
-                label: AppStrings.password,
-                hint: AppStrings.insertPassword,
-                icon: Image.asset(AppAssetIcons.lock),
-                textInputType: TextInputType.visiblePassword,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return AppStrings.passwordRequired;
-                  } else if (text.length < 8) {
-                    return AppStrings.characterCountRequirementPassword;
-                  } else if (!RegExp(
-                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
-                      .hasMatch(text)) {
-                    return AppStrings.conditionPassword;
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (_) {
-                  if (isChanged) {
-                    formKey.currentState!.validate();
-                  }
-                },
-              ),
-              SizedBox(
-                height: 32.h,
-              ),
-              CustomTextField(
-                controller: controller.confirmPasswordController,
-                label: AppStrings.confirmPassword,
-                hint: AppStrings.insertPassword,
-                icon: Image.asset(AppAssetIcons.lock),
-                textInputType: TextInputType.visiblePassword,
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return AppStrings.passwordRequired;
-                  } else if (text.length < 8) {
-                    return AppStrings.characterCountRequirementPassword;
-                  } else if (!RegExp(
-                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
-                      .hasMatch(text)) {
-                    return AppStrings.conditionPassword;
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (_) {
-                  if (isChanged) {
-                    formKey.currentState!.validate();
-                  }
-                },
-              ),
-            ],
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 60.h,
+                ),
+                CustomTextField(
+                  controller: controller.passwordController,
+                  label: AppStrings.password,
+                  hint: AppStrings.insertPassword,
+                  icon: Image.asset(AppAssetIcons.lock),
+                  textInputType: TextInputType.visiblePassword,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return AppStrings.passwordRequired;
+                    } else if (text.length < 8) {
+                      return AppStrings.characterCountRequirementPassword;
+                    } else if (!RegExp(
+                            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                        .hasMatch(text)) {
+                      return AppStrings.conditionPassword;
+                    } else {
+                      return null;
+                    }
+                  },
+                  onChanged: (_) {
+                    if (isChanged) {
+                      formKey.currentState!.validate();
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 32.h,
+                ),
+                CustomTextField(
+                  controller: controller.confirmPasswordController,
+                  label: AppStrings.confirmPassword,
+                  hint: AppStrings.insertPassword,
+                  icon: Image.asset(AppAssetIcons.lock),
+                  textInputType: TextInputType.visiblePassword,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return AppStrings.passwordRequired;
+                    } else if (text.length < 8) {
+                      return AppStrings.characterCountRequirementPassword;
+                    } else if (!RegExp(
+                            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%^&*()]).{8,}$')
+                        .hasMatch(text)) {
+                      return AppStrings.conditionPassword;
+                    } else {
+                      return null;
+                    }
+                  },
+                  onChanged: (_) {
+                    if (isChanged) {
+                      formKey.currentState!.validate();
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
