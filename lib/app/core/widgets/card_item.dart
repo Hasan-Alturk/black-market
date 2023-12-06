@@ -1,5 +1,4 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
-import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
