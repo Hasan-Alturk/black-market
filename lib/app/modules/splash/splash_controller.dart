@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/setting.dart';
-import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:black_market/app/modules/splash/shared.dart';
@@ -38,23 +37,23 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
-  Future<UserSetting> getUserSetting() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
+  // Future<UserSetting> getUserSetting() async {
+  //   try {
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     String? token = prefs.getString('token');
 
-      UserSetting userSetting = await settingRepo.getUserSetting(
-        token: token.toString(),
-      );
+  //     UserSetting userSetting = await settingRepo.getUserSetting(
+  //       token: token.toString(),
+  //     );
 
-      await Shared.saveUserSetting(userSetting);
-      return userSetting;
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
+  //     await Shared.saveUserSetting(userSetting);
+  //     return userSetting;
+  //   } on ExceptionHandler catch (e) {
+  //     log("Error: $e");
 
-      throw ExceptionHandler("Unknown error");
-    }
-  }
+  //     throw ExceptionHandler("Unknown error");
+  //   }
+  // }
 
   Future<Setting> getSetting() async {
     try {

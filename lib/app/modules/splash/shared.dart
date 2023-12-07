@@ -1,20 +1,18 @@
 import 'dart:convert';
 
+import 'package:black_market/app/core/model/articles.dart';
 import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Shared {
-
-
-  
- static Future<void> saveUserSetting(UserSetting userSetting) async {
+  static Future<void> saveUserSetting(UserSetting userSetting) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('user_setting', userSetting.toJson().toString());
   }
 
 // استرجاع UserSetting من SharedPreferences
- static Future<UserSetting?> getUserSettingFromPrefs() async {
+  static Future<UserSetting?> getUserSettingFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userSettingJson = prefs.getString('user_setting');
 
@@ -44,4 +42,6 @@ class Shared {
 
     return null;
   }
+
+ 
 }

@@ -10,6 +10,8 @@ import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/login/login_view.dart';
 import 'package:black_market/app/modules/main/main_home_binding.dart';
 import 'package:black_market/app/modules/main/main_home_view.dart';
+import 'package:black_market/app/modules/notification/html_article/html_article_binding.dart';
+import 'package:black_market/app/modules/notification/html_article/html_article_view.dart';
 import 'package:black_market/app/modules/notification/notification_binding.dart';
 import 'package:black_market/app/modules/notification/notification_view.dart';
 import 'package:black_market/app/modules/password/insert_otp/insert_otp%20controller_binding.dart';
@@ -147,5 +149,10 @@ List<GetPage> approuts = [
     name: "/about_app",
     page: () => const AboutAppView(),
     binding: AboutAppBinding(),
+  ),
+  GetPage(
+    name: "/html_article",
+    page: () => const HtmlArticleView(),
+    binding: HtmlArticleBinding(),
   ),
 ];

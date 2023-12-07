@@ -1,34 +1,36 @@
-class Articles {
-  Articles({
+class HtmlArticle {
+  HtmlArticle({
     required this.currentPage,
     required this.data,
     required this.firstPageUrl,
     required this.from,
-    required this.nextPageUrl,
+    this.nextPageUrl,
     required this.path,
     required this.perPage,
     this.prevPageUrl,
     required this.to,
   });
   late final int currentPage;
-  late final List<DataArticle> data;
+  late final List<HtmlArticleData> data;
   late final String firstPageUrl;
   late final int from;
-  late final String nextPageUrl;
+  late final dynamic nextPageUrl;
   late final String path;
   late final int perPage;
   late final dynamic prevPageUrl;
   late final int to;
 
-  Articles.fromJson(Map<String, dynamic> json) {
+  HtmlArticle.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
-    data = List.from(json['data']).map((e) => DataArticle.fromJson(e)).toList();
+    data = List.from(json['data'])
+        .map((e) => HtmlArticleData.fromJson(e))
+        .toList();
     firstPageUrl = json['first_page_url'];
     from = json['from'];
     nextPageUrl = json['next_page_url'];
     path = json['path'];
     perPage = json['per_page'];
-    prevPageUrl = json['prev_page_url'];
+    prevPageUrl = ['prev_page_url'];
     to = json['to'];
   }
 
@@ -47,29 +49,44 @@ class Articles {
   }
 }
 
-class DataArticle {
-  DataArticle({
+class HtmlArticleData {
+  HtmlArticleData({
     required this.id,
     required this.thumbnail,
     required this.banner,
     required this.title,
     required this.shortDescription,
+    required this.description,
+    required this.draft,
     required this.createdAt,
+    required this.updatedAt,
+    required this.comments,
+    required this.readsCount,
   });
   late final int id;
   late final String thumbnail;
   late final String banner;
   late final String title;
   late final String shortDescription;
+  late final String description;
+  late final int draft;
   late final String createdAt;
+  late final String updatedAt;
+  late final List<dynamic> comments;
+  late final int readsCount;
 
-  DataArticle.fromJson(Map<String, dynamic> json) {
+  HtmlArticleData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     thumbnail = json['thumbnail'];
     banner = json['banner'];
     title = json['title'];
     shortDescription = json['short_description'];
+    description = json['description'];
+    draft = json['draft'];
     createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    comments = List.castFrom<dynamic, dynamic>(json['comments']);
+    readsCount = json['reads_count'];
   }
 
   Map<String, dynamic> toJson() {
@@ -79,7 +96,12 @@ class DataArticle {
     data['banner'] = banner;
     data['title'] = title;
     data['short_description'] = shortDescription;
+    data['description'] = description;
+    data['draft'] = draft;
     data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['comments'] = comments;
+    data['reads_count'] = readsCount;
     return data;
   }
 }

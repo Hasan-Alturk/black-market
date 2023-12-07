@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/Html_article.dart';
 import 'package:black_market/app/core/model/articles.dart';
 import 'package:black_market/app/core/model/notifications.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
@@ -32,11 +33,28 @@ class NotificationRepo {
 
   Future<Articles> getArticle() async {
     try {
-      Response response =
-          await dio.get("$baseUrl/articles?start_date=2023-10-06&page=1");
+      Response response = await dio.get("$baseUrl/articles");
 
       Articles articles = Articles.fromJson(response.data);
       return articles;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("notifications not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<HtmlArticle> getHtmlArticle(String id) async {
+    try {
+      Response response = await dio.get("$baseUrl/articles/$id");
+
+      HtmlArticle htmlarticle = HtmlArticle.fromJson(response.data);
+      return htmlarticle;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {

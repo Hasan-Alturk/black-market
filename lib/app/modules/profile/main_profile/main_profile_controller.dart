@@ -20,7 +20,6 @@ class MainProfileController extends GetxController {
 
   @override
   void onInit() {
-    getUserSetting();
     //   getSetting();
     super.onInit();
   }
@@ -45,32 +44,6 @@ class MainProfileController extends GetxController {
       update(["LogOut"]);
     }
   }
-
-  Future<UserSetting> getUserSetting() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
-
-      UserSetting userSetting = await settingRepo.getUserSetting(
-        token: token.toString(),
-      );
-      name = userSetting.name;
-      update(["name"]);
-
-      return userSetting;
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-
-      throw ExceptionHandler("Unknown error");
-    }
-  }
-
- 
-
-  // Future<void> saveAboutText(String aboutText) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('aboutText', aboutText);
-  // }
 
   void goToMainCuurency() {
     Get.toNamed("/main_cuurency");

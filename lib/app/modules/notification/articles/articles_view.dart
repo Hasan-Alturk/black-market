@@ -21,11 +21,16 @@ class ArticlesView extends GetView<NotificationController> {
                 physics: const ScrollPhysics(),
                 itemCount: controller.articles.length,
                 itemBuilder: (context, index) {
-                  return CustomContainerArticles(
-                    title: controller.articles[index].title,
-                    body: controller.articles[index].shortDescription,
-                    notificationDate: controller.articles[index].createdAt,
-                    image: controller.articles[index].thumbnail,
+                  return GestureDetector(
+                    onTap: () {
+                      controller.goToHtmlArticle();
+                    },
+                    child: CustomContainerArticles(
+                      title: controller.articles[index].title,
+                      body: controller.articles[index].shortDescription,
+                      notificationDate: controller.articles[index].createdAt,
+                      image: controller.articles[index].thumbnail,
+                    ),
                   );
                 },
               );
