@@ -45,7 +45,7 @@ class CustomContainerProfile extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: AppColors.whiteLight,
-                  fontSize: 14*context.textScale,
+                  fontSize: 14 * context.textScale,
                   fontWeight: FontWeight.w700,
                 ),
               ),

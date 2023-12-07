@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:get/get.dart';
 
-class LanguagegController extends GetxController {
+class LanguageController extends GetxController {
   RxBool rememberLanguage = false.obs;
   final languages = [
     AppStrings.languageArabic,

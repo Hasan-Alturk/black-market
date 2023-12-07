@@ -31,4 +31,5 @@ class AppAssetIcons {
   static const String delete = "asset/icons/delete.png";
   static const String yellowCalculator = "asset/icons/yellow_calculator.png";
   static const String close = "asset/icons/close.png";
+  static const String drag = "asset/icons/drag.png";
 }

@@ -8,6 +8,5 @@ class MainHomeBinding extends Bindings {
   void dependencies() {
     Get.put(MainHomeController(), permanent: true);
     CurrenciesBinding().dependencies();
-    MainProfileBinding().dependencies();
   }
 }

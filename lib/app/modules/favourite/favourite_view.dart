@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
-import 'package:black_market/app/modules/currencies/card_item.dart';
+import 'package:black_market/app/core/widgets/card_item.dart';
 import 'package:black_market/app/modules/favourite/favourite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +43,7 @@ class FavouriteView extends GetView<FavouriteController> {
                 mainAxisSpacing: 10),
             itemCount: 6,
             itemBuilder: (ctx, i) => GestureDetector(
-                child: const CardItem(),
+                // child: const CardItem(),
                 onTap: () => controller.goToBankDetails()),
           )
         ],

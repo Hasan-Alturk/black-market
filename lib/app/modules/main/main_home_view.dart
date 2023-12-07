@@ -3,7 +3,7 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/modules/currencies/currencies_view.dart';
 import 'package:black_market/app/modules/favourite/favourite_view.dart';
-import 'package:black_market/app/modules/gold/main_gold_view.dart';
+import 'package:black_market/app/modules/gold/main_gold/main_gold_view.dart';
 import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
 import 'package:flutter/material.dart';

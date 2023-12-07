@@ -1,6 +1,6 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -50,14 +50,14 @@ class CustomTextField extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14 * context.textScale,
+              fontSize: 14.sp,
               color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
         SizedBox(
-          height: context.screenHeight * 0.015,
+          height: 15.h,
         ),
         Directionality(
           textDirection: TextDirection.rtl,
@@ -65,10 +65,11 @@ class CustomTextField extends StatelessWidget {
             onChanged: onChanged,
             controller: controller,
             enabled: !disable,
+            validator: validator,
             keyboardType: textInputType,
             obscureText: obscureText,
             style: TextStyle(
-              fontSize: 14 * context.textScale,
+              fontSize: 14.sp,
               color: AppColors.yellowNormal,
               fontWeight: FontWeight.bold,
             ),
@@ -84,12 +85,11 @@ class CustomTextField extends StatelessWidget {
               fillColor: AppColors.gray,
               hintText: hint,
               hintStyle: TextStyle(
-                fontSize: 12 * context.textScale,
+                fontSize: 12.sp,
                 color: AppColors.graylight,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            validator: validator,
           ),
         ),
       ],

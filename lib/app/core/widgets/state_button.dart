@@ -1,5 +1,5 @@
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StateButton extends StatelessWidget {
   const StateButton({
@@ -23,7 +23,7 @@ class StateButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
-        fixedSize: Size(context.screenWidth, context.screenHeight * 0.065),
+        fixedSize: Size(375.w, 52.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius),
         ),
@@ -34,7 +34,7 @@ class StateButton extends StatelessWidget {
           : Text(
               text,
               style: TextStyle(
-                fontSize: 16 * context.textScale,
+                fontSize: 16.sp,
                 color: textColor,
                 fontWeight: FontWeight.w800,
               ),

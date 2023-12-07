@@ -32,6 +32,7 @@
 //               label: AppStrings.nowPassword,
 //               hint: AppStrings.insertPassword,
 //               icon: Image.asset(AppAssetIcons.lock),
+//               controller: ,
 //             ),
 //             SizedBox(
 //               height: context.screenHeight * 0.04,

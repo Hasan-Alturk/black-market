@@ -1,5 +1,5 @@
 abstract class AppStrings {
-  static String loginIntoAccount = "تسجيل الدخول الى حسابك";
+  static String loginIntoAccount = "تسجيل الدخول\nإلى حسابك";
   static String hello = "مرحباً";
   static String nameExample = "على عبدالله";
   static String blackMarketInEng = "Black Market";
@@ -89,6 +89,20 @@ abstract class AppStrings {
   static String articles = "المقالات ";
   static String date = " 26 أكتوبر 2023";
   static String emailRequired = "الايميل مطلوب";
-  static String characterCountRequirement =
-      "البريد الالكتروني يجب أن يكون عدد الاحرف فوق 20";
+  static String passwordRequired = "كلمة السر مطلوبة";
+  static String userNameRequired = "الاسم بالكامل مطلوب";
+
+  static String characterCountRequirementEmail =
+      "يجب أن يكون عدد حروف البريد الالكتروني فوق 20";
+  static String characterCountRequirementPassword =
+      "يجب أن يكون عدد حروف كلمة السر فوق 8";
+  static String conditionPassword =
+      "يجب أن تحتوي كلمة السر حرف صغير وحرف كبير و رمز على الأقل";
+  static String noteBank =
+      "إضغط مطولاً علي أي بنك لتغيير ترتيبه.\nيمكنك تعديل هذه القائمة لاحقاََ.";
+  static String noteCurrency =
+      "إضغط مطولاً علي أي عملة لتغيير ترتيبها.\nيمكنك تعديل هذه القائمة لاحقاََ.";
+
+  static String dragBank = "إختر الترتيب المفضل للبنوك";
+  static String dragCurrency = "إختر الترتيب المفضل للعملات";
 }

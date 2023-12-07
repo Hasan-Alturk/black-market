@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/user.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
@@ -9,17 +10,18 @@ class AuthRepo {
   AuthRepo(this.dio);
   final Dio dio;
 
-  // <User>
-  Future login({required String email, required String password}) async {
+  Future<MainUser> login(
+      {required String email, required String password}) async {
     try {
-      var response = await dio.post("$baseUrl/login", data: {
-        "email": email,
-        "password": password,
-      });
-      log(response.data.toString());
-
-      //   User user = User.fromMap(response.data);
-      //   return user;
+      Response response = await dio.post(
+        "$baseUrl/login",
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
+      MainUser mainUser = MainUser.fromJson(response.data);
+      return mainUser;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {
@@ -29,13 +31,11 @@ class AuthRepo {
           throw ExceptionHandler("Wrong password");
         }
       }
-
       throw ExceptionHandler("Unknown error");
     }
   }
 
-// <User>
-  Future register({
+  Future<MainUser> register({
     required String name,
     required String email,
     required String password,
@@ -43,7 +43,7 @@ class AuthRepo {
   }) async {
     try {
       Response response = await dio.post(
-        "https://voipsys.space/api/register",
+        "$baseUrl/register",
         data: {
           "name": name,
           "email": email,
@@ -51,11 +51,10 @@ class AuthRepo {
           "password_confirmation": passwordConfirmation,
         },
       );
-      log(response.statusCode as String); // طباعة رمز الاستجابة
-      log(response.headers as String); // طباعة رؤوس الاستجابة
-      log(response.data); // طباعة بيانات الاستجابة
-      log(response.data.toString());
-      //   return User.fromMap(response.data);
+
+      MainUser mainUser = MainUser.fromJson(response.data);
+      log(mainUser.accessToken.toString());
+      return mainUser;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {
@@ -66,4 +65,55 @@ class AuthRepo {
       throw ExceptionHandler("Unknown error");
     }
   }
+
+  Future<void> sendOtp({required String email}) async {
+    try {
+      Response response = await dio.post(
+        "$baseUrl/forget_password",
+        data: {
+          "email": email,
+        },
+      );
+      log(response.data);
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("");
+        }
+      }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<MainUser> passwordSuccessfully({
+    required String password,
+    required String passwordConfirmation,
+    required String otp,
+    required String email,
+  }) async {
+    try {
+      var response = await dio.post(
+        "$baseUrl/update_forgotten_password",
+        data: {
+          "password": password,
+          "password_confirmation": passwordConfirmation,
+          "otp": otp,
+          "email": email,
+        },
+      );
+      MainUser mainUser = MainUser.fromJson(response.data);
+      log(mainUser.accessToken.toString());
+      return mainUser;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("");
+        }
+      }
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
 }
