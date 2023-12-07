@@ -8,9 +8,6 @@ import 'package:get/get.dart';
 class HtmlArticleController extends GetxController {
   final NotificationRepo notificationRepo;
   int id = Get.arguments;
-  int a = 0;
-  //String text = "";
-
   List<HtmlArticleData> articlesData = [];
 
   HtmlArticleController({required this.notificationRepo});
@@ -29,7 +26,6 @@ class HtmlArticleController extends GetxController {
           await notificationRepo.getHtmlArticle(id.toString());
       List<HtmlArticleData> articlesList = article.data;
       articlesData.addAll(articlesList);
-      a = 0;
       for (var element in articlesData) {
         log(element.id.toString());
       }
