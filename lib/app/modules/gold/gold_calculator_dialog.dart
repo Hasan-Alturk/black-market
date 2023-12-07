@@ -37,6 +37,7 @@ class GoldCalculatorDialog extends StatelessWidget {
                   elevation: 0,
                   color: AppColors.gray,
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     cursorColor: AppColors.yellowNormal,
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
@@ -46,13 +47,14 @@ class GoldCalculatorDialog extends StatelessWidget {
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(12),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.greyNormal),
+                            borderSide:
+                                BorderSide(color: AppColors.yellowNormal),
                             borderRadius: BorderRadius.circular(12)),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.greyNormal),
                             borderRadius: BorderRadius.circular(12)),
-                        hintText: AppStrings.totalPaidAmount,
-                        hintStyle: TextStyle(
+                        labelText: AppStrings.totalPaidAmount,
+                        labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             color: AppColors.greyNormalActive)),
