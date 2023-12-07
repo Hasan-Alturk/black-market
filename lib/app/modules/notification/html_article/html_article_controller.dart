@@ -7,8 +7,9 @@ import 'package:get/get.dart';
 
 class HtmlArticleController extends GetxController {
   final NotificationRepo notificationRepo;
-  String ida = "";
-  String text = "";
+  int id = Get.arguments;
+  int a = 0;
+  //String text = "";
 
   List<HtmlArticleData> articlesData = [];
 
@@ -17,18 +18,21 @@ class HtmlArticleController extends GetxController {
   @override
   void onInit() {
     getArticles();
+
     super.onInit();
   }
 
   Future<List<HtmlArticleData>> getArticles() async {
     try {
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // String? id = prefs.getString('id');
-      HtmlArticle article = await notificationRepo.getHtmlArticle("416");
+      update(["HtmlArticle"]);
+      HtmlArticle article =
+          await notificationRepo.getHtmlArticle(id.toString());
       List<HtmlArticleData> articlesList = article.data;
       articlesData.addAll(articlesList);
-      // text = articlesData[id].banner;
-
+      a = 0;
+      for (var element in articlesData) {
+        log(element.id.toString());
+      }
       update(["HtmlArticle"]);
       return articlesData;
     } on ExceptionHandler catch (e) {

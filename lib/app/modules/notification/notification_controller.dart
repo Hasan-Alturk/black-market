@@ -4,7 +4,6 @@ import 'package:black_market/app/core/model/articles.dart';
 import 'package:black_market/app/core/model/notifications.dart';
 import 'package:black_market/app/core/repo/notification_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
-import 'package:black_market/app/modules/splash/shared.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +12,6 @@ class NotificationController extends GetxController {
   final NotificationRepo notificationRepo;
   List<DataNotifications> notifications = [];
   List<DataArticle> articles = [];
-  int id = 0;
 
   NotificationController({required this.notificationRepo});
 
@@ -44,7 +42,11 @@ class NotificationController extends GetxController {
       List<DataArticle> articlesList = article.data;
       articles.addAll(articlesList);
       update(["articles"]);
-      
+      for (var element in articles) {
+        log(element.id.toString());
+        log(element.shortDescription);
+      }
+
       return article;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
@@ -53,7 +55,7 @@ class NotificationController extends GetxController {
     }
   }
 
-  void goToHtmlArticle() {
-    Get.toNamed("/html_article");
+  void goToHtmlArticle(int id) {
+    Get.toNamed("/html_article", arguments: id);
   }
 }

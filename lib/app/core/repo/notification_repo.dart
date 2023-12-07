@@ -54,6 +54,7 @@ class NotificationRepo {
       Response response = await dio.get("$baseUrl/articles/$id");
 
       HtmlArticle htmlarticle = HtmlArticle.fromJson(response.data);
+      log(htmlarticle.firstPageUrl);
       return htmlarticle;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());

@@ -23,9 +23,10 @@ class ArticlesView extends GetView<NotificationController> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      controller.goToHtmlArticle();
+                      controller.goToHtmlArticle(controller.articles[index].id);
                     },
                     child: CustomContainerArticles(
+                     
                       title: controller.articles[index].title,
                       body: controller.articles[index].shortDescription,
                       notificationDate: controller.articles[index].createdAt,

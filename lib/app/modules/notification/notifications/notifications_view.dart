@@ -26,6 +26,7 @@ class NotificationsView extends GetView<NotificationController> {
                     body: controller.notifications[index].body,
                     notificationDate:
                         controller.notifications[index].notificationDate,
+                        
                   );
                 },
               );

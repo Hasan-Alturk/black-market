@@ -6,6 +6,7 @@ import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Shared {
+  
   static Future<void> saveUserSetting(UserSetting userSetting) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('user_setting', userSetting.toJson().toString());
