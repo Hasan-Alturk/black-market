@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
@@ -7,28 +9,30 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 
-class GoldCalculatorDialog extends StatelessWidget {
+class GoldCalculatorDialog extends GetView<MainGoldController> {
   List<String> karat;
   TextEditingController totalPaidAmount;
   TextEditingController totalGram;
   Function(String selectedKarat) selectKarat;
   void Function() calculate;
+  String? workshipText;
 
-  GoldCalculatorDialog({
-    Key? key,
-    required this.karat,
-    required this.totalPaidAmount,
-    required this.totalGram,
-    required this.selectKarat,
-    required this.calculate,
-  }) : super(key: key);
+  GoldCalculatorDialog(
+      {Key? key,
+      required this.karat,
+      required this.totalPaidAmount,
+      required this.totalGram,
+      required this.selectKarat,
+      required this.calculate,
+      this.workshipText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: context.screenHeight * 0.35,
+        height: context.screenHeight * 0.39,
         width: context.screenWidth * 0.92,
         decoration: BoxDecoration(
           color: AppColors.gray,
@@ -194,12 +198,31 @@ class GoldCalculatorDialog extends StatelessWidget {
                           color: AppColors.blackNormal,
                           fontWeight: FontWeight.w700),
                     )),
-                // Container(
-                //   decoration: BoxDecoration(
-                //       color: AppColors.yellowNormal,
-                //       borderRadius: BorderRadius.circular(12)),
-                //       child: Text("data"),
-                // )
+                SizedBox(
+                  height: context.screenHeight * 0.01,
+                ),
+                GetBuilder<MainGoldController>(
+                    id: "workshipContainer",
+                    builder: (context) {
+                      if (controller.totalWorkShip == 0) {
+                        return const Visibility(
+                          visible: false,
+                          child: Text(
+                            "",
+                          ),
+                        );
+                      } else {
+                        return Visibility(
+                            visible: true,
+                            child: Text(
+                              "مصنعية الذهب ل ${controller.totalgramsController.value.text}جرام =  ${controller.totalWorkShip}  ج.م",
+                              style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppColors.yellowNormal,
+                                  fontWeight: FontWeight.w700),
+                            ));
+                      }
+                    })
               ],
             ),
           ),
