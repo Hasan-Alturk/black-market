@@ -9,6 +9,7 @@ import 'package:black_market/app/core/model/ingot_company.dart';
 import 'package:black_market/app/core/model/ingots.dart';
 import 'package:black_market/app/core/repo/gold_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainGoldController extends GetxController {
@@ -20,10 +21,14 @@ class MainGoldController extends GetxController {
   List<Coins> coins = [];
   List<IngotCompany?> filteredIngotsByCompany = [];
   List<IngotCompany?> filteredCoinsByCompany = [];
+  var totalPaidAmountController = TextEditingController().obs;
+  var totalgramsController = TextEditingController().obs;
+  String selectedKarat = "";
 
   List<IngotCompany> btcIngotInfo = [];
   List<IngotCompany> btcCoinsInfo = [];
-
+  List<String> karatList = [];
+  num totalWorkShip = 0;
   int selected = -1;
   int isSelected = -1;
   int isCompanySelected = -1;
@@ -269,7 +274,15 @@ class MainGoldController extends GetxController {
       List<Gold> gold = await goldRepo.getGold();
 
       goldList.addAll(gold);
-      update(["goldCard"]);
+      gold.forEach(
+        (element) {
+          if (element.karat.isNum) {
+            karatList.add("${element.karat}k");
+          }
+        },
+      );
+
+      update(["goldCard", "goldDialog"]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
       error = e.error;
@@ -277,5 +290,20 @@ class MainGoldController extends GetxController {
 
       update(["goldCard"]);
     }
+  }
+
+  void calculateTotalWorkmanship() {
+    goldList.forEach((element) {
+      if ("${element.karat}k" == selectedKarat) {
+        totalWorkShip = num.parse(totalPaidAmountController.value.text) -
+            (num.parse(totalgramsController.value.text) * element.price.price);
+        update(["goldDialog"]);
+      }
+    });
+  }
+
+  void selectKarat(String karatValue) {
+    selectedKarat = karatValue;
+    log(selectedKarat);
   }
 }

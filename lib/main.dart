@@ -1,3 +1,4 @@
+import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_routs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Black Market',
           theme: ThemeData(
-            fontFamily: 'Almarai',
-            useMaterial3: true,
-          ),
+              fontFamily: 'Almarai',
+              useMaterial3: true,
+              canvasColor: AppColors.gray),
           initialRoute: "/splash",
           getPages: approuts,
         );

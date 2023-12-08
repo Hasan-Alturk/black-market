@@ -21,16 +21,28 @@ class MainGoldView extends GetView<MainGoldController> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          leading: IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const GoldCalculatorDialog();
-                  },
-                );
-              },
-              icon: Image.asset(AppAssetIcons.yellowCalculator)),
+          leading: GetBuilder<MainGoldController>(
+              id: "goldDialog",
+              builder: (_) {
+                return IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return GoldCalculatorDialog(
+                            karat: controller.karatList,
+                            totalGram: controller.totalgramsController.value,
+                            totalPaidAmount:
+                                controller.totalPaidAmountController.value,
+                            selectKarat: (selectedKarat) =>
+                                controller.selectKarat(selectedKarat),
+                            calculate: controller.calculateTotalWorkmanship,
+                          );
+                        },
+                      );
+                    },
+                    icon: Image.asset(AppAssetIcons.yellowCalculator));
+              }),
           title: Text(
             AppStrings.gold,
             style: TextStyle(
