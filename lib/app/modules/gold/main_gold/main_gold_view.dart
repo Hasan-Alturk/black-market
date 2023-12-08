@@ -37,6 +37,7 @@ class MainGoldView extends GetView<MainGoldController> {
                             selectKarat: (selectedKarat) =>
                                 controller.selectKarat(selectedKarat),
                             calculate: controller.calculateTotalWorkmanship,
+                            workshipText: controller.totalWorkShip.toString(),
                           );
                         },
                       );

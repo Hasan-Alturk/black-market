@@ -297,7 +297,8 @@ class MainGoldController extends GetxController {
       if ("${element.karat}k" == selectedKarat) {
         totalWorkShip = num.parse(totalPaidAmountController.value.text) -
             (num.parse(totalgramsController.value.text) * element.price.price);
-        update(["goldDialog"]);
+        log(totalWorkShip.toString());
+        update(["goldDialog", "workshipContainer"]);
       }
     });
   }
