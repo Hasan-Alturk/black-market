@@ -6,13 +6,13 @@ import 'package:intl/intl.dart';
 class CustomContainerNotifications extends StatelessWidget {
   final String title;
   final String body;
-  final String notificationDate;
+ // final String notificationDate;
 
   const CustomContainerNotifications({
     super.key,
     required this.title,
     required this.body,
-    required this.notificationDate,
+ //   required this.notificationDate,
   });
 
   @override
@@ -22,19 +22,19 @@ class CustomContainerNotifications extends StatelessWidget {
         SizedBox(
           height: 10.h,
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Text(
-            DateFormat('yyyy/MM/dd').format(
-              DateTime.parse(notificationDate),
-            ),
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: AppColors.yellowDark,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.center,
+        //   child: Text(
+        //     DateFormat('yyyy/MM/dd').format(
+        //       DateTime.parse(notificationDate),
+        //     ),
+        //     style: TextStyle(
+        //       fontSize: 14.sp,
+        //       color: AppColors.yellowDark,
+        //       fontWeight: FontWeight.w700,
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           height: 10.h,
         ),

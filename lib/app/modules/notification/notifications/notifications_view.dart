@@ -3,6 +3,7 @@ import 'package:black_market/app/core/widgets/custom_container_notifications.dar
 import 'package:black_market/app/modules/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class NotificationsView extends GetView<NotificationController> {
   const NotificationsView({super.key});
@@ -12,26 +13,53 @@ class NotificationsView extends GetView<NotificationController> {
     return Scaffold(
       backgroundColor: AppColors.blackDark,
       body: SafeArea(
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: GetBuilder<NotificationController>(
-            id: "notifications",
-            builder: (_) {
-              return ListView.builder(
-                physics: const ScrollPhysics(),
-                itemCount: controller.notifications.length,
-                itemBuilder: (context, index) {
-                  return CustomContainerNotifications(
-                    title: controller.notifications[index].title,
-                    body: controller.notifications[index].body,
-                    notificationDate:
-                        controller.notifications[index].notificationDate,
-                        
-                  );
-                },
-              );
-            },
-          ),
+        child: GetBuilder<NotificationController>(
+          id: "notifications",
+          builder: (_) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    physics: const ScrollPhysics(),
+                    itemCount: controller.notifications.length,
+                    itemBuilder: (context, index) {
+                      if (index == 0 ||
+                          DateFormat('yyyy/MM/dd').format(DateTime.parse(
+                                  controller.notifications[index]
+                                      .notificationDate)) !=
+                              DateFormat('yyyy/MM/dd').format(DateTime.parse(
+                                  controller.notifications[index - 1]
+                                      .notificationDate))) {
+                        return Column(
+                          children: [
+                            Text(
+                              controller
+                                  .notifications[index].notificationDate,
+                              style: TextStyle(color: AppColors.white),
+                            ),
+                            CustomContainerNotifications(
+                              title: controller.notifications[index].title,
+                              body: controller.notifications[index].body,
+                              // notificationDate: controller
+                              //     .notifications[index].notificationDate,
+                            )
+                          ],
+                        );
+                      } else {
+                        // إذا كان التاريخ متطابقًا مع العنصر السابق، فقط عرض العنصر
+                        return CustomContainerNotifications(
+                          title: controller.notifications[index].title,
+                          body: controller.notifications[index].body,
+                          // notificationDate: controller
+                          //     .notifications[index].notificationDate,
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
