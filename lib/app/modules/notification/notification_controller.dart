@@ -14,6 +14,8 @@ class NotificationController extends GetxController {
   List<DataNotifications> notifications = [];
   List<DataArticle> articles = [];
   bool isLoading = false;
+  bool dataFetched = false;
+  ScrollController scrollController = ScrollController();
 
   NotificationController({required this.notificationRepo});
   String startDate = DataFormatApp.getCurrentDate();
@@ -47,6 +49,30 @@ class NotificationController extends GetxController {
       notifications.addAll(notificationList);
       page++;
       isLoading = false;
+      log("getNotification");
+
+      update(["notifications"]);
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+      update();
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<void> getNotificationAgain() async {
+    try {
+      isLoading = true;
+      update(["notifications"]);
+      Notifications notification = await notificationRepo.getNotification(
+        startDate: startDate,
+        topics: topics[2],
+        page: 1,
+      );
+      List<DataNotifications> notificationList = notification.data;
+      notifications.addAll(notificationList);
+      isLoading = false;
+      log("getNotificationAgain");
+
       update(["notifications"]);
     } on ExceptionHandler catch (e) {
       log("Error: $e");

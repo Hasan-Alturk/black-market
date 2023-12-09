@@ -20,7 +20,7 @@ class NotificationsView extends GetView<NotificationController> {
             return RefreshIndicator(
               onRefresh: () async {
                 // عند سحب الشاشة، قم بجلب البيانات الجديدة
-                controller.getNotification();
+                controller.getNotificationAgain();
               },
               child: NotificationListener<ScrollEndNotification>(
                 onNotification: (notification) {
@@ -30,7 +30,7 @@ class NotificationsView extends GetView<NotificationController> {
                       controller.getNotification();
                     }
                   }
-                  return true;
+                  return false;
                 },
                 child: ListView.builder(
                   physics: const ScrollPhysics(),
