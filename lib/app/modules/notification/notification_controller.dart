@@ -16,8 +16,14 @@ class NotificationController extends GetxController {
 
   NotificationController({required this.notificationRepo});
   String startDate = DataFormatApp.getCurrentDate();
-  String topics =
-      "marketing%2Cnew_marketing%2Cmarketing_1_0_10%2Cgold%2Ccurrencies%2Cnews";
+  List<String> topics = [
+    "marketing",
+    "new_marketing",
+    "marketing_1_0_10",
+    "gold",
+    "currencies",
+    "news",
+  ];
   int page = 1;
 
   @override
@@ -30,18 +36,9 @@ class NotificationController extends GetxController {
   Future<Notifications> getNotification() async {
     try {
       Notifications notification = await notificationRepo.getNotification(
-        startDate:"2022/12/10",
-        topics: [
-          [
-            "marketing",
-            "new_marketing",
-            "marketing_1_0_10",
-            "gold",
-            "currencies",
-            "news",
-          ]
-        ],
-        // page: 1
+        startDate: DataFormatApp.getCurrentDate(),
+        topics: topics[2],
+        page: 1,
       );
       List<DataNotifications> notificationList = notification.data;
       notifications.addAll(notificationList);

@@ -14,13 +14,14 @@ class NotificationRepo {
 
   Future<Notifications> getNotification({
     required String startDate,
-    required List<List<String>> topics,
-    // required int page,
+    required String topics,
+    required int page,
   }) async {
     try {
       Map<String, dynamic> queryParameters = {
         'start_date': startDate,
         'topics': topics,
+        "page": page,
       };
       Response response = await dio.get(
         "$baseUrl/notifications",
