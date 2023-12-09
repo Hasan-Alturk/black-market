@@ -2,6 +2,7 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/widgets/custom_container_notifications.dart';
 import 'package:black_market/app/modules/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -33,25 +34,34 @@ class NotificationsView extends GetView<NotificationController> {
                         return Column(
                           children: [
                             Text(
-                              controller
-                                  .notifications[index].notificationDate,
-                              style: TextStyle(color: AppColors.white),
+                              DateFormat('yyyy/MM/dd').format(
+                                DateTime.parse(controller
+                                    .notifications[index].notificationDate),
+                              ),
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                color: AppColors.yellowDark,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                             CustomContainerNotifications(
                               title: controller.notifications[index].title,
                               body: controller.notifications[index].body,
-                              // notificationDate: controller
-                              //     .notifications[index].notificationDate,
-                            )
+                            ),
                           ],
                         );
                       } else {
                         // إذا كان التاريخ متطابقًا مع العنصر السابق، فقط عرض العنصر
-                        return CustomContainerNotifications(
-                          title: controller.notifications[index].title,
-                          body: controller.notifications[index].body,
-                          // notificationDate: controller
-                          //     .notifications[index].notificationDate,
+                        return Column(
+                          children: [
+                            CustomContainerNotifications(
+                              title: controller.notifications[index].title,
+                              body: controller.notifications[index].body,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                          ],
                         );
                       }
                     },

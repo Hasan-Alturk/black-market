@@ -12,10 +12,20 @@ class NotificationRepo {
   NotificationRepo(this.dio);
   final Dio dio;
 
-  Future<Notifications> getNotification() async {
+  Future<Notifications> getNotification({
+    required String startDate,
+    required List<List<String>> topics,
+    // required int page,
+  }) async {
     try {
+      Map<String, dynamic> queryParameters = {
+        'start_date': startDate,
+        'topics': topics,
+      };
       Response response = await dio.get(
-          "$baseUrl/notifications?start_date=2023-10-07&topics=marketing%2Cnew_marketing%2Cmarketing_1_0_10%2Cgold%2Ccurrencies%2Cnews");
+        "$baseUrl/notifications",
+        queryParameters: queryParameters,
+      );
 
       Notifications notifications = Notifications.fromJson(response.data);
       return notifications;
