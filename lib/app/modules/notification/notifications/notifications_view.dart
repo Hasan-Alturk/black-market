@@ -17,57 +17,74 @@ class NotificationsView extends GetView<NotificationController> {
         child: GetBuilder<NotificationController>(
           id: "notifications",
           builder: (_) {
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    physics: const ScrollPhysics(),
-                    itemCount: controller.notifications.length,
-                    itemBuilder: (context, index) {
-                      if (index == 0 ||
-                          DateFormat('yyyy/MM/dd').format(DateTime.parse(
-                                  controller.notifications[index]
-                                      .notificationDate)) !=
-                              DateFormat('yyyy/MM/dd').format(DateTime.parse(
-                                  controller.notifications[index - 1]
-                                      .notificationDate))) {
-                        return Column(
-                          children: [
-                            Text(
-                              DateFormat('yyyy/MM/dd').format(
-                                DateTime.parse(controller
-                                    .notifications[index].notificationDate),
-                              ),
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: AppColors.yellowDark,
-                                fontWeight: FontWeight.w700,
-                              ),
+            return RefreshIndicator(
+              onRefresh: () async {
+                // عند سحب الشاشة، قم بجلب البيانات الجديدة
+                controller.getNotification();
+              },
+              child: NotificationListener<ScrollEndNotification>(
+                onNotification: (notification) {
+                  if (notification.metrics.pixels ==
+                      notification.metrics.maxScrollExtent) {
+                    if (!controller.isLoading) {
+                      controller.getNotification();
+                    }
+                  }
+                  return true;
+                },
+                child: ListView.builder(
+                  physics: const ScrollPhysics(),
+                  itemCount: controller.notifications.length +
+                      (controller.isLoading ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index == controller.notifications.length) {
+                      return controller.isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : const SizedBox.shrink();
+                    } else if (index == 0 ||
+                        DateFormat('yyyy/MM/dd').format(DateTime.parse(
+                                controller
+                                    .notifications[index].notificationDate)) !=
+                            DateFormat('yyyy/MM/dd').format(DateTime.parse(
+                                controller.notifications[index - 1]
+                                    .notificationDate))) {
+                      return Column(
+                        children: [
+                          Text(
+                            DateFormat('yyyy/MM/dd').format(
+                              DateTime.parse(controller
+                                  .notifications[index].notificationDate),
                             ),
-                            CustomContainerNotifications(
-                              title: controller.notifications[index].title,
-                              body: controller.notifications[index].body,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppColors.yellowDark,
+                              fontWeight: FontWeight.w700,
                             ),
-                          ],
-                        );
-                      } else {
-                        // إذا كان التاريخ متطابقًا مع العنصر السابق، فقط عرض العنصر
-                        return Column(
-                          children: [
-                            CustomContainerNotifications(
-                              title: controller.notifications[index].title,
-                              body: controller.notifications[index].body,
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                          ],
-                        );
-                      }
-                    },
-                  ),
+                          ),
+                          CustomContainerNotifications(
+                            title: controller.notifications[index].title,
+                            body: controller.notifications[index].body,
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          CustomContainerNotifications(
+                            title: controller.notifications[index].title,
+                            body: controller.notifications[index].body,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
-              ],
+              ),
             );
           },
         ),

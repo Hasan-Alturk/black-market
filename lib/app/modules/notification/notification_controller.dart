@@ -9,10 +9,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
-  PageController pageController = PageController();
   final NotificationRepo notificationRepo;
+  PageController pageController = PageController();
   List<DataNotifications> notifications = [];
   List<DataArticle> articles = [];
+  bool isLoading = false;
 
   NotificationController({required this.notificationRepo});
   String startDate = DataFormatApp.getCurrentDate();
@@ -33,21 +34,20 @@ class NotificationController extends GetxController {
     getArticles();
   }
 
-  Future<Notifications> getNotification() async {
+  Future<void> getNotification() async {
     try {
+      isLoading = true;
+      update(["notifications"]);
       Notifications notification = await notificationRepo.getNotification(
-        startDate: DataFormatApp.getCurrentDate(),
+        startDate: startDate,
         topics: topics[2],
-        page: 1,
+        page: page,
       );
       List<DataNotifications> notificationList = notification.data;
       notifications.addAll(notificationList);
+      page++;
+      isLoading = false;
       update(["notifications"]);
-      for (var element in notifications) {
-        log(element.id.toString());
-        log(element.createdAt);
-      }
-      return notification;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
       update();
