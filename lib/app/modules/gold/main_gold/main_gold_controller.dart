@@ -5,7 +5,7 @@ import 'package:black_market/app/core/model/alloy_coins_reponse.dart';
 import 'package:black_market/app/core/model/coins.dart';
 import 'package:black_market/app/core/model/gold.dart';
 import 'package:black_market/app/core/model/gold_company.dart';
-import 'package:black_market/app/core/model/ingot_company.dart';
+import 'package:black_market/app/core/mapper/ingot_company.dart';
 import 'package:black_market/app/core/model/ingots.dart';
 import 'package:black_market/app/core/repo/gold_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';

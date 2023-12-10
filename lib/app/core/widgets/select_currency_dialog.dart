@@ -1,5 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/model/currency_in_bank.dart';
+import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/widgets/currency_item.dart';
 import 'package:flutter/material.dart';

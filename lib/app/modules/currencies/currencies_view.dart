@@ -153,11 +153,10 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                                 .currenyAccordingToBankInfo(
                                                     controller
                                                         .selectedCurrencyId);
+                                            controller
+                                                .getCurrencyInBank(currencyId);
                                             Get.back();
                                           },
-                                          //   onTap: () {
-                                          //   Get.back;
-                                          // }
                                         );
                                       },
                                     );
@@ -189,71 +188,95 @@ class CurrenciesView extends GetView<CurrenciesController> {
                         SizedBox(
                           height: context.screenHeight * 0.01,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    AppStrings.blackMarket,
-                                    style:
-                                        TextStyle(color: AppColors.lightGrey),
-                                  ),
-                                  Text(
-                                    "40 ج.م ",
-                                    style:
-                                        TextStyle(color: AppColors.yellowDark),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                height: context.screenHeight * 0.04,
-                                width: 1,
-                                color: AppColors.lighterGrey,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    AppStrings.lastUpdate,
-                                    style:
-                                        TextStyle(color: AppColors.lightGrey),
-                                  ),
-                                  Text(
-                                    "منذ 15 دقيقة",
-                                    style: TextStyle(
-                                        color: AppColors.darkGrey,
-                                        fontWeight: FontWeight.w700),
-                                  )
-                                ],
-                              ),
-                              Container(
-                                height: context.screenHeight * 0.04,
-                                width: 1,
-                                color: AppColors.lighterGrey,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    AppStrings.bankPrice,
-                                    style:
-                                        TextStyle(color: AppColors.lightGrey),
-                                  ),
-                                  Text(
-                                    "30.25 ج.م ",
-                                    style: TextStyle(
-                                        color: AppColors.darkGrey,
-                                        fontWeight: FontWeight.w700),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
+                        GetBuilder<CurrenciesController>(
+                            id: "lastUpdateContainer",
+                            builder: (_) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          AppStrings.blackMarket,
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.lightGrey),
+                                        ),
+                                        Text(
+                                          controller.currency.isNotEmpty
+                                              ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
+                                              : "",
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.yellowDark),
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      height: context.screenHeight * 0.04,
+                                      width: 1,
+                                      color: AppColors.lighterGrey,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          AppStrings.lastUpdate,
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.lightGrey),
+                                        ),
+                                        Text(
+                                          controller.currency.isNotEmpty
+                                              ? " منذ ${controller.currency.first.lastUpdate} دقيقة "
+                                              : "",
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              color: AppColors.darkGrey,
+                                              fontWeight: FontWeight.w700),
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      height: context.screenHeight * 0.03,
+                                      width: 1,
+                                      color: AppColors.lighterGrey,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          AppStrings.bankPrice,
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.lightGrey),
+                                        ),
+                                        Text(
+                                          controller.currency.isNotEmpty
+                                              ? "${controller.currency.first.livePrice} ج.م"
+                                              : "",
+                                          style: TextStyle(
+                                              fontSize: 10.sp,
+                                              color: AppColors.darkGrey,
+                                              fontWeight: FontWeight.w700),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       ],
                     ),
                   )
@@ -275,68 +298,72 @@ class CurrenciesView extends GetView<CurrenciesController> {
                     SizedBox(
                       height: context.screenHeight * 0.01,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Image.asset(AppAssetIcons.calculator),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                AppStrings.sell,
-                                style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                "40 ج.م ",
-                                style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                          Container(
-                            height: context.screenHeight * 0.04,
-                            width: 1,
-                            color: AppColors.yellowDark,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                AppStrings.buy,
-                                style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                "40 ج.م ",
-                                style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
-                          ),
-                          Container(
-                            height: context.screenHeight * 0.04,
-                            width: 1,
-                            color: AppColors.yellowDark,
-                          ),
-                          Text(
-                            AppStrings.avgPrice,
-                            style: TextStyle(
-                                color: AppColors.darkBlack,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    )
+                    GetBuilder<CurrenciesController>(
+                        id: "averageContainer",
+                        builder: (_) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Image.asset(AppAssetIcons.calculator),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppStrings.sell,
+                                      style: TextStyle(
+                                          color: AppColors.darkBlack,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      "${controller.avgSellPrice.toStringAsFixed(2)} ج.م ",
+                                      style: TextStyle(
+                                          color: AppColors.darkBlack,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  ],
+                                ),
+                                Container(
+                                  height: context.screenHeight * 0.04,
+                                  width: 1,
+                                  color: AppColors.yellowDark,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      AppStrings.buy,
+                                      style: TextStyle(
+                                          color: AppColors.darkBlack,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      "${controller.avgBuyPrice.toStringAsFixed(2)} ج.م ",
+                                      style: TextStyle(
+                                          color: AppColors.darkBlack,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  ],
+                                ),
+                                Container(
+                                  height: context.screenHeight * 0.04,
+                                  width: 1,
+                                  color: AppColors.yellowDark,
+                                ),
+                                Text(
+                                  AppStrings.avgPrice,
+                                  style: TextStyle(
+                                      color: AppColors.darkBlack,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                          );
+                        })
                   ],
                 ),
               ),

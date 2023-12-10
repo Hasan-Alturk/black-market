@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'package:black_market/app/core/mapper/currency_in_home.dart';
 import 'package:black_market/app/core/model/bank.dart';
-import 'package:black_market/app/core/model/currency_in_bank.dart';
+import 'package:black_market/app/core/mapper/currency.dart';
+import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
@@ -12,6 +15,9 @@ class CurrenciesController extends GetxController {
   final CurrencyRepo currencyRepo;
   int selectedCurrencyId = 19;
   String name = "";
+  List<CurrencyInHome> currency = [];
+  num avgBuyPrice = 0;
+  num avgSellPrice = 0;
 
   String? error;
   List<Bank> bankList = [];
@@ -33,8 +39,10 @@ class CurrenciesController extends GetxController {
     super.onInit();
     //getName();
     getBanks();
-    getLatestCurreny()
-        .then((value) => currenyAccordingToBankInfo(selectedCurrencyId));
+    getLatestCurreny().then((value) {
+      currenyAccordingToBankInfo(selectedCurrencyId);
+      getCurrencyInBank(19);
+    });
   }
 
   // Future<void> getName() async {
@@ -45,8 +53,6 @@ class CurrenciesController extends GetxController {
   //     return;
   //   }
   // }
-
-
 
   // Future<void> getName() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -121,6 +127,47 @@ class CurrenciesController extends GetxController {
       error = e.error;
       log(error!);
     }
+  }
+
+  void getCurrencyInBank(int currencyId) {
+    currency.clear();
+    for (var b in latestCurrencyList) {
+      if (b.id == currencyId) {
+        currency.add(CurrencyInHome(
+            currencyId: currencyId,
+            currencyName: b.name,
+            currencyIcon: b.icon,
+            currencyCode: b.code,
+            livePrice: b.livePrices.last.price,
+            blackMarketBuyPrice: b.blackMarketPrices.last.buyPrice,
+            lastUpdate: DateTime.now()
+                .difference(DateTime.parse(b.lastUpdate))
+                .inMinutes));
+      }
+      getAverage(currencyId);
+    }
+    // currency.forEach(
+    //   (element) => log(element.lastUpdate.toString() +
+    //       element.blackMarketBuyPrice.toString()),
+    // );
+    update(["currenciesInBank", "lastUpdateContainer"]);
+  }
+
+  void getAverage(int currencyId) {
+    latestCurrencyList.forEach((e) {
+      if (e.id == currencyId) {
+        avgBuyPrice = e.bankPrices.fold(
+            0.0,
+            (previousValue, element) =>
+                previousValue + element.buyPrice / e.bankPrices.length);
+        avgSellPrice = e.bankPrices.fold(
+            0.0,
+            (previousValue, element) =>
+                previousValue + element.sellPrice / e.bankPrices.length);
+        update(["averageContainer"]);
+        log("Average = ${avgBuyPrice / e.bankPrices.length}");
+      }
+    });
   }
 
   void getBankData(int bankId) {

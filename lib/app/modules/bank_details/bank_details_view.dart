@@ -701,7 +701,9 @@ class BankDetailsView extends GetView<BankDetailsController> {
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  "${controller.totalAmount} دولار أمريكي",
+                  controller.amountController.value.text.isNotEmpty
+                      ? " ${num.parse(controller.amountController.value.text)} دولار امريكى "
+                      : "1 دولار امريكى",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.blackNormal,
@@ -723,9 +725,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  controller.amountController.value.text.isNotEmpty
-                      ? " ${num.parse(controller.amountController.value.text)} جنيه مصري"
-                      : "1 جنيه مصرى",
+                  "${controller.totalAmount} جنيه مصرى ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.blackNormal,

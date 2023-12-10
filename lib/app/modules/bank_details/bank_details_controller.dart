@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/bank.dart';
-import 'package:black_market/app/core/model/currency.dart';
-import 'package:black_market/app/core/model/currency_in_bank.dart';
+import 'package:black_market/app/core/mapper/currency.dart';
+import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
