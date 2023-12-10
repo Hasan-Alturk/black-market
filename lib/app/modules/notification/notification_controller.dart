@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:black_market/app/core/model/articles.dart';
 import 'package:black_market/app/core/model/notifications.dart';
-import 'package:black_market/app/core/plugin/data_format.dart';
+import 'package:black_market/app/core/plugin/data_format_App.dart';
 import 'package:black_market/app/core/repo/notification_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:flutter/widgets.dart';

@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
-import 'package:black_market/app/core/plugin/data_format.dart';
+import 'package:black_market/app/core/plugin/data_format_App.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/modules/notification/html_article/html_article_controller.dart';
 import 'package:flutter/material.dart';

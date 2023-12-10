@@ -13,14 +13,34 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       backgroundColor: AppColors.yellowNormal,
       body: SafeArea(
-        child: Center(
-          child: SizedBox(
-            height: 279.h,
-            width: 279.w,
-            child: Image.asset(
-              AppAssetImage.imageOnBoarding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: SizedBox(
+                height: 279.h,
+                width: 279.w,
+                child: Image.asset(
+                  AppAssetImage.imageOnBoarding,
+                ),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: GetBuilder<SplashController>(
+                builder: (controller) {
+                  if (controller.isLoading) {
+                    return CircularProgressIndicator(
+                      color: AppColors.blackDark,
+                    );
+                  } else {
+                    return const SizedBox
+                        .shrink(); // يمكنك استخدام أي عنصر بديل غير مرئي
+                  }
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

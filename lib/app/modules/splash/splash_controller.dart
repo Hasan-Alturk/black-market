@@ -1,16 +1,45 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/setting.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
-import 'package:black_market/app/modules/splash/shared.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends GetxController {
   final SettingRepo settingRepo;
+  bool isLoading = false;
 
   SplashController({required this.settingRepo});
+
+  @override
+  void onInit() {
+    onStartSplash();
+    super.onInit();
+  }
+
+  Future<void> onStartSplash() async {
+    try {
+      isLoading = true;
+      update();
+
+      log("onStartSplash");
+      await Future.delayed(
+          const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
+
+      checkToken();
+      await getSetting();
+      await Future.delayed(
+          const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
+
+      isLoading = false;
+      update();
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+      throw ExceptionHandler("Unknown error");
+    }
+  }
 
   void checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -21,20 +50,6 @@ class SplashController extends GetxController {
     } else {
       Get.offAllNamed("/login");
     }
-  }
-
-  @override
-  void onInit() {
-    Future.delayed(
-      const Duration(seconds: 5),
-      () {
-        checkToken();
-        getSetting();
-        // getUserSetting();
-      },
-    );
-
-    super.onInit();
   }
 
   // Future<UserSetting> getUserSetting() async {
@@ -55,14 +70,11 @@ class SplashController extends GetxController {
   //   }
   // }
 
-  Future<Setting> getSetting() async {
+  Future<void> getSetting() async {
     try {
-      log("settingMainProfile");
-
+      log("getSetting");
       Setting setting = await settingRepo.getSetting();
-      await Shared.saveSetting(setting);
-      log(setting.abouttext);
-      return setting;
+      await SharedStorage.saveSetting(setting);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
       throw ExceptionHandler("Unknown error");
