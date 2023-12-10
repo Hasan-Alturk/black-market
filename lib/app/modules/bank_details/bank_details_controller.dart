@@ -37,7 +37,7 @@ class BankDetailsController extends GetxController {
     if (currency.isNotEmpty) {
       if (amountController.value.text.isNotEmpty) {
         totalAmount =
-            num.parse(amountController.value.text) * currency.first.buyPrice;
+            num.parse(amountController.value.text) / currency.first.buyPrice;
       } else {
         totalAmount = currency.first.buyPrice;
       }
@@ -95,6 +95,7 @@ class BankDetailsController extends GetxController {
           "bankPrices",
           "bankInfo",
           "calculatorView",
+          "totalAmount"
         ]);
       }
     }

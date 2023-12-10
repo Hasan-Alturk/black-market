@@ -695,15 +695,15 @@ class BankDetailsView extends GetView<BankDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: context.screenWidth * 0.3,
+                width: context.screenWidth * 0.35,
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  controller.amountController.value.text.isNotEmpty
-                      ? " ${num.parse(controller.amountController.value.text)} دولار امريكى "
-                      : "1 دولار امريكى",
+                  controller.latestCurrencyList.isNotEmpty
+                      ? "${controller.totalAmount.toStringAsFixed(2)} ${controller.currency.first.currencyName.split('/').first}"
+                      : "",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.blackNormal,
@@ -719,13 +719,17 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 width: context.screenWidth * 0.02,
               ),
               Container(
-                width: context.screenWidth * 0.3,
+                width: context.screenWidth * 0.35,
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
                 padding: const EdgeInsets.all(5),
                 child: Text(
-                  "${controller.totalAmount} جنيه مصرى ",
+                  controller.amountController.value.text.isNotEmpty
+                      ? " ${num.parse(controller.amountController.value.text)} ${controller.latestCurrencyList.first.name.split('/').first}"
+                      : controller.latestCurrencyList.isNotEmpty
+                          ? "1 ${controller.latestCurrencyList.first.name.split('/').first}"
+                          : "",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: AppColors.blackNormal,
