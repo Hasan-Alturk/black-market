@@ -1,13 +1,14 @@
 import 'dart:developer';
+
+import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/mapper/currency_in_home.dart';
 import 'package:black_market/app/core/model/bank.dart';
-import 'package:black_market/app/core/mapper/currency.dart';
-import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
+import 'package:black_market/app/core/model/user_setting.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
-import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
@@ -15,6 +16,7 @@ class CurrenciesController extends GetxController {
   final CurrencyRepo currencyRepo;
   int selectedCurrencyId = 19;
   String name = "";
+  String avatar = "";
   List<CurrencyInHome> currency = [];
   num avgBuyPrice = 0;
   num avgSellPrice = 0;
@@ -37,7 +39,7 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    //getName();
+    //  getNameAndAvatar();
     getBanks();
     getLatestCurreny().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);
@@ -45,19 +47,16 @@ class CurrenciesController extends GetxController {
     });
   }
 
-  // Future<void> getName() async {
-  //   UserSetting? storedUserSetting = await Shared().getUserSettingFromPrefs();
-  //   if (storedUserSetting != null) {
-  //     name = storedUserSetting.name;
-  //   } else {
-  //     return;
-  //   }
-  // }
-
-  // Future<void> getName() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   name = prefs.getString('name')!;
-  // }
+  Future<void> getNameAndAvatar() async {
+    UserSetting? storedUserSetting =
+        await SharedStorage.getUserSettingFromPrefs();
+    if (storedUserSetting != null) {
+      name = storedUserSetting.name;
+      avatar = storedUserSetting.avatar;
+    } else {
+      return;
+    }
+  }
 
   void currenyAccordingToBankInfo(int currencyId) {
     currencyInBankList.clear();
@@ -154,7 +153,7 @@ class CurrenciesController extends GetxController {
   }
 
   void getAverage(int currencyId) {
-    latestCurrencyList.forEach((e) {
+    for (var e in latestCurrencyList) {
       if (e.id == currencyId) {
         avgBuyPrice = e.bankPrices.fold(
             0.0,
@@ -167,7 +166,7 @@ class CurrenciesController extends GetxController {
         update(["averageContainer"]);
         log("Average = ${avgBuyPrice / e.bankPrices.length}");
       }
-    });
+    }
   }
 
   void getBankData(int bankId) {

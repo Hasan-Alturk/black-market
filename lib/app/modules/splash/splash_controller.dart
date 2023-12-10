@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:black_market/app/core/model/setting.dart';
+import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
@@ -21,17 +22,10 @@ class SplashController extends GetxController {
 
   Future<void> onStartSplash() async {
     try {
+      log("onStartSplash");
       isLoading = true;
       update();
-
-      log("onStartSplash");
-      await Future.delayed(
-          const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
-
-      checkToken();
-      await Future.delayed(
-          const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
-
+      await checkToken();
       isLoading = false;
       update();
     } on ExceptionHandler catch (e) {
@@ -40,35 +34,18 @@ class SplashController extends GetxController {
     }
   }
 
-  void checkToken() async {
+  Future<void> checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     bool? rememberMe = prefs.getBool("rememberMe");
     if (token != null && token.isNotEmpty && rememberMe == true) {
       await getSetting();
+      await getUserSetting();
       Get.offAllNamed("/main_home");
     } else {
       Get.offAllNamed("/login");
     }
   }
-
-  // Future<UserSetting> getUserSetting() async {
-  //   try {
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     String? token = prefs.getString('token');
-
-  //     UserSetting userSetting = await settingRepo.getUserSetting(
-  //       token: token.toString(),
-  //     );
-
-  //     await Shared.saveUserSetting(userSetting);
-  //     return userSetting;
-  //   } on ExceptionHandler catch (e) {
-  //     log("Error: $e");
-
-  //     throw ExceptionHandler("Unknown error");
-  //   }
-  // }
 
   Future<void> getSetting() async {
     try {
@@ -77,6 +54,26 @@ class SplashController extends GetxController {
       await SharedStorage.saveSetting(setting);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<UserSetting> getUserSetting() async {
+    try {
+      log("getUserSetting");
+      
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+
+      UserSetting userSetting = await settingRepo.getUserSetting(
+        token: token.toString(),
+      );
+
+      await SharedStorage.saveUserSetting(userSetting);
+      return userSetting;
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+
       throw ExceptionHandler("Unknown error");
     }
   }

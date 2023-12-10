@@ -79,10 +79,16 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                     SizedBox(
                                       width: context.screenWidth * 0.02,
                                     ),
-                                    CircleAvatar(
-                                      radius: 24,
-                                      child: Image.asset(AppAssetImage.avatar),
-                                    )
+                                    GetBuilder<CurrenciesController>(
+                                        builder: (_) {
+                                      return const CircleAvatar(
+                                        radius: 24,
+                                        // child: Image.network(
+                                        //   BaseUrls.storageUrl +
+                                        //       controller.avatar,
+                                        // ),
+                                      );
+                                    })
                                   ],
                                 ),
                               ],
