@@ -37,14 +37,14 @@ class CurrenciesController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    //  getNameAndAvatar();
     getBanks();
     getLatestCurreny().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);
       getCurrencyInBank(19);
     });
+    await getNameAndAvatar();
   }
 
   Future<void> getNameAndAvatar() async {
@@ -56,6 +56,7 @@ class CurrenciesController extends GetxController {
     } else {
       return;
     }
+    update(["name_and_avatar"]);
   }
 
   void currenyAccordingToBankInfo(int currencyId) {

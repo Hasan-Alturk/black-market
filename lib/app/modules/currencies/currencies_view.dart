@@ -51,46 +51,45 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                     ),
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          AppStrings.hello,
-                                          style: TextStyle(
-                                            color: AppColors.blackLightActive,
+                                GetBuilder<CurrenciesController>(
+                                    id: "name_and_avatar",
+                                    builder: (_) {
+                                      return Row(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                AppStrings.hello,
+                                                style: TextStyle(
+                                                  color: AppColors
+                                                      .blackLightActive,
+                                                ),
+                                              ),
+                                              Text(
+                                                controller.name,
+                                                style: TextStyle(
+                                                  color: AppColors.white,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        ),
-                                        GetBuilder<CurrenciesController>(
-                                            builder: (_) {
-                                          return Text(
-                                            controller.name,
-                                            style: TextStyle(
-                                              color: AppColors.white,
-                                            ),
-                                          );
-                                        })
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: context.screenWidth * 0.02,
-                                    ),
-                                    GetBuilder<CurrenciesController>(
-                                        builder: (_) {
-                                      return const CircleAvatar(
-                                        radius: 24,
-                                        // child: Image.network(
-                                        //   BaseUrls.storageUrl +
-                                        //       controller.avatar,
-                                        // ),
+                                          SizedBox(
+                                            width: context.screenWidth * 0.02,
+                                          ),
+                                          // CircleAvatar(
+                                          //   radius: 24,
+                                          //   child: Image.network(
+                                          //     BaseUrls.storageUrl +
+                                          //         controller.avatar,
+                                          //   ),
+                                          // )
+                                        ],
                                       );
-                                    })
-                                  ],
-                                ),
+                                    }),
                               ],
                             ),
                           ),
