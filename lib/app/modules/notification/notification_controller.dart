@@ -11,12 +11,9 @@ import 'package:get/get.dart';
 class NotificationController extends GetxController {
   final NotificationRepo notificationRepo;
   PageController pageController = PageController();
+  bool isLoading = false;
   List<DataNotifications> notifications = [];
   List<DataArticle> articles = [];
-  bool isLoading = false;
-  bool dataFetched = false;
-  ScrollController scrollController = ScrollController();
-
   NotificationController({required this.notificationRepo});
   String startDate = DataFormatApp.getCurrentDate();
   List<String> topics = [
@@ -28,6 +25,7 @@ class NotificationController extends GetxController {
     "news",
   ];
   int page = 1;
+  int pageArticle = 1;
 
   @override
   void onInit() {
@@ -83,14 +81,43 @@ class NotificationController extends GetxController {
 
   Future<Articles> getArticles() async {
     try {
-      Articles article = await notificationRepo.getArticle();
+      isLoading = true;
+      update(["articles"]);
+
+      Articles article = await notificationRepo.getArticle(
+        startDate: startDate,
+        page: pageArticle,
+      );
       List<DataArticle> articlesList = article.data;
       articles.addAll(articlesList);
+      isLoading = false;
+      log("getArticles");
+
       update(["articles"]);
-      // for (var element in articles) {
-      //   log(element.id.toString());
-      //   log(element.shortDescription);
-      // }
+
+      return article;
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+      update();
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<Articles> getArticlesAgain() async {
+    try {
+      isLoading = true;
+      update(["articles"]);
+
+      Articles article = await notificationRepo.getArticle(
+        startDate: startDate,
+        page: 1,
+      );
+      List<DataArticle> articlesList = article.data;
+      articles.addAll(articlesList);
+      isLoading = false;
+      log("getArticlesAgain");
+
+      update(["articles"]);
 
       return article;
     } on ExceptionHandler catch (e) {

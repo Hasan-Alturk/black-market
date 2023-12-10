@@ -42,9 +42,17 @@ class NotificationRepo {
     }
   }
 
-  Future<Articles> getArticle() async {
+  Future<Articles> getArticle({
+    required String startDate,
+    required int page,
+  }) async {
     try {
-      Response response = await dio.get("$baseUrl/articles");
+      Map<String, dynamic> queryParameters = {
+        'start_date': startDate,
+        "page": page,
+      };
+      Response response =
+          await dio.get("$baseUrl/articles", queryParameters: queryParameters);
 
       Articles articles = Articles.fromJson(response.data);
       return articles;
