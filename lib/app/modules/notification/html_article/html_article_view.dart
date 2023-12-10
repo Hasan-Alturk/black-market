@@ -93,7 +93,7 @@ class HtmlArticleView extends GetView<HtmlArticleController> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        DataFormat.getDataTime(controller
+                                        DataFormatApp.getDataTime(controller
                                             .articlesData[0].createdAt),
                                         style: TextStyle(
                                           fontSize: 15.sp,

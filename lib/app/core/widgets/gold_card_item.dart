@@ -24,7 +24,7 @@ class GoldCardItem extends StatelessWidget {
     return Container(
       width: 156.w,
       height: 135.h,
-      margin: const EdgeInsets.all(12),
+      margin: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.gray,
         borderRadius: BorderRadius.circular(8.r),
@@ -34,6 +34,7 @@ class GoldCardItem extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 12.h,
