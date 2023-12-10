@@ -29,7 +29,6 @@ class SplashController extends GetxController {
           const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
 
       checkToken();
-      await getSetting();
       await Future.delayed(
           const Duration(seconds: 1)); // قم بتعديل المدة حسب الحاجة
 
@@ -46,6 +45,7 @@ class SplashController extends GetxController {
     String? token = prefs.getString('token');
     bool? rememberMe = prefs.getBool("rememberMe");
     if (token != null && token.isNotEmpty && rememberMe == true) {
+      await getSetting();
       Get.offAllNamed("/main_home");
     } else {
       Get.offAllNamed("/login");
