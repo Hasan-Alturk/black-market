@@ -1,6 +1,6 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSwitch extends StatelessWidget {
   CustomSwitch({
@@ -19,28 +19,29 @@ class CustomSwitch extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(context.screenWidth * 0.05),
-          height: context.screenHeight * 0.08,
+          padding: const EdgeInsets.all(15),
+          height: 65.h,
           decoration: BoxDecoration(
             color: AppColors.gray,
             border: Border.all(color: AppColors.gray),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Switch(
-                  activeTrackColor: AppColors.greenLight,
-                  activeColor: AppColors.white,
-                  value: isSwitched,
-                  onChanged: onChanged),
+                activeTrackColor: AppColors.greenLight,
+                activeColor: AppColors.white,
+                value: isSwitched,
+                onChanged: onChanged,
+              ),
               Directionality(
                 textDirection: TextDirection.rtl,
                 child: Text(
                   text,
                   style: TextStyle(
                     color: AppColors.whiteLight,
-                    fontSize: 14 * context.textScale,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

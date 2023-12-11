@@ -23,7 +23,7 @@ class CurrenciesController extends GetxController {
   List<CurrencyInBank> bankData = [];
 
   void goToBankDetails(int bankId) {
-    Get.toNamed("/bank_details", arguments: [bankId,selectedCurrencyId]);
+    Get.toNamed("/bank_details", arguments: [bankId, selectedCurrencyId]);
   }
 
   void goToNotification() {
@@ -79,7 +79,6 @@ class CurrenciesController extends GetxController {
         for (var bank in element.bankPrices!) {
           for (var b in bankList) {
             if (bank.currencyId == currencyId && b.id == bank.bankId) {
-              log("elements ${element.name}");
               currencyInBankList.add(CurrencyInBank(
                   currencyId: currencyId,
                   currencyIcon: element.icon.toString(),
@@ -101,13 +100,6 @@ class CurrenciesController extends GetxController {
         }
       }
     }
-
-    for (var element in currencyInBankList) {
-      log(element.currencyName.toString() +
-          element.sellPrice.toString() +
-          element.currencyId.toString());
-    }
-    log("length${currencyInBankList.length}");
     update(["bankList", "currencies", "currencyList"]);
   }
 
@@ -128,10 +120,6 @@ class CurrenciesController extends GetxController {
       }
       getAverage(currencyId);
     }
-    // currency.forEach(
-    //   (element) => log(element.lastUpdate.toString() +
-    //       element.blackMarketBuyPrice.toString()),
-    // );
     update(["currenciesInBank", "lastUpdateContainer"]);
   }
 
@@ -176,7 +164,6 @@ class CurrenciesController extends GetxController {
               lastUpdate: element.lastUpdate.toString(),
               blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
               updatedAt: p.updatedAt));
-          log("Eman...${element.name} ${bank.first.name} : ${p.bankId} :${p.sellPrice}  ${p.createdAt.toString()}");
         }
       }
     }

@@ -1,6 +1,8 @@
+import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
+import 'package:black_market/app/core/widgets/custom_container_drag.dart';
 import 'package:black_market/app/modules/profile/main_cuurency/main_cuurency_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,35 +40,18 @@ class MainCurencyView extends GetView<MainCurencyController> {
                   return ListView.builder(
                     itemCount: controller.latestCurrencyList.length,
                     itemBuilder: (context, index) {
-                      String currencyName =
-                          controller.latestCurrencyList[index].name.toString();
+                      // String currencyName =
+                      //     controller.latestCurrencyList[index].name.toString();
 
                       return Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(15),
-                            height: 65.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.gray,
-                              border: Border.all(color: AppColors.gray),
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Directionality(
-                                  textDirection: TextDirection.rtl,
-                                  child: Text(
-                                    currencyName,
-                                    style: TextStyle(
-                                      color: AppColors.whiteLight,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          CustomContainerDrag(
+                            text: controller.latestCurrencyList[index].name
+                                .toString(),
+                            stringImage: controller
+                                .latestCurrencyList[index].icon
+                                .toString(),
+                            stringIcon: AppAssetIcons.arrowDown,
                           ),
                           SizedBox(
                             height: 20.h,

@@ -2,16 +2,8 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:get/get.dart';
 
 class LanguageController extends GetxController {
-  RxBool rememberLanguage = false.obs;
+  bool rememberLanguage = true;
   final languages = [
     AppStrings.languageArabic,
-    AppStrings.languageEnglish,
   ];
-
-  //   void goToMainProfile() {
-  //   Get.offNamed("/main_profile");
-  // }
-
-  ///storage.saveUser(user);
-  // Get.to(Home());
 }

@@ -1,9 +1,9 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/modules/profile/setting/language/language_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LanguageView extends GetView<LanguageController> {
@@ -19,83 +19,71 @@ class LanguageView extends GetView<LanguageController> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(context.screenWidth * 0.03),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 25.h,
               ),
               Text(
                 AppStrings.selectLanguage,
                 style: TextStyle(
-                  fontSize: 16 * context.textScale,
+                  fontSize: 16.sp,
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 25.h,
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: controller.languages.length,
-                  itemBuilder: (context, index) {
-                    String currencyName = controller.languages[index];
-
-                    return Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(context.screenWidth * 0.05),
-                          height: context.screenHeight * 0.08,
-                          decoration: BoxDecoration(
-                            color: AppColors.gray,
-                            border: Border.all(color: AppColors.gray),
-                            borderRadius: BorderRadius.circular(12),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      height: 65.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.gray,
+                        border: Border.all(color: AppColors.gray),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Radio<bool>(
+                            value: true,
+                            groupValue: controller.rememberLanguage,
+                            onChanged: (value) {
+                              if (value != null) {
+                                controller.rememberLanguage = value;
+                              }
+                            },
+                            fillColor: MaterialStateColor.resolveWith(
+                              (states) {
+                                if (states.contains(MaterialState.disabled) ||
+                                    !controller.rememberLanguage) {
+                                  return AppColors.white;
+                                }
+                                return AppColors.yellowDark;
+                              },
+                            ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Obx(
-                                () => Radio<bool>(
-                                  value:
-                                      true, // ربما ترغب في تغيير هذا استنادًا إلى منطق التطبيق الخاص بك
-                                  groupValue: controller.rememberLanguage.value,
-                                  onChanged: (value) {
-                                    controller.rememberLanguage.value = value!;
-                                  },
-                                  fillColor: MaterialStateColor.resolveWith(
-                                    (states) {
-                                      if (states.contains(
-                                              MaterialState.disabled) ||
-                                          !controller.rememberLanguage.value) {
-                                        return AppColors.white;
-                                      }
-                                      return AppColors.yellowDark;
-                                    },
-                                  ),
-                                ),
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Text(
+                              controller.languages[0],
+                              style: TextStyle(
+                                color: AppColors.whiteLight,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w700,
                               ),
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: Text(
-                                  currencyName,
-                                  style: TextStyle(
-                                    color: AppColors.whiteLight,
-                                    fontSize: 14 * context.textScale,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: context.screenHeight * 0.03,
-                        )
-                      ],
-                    );
-                  },
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
