@@ -19,10 +19,11 @@ class SplashController extends GetxController {
   final CurrencyRepo currencyRepo;
   bool isLoading = false;
 
-  SplashController(
-      {required this.bankRepo,
-      required this.currencyRepo,
-      required this.settingRepo});
+  SplashController({
+    required this.bankRepo,
+    required this.currencyRepo,
+    required this.settingRepo,
+  });
 
   @override
   void onInit() {
@@ -44,12 +45,14 @@ class SplashController extends GetxController {
   }
 
   Future<void> checkToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-    bool? rememberMe = prefs.getBool("rememberMe");
     await getSetting();
     await getBanks();
     await getLatestCurrency();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    bool? rememberMe = prefs.getBool("rememberMe");
+
     if (token != null && token.isNotEmpty && rememberMe == true) {
       await getUserSetting();
       Get.offAllNamed("/main_home");

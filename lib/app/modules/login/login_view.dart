@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
 import 'package:black_market/app/modules/login/login_controller.dart';
@@ -106,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                       child: Text(
                         AppStrings.didYouForgetPassword,
                         style: TextStyle(
-                          fontSize: 12 * context.textScale,
+                          fontSize: 12.sp,
                           color: AppColors.yellowLightActive,
                           fontWeight: FontWeight.w700,
                         ),
@@ -117,27 +116,25 @@ class LoginView extends GetView<LoginController> {
                         Text(
                           AppStrings.remember,
                           style: TextStyle(
-                            fontSize: 14 * context.textScale,
+                            fontSize: 14.sp,
                             color: AppColors.white,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Obx(
-                          () => Radio<bool>(
-                            value: true,
-                            groupValue: controller.rememberMe.value,
-                            onChanged: (value) {
-                              controller.rememberMe.value = value!;
+                        Radio<bool>(
+                          value: true,
+                          groupValue: controller.rememberMe.value,
+                          onChanged: (value) {
+                            controller.rememberMe.value = value!;
+                          },
+                          fillColor: MaterialStateColor.resolveWith(
+                            (states) {
+                              if (states.contains(MaterialState.disabled) ||
+                                  !controller.rememberMe.value) {
+                                return AppColors.white;
+                              }
+                              return AppColors.yellowDark;
                             },
-                            fillColor: MaterialStateColor.resolveWith(
-                              (states) {
-                                if (states.contains(MaterialState.disabled) ||
-                                    !controller.rememberMe.value) {
-                                  return AppColors.white;
-                                }
-                                return AppColors.yellowDark;
-                              },
-                            ),
                           ),
                         ),
                       ],
@@ -155,10 +152,7 @@ class LoginView extends GetView<LoginController> {
                         isLoading: controller.isLoading,
                         text: AppStrings.login,
                         buttonColor: AppColors.yellowNormal,
-                        radius: 14,
-                        // onPressed: () {
-                        //   controller.goToHome();
-                        // },
+                        radius: 14.r,
                         onPressed: () {
                           isChanged = true;
                           if (formKey.currentState!.validate()) {
@@ -180,7 +174,7 @@ class LoginView extends GetView<LoginController> {
                       child: Text(
                         AppStrings.createAccount,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: AppColors.yellowLightActive,
                           fontWeight: FontWeight.w700,
                         ),
@@ -192,7 +186,7 @@ class LoginView extends GetView<LoginController> {
                     Text(
                       AppStrings.dontHaveAnAccount,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: AppColors.graylight,
                         fontWeight: FontWeight.w700,
                       ),
@@ -209,8 +203,9 @@ class LoginView extends GetView<LoginController> {
                       child: Text(
                         controller.error ?? "",
                         style: TextStyle(
-                            color: AppColors.red,
-                            fontSize: 16 * context.textScale),
+                          color: AppColors.red,
+                          fontSize: 16.sp,
+                        ),
                       ),
                     );
                   },

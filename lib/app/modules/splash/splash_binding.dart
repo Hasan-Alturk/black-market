@@ -11,7 +11,7 @@ class SplashBinding extends Bindings {
     Get.put(Dio(), permanent: true);
     Get.put(BankRepo(Dio()), permanent: true);
     Get.put(CurrencyRepo(Dio()), permanent: true);
-    Get.put(SettingRepo(Dio()));
+    Get.put(SettingRepo(Dio()),permanent: true);
 
     Get.put(
       SplashController(

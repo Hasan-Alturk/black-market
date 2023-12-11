@@ -1,10 +1,9 @@
 import 'dart:developer';
 
-import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
-import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,21 +18,35 @@ class MainProfileController extends GetxController {
   });
 
   @override
-  void onInit() {
-    //   getSetting();
+  void onInit() async {
+    await getNameAndAvatar();
     super.onInit();
+  }
+
+  Future<void> getNameAndAvatar() async {
+    UserSetting? storedUserSetting =
+        await SharedStorage.getUserSettingFromPrefs();
+    if (storedUserSetting != null) {
+      name = storedUserSetting.name;
+      avatar = storedUserSetting.avatar;
+    } else {
+      return;
+    }
+    update(["name_and_avatar"]);
   }
 
   Future<void> logOut() async {
     try {
       isLoading = true;
       update(["LogOut"]);
-      log("logOut");
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
+      String? token = await SharedStorage.getToken();
 
       await settingRepo.logOut(token: token.toString());
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
+      await prefs.remove('user_setting');
+
       Get.offAllNamed("/login");
       isLoading = false;
 

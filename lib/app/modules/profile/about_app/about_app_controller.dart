@@ -16,20 +16,11 @@ class AboutAppController extends GetxController {
     Setting? storedSetting = await SharedStorage.getSettingFromPrefs();
 
     if (storedSetting != null) {
-      // Use storedSetting as needed
-
       text = storedSetting.dealingcaution;
 
       update(["AboutAppController"]);
-    } else {
-      // Setting is not found in SharedPreferences
-    }
+    } else {}
   }
 
-  // getTextAboutApp() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? aboutText = prefs.getString('aboutText');
-  //   text = aboutText!;
-  //   update(["AboutAppController"]);
-  // }
+ 
 }

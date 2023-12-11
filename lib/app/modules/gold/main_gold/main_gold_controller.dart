@@ -1,11 +1,10 @@
 import 'dart:developer';
 
-import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/mapper/ingot_company.dart';
 import 'package:black_market/app/core/model/alloy_coins_reponse.dart';
 import 'package:black_market/app/core/model/coins.dart';
 import 'package:black_market/app/core/model/gold.dart';
 import 'package:black_market/app/core/model/gold_company.dart';
-import 'package:black_market/app/core/mapper/ingot_company.dart';
 import 'package:black_market/app/core/model/ingots.dart';
 import 'package:black_market/app/core/repo/gold_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
@@ -161,24 +160,24 @@ class MainGoldController extends GetxController {
         if (company.companyId == companyID) {
           log("elements ${element.name}");
           filteredIngotsByCompany.add(IngotCompany(
-              id: element.id,
-              baseGoldItem: element.baseGoldItem,
-              icon: element.icon,
-              name: element.name,
-              karat: element.karat,
-              weight: element.weight,
-              updatedAt: element.updatedAt,
-              createdAt: element.createdAt,
-              companyId: company.companyId,
-              workManShip: company.workmanship,
-              tax: company.tax,
-              returnFees: company.returnFees,
-              totalPriceIncludingtaxAndWorkmanship: element.price!.sellPrice! +
-                  company.tax! +
-                  company.workmanship!,
-              sellPrice: element.price?.sellPrice,
-              difference: company.workmanship! - company.returnFees!,
-              buyPrice: element.price?.buyPrice));
+            id: element.id,
+            baseGoldItem: element.baseGoldItem,
+            icon: element.icon,
+            name: element.name,
+            karat: element.karat,
+            weight: element.weight,
+            updatedAt: element.updatedAt,
+            createdAt: element.createdAt,
+            companyId: company.companyId,
+            workManShip: company.workmanship,
+            tax: company.tax,
+            returnFees: company.returnFees,
+            totalPriceIncludingtaxAndWorkmanship:
+                element.price!.sellPrice! + company.tax! + company.workmanship!,
+            sellPrice: element.price?.sellPrice,
+            difference: company.workmanship! - company.returnFees!,
+            buyPrice: element.price?.buyPrice,
+          ));
         } else {
           continue;
         }
@@ -274,13 +273,11 @@ class MainGoldController extends GetxController {
       List<Gold> gold = await goldRepo.getGold();
 
       goldList.addAll(gold);
-      gold.forEach(
-        (element) {
-          if (element.karat.isNum) {
-            karatList.add("${element.karat}k");
-          }
-        },
-      );
+      for (var element in gold) {
+        if (element.karat.isNum) {
+          karatList.add("${element.karat}k");
+        }
+      }
 
       update(["goldCard", "goldDialog"]);
     } on ExceptionHandler catch (e) {
@@ -293,14 +290,14 @@ class MainGoldController extends GetxController {
   }
 
   void calculateTotalWorkmanship() {
-    goldList.forEach((element) {
+    for (var element in goldList) {
       if ("${element.karat}k" == selectedKarat) {
         totalWorkShip = num.parse(totalPaidAmountController.value.text) -
             (num.parse(totalgramsController.value.text) * element.price.price);
         log(totalWorkShip.toString());
         update(["goldDialog", "workshipContainer"]);
       }
-    });
+    }
   }
 
   void selectKarat(String karatValue) {

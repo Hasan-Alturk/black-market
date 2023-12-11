@@ -35,25 +35,33 @@ class MainProfileView extends GetView<MainProfileController> {
             SizedBox(
               height: 30.h,
             ),
-            CircleAvatar(
-              radius: 41.0.r,
-              child: Image.network("${BaseUrls.storageUrl}users/default.png"),
-            ),
-            SizedBox(height: 15.h),
             GetBuilder<MainProfileController>(
-                id: "name",
+                id: "name_and_avatar",
                 builder: (_) {
-                  return Text(
-                    controller.name,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: AppColors.yellowNormal,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  return Column(
+                    children: [
+                      controller.avatar == ""
+                          ? const SizedBox()
+                          : CircleAvatar(
+                              radius: 35.r,
+                              child: Image.network(
+                                BaseUrls.storageUrl + controller.avatar,
+                              ),
+                            ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        controller.name,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: AppColors.yellowNormal,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   );
                 }),
             SizedBox(
-              height: 100.h,
+              height: 80.h,
             ),
             CustomContainerProfile(
               text: AppStrings.shareTheApp,
