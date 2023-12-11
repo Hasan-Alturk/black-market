@@ -1,18 +1,18 @@
 class LatestCurrency {
-  late int id;
+  int? id;
   dynamic banner;
-  late final String icon;
-  late final String name;
-  late String code;
-  late int canBeMain;
-  late int sort;
-  late int showNetworkImage;
-  late String lastUpdate;
-  late dynamic createdAt;
-  late String updatedAt;
-  late List<LivePrice> livePrices;
-  late List<BlackMarketPrice> blackMarketPrices;
-  late List<BankPrice> bankPrices;
+  String? icon;
+  String? name;
+  String? code;
+  int? canBeMain;
+  int? sort;
+  int? showNetworkImage;
+  String? lastUpdate;
+  dynamic createdAt;
+  String? updatedAt;
+  List<LivePrice>? livePrices;
+  List<BlackMarketPrice>? blackMarketPrices;
+  List<BankPrice>? bankPrices;
 
   LatestCurrency({
     required this.id,
@@ -49,19 +49,19 @@ class LatestCurrency {
     if (json['live_prices'] != null) {
       livePrices = <LivePrice>[];
       json['live_prices'].forEach((v) {
-        livePrices.add(LivePrice.fromJson(v));
+        livePrices?.add(LivePrice.fromJson(v));
       });
     }
     if (json['black_market_prices'] != null) {
       blackMarketPrices = <BlackMarketPrice>[];
       json['black_market_prices'].forEach((v) {
-        blackMarketPrices.add(BlackMarketPrice.fromJson(v));
+        blackMarketPrices?.add(BlackMarketPrice.fromJson(v));
       });
     }
     if (json['bank_prices'] != null) {
       bankPrices = <BankPrice>[];
       json['bank_prices'].forEach((v) {
-        bankPrices.add(BankPrice.fromJson(v));
+        bankPrices?.add(BankPrice.fromJson(v));
       });
     }
   }
@@ -79,15 +79,15 @@ class LatestCurrency {
     data['last_update'] = lastUpdate;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    if (livePrices.isNotEmpty) {
-      data['live_prices'] = livePrices.map((v) => v.toJson()).toList();
+    if (livePrices!.isNotEmpty) {
+      data['live_prices'] = livePrices?.map((v) => v.toJson()).toList();
     }
-    if (blackMarketPrices.isNotEmpty) {
+    if (blackMarketPrices!.isNotEmpty) {
       data['black_market_prices'] =
-          blackMarketPrices.map((v) => v.toJson()).toList();
+          blackMarketPrices?.map((v) => v.toJson()).toList();
     }
-    if (bankPrices.isNotEmpty) {
-      data['bank_prices'] = bankPrices.map((v) => v.toJson()).toList();
+    if (bankPrices!.isNotEmpty) {
+      data['bank_prices'] = bankPrices?.map((v) => v.toJson()).toList();
     }
     return data;
   }

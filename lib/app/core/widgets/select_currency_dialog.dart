@@ -50,7 +50,7 @@ class SelectCurrencyDialog extends StatelessWidget {
                   //  controller.latestCurrencyList[index].name
                   //     .toString(),
                   currenyImage: currencyList == null
-                      ? latestCurrencyList![index].icon
+                      ? latestCurrencyList![index].icon!
                       : currencyList![index].currencyIcon,
                   // controller.latestCurrencyList[index].icon
                   //     .toString(),

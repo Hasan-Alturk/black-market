@@ -36,7 +36,7 @@ class PreferredOfCurrenciesController extends GetxController {
       List<LatestCurrency> currencies = await settingRepo.getLatestCurrencies();
       currenciesList.addAll(currencies);
       for (var element in currenciesList) {
-        log(element.name);
+        log(element.name!);
       }
       update(["currency"]);
     } on ExceptionHandler catch (e) {

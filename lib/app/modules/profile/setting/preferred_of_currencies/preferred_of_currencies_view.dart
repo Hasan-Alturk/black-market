@@ -91,8 +91,8 @@ class PreferredOfCurrenciesView
                             key: ValueKey(latestCurrency),
                             padding: const EdgeInsets.all(5.0),
                             child: CustomContainerDrag(
-                              text: latestCurrency.name,
-                              stringImage: latestCurrency.icon,
+                              text: latestCurrency.name!,
+                              stringImage: latestCurrency.icon!,
                               stringIcon: AppAssetIcons.drag,
                             ),
                           ),

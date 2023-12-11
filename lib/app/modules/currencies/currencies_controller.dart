@@ -6,14 +6,9 @@ import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
-import 'package:black_market/app/core/repo/bank_repo.dart';
-import 'package:black_market/app/core/repo/currency_repo.dart';
-import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
-  final BankRepo bankRepo;
-  final CurrencyRepo currencyRepo;
   int selectedCurrencyId = 19;
   String name = "";
   String avatar = "";
@@ -27,9 +22,8 @@ class CurrenciesController extends GetxController {
   List<CurrencyInBank> currencyInBankList = [];
   List<CurrencyInBank> bankData = [];
 
-  CurrenciesController({required this.currencyRepo, required this.bankRepo});
   void goToBankDetails(int bankId) {
-    Get.toNamed("/bank_details", arguments: bankId);
+    Get.toNamed("/bank_details", arguments: [bankId,selectedCurrencyId]);
   }
 
   void goToNotification() {
@@ -37,14 +31,33 @@ class CurrenciesController extends GetxController {
   }
 
   @override
-  void onInit() async {
-    super.onInit();
-    getBanks();
-    getLatestCurreny().then((value) {
+  void onInit() {
+    getBanksFromPrefs();
+    getLatestCurrenciesFromPrefs().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);
       getCurrencyInBank(19);
     });
-    await getNameAndAvatar();
+    getNameAndAvatar();
+    super.onInit();
+  }
+
+  Future<void> getBanksFromPrefs() async {
+    var banks = await SharedStorage.getBanks();
+    if (banks.isNotEmpty) {
+      bankList.addAll(banks);
+    } else {
+      return;
+    }
+    update(["bankList"]);
+  }
+
+  Future<void> getLatestCurrenciesFromPrefs() async {
+    var currencies = await SharedStorage.getCurrencies();
+    if (currencies.isNotEmpty) {
+      latestCurrencyList.addAll(currencies);
+    } else {
+      return;
+    }
   }
 
   Future<void> getNameAndAvatar() async {
@@ -62,26 +75,28 @@ class CurrenciesController extends GetxController {
   void currenyAccordingToBankInfo(int currencyId) {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
-      for (var bank in element.bankPrices) {
-        for (var b in bankList) {
-          if (bank.currencyId == currencyId && b.id == bank.bankId) {
-            log("elements ${element.name}");
-            currencyInBankList.add(CurrencyInBank(
-                currencyId: currencyId,
-                currencyIcon: element.icon.toString(),
-                currencyName: element.name.toString(),
-                currencyCode: element.code.toString(),
-                bankId: bank.bankId,
-                bankIcon: b.icon.toString(),
-                bankName: b.name.toString(),
-                sellPrice: bank.sellPrice,
-                buyPrice: bank.buyPrice,
-                lastUpdate: element.lastUpdate,
-                blackMarketBuyPrice: element.blackMarketPrices.last.buyPrice,
-                createdAt: element.createdAt.toString(),
-                updatedAt: element.updatedAt.toString()));
-          } else {
-            continue;
+      if (element.bankPrices != null) {
+        for (var bank in element.bankPrices!) {
+          for (var b in bankList) {
+            if (bank.currencyId == currencyId && b.id == bank.bankId) {
+              log("elements ${element.name}");
+              currencyInBankList.add(CurrencyInBank(
+                  currencyId: currencyId,
+                  currencyIcon: element.icon.toString(),
+                  currencyName: element.name.toString(),
+                  currencyCode: element.code.toString(),
+                  bankId: bank.bankId,
+                  bankIcon: b.icon.toString(),
+                  bankName: b.name.toString(),
+                  sellPrice: bank.sellPrice,
+                  buyPrice: bank.buyPrice,
+                  lastUpdate: element.lastUpdate.toString(),
+                  blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
+                  createdAt: element.createdAt.toString(),
+                  updatedAt: element.updatedAt.toString()));
+            } else {
+              continue;
+            }
           }
         }
       }
@@ -96,52 +111,19 @@ class CurrenciesController extends GetxController {
     update(["bankList", "currencies", "currencyList"]);
   }
 
-  Future<void> getBanks() async {
-    try {
-      error = null;
-      update(["bankList"]);
-      List<Bank> banks = await bankRepo.getBanks();
-      bankList.addAll(banks);
-
-      update(["bankList"]);
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-      error = e.error;
-      log(error!);
-    }
-  }
-
-  Future<void> getLatestCurreny() async {
-    try {
-      error = null;
-      update([""]);
-      List<LatestCurrency> latestCurrencies =
-          await currencyRepo.getLatestCurrencies();
-      latestCurrencyList.addAll(latestCurrencies);
-      for (var element in latestCurrencyList) {
-        log(element.name.toString() + element.icon.toString());
-      }
-      update([""]);
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-      error = e.error;
-      log(error!);
-    }
-  }
-
   void getCurrencyInBank(int currencyId) {
     currency.clear();
     for (var b in latestCurrencyList) {
       if (b.id == currencyId) {
         currency.add(CurrencyInHome(
             currencyId: currencyId,
-            currencyName: b.name,
-            currencyIcon: b.icon,
-            currencyCode: b.code,
-            livePrice: b.livePrices.last.price,
-            blackMarketBuyPrice: b.blackMarketPrices.last.buyPrice,
+            currencyName: b.name.toString(),
+            currencyIcon: b.icon.toString(),
+            currencyCode: b.code.toString(),
+            livePrice: b.livePrices!.last.price,
+            blackMarketBuyPrice: b.blackMarketPrices!.last.buyPrice,
             lastUpdate: DateTime.now()
-                .difference(DateTime.parse(b.lastUpdate))
+                .difference(DateTime.parse(b.lastUpdate!))
                 .inMinutes));
       }
       getAverage(currencyId);
@@ -156,23 +138,23 @@ class CurrenciesController extends GetxController {
   void getAverage(int currencyId) {
     for (var e in latestCurrencyList) {
       if (e.id == currencyId) {
-        avgBuyPrice = e.bankPrices.fold(
+        avgBuyPrice = e.bankPrices!.fold(
             0.0,
             (previousValue, element) =>
-                previousValue + element.buyPrice / e.bankPrices.length);
-        avgSellPrice = e.bankPrices.fold(
+                previousValue + element.buyPrice / e.bankPrices!.length);
+        avgSellPrice = e.bankPrices!.fold(
             0.0,
             (previousValue, element) =>
-                previousValue + element.sellPrice / e.bankPrices.length);
+                previousValue + element.sellPrice / e.bankPrices!.length);
         update(["averageContainer"]);
-        log("Average = ${avgBuyPrice / e.bankPrices.length}");
+        log("Average = ${avgBuyPrice / e.bankPrices!.length}");
       }
     }
   }
 
   void getBankData(int bankId) {
     for (var element in latestCurrencyList) {
-      var x = element.bankPrices.where((value) =>
+      var x = element.bankPrices!.where((value) =>
           DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
               Duration.zero &&
           DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
@@ -181,18 +163,18 @@ class CurrenciesController extends GetxController {
         if (p.bankId == bankId) {
           var bank = bankList.where((w) => w.id == bankId);
           bankData.add(CurrencyInBank(
-              currencyId: element.id,
-              currencyIcon: element.icon,
-              currencyName: element.name,
-              currencyCode: element.code,
+              currencyId: element.id!.toInt(),
+              currencyIcon: element.icon.toString(),
+              currencyName: element.name.toString(),
+              currencyCode: element.code.toString(),
               bankId: bankId,
               bankIcon: bank.first.icon!,
               bankName: bank.first.name!,
               sellPrice: p.sellPrice,
               buyPrice: p.buyPrice,
               createdAt: p.createdAt,
-              lastUpdate: element.lastUpdate,
-              blackMarketBuyPrice: element.blackMarketPrices.last.buyPrice,
+              lastUpdate: element.lastUpdate.toString(),
+              blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
               updatedAt: p.updatedAt));
           log("Eman...${element.name} ${bank.first.name} : ${p.bankId} :${p.sellPrice}  ${p.createdAt.toString()}");
         }

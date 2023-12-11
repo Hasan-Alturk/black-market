@@ -10,7 +10,7 @@ class CurrencyInBank {
   late num buyPrice;
   late String createdAt;
   late String updatedAt;
-  late num blackMarketBuyPrice;
+  late dynamic blackMarketBuyPrice;
   late String lastUpdate;
 
   CurrencyInBank(

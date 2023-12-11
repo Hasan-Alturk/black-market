@@ -515,7 +515,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                   ),
                   Text(
                     controller.bankData.isNotEmpty
-                        ? controller.latestCurrencyList[0].code.toUpperCase()
+                        ? controller.latestCurrencyList[0].code!.toUpperCase()
                         : "",
                     style: TextStyle(
                         color: AppColors.gray,
@@ -528,7 +528,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                   controller.latestCurrencyList.isNotEmpty
                       ? Image.network(
                           BaseUrls.storageUrl +
-                              controller.latestCurrencyList[0].icon,
+                              controller.latestCurrencyList[0].icon.toString(),
                           height: 15,
                           width: 15,
                         )
@@ -726,9 +726,9 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 padding: const EdgeInsets.all(5),
                 child: Text(
                   controller.amountController.value.text.isNotEmpty
-                      ? " ${num.parse(controller.amountController.value.text)} ${controller.latestCurrencyList.first.name.split('/').first}"
+                      ? " ${num.parse(controller.amountController.value.text)} ${controller.latestCurrencyList.first.name!.split('/').first}"
                       : controller.latestCurrencyList.isNotEmpty
-                          ? "1 ${controller.latestCurrencyList.first.name.split('/').first}"
+                          ? "1 ${controller.latestCurrencyList.first.name!.split('/').first}"
                           : "",
                   textAlign: TextAlign.center,
                   style: TextStyle(

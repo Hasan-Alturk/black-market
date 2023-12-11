@@ -1,10 +1,26 @@
 import 'dart:convert';
 
+import 'package:black_market/app/core/model/bank.dart';
+import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/setting.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedStorage {
+// Save Token and remember me
+  static Future<void> saveTokenAndRememberMe(
+      String token, bool rememberMe) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('token', token);
+    prefs.setBool('rememberMe', rememberMe);
+  }
+
+  // get Token and remember me
+  static Future<String?> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    return token;
+  }
   // Save UserSetting in SharedPreferences
 
   static Future<void> saveUserSetting(UserSetting userSetting) async {
@@ -42,5 +58,47 @@ class SharedStorage {
     }
 
     return null;
+  }
+
+  // Save Bank List in SharedPreferences
+
+  static Future<void> saveBanks(List<Bank> banks) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> banksJsonList =
+        banks.map((bank) => jsonEncode(bank.toJson())).toList();
+    await prefs.setStringList("banks", banksJsonList);
+  }
+  // Retrieve Bank List from SharedPreferences
+
+  static Future<List<Bank>> getBanks() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? banksJsonList = prefs.getStringList("banks");
+    if (banksJsonList == null) {
+      return [];
+    }
+    return banksJsonList
+        .map((jsonString) => Bank.fromJson(jsonDecode(jsonString)))
+        .toList();
+  }
+
+  // Save Currency List in SharedPreferences
+
+  static Future<void> saveCurrencies(List<LatestCurrency> currencies) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> currenciesJsonList =
+        currencies.map((currency) => jsonEncode(currency.toJson())).toList();
+    await prefs.setStringList("currencies", currenciesJsonList);
+  }
+  // Retrieve Currency List from SharedPreferences
+
+  static Future<List<LatestCurrency>> getCurrencies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? currenciesJsonList = prefs.getStringList("currencies");
+    if (currenciesJsonList == null) {
+      return [];
+    }
+    return currenciesJsonList
+        .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))
+        .toList();
   }
 }

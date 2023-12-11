@@ -33,7 +33,7 @@ class MainProfileController extends GetxController {
       String? token = prefs.getString('token');
 
       await settingRepo.logOut(token: token.toString());
-      await prefs.clear();
+      await prefs.remove('token');
       Get.offAllNamed("/login");
       isLoading = false;
 
