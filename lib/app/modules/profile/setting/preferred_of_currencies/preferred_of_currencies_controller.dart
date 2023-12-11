@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
@@ -25,6 +27,14 @@ class PreferredOfCurrenciesController extends GetxController {
     final LatestCurrency tile = latestCurrencyList.removeAt(oldIndex);
     // place the tile in the new position
     latestCurrencyList.insert(newIndex, tile);
+    for (var element in latestCurrencyList) {
+      element.sort = newIndex;
+    }
+
+    for (var element in latestCurrencyList) {
+      log("${element.sort}updateMyTiles");
+    }
+    log("${latestCurrencyList.length}updateMyTiles");
     update(["currency"]);
   }
 
@@ -35,6 +45,11 @@ class PreferredOfCurrenciesController extends GetxController {
     } else {
       return;
     }
+    for (var element in latestCurrencyList) {
+      log("${element.sort}getLatestCurrenciesFromPrefs");
+    }
+    log("${latestCurrencyList.length}getLatestCurrenciesFromPrefs");
+
     update(["currency"]);
   }
 }
