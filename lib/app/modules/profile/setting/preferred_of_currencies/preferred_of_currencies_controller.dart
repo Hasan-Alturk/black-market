@@ -1,20 +1,18 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/model/latest_currency.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
-import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class PreferredOfCurrenciesController extends GetxController {
   PreferredOfCurrenciesController({required this.settingRepo});
   bool isLoading = false;
   final SettingRepo settingRepo;
-  List<LatestCurrency> currenciesList = [];
+  List<LatestCurrency> latestCurrencyList = [];
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    getCurrency();
+    await getLatestCurrenciesFromPrefs();
   }
 
   void updateMyTiles(int oldIndex, int newIndex) {
@@ -24,25 +22,19 @@ class PreferredOfCurrenciesController extends GetxController {
     }
 
     // get the tile we are moving
-    final LatestCurrency tile = currenciesList.removeAt(oldIndex);
+    final LatestCurrency tile = latestCurrencyList.removeAt(oldIndex);
     // place the tile in the new position
-    currenciesList.insert(newIndex, tile);
+    latestCurrencyList.insert(newIndex, tile);
     update(["currency"]);
   }
 
-  Future<void> getCurrency() async {
-    try {
-      update(["currency"]);
-      List<LatestCurrency> currencies = await settingRepo.getLatestCurrencies();
-      currenciesList.addAll(currencies);
-      for (var element in currenciesList) {
-        log(element.name!);
-      }
-      update(["currency"]);
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-      log(e.error);
-      throw ExceptionHandler("Unknown error");
+  Future<void> getLatestCurrenciesFromPrefs() async {
+    var currencies = await SharedStorage.getCurrencies();
+    if (currencies.isNotEmpty) {
+      latestCurrencyList.addAll(currencies);
+    } else {
+      return;
     }
+    update(["currency"]);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +35,7 @@ class CustomContainerDrag extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: AppColors.whiteLight,
-                  fontSize: 14 * context.textScale,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                 ),
               ),

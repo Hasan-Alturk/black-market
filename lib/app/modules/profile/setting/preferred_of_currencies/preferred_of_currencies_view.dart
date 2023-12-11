@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_drag.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
@@ -24,7 +24,7 @@ class PreferredOfCurrenciesView
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(context.screenWidth * 0.03),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -32,7 +32,7 @@ class PreferredOfCurrenciesView
                 height: 20.h,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                padding: const EdgeInsets.all(12),
                 height: 80.h,
                 width: 340.w,
                 decoration: BoxDecoration(
@@ -67,12 +67,12 @@ class PreferredOfCurrenciesView
                 ),
               ),
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 25.h,
               ),
               Text(
                 AppStrings.dragCurrency,
                 style: TextStyle(
-                  fontSize: 16 * context.textScale,
+                  fontSize: 16.sp,
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
                 ),
@@ -86,7 +86,8 @@ class PreferredOfCurrenciesView
                   builder: (_) {
                     return ReorderableListView(
                       children: [
-                        for (final latestCurrency in controller.currenciesList)
+                        for (final latestCurrency
+                            in controller.latestCurrencyList)
                           Padding(
                             key: ValueKey(latestCurrency),
                             padding: const EdgeInsets.all(5.0),
@@ -111,12 +112,15 @@ class PreferredOfCurrenciesView
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
         child: StateButton(
-            isLoading: controller.isLoading,
-            text: AppStrings.change,
-            onPressed: () {},
-            buttonColor: AppColors.yellowNormal,
-            radius: 14.r,
-            textColor: AppColors.blackDark),
+          isLoading: controller.isLoading,
+          text: AppStrings.change,
+          onPressed: () {
+            SharedStorage.saveCurrencies(controller.latestCurrencyList);
+          },
+          buttonColor: AppColors.yellowNormal,
+          radius: 14.r,
+          textColor: AppColors.blackDark,
+        ),
       ),
     );
   }

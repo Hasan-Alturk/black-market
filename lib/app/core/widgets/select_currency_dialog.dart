@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SelectCurrencyDialog extends StatelessWidget {
-  const SelectCurrencyDialog(
-      {this.currencyList,
-      this.latestCurrencyList,
-      required this.onTap,
-      super.key});
+  const SelectCurrencyDialog({
+    this.currencyList,
+    this.latestCurrencyList,
+    required this.onTap,
+    super.key,
+  });
   final Function(int currencyId) onTap;
   final List<LatestCurrency>? latestCurrencyList;
   final List<CurrencyInBank>? currencyList;
