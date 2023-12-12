@@ -79,16 +79,25 @@ class LatestCurrency {
     data['last_update'] = lastUpdate;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    if (livePrices!.isNotEmpty) {
-      data['live_prices'] = livePrices?.map((v) => v.toJson()).toList();
+    if (livePrices != null) {
+      if (livePrices!.isNotEmpty) {
+        data['live_prices'] = livePrices?.map((v) => v.toJson()).toList();
+      }
     }
-    if (blackMarketPrices!.isNotEmpty) {
-      data['black_market_prices'] =
-          blackMarketPrices?.map((v) => v.toJson()).toList();
+
+    if (blackMarketPrices != null) {
+      if (blackMarketPrices!.isNotEmpty) {
+        data['black_market_prices'] =
+            blackMarketPrices?.map((v) => v.toJson()).toList();
+      }
     }
-    if (bankPrices!.isNotEmpty) {
-      data['bank_prices'] = bankPrices?.map((v) => v.toJson()).toList();
+
+    if (bankPrices != null) {
+      if (bankPrices!.isNotEmpty) {
+        data['bank_prices'] = bankPrices?.map((v) => v.toJson()).toList();
+      }
     }
+
     return data;
   }
 }

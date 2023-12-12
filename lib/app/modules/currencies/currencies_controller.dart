@@ -35,7 +35,7 @@ class CurrenciesController extends GetxController {
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);
-      getCurrencyInBank(19);
+      getCurrencyInBank(selectedCurrencyId);
     });
     getNameAndAvatar();
     super.onInit();
