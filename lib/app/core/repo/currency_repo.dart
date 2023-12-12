@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/historical_currency.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
@@ -18,6 +19,27 @@ class CurrencyRepo {
           LatestCurrency.latestCurrencyList(response.data);
 
       return latestCurrencyList;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Currency List not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<HistoricalCurrency> getHistoricalCurrencies() async {
+    try {
+      var response = await dio.get("$baseUrl/currencies/historical");
+      log("response ${response.data}");
+      HistoricalCurrency historicalCurrency =
+          HistoricalCurrency.fromJson(response.data);
+      log("historicalCurrency ${historicalCurrency.livePrices?.livePrices?.values.last}");
+
+      return historicalCurrency;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {
