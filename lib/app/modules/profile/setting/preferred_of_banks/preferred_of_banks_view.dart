@@ -112,8 +112,11 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
         child: StateButton(
             isLoading: controller.isLoading,
             text: AppStrings.change,
-            onPressed: () {},
+            onPressed: () {
+              controller.saveNewBanks(controller.bankList);
+            },
             buttonColor: AppColors.yellowNormal,
+            
             radius: 14.r,
             textColor: AppColors.blackDark),
       ),

@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/model/bank.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
-import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class PreferredOfBanksController extends GetxController {
@@ -16,7 +14,7 @@ class PreferredOfBanksController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getBanks();
+    getBanksFromPrefs();
   }
 
   void updateMyTiles(int oldIndex, int newIndex) {
@@ -32,24 +30,18 @@ class PreferredOfBanksController extends GetxController {
     update(["bankList"]);
   }
 
-  Future<void> getBanks() async {
-    try {
-      error = null;
-      update(["bankList"]);
-      List<Bank> banks = await settingRepo.getBanks();
+  Future<void> getBanksFromPrefs() async {
+    var banks = await SharedStorage.getBanks();
+    if (banks.isNotEmpty) {
       bankList.addAll(banks);
-      update(["bankList"]);
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
-      error = e.error;
-      log(error!);
+    } else {
+      return;
     }
+    update(["bankList"]);
   }
 
-  //   void goToMainProfile() {
-  //   Get.offNamed("/main_profile");
-  // }
-
-  ///storage.saveUser(user);
-  // Get.to(Home());
+  Future<void> saveNewBanks(List<Bank> banks) async {
+    SharedStorage.saveBanks(banks);
+    update(["bankList"]);
+  }
 }
