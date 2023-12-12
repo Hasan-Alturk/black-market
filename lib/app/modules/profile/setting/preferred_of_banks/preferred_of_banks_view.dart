@@ -109,16 +109,20 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
-        child: StateButton(
-            isLoading: controller.isLoading,
-            text: AppStrings.change,
-            onPressed: () {
-              controller.saveNewBanks(controller.bankList);
-            },
-            buttonColor: AppColors.yellowNormal,
-            
-            radius: 14.r,
-            textColor: AppColors.blackDark),
+        child: GetBuilder<PreferredOfBanksController>(
+            id: "saveNewBanks",
+            builder: (_) {
+              return StateButton(
+                isLoading: controller.isLoading,
+                text: AppStrings.change,
+                onPressed: () {
+                  controller.saveNewBanks(controller.bankList);
+                },
+                buttonColor: AppColors.yellowNormal,
+                radius: 14.r,
+                textColor: AppColors.blackDark,
+              );
+            }),
       ),
     );
   }

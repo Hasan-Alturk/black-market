@@ -41,7 +41,11 @@ class PreferredOfBanksController extends GetxController {
   }
 
   Future<void> saveNewBanks(List<Bank> banks) async {
-    SharedStorage.saveBanks(banks);
-    update(["bankList"]);
+    isLoading = true;
+    update(["saveNewBanks"]);
+    await Future.delayed(const Duration(seconds: 1));
+    await SharedStorage.saveBanks(banks);
+    isLoading = false;
+    update(["saveNewBanks"]);
   }
 }

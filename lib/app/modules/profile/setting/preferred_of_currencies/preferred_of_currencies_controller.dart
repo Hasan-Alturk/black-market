@@ -46,10 +46,21 @@ class PreferredOfCurrenciesController extends GetxController {
       return;
     }
     for (var element in latestCurrencyList) {
-      log("${element.sort}getLatestCurrenciesFromPrefs");
+      log("${element.sort}Prefs");
     }
-    log("${latestCurrencyList.length}getLatestCurrenciesFromPrefs");
+    log("${latestCurrencyList.length}Prefs");
 
     update(["currency"]);
+  }
+
+  Future<void> saveNewCurrencies(List<LatestCurrency> currencies) async {
+    isLoading = true;
+    update(["saveNewCurrencies"]);
+    await Future.delayed(const Duration(seconds: 1));
+    await SharedStorage.saveCurrencies(currencies);
+    isLoading = false;
+
+    update(["saveNewCurrencies"]);
+    // isLoading = false;
   }
 }
