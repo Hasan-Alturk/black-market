@@ -1,7 +1,6 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_drag.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
@@ -111,16 +110,20 @@ class PreferredOfCurrenciesView
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
-        child: StateButton(
-          isLoading: controller.isLoading,
-          text: AppStrings.change,
-          onPressed: () {
-            SharedStorage.saveCurrencies(controller.latestCurrencyList);
-          },
-          buttonColor: AppColors.yellowNormal,
-          radius: 14.r,
-          textColor: AppColors.blackDark,
-        ),
+        child: GetBuilder<PreferredOfCurrenciesController>(
+            id: "saveNewCurrencies",
+            builder: (_) {
+              return StateButton(
+                isLoading: controller.isLoading,
+                text: AppStrings.change,
+                onPressed: () {
+                  controller.saveNewCurrencies(controller.latestCurrencyList);
+                },
+                buttonColor: AppColors.yellowNormal,
+                radius: 14.r,
+                textColor: AppColors.blackDark,
+              );
+            }),
       ),
     );
   }

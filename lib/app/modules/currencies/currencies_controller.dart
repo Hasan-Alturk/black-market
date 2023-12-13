@@ -52,12 +52,15 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
+    latestCurrencyList.clear();
+
     var currencies = await SharedStorage.getCurrencies();
     if (currencies.isNotEmpty) {
       latestCurrencyList.addAll(currencies);
     } else {
       return;
     }
+    log("message");
   }
 
   Future<void> getNameAndAvatar() async {

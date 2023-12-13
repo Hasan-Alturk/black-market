@@ -101,4 +101,27 @@ class SharedStorage {
         .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))
         .toList();
   }
+
+  // Save CurrencySorted List in SharedPreferences
+
+  static Future<void> saveCurrenciesSorted(
+      List<LatestCurrency> currencies) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> currenciesJsonList =
+        currencies.map((currency) => jsonEncode(currency.toJson())).toList();
+    await prefs.setStringList("currencies_sorted", currenciesJsonList);
+  }
+
+  // Retrieve CurrencySorted List from SharedPreferences
+
+  static Future<List<LatestCurrency>> getCurrenciesSorted() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? currenciesJsonList = prefs.getStringList("currencies_sorted");
+    if (currenciesJsonList == null) {
+      return [];
+    }
+    return currenciesJsonList
+        .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))
+        .toList();
+  }
 }
