@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/mapper/currency_in_home.dart';
 import 'package:black_market/app/core/model/bank.dart';
+import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
+import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
+import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
@@ -26,6 +29,38 @@ class CurrenciesController extends GetxController {
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> currencyInBankList = [];
   List<CurrencyInBank> bankData = [];
+  List<HistoricalCurrencyLivePrices> historicallatestCurrencyLiveList = [];
+  List<HistoricalCurrencyBlackPrices> historicallatestCurrencyBlackList = [];
+
+  Future<void> getHistoricalCurrencyLivePrices() async {
+    try {
+      HistoricalCurrencyLivePrices currencyList =
+          await currencyRepo.getHistoricalCurrenciesLivePrices(
+        startDate: '2023-09-06',
+        currencyId: 5,
+        type: "live",
+      );
+
+      log(currencyList.livePrices.toString());
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
+
+  Future<void> getHistoricalCurrencyBlackPrices() async {
+    try {
+      HistoricalCurrencyBlackPrices currencyList =
+          await currencyRepo.getHistoricalCurrencyBlackPrices(
+        startDate: '2023-09-06',
+        currencyId: 15,
+        type: "black",
+      );
+
+      log(currencyList.blackMarketPrices.toString());
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
 
   void goToBankDetails(int bankId) {
     Get.toNamed("/bank_details", arguments: [bankId, selectedCurrencyId]);
@@ -37,6 +72,8 @@ class CurrenciesController extends GetxController {
 
   @override
   void onInit() {
+    getHistoricalCurrencyLivePrices();
+    getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);

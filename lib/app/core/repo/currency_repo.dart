@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:black_market/app/core/model/historical_currency.dart';
+import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
+import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
@@ -31,10 +32,10 @@ class CurrencyRepo {
     }
   }
 
-  Future<HistoricalCurrency> getHistoricalCurrencies({
-    required String startDate,
-    required int currencyId,
-    required String type,
+  Future<HistoricalCurrencyLivePrices> getHistoricalCurrenciesLivePrices({
+    String? startDate,
+    int? currencyId,
+    String? type,
   }) async {
     try {
       Map<String, dynamic> queryParameters = {
@@ -46,11 +47,41 @@ class CurrencyRepo {
         "$baseUrl/currencies/historical",
         queryParameters: queryParameters,
       );
-      HistoricalCurrency historicalCurrency =
-          HistoricalCurrency.fromJson(response.data);
-      log("response ${historicalCurrency.blackMarketPrices}");
+      HistoricalCurrencyLivePrices historicalCurrencyLivePrices =
+          HistoricalCurrencyLivePrices.fromJson(response.data);
 
-      return historicalCurrency;
+      return historicalCurrencyLivePrices;
+    } on DioException catch (e) {
+      log(e.response!.statusCode.toString());
+      if (e.response != null) {
+        if (e.response!.statusCode == 404) {
+          throw ExceptionHandler("Currency List not found");
+        }
+      }
+
+      throw ExceptionHandler("Unknown error");
+    }
+  }
+
+  Future<HistoricalCurrencyBlackPrices> getHistoricalCurrencyBlackPrices({
+    String? startDate,
+    int? currencyId,
+    String? type,
+  }) async {
+    try {
+      Map<String, dynamic> queryParameters = {
+        'start_date': startDate,
+        "currency_id": currencyId,
+        "type": type,
+      };
+      Response response = await dio.get(
+        "$baseUrl/currencies/historical",
+        queryParameters: queryParameters,
+      );
+      HistoricalCurrencyBlackPrices historicalCurrencyBlackPrices =
+          HistoricalCurrencyBlackPrices.fromJson(response.data);
+
+      return historicalCurrencyBlackPrices;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());
       if (e.response != null) {
