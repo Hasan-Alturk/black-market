@@ -47,7 +47,7 @@ class SplashController extends GetxController {
   Future<void> checkToken() async {
     await getSetting();
     await getBanks();
-    await getLatestCurrency();
+    await getLatestCurrency().then((value) => getLatestCurrencySorted());
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -91,7 +91,7 @@ class SplashController extends GetxController {
   Future<void> getBanks() async {
     try {
       List<Bank> banks = await bankRepo.getBanks();
-      SharedStorage.saveBanks(banks);
+      await SharedStorage.saveBanks(banks);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
@@ -101,7 +101,25 @@ class SplashController extends GetxController {
     try {
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
-      SharedStorage.saveCurrencies(latestCurrencies);
+      await SharedStorage.saveCurrencies(latestCurrencies);
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
+
+  Future<void> getLatestCurrencySorted() async {
+    try {
+      List<LatestCurrency> latestCurrencies =
+          await SharedStorage.getCurrencies();
+      List<LatestCurrency> latestCurrenciesSorted =
+          await SharedStorage.getCurrenciesSorted();
+      for (var element1 in latestCurrencies) {
+        for (var element2 in latestCurrenciesSorted) {
+          if (element1.sort != element2.sort) {
+            element1.sort = element2.sort;
+          }
+        }
+      }
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }

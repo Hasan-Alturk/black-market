@@ -27,19 +27,18 @@ class PreferredOfCurrenciesController extends GetxController {
     final LatestCurrency tile = latestCurrencyList.removeAt(oldIndex);
     // place the tile in the new position
     latestCurrencyList.insert(newIndex, tile);
-    for (var element in latestCurrencyList) {
-      element.sort = newIndex;
+    for (int i = 0; i < latestCurrencyList.length; i++) {
+      latestCurrencyList[i].sort = i;
     }
 
     for (var element in latestCurrencyList) {
       log("${element.sort}updateMyTiles");
     }
-    log("${latestCurrencyList.length}updateMyTiles");
     update(["currency"]);
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
-    var currencies = await SharedStorage.getCurrencies();
+    var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
       latestCurrencyList.addAll(currencies);
     } else {
@@ -48,7 +47,6 @@ class PreferredOfCurrenciesController extends GetxController {
     for (var element in latestCurrencyList) {
       log("${element.sort}Prefs");
     }
-    log("${latestCurrencyList.length}Prefs");
 
     update(["currency"]);
   }
@@ -57,7 +55,7 @@ class PreferredOfCurrenciesController extends GetxController {
     isLoading = true;
     update(["saveNewCurrencies"]);
     await Future.delayed(const Duration(seconds: 1));
-    await SharedStorage.saveCurrencies(currencies);
+    await SharedStorage.saveCurrenciesSorted(currencies);
     isLoading = false;
 
     update(["saveNewCurrencies"]);

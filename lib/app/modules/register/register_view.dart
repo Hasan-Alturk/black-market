@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
@@ -143,9 +142,7 @@ class RegisterView extends GetView<RegisterController> {
                     return Center(
                       child: Text(
                         controller.error ?? "",
-                        style: TextStyle(
-                            color: AppColors.red,
-                            fontSize: 16 * context.textScale),
+                        style: TextStyle(color: AppColors.red, fontSize: 16.sp),
                       ),
                     );
                   },
