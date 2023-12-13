@@ -16,8 +16,6 @@ class HistoricalCurrencyLivePrices {
     );
   }
 
-    // static List<LatestCurrency> latestCurrencyList(List data) =>
-    //   data.map((currency) => LatestCurrency.fromJson(currency)).toList();
 
   Map<String, dynamic> toJson() => {
         "live_prices": Map.from(livePrices).map((k, v) =>
