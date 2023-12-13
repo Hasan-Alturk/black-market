@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:black_market/app/core/model/Html_article.dart';
+import 'package:black_market/app/core/model/html_article.dart';
 import 'package:black_market/app/core/repo/notification_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';

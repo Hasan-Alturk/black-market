@@ -1,6 +1,6 @@
+import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:black_market/app/core/constants/app_colors.dart';
 
 class LineChartSample2 extends StatefulWidget {
   const LineChartSample2({super.key});
@@ -22,37 +22,37 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1.5,
+          aspectRatio: 1.2,
           child: Padding(
             padding: const EdgeInsets.only(
               right: 18,
               left: 12,
-              top: 24,
-              bottom: 12,
+              top: 20,
+              bottom: 10,
             ),
             child: LineChart(
               showAvg ? avgData() : mainData(),
             ),
           ),
         ),
-        // SizedBox(
-        //   width: 60,
-        //   height: 34,
-        //   child: TextButton(
-        //     onPressed: () {
-        //       setState(() {
-        //         showAvg = !showAvg;
-        //       });
-        //     },
-        //     child: Text(
-        //       'avg',
-        //       style: TextStyle(
-        //         fontSize: 12,
-        //         color: showAvg ? Colors.white.withOpacity(0.5) : Colors.white,
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        SizedBox(
+          width: 60,
+          height: 34,
+          child: TextButton(
+            onPressed: () {
+              setState(() {
+                showAvg = !showAvg;
+              });
+            },
+            child: Text(
+              'avg',
+              style: TextStyle(
+                fontSize: 12,
+                color: showAvg ? Colors.white.withOpacity(0.5) : Colors.white,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -69,16 +69,16 @@ class _LineChartSample2State extends State<LineChartSample2> {
         text = Text('سبت', style: style);
         break;
       case 3:
-        text = Text('حد', style: style);
+        text = Text('أحد', style: style);
         break;
       case 5:
-        text = Text('اتنين', style: style);
+        text = Text('اثنين', style: style);
         break;
       case 7:
         text = Text('ثلاثاء', style: style);
         break;
       case 9:
-        text = Text('اربع', style: style);
+        text = Text('أربعاء', style: style);
         break;
       case 11:
         text = Text('خميس', style: style);
@@ -239,7 +239,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             interval: 1,
           ),
         ),
-        leftTitles: AxisTitles(
+        leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
             // getTitlesWidget: leftTitleWidgets,

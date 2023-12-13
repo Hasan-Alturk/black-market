@@ -28,7 +28,6 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     onStartSplash();
-    currencyRepo.getHistoricalCurrencies();
     super.onInit();
   }
 

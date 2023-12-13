@@ -13,7 +13,7 @@ class CurrencyRepo {
 
   Future<List<LatestCurrency>> getLatestCurrencies() async {
     try {
-      var response = await dio.get("$baseUrl/currencies/latest");
+      Response response = await dio.get("$baseUrl/currencies/latest");
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);
@@ -31,13 +31,24 @@ class CurrencyRepo {
     }
   }
 
-  Future<HistoricalCurrency> getHistoricalCurrencies() async {
+  Future<HistoricalCurrency> getHistoricalCurrencies({
+    required String startDate,
+    required int currencyId,
+    required String type,
+  }) async {
     try {
-      var response = await dio.get("$baseUrl/currencies/historical");
-      log("response ${response.data}");
+      Map<String, dynamic> queryParameters = {
+        'start_date': startDate,
+        "currency_id": currencyId,
+        "type": type,
+      };
+      Response response = await dio.get(
+        "$baseUrl/currencies/historical",
+        queryParameters: queryParameters,
+      );
       HistoricalCurrency historicalCurrency =
           HistoricalCurrency.fromJson(response.data);
-      log("historicalCurrency ${historicalCurrency.livePrices?.livePrices?.values.last}");
+      log("response ${historicalCurrency.blackMarketPrices}");
 
       return historicalCurrency;
     } on DioException catch (e) {

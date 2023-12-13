@@ -6,9 +6,14 @@ import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
+import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
+  CurrenciesController({required this.currencyRepo});
+
+  final CurrencyRepo currencyRepo;
+
   int selectedCurrencyId = 19;
   String name = "";
   String avatar = "";
