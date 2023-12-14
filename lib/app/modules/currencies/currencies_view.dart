@@ -214,33 +214,49 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            AppStrings.blackMarket,
-                                            style: TextStyle(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppColors.lightGrey),
-                                          ),
-                                          Text(
-                                            controller.currency.isNotEmpty
-                                                ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
-                                                : "",
-                                            style: TextStyle(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppColors.yellowDark),
-                                          )
-                                        ],
-                                      ),
-                                      Container(
-                                        height: context.screenHeight * 0.04,
-                                        width: 1,
-                                        color: AppColors.lighterGrey,
-                                      ),
+                                      if (controller.currency.isNotEmpty)
+                                        controller.currency.first
+                                                    .blackMarketBuyPrice !=
+                                                null
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    AppStrings.blackMarket,
+                                                    style: TextStyle(
+                                                        fontSize: 10.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: AppColors
+                                                            .lightGrey),
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                            .currency.isNotEmpty
+                                                        ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
+                                                        : "",
+                                                    style: TextStyle(
+                                                        fontSize: 10.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: AppColors
+                                                            .yellowDark),
+                                                  ),
+                                                ],
+                                              )
+                                            : const SizedBox.shrink(),
+                                      if (controller.currency.isNotEmpty)
+                                        controller.currency.first
+                                                    .blackMarketBuyPrice !=
+                                                null
+                                            ? Container(
+                                                height:
+                                                    context.screenHeight * 0.04,
+                                                width: 1,
+                                                color: AppColors.lighterGrey,
+                                              )
+                                            : const SizedBox.shrink(),
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,

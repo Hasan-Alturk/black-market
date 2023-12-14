@@ -26,7 +26,7 @@ class CurrencyInBank {
       required this.createdAt,
       required this.updatedAt,
       required this.lastUpdate,
-      required this.blackMarketBuyPrice});
+       this.blackMarketBuyPrice});
 
   // static List<CurrencyInBank> currencyInBankList(List data) => data
   //     .map((currencyInBank) => CurrencyInBank.fromJson(currencyInBank))
