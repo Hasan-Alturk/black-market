@@ -99,33 +99,39 @@ class CurrenciesController extends GetxController {
     getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
-      currenyAccordingToBankInfo(selectedCurrencyId);
-      getCurrencyInBank(selectedCurrencyId);
+      if (latestCurrencyList.isNotEmpty) {
+        selectedCurrencyId = latestCurrencyList[0].id!;
+        getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
+        getCurrencyInBank(latestCurrencyList[0].id!);
+        // update();
+      }
     });
     getNameAndAvatar();
     super.onInit();
   }
 
   Future<void> getBanksFromPrefs() async {
+    bankList.clear();
     var banks = await SharedStorage.getBanks();
     if (banks.isNotEmpty) {
+      bankList.clear();
       bankList.addAll(banks);
     } else {
       return;
     }
-    update(["bankList"]);
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     latestCurrencyList.clear();
-
-    var currencies = await SharedStorage.getCurrencies();
+    var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
+      latestCurrencyList.clear();
       latestCurrencyList.addAll(currencies);
     } else {
       return;
     }
     log("message");
+    update();
   }
 
   Future<void> getNameAndAvatar() async {
@@ -140,14 +146,16 @@ class CurrenciesController extends GetxController {
     update(["name_and_avatar"]);
   }
 
-  void currenyAccordingToBankInfo(int currencyId) {
+  void getBanksAccordingToSelectedCurrency(int currencyId) {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
+        outerLoop:
         for (var bank in element.bankPrices!) {
+          innerLoop:
           for (var b in bankList) {
             if (bank.currencyId == currencyId && b.id == bank.bankId) {
-              currencyInBankList.add(CurrencyInBank(
+              var c = CurrencyInBank(
                   currencyId: currencyId,
                   currencyIcon: element.icon.toString(),
                   currencyName: element.name.toString(),
@@ -160,15 +168,29 @@ class CurrenciesController extends GetxController {
                   lastUpdate: element.lastUpdate.toString(),
                   blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
                   createdAt: element.createdAt.toString(),
-                  updatedAt: element.updatedAt.toString()));
+                  updatedAt: element.updatedAt.toString());
+              if (!(currencyInBankList.contains(c))) {
+                currencyInBankList.add(c);
+              } else {
+                continue;
+              }
+              break innerLoop;
             } else {
-              continue;
+              continue ;
             }
           }
         }
       }
     }
+    for (var element in currencyInBankList) {
+      log(element.bankName);
+    }
+    removeDuplicates();
     update(["bankList", "currencies", "currencyList"]);
+  }
+
+  void removeDuplicates() {
+    currencyInBankList.toSet().toList();
   }
 
   void getCurrencyInBank(int currencyId) {
@@ -194,46 +216,51 @@ class CurrenciesController extends GetxController {
   void getAverage(int currencyId) {
     for (var e in latestCurrencyList) {
       if (e.id == currencyId) {
-        avgBuyPrice = e.bankPrices!.fold(
-            0.0,
-            (previousValue, element) =>
-                previousValue + element.buyPrice / e.bankPrices!.length);
-        avgSellPrice = e.bankPrices!.fold(
-            0.0,
-            (previousValue, element) =>
-                previousValue + element.sellPrice / e.bankPrices!.length);
+        if (e.bankPrices != null) {
+          if (e.bankPrices!.isNotEmpty) {
+            avgBuyPrice = e.bankPrices!.fold(
+                0.0,
+                (previousValue, element) =>
+                    previousValue + element.buyPrice / e.bankPrices!.length);
+            avgSellPrice = e.bankPrices!.fold(
+                0.0,
+                (previousValue, element) =>
+                    previousValue + element.sellPrice / e.bankPrices!.length);
+          }
+        }
+
         update(["averageContainer"]);
-        log("Average = ${avgBuyPrice / e.bankPrices!.length}");
+        // log("Average = ${avgBuyPrice / e.bankPrices!.length}");
       }
     }
   }
 
-  void getBankData(int bankId) {
-    for (var element in latestCurrencyList) {
-      var x = element.bankPrices!.where((value) =>
-          DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
-              Duration.zero &&
-          DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
-              const Duration(hours: 24));
-      for (var p in x) {
-        if (p.bankId == bankId) {
-          var bank = bankList.where((w) => w.id == bankId);
-          bankData.add(CurrencyInBank(
-              currencyId: element.id!.toInt(),
-              currencyIcon: element.icon.toString(),
-              currencyName: element.name.toString(),
-              currencyCode: element.code.toString(),
-              bankId: bankId,
-              bankIcon: bank.first.icon!,
-              bankName: bank.first.name!,
-              sellPrice: p.sellPrice,
-              buyPrice: p.buyPrice,
-              createdAt: p.createdAt,
-              lastUpdate: element.lastUpdate.toString(),
-              blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
-              updatedAt: p.updatedAt));
-        }
-      }
-    }
-  }
+  // void getBankData(int bankId) {
+  //   for (var element in latestCurrencyList) {
+  //     var x = element.bankPrices!.where((value) =>
+  //         DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
+  //             Duration.zero &&
+  //         DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
+  //             const Duration(hours: 24));
+  //     for (var p in x) {
+  //       if (p.bankId == bankId) {
+  //         var bank = bankList.where((w) => w.id == bankId);
+  //         bankData.add(CurrencyInBank(
+  //             currencyId: element.id!.toInt(),
+  //             currencyIcon: element.icon.toString(),
+  //             currencyName: element.name.toString(),
+  //             currencyCode: element.code.toString(),
+  //             bankId: bankId,
+  //             bankIcon: bank.first.icon!,
+  //             bankName: bank.first.name!,
+  //             sellPrice: p.sellPrice,
+  //             buyPrice: p.buyPrice,
+  //             createdAt: p.createdAt,
+  //             lastUpdate: element.lastUpdate.toString(),
+  //             blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
+  //             updatedAt: p.updatedAt));
+  //       }
+  //     }
+  //   }
+  // }
 }
