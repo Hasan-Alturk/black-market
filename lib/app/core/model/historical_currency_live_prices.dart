@@ -3,16 +3,16 @@ class HistoricalCurrencyLivePrices {
     required this.livePrices,
   });
 
-  final Map<String, List<LivePrice>> livePrices;
+  final Map<String, List<LivePrices>> livePrices;
 
   factory HistoricalCurrencyLivePrices.fromJson(Map<String, dynamic> json) {
     return HistoricalCurrencyLivePrices(
       livePrices: Map.from(json["live_prices"]).map((k, v) => MapEntry<String,
-              List<LivePrice>>(
+              List<LivePrices>>(
           k,
           v == null
               ? []
-              : List<LivePrice>.from(v!.map((x) => LivePrice.fromJson(x))))),
+              : List<LivePrices>.from(v!.map((x) => LivePrices.fromJson(x))))),
     );
   }
 
@@ -23,8 +23,8 @@ class HistoricalCurrencyLivePrices {
       };
 }
 
-class LivePrice {
-  LivePrice({
+class LivePrices {
+  LivePrices({
     required this.currencyId,
     required this.price,
     required this.date,
@@ -34,8 +34,8 @@ class LivePrice {
   final dynamic price;
   final String date;
 
-  factory LivePrice.fromJson(Map<String, dynamic> json) {
-    return LivePrice(
+  factory LivePrices.fromJson(Map<String, dynamic> json) {
+    return LivePrices(
       currencyId: json["currency_id"],
       price: json["price"],
       date: json["date"],
