@@ -96,7 +96,7 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     getHistoricalCurrencyLivePrices();
-    getHistoricalCurrencyBlackPrices();
+ //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       if (latestCurrencyList.isNotEmpty) {

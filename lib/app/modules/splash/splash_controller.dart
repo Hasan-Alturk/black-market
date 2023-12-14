@@ -111,10 +111,10 @@ class SplashController extends GetxController {
     try {
       List<LatestCurrency> latestCurrencies =
           await SharedStorage.getCurrencies();
-      List<LatestCurrency>? latestCurrenciesSorted =
+      List<LatestCurrency> latestCurrenciesSorted =
           await SharedStorage.getCurrenciesSorted();
       for (var element1 in latestCurrencies) {
-        for (var element2 in latestCurrenciesSorted!) {
+        for (var element2 in latestCurrenciesSorted) {
           if (element1.sort != element2.sort) {
             element1.sort = element2.sort;
           }
