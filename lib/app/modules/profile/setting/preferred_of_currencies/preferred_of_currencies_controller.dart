@@ -39,7 +39,7 @@ class PreferredOfCurrenciesController extends GetxController {
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     var currencies = await SharedStorage.getCurrenciesSorted();
-    if (currencies.isNotEmpty) {
+    if (currencies!.isNotEmpty) {
       latestCurrencyList.addAll(currencies);
     } else {
       return;

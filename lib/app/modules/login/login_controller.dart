@@ -35,10 +35,10 @@ class LoginController extends GetxController {
       );
       SharedStorage.saveTokenAndRememberMe(
           mainUser.accessToken, rememberMe.value);
-
       await getUserSetting();
 
       Get.offAllNamed("/main_home");
+
       isLoading = false;
       update(["TextError", "ElevatedButton"]);
     } on ExceptionHandler catch (e) {

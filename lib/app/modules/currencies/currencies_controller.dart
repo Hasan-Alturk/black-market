@@ -38,7 +38,7 @@ class CurrenciesController extends GetxController {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
         startDate: '2023-09-06',
-        currencyId: 5,
+        currencyId: selectedCurrencyId,
         type: "live",
       );
 
@@ -80,7 +80,6 @@ class CurrenciesController extends GetxController {
           log('--------------');
         }
       });
-
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
