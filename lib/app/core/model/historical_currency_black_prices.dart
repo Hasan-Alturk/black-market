@@ -1,30 +1,30 @@
 class HistoricalCurrencyBlackPrices {
   HistoricalCurrencyBlackPrices({
-    required this.blackMarketPrices,
+    required this.blackPrices,
   });
 
-  final Map<String, List<BlackMarketPrice>> blackMarketPrices;
+  final Map<String, List<BlackPrices>> blackPrices;
 
   factory HistoricalCurrencyBlackPrices.fromJson(Map<String, dynamic> json) {
     return HistoricalCurrencyBlackPrices(
-      blackMarketPrices: Map.from(json["black_market_prices"]).map((k, v) =>
-          MapEntry<String, List<BlackMarketPrice>>(
+      blackPrices: Map.from(json["black_market_prices"]).map((k, v) =>
+          MapEntry<String, List<BlackPrices>>(
               k,
               v == null
                   ? []
-                  : List<BlackMarketPrice>.from(
-                      v!.map((x) => BlackMarketPrice.fromJson(x))))),
+                  : List<BlackPrices>.from(
+                      v!.map((x) => BlackPrices.fromJson(x))))),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "black_market_prices": Map.from(blackMarketPrices).map((k, v) =>
+        "black_market_prices": Map.from(blackPrices).map((k, v) =>
             MapEntry<String, dynamic>(k, v.map((x) => x?.toJson()).toList())),
       };
 }
 
-class BlackMarketPrice {
-  BlackMarketPrice({
+class BlackPrices {
+  BlackPrices({
     required this.currencyId,
     required this.buyPrice,
     required this.sellPrice,
@@ -36,8 +36,8 @@ class BlackMarketPrice {
   final dynamic sellPrice;
   final String? date;
 
-  factory BlackMarketPrice.fromJson(Map<String, dynamic> json) {
-    return BlackMarketPrice(
+  factory BlackPrices.fromJson(Map<String, dynamic> json) {
+    return BlackPrices(
       currencyId: json["currency_id"],
       buyPrice: json["buy_price"],
       sellPrice: json["sell_price"],

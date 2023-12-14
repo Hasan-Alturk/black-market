@@ -29,10 +29,9 @@ class CurrenciesController extends GetxController {
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> currencyInBankList = [];
   List<CurrencyInBank> bankData = [];
-  List<HistoricalCurrencyLivePrices> historicallatestCurrencyLiveList = [];
-  List<HistoricalCurrencyBlackPrices> historicallatestCurrencyBlackList = [];
 
   Map<String, List<LivePrices>> livePricesMap = {};
+  Map<String, List<BlackPrices>> blackPricesMap = {};
 
   Future<void> getHistoricalCurrencyLivePrices() async {
     try {
@@ -68,8 +67,20 @@ class CurrenciesController extends GetxController {
         currencyId: 15,
         type: "black",
       );
+      blackPricesMap = currencyList.blackPrices;
+      blackPricesMap.forEach((currency, blackPrices) {
+        log('العملة: $currency');
 
-      log(currencyList.blackMarketPrices.toString());
+        // الدوران عبر قائمة كائنات LivePrices
+        for (var e in blackPrices) {
+          log('معرف العملة: ${e.currencyId}');
+          log('السعر: ${e.buyPrice}');
+          log('السعر: ${e.sellPrice}');
+          log('التاريخ: ${e.date}');
+          log('--------------');
+        }
+      });
+
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
@@ -86,7 +97,7 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     getHistoricalCurrencyLivePrices();
-    // getHistoricalCurrencyBlackPrices();
+    getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       currenyAccordingToBankInfo(selectedCurrencyId);
