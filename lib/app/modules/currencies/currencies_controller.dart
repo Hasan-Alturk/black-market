@@ -96,7 +96,7 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     getHistoricalCurrencyLivePrices();
- //   getHistoricalCurrencyBlackPrices();
+    //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       if (latestCurrencyList.isNotEmpty) {
@@ -126,6 +126,7 @@ class CurrenciesController extends GetxController {
     var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
       latestCurrencyList.clear();
+      currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
     } else {
       return;
