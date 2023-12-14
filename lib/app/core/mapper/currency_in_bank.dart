@@ -12,6 +12,7 @@ class CurrencyInBank {
   late String updatedAt;
   late dynamic blackMarketBuyPrice;
   late String lastUpdate;
+  late int bankSort;
 
   CurrencyInBank(
       {required this.currencyId,
@@ -26,7 +27,7 @@ class CurrencyInBank {
       required this.createdAt,
       required this.updatedAt,
       required this.lastUpdate,
-       this.blackMarketBuyPrice});
+      this.blackMarketBuyPrice , required this.bankSort});
 
   // static List<CurrencyInBank> currencyInBankList(List data) => data
   //     .map((currencyInBank) => CurrencyInBank.fromJson(currencyInBank))

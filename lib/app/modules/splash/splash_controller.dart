@@ -46,7 +46,7 @@ class SplashController extends GetxController {
 
   Future<void> checkToken() async {
     await getSetting();
-    await getBanks();
+    await getBanks().then((value) => getSortedBanks());
     await getLatestCurrency().then((value) => getLatestCurrencySorted());
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -115,6 +115,23 @@ class SplashController extends GetxController {
           await SharedStorage.getCurrenciesSorted();
       for (var element1 in latestCurrencies) {
         for (var element2 in latestCurrenciesSorted) {
+          if (element1.sort != element2.sort) {
+            element1.sort = element2.sort;
+          }
+        }
+      }
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
+   Future<void> getSortedBanks() async {
+    try {
+      List<Bank> banks =
+          await SharedStorage.getBanks();
+      List<Bank> sortedBanks =
+          await SharedStorage.getSortedBanks();
+      for (var element1 in banks) {
+        for (var element2 in sortedBanks) {
           if (element1.sort != element2.sort) {
             element1.sort = element2.sort;
           }

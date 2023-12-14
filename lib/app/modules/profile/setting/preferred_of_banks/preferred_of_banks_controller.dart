@@ -27,11 +27,14 @@ class PreferredOfBanksController extends GetxController {
     final Bank tile = bankList.removeAt(oldIndex);
     // place the tile in the new position
     bankList.insert(newIndex, tile);
+     for (int i = 0; i < bankList.length; i++) {
+      bankList[i].sort = i;
+    }
     update(["bankList"]);
   }
 
   Future<void> getBanksFromPrefs() async {
-    var banks = await SharedStorage.getBanks();
+    var banks = await SharedStorage.getSortedBanks();
     if (banks.isNotEmpty) {
       bankList.addAll(banks);
     } else {
@@ -44,7 +47,7 @@ class PreferredOfBanksController extends GetxController {
     isLoading = true;
     update(["saveNewBanks"]);
     await Future.delayed(const Duration(seconds: 1));
-    await SharedStorage.saveBanks(banks);
+    await SharedStorage.saveSortedBanks(banks);
     isLoading = false;
     update(["saveNewBanks"]);
   }

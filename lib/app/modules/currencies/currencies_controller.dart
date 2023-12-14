@@ -112,7 +112,7 @@ class CurrenciesController extends GetxController {
 
   Future<void> getBanksFromPrefs() async {
     bankList.clear();
-    var banks = await SharedStorage.getBanks();
+    var banks = await SharedStorage.getSortedBanks();
     if (banks.isNotEmpty) {
       bankList.clear();
       bankList.addAll(banks);
@@ -168,6 +168,7 @@ class CurrenciesController extends GetxController {
                   sellPrice: bank.sellPrice,
                   buyPrice: bank.buyPrice,
                   lastUpdate: element.lastUpdate.toString(),
+                  bankSort: b.sort!,
                   blackMarketBuyPrice: element.blackMarketPrices?.last.buyPrice,
                   createdAt: element.createdAt.toString(),
                   updatedAt: element.updatedAt.toString());
@@ -187,12 +188,12 @@ class CurrenciesController extends GetxController {
     for (var element in currencyInBankList) {
       log(element.bankName);
     }
-    removeDuplicates();
+    sortBanks();
     update(["bankList", "currencies", "currencyList"]);
   }
 
-  void removeDuplicates() {
-    currencyInBankList.toSet().toList();
+  void sortBanks() {
+    currencyInBankList.sort((a,b)=> a.bankSort.compareTo(b.bankSort));
   }
 
   void getCurrencyInBank(int currencyId) {

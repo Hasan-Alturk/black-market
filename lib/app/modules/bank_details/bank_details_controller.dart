@@ -117,6 +117,7 @@ class BankDetailsController extends GetxController {
                 buyPrice: p.buyPrice,
                 createdAt: p.createdAt,
                 updatedAt: p.updatedAt,
+                bankSort: bank.first.sort!,
                 lastUpdate: element.lastUpdate.toString(),
                 blackMarketBuyPrice: element.blackMarketPrices?.last.buyPrice));
             update(["bankDetails", "bankInfo", "currenciesInBank"]);
