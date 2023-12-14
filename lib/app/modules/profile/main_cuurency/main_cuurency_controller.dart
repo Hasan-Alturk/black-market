@@ -14,7 +14,7 @@ class MainCurencyController extends GetxController {
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
-    var currencies = await SharedStorage.getCurrencies();
+    var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
       latestCurrencyList.addAll(currencies);
       update();

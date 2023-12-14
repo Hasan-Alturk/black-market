@@ -17,7 +17,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
 
   @override
   Widget build(BuildContext context) {
-   // controller.getLatestCurrenciesFromPrefs();
+    // controller.onInit();
     return Scaffold(
         backgroundColor: AppColors.blackDarkActive,
         body: SafeArea(
@@ -165,7 +165,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                               controller.selectedCurrencyId =
                                                   currencyId;
                                               controller
-                                                  .currenyAccordingToBankInfo(
+                                                  .getBanksAccordingToSelectedCurrency(
                                                       controller
                                                           .selectedCurrencyId);
                                               controller.getCurrencyInBank(
