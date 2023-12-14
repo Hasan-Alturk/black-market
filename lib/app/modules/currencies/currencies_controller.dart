@@ -38,7 +38,7 @@ class CurrenciesController extends GetxController {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
         startDate: '2023-09-06',
-        currencyId: 5,
+        currencyId: selectedCurrencyId,
         type: "live",
       );
 
@@ -96,7 +96,7 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() {
     getHistoricalCurrencyLivePrices();
-    getHistoricalCurrencyBlackPrices();
+ //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
       if (latestCurrencyList.isNotEmpty) {

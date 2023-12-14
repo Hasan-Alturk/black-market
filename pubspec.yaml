@@ -44,6 +44,8 @@ dependencies:
   expansion_tile_group: ^1.2.4
   flutter_widget_from_html: ^0.14.9
   collection: ^1.15.0
+  chart_sparkline: ^1.0.14
+
 
 
  

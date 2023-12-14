@@ -302,7 +302,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: context.screenHeight * 0.02,
                 ),
-                const LineChartSample2(),
+                const LineChart(),
                 Container(
                   height: context.screenHeight * 0.12,
                   width: context.screenWidth * 0.87,
