@@ -167,7 +167,7 @@ class CurrenciesController extends GetxController {
                   sellPrice: bank.sellPrice,
                   buyPrice: bank.buyPrice,
                   lastUpdate: element.lastUpdate.toString(),
-                  blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
+                  blackMarketBuyPrice: element.blackMarketPrices?.last.buyPrice,
                   createdAt: element.createdAt.toString(),
                   updatedAt: element.updatedAt.toString());
               if (!(currencyInBankList.contains(c))) {
@@ -204,7 +204,7 @@ class CurrenciesController extends GetxController {
             currencyIcon: b.icon.toString(),
             currencyCode: b.code.toString(),
             livePrice: b.livePrices!.last.price,
-            blackMarketBuyPrice: b.blackMarketPrices!.last.buyPrice,
+            blackMarketBuyPrice: b.blackMarketPrices?.last.buyPrice,
             lastUpdate: DateTime.now()
                 .difference(DateTime.parse(b.lastUpdate!))
                 .inMinutes));
