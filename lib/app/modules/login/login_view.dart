@@ -121,20 +121,22 @@ class LoginView extends GetView<LoginController> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Radio<bool>(
-                          value: true,
-                          groupValue: controller.rememberMe.value,
-                          onChanged: (value) {
-                            controller.rememberMe.value = value!;
-                          },
-                          fillColor: MaterialStateColor.resolveWith(
-                            (states) {
-                              if (states.contains(MaterialState.disabled) ||
-                                  !controller.rememberMe.value) {
-                                return AppColors.white;
-                              }
-                              return AppColors.yellowDark;
+                        Obx(
+                          () => Radio<bool>(
+                            value: true,
+                            groupValue: controller.rememberMe.value,
+                            onChanged: (value) {
+                              controller.rememberMe.value = value!;
                             },
+                            fillColor: MaterialStateColor.resolveWith(
+                              (states) {
+                                if (states.contains(MaterialState.disabled) ||
+                                    !controller.rememberMe.value) {
+                                  return AppColors.white;
+                                }
+                                return AppColors.yellowDark;
+                              },
+                            ),
                           ),
                         ),
                       ],
