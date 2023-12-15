@@ -88,11 +88,11 @@ class Chart extends GetView<CurrenciesController> {
             getTitlesWidget: rightTitleWidgets,
           ),
         ),
-        bottomTitles: const AxisTitles(
+        bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: false,
+            showTitles: true,
             reservedSize: 30,
-            // getTitlesWidget: bottomTitleWidgets,
+            getTitlesWidget: bottomTitleWidgets,
             interval: 1,
           ),
         ),
@@ -112,7 +112,7 @@ class Chart extends GetView<CurrenciesController> {
       minX: 0,
       maxX: 31,
       minY: 0,
-      maxY: 150,
+      maxY: 50,
       lineBarsData: [
         LineChartBarData(
           spots: spots,
@@ -134,33 +134,33 @@ class Chart extends GetView<CurrenciesController> {
     );
   }
 
-  // Widget bottomTitleWidgets(double value, TitleMeta meta) {
-  //   var style = TextStyle(
-  //     fontWeight: FontWeight.bold,
-  //     fontSize: 16,
-  //     color: AppColors.graylight,
-  //   );
-  //   Widget text;
-  //   switch (value.toInt()) {
-  //     case 2:
-  //       text = Text('Nov 15', style: style);
-  //       break;
-  //     case 5:
-  //       text = Text('Nov 29', style: style);
-  //       break;
-  //     case 8:
-  //       text = Text('Dec15', style: style);
-  //       break;
-  //     default:
-  //       text = Text('', style: style);
-  //       break;
-  //   }
+  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+    var style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+      color: AppColors.graylight,
+    );
+    Widget text;
+    switch (value.toInt()) {
+      case 2:
+        text = Text('Nov 15', style: style);
+        break;
+      case 5:
+        text = Text('Nov 29', style: style);
+        break;
+      case 8:
+        text = Text('Dec15', style: style);
+        break;
+      default:
+        text = Text('', style: style);
+        break;
+    }
 
-  //   return SideTitleWidget(
-  //     axisSide: meta.axisSide,
-  //     child: text,
-  //   );
-  // }
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: text,
+    );
+  }
 
   Widget rightTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
