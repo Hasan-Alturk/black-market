@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +17,9 @@ class Chart extends GetView<CurrenciesController> {
     AppColors.startRedGrad,
     AppColors.endRedGrad,
   ];
-  final List<List<String>> result;
+  Map<String, List<LivePrices>> livePricesMap;
 
-  Chart({super.key, required this.result});
+  Chart({super.key, required this.livePricesMap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +36,11 @@ class Chart extends GetView<CurrenciesController> {
             //   return Container();
             // }),
 
-            child: LineChart(
-              mainData(),
-            ),
+            child: GetBuilder<CurrenciesController>(builder: (_) {
+              return LineChart(
+                mainData(),
+              );
+            }),
           ),
         ),
       ],
@@ -44,16 +49,28 @@ class Chart extends GetView<CurrenciesController> {
 
   LineChartData mainData() {
     List<FlSpot> spots = [];
-    for (var e in result) {
-      try {
-        double x = double.parse(e[0]);
+    livePricesMap.forEach(
+      (currency, livePricesList) {
+        log('العملة: $currency');
 
-        double y = double.parse(e[1]);
-        spots.add(const FlSpot(4, 5));
-      } catch (e) {
-        print("Error parsing values: $e");
-      }
-    }
+        // الدوران عبر قائمة كائنات LivePrices
+        for (var livePrice in livePricesList) {
+          var y = livePrice.price;
+          var x = livePrice.date;
+
+          DateTime apiDate = DateTime.parse(x);
+
+          log('معرف العملة: ${livePrice.currencyId}');
+          log('السعر: ${livePrice.price}');
+          log('التاريخ: ${livePrice.date}');
+          log('--------------');
+          log(x);
+          log(y.toString());
+
+          spots.add(FlSpot(apiDate.day.toDouble(), y as double));
+        }
+      },
+    );
 
     return LineChartData(
       gridData: const FlGridData(
@@ -93,9 +110,9 @@ class Chart extends GetView<CurrenciesController> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 9,
+      maxX: 31,
       minY: 0,
-      maxY: 6,
+      maxY: 50,
       lineBarsData: [
         LineChartBarData(
           spots: spots,
