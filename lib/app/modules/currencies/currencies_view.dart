@@ -317,11 +317,9 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: context.screenHeight * 0.02,
                 ),
-                GetBuilder<CurrenciesController>(builder: (_) {
-                  return Chart(
-                      //   livePricesMap: controller.livePricesMap,
-                      );
-                }),
+                Chart(
+                  result: controller.result,
+                ),
                 Container(
                   height: context.screenHeight * 0.12,
                   width: context.screenWidth * 0.87,
