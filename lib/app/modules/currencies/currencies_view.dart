@@ -24,7 +24,6 @@ class CurrenciesView extends GetView<CurrenciesController> {
           child: RefreshIndicator(
             onRefresh: () async {
               // عند سحب الشاشة، قم بجلب البيانات الجديدة
-              controller.getLatestCurrenciesFromPrefs();
             },
             child: ListView(
               children: [
@@ -318,7 +317,11 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: context.screenHeight * 0.02,
                 ),
-                const Chart(),
+                GetBuilder<CurrenciesController>(builder: (_) {
+                  return Chart(
+                      //   livePricesMap: controller.livePricesMap,
+                      );
+                }),
                 Container(
                   height: context.screenHeight * 0.12,
                   width: context.screenWidth * 0.87,

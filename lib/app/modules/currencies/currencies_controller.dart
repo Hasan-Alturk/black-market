@@ -33,7 +33,8 @@ class CurrenciesController extends GetxController {
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
-  Future<void> getHistoricalCurrencyLivePrices() async {
+  Future<Map<String, List<LivePrices>>>
+      getHistoricalCurrencyLivePrices() async {
     try {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
@@ -43,19 +44,27 @@ class CurrenciesController extends GetxController {
       );
 
       livePricesMap = currencyList.livePrices;
-      livePricesMap.forEach((currency, livePricesList) {
-        log('العملة: $currency');
 
-        // الدوران عبر قائمة كائنات LivePrices
-        for (var livePrice in livePricesList) {
-          log('معرف العملة: ${livePrice.currencyId}');
-          log('السعر: ${livePrice.price}');
-          log('التاريخ: ${livePrice.date}');
-          log('--------------');
-        }
-      });
+      // livePricesMap.forEach(
+      //   (currency, livePricesList) {
+      //     log('العملة: $currency');
+
+      //     // الدوران عبر قائمة كائنات LivePrices
+      //     for (var livePrice in livePricesList) {
+      //       String x = livePrice.price.toString();
+      //       String y = livePrice.date;
+
+      //       log('معرف العملة: ${livePrice.currencyId}');
+      //       log('السعر: ${livePrice.price}');
+      //       log('التاريخ: ${livePrice.date}');
+      //       log('--------------');
+      //     }
+      //   },
+      // );
+      return livePricesMap;
     } on ExceptionHandler catch (e) {
       log("Error: $e");
+      throw ExceptionHandler("Unknown error");
     }
   }
 
@@ -95,7 +104,9 @@ class CurrenciesController extends GetxController {
 
   @override
   void onInit() {
-    getHistoricalCurrencyLivePrices();
+    getHistoricalCurrencyLivePrices().then(
+      (value) => getData(),
+    );
     //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
@@ -108,6 +119,31 @@ class CurrenciesController extends GetxController {
     });
     getNameAndAvatar();
     super.onInit();
+  }
+
+  List<List<String>> getData() {
+    List<List<String>> result = [];
+
+    livePricesMap.forEach(
+      (currency, livePricesList) {
+        log('العملة: $currency');
+
+        // الدوران عبر قائمة كائنات LivePrices
+        for (var livePrice in livePricesList) {
+          String x = livePrice.price.toString();
+          String y = livePrice.date;
+
+          result.add([x, y]);
+
+          log('معرف العملة: ${livePrice.currencyId}');
+          log('السعر: ${livePrice.price}');
+          log('التاريخ: ${livePrice.date}');
+          log('--------------');
+        }
+      },
+    );
+
+    return result;
   }
 
   Future<void> getBanksFromPrefs() async {
@@ -193,7 +229,7 @@ class CurrenciesController extends GetxController {
   }
 
   void sortBanks() {
-    currencyInBankList.sort((a,b)=> a.bankSort.compareTo(b.bankSort));
+    currencyInBankList.sort((a, b) => a.bankSort.compareTo(b.bankSort));
   }
 
   void getCurrencyInBank(int currencyId) {
