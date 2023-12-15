@@ -77,7 +77,7 @@ class GoldCardItem extends StatelessWidget {
             goldName,
             style: TextStyle(
                 color: AppColors.white,
-                fontSize: 12 * context.textScale,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w700),
           ),
           SizedBox(

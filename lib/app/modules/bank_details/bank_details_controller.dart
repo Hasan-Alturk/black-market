@@ -34,7 +34,7 @@ class BankDetailsController extends GetxController {
   }
 
   Future<void> getBanksFromPrefs() async {
-    var banks = await SharedStorage.getBanks();
+    var banks = await SharedStorage.getSortedBanks();
     if (banks.isNotEmpty) {
       bankList.addAll(banks);
     } else {
@@ -44,7 +44,7 @@ class BankDetailsController extends GetxController {
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
-    var currencies = await SharedStorage.getCurrencies();
+    var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
       latestCurrencyList.addAll(currencies);
     } else {

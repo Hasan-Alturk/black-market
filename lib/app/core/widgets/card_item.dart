@@ -100,7 +100,7 @@ class CardItem extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height: context.screenHeight * 0.04,
+                  height:18.h,
                   width: 1,
                   color: AppColors.darkGrey,
                 ),
