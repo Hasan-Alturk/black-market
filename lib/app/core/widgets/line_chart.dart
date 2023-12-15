@@ -49,8 +49,7 @@ class Chart extends GetView<CurrenciesController> {
         double x = double.parse(e[0]);
 
         double y = double.parse(e[1]);
-
-        spots.add(const FlSpot(4.5, 5.5));
+        spots.add(const FlSpot(4, 5));
       } catch (e) {
         print("Error parsing values: $e");
       }

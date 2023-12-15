@@ -19,6 +19,8 @@ class BankDetailsController extends GetxController {
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> bankData = [];
 
+   LatestCurrency? egyptCurrency;
+
   @override
   void onInit() {
     super.onInit();
@@ -46,6 +48,22 @@ class BankDetailsController extends GetxController {
   Future<void> getLatestCurrenciesFromPrefs() async {
     var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
+      var v = currencies.where((element) => element.id == 21);
+      egyptCurrency = LatestCurrency(
+          id: v.first.id,
+          banner: v.first.banner,
+          icon: v.first.icon,
+          name: v.first.name,
+          code: v.first.code,
+          canBeMain: v.first.canBeMain,
+          sort: v.first.sort,
+          showNetworkImage: v.first.showNetworkImage,
+          lastUpdate: v.first.lastUpdate,
+          createdAt: v.first.createdAt,
+          updatedAt: v.first.updatedAt,
+          livePrices: v.first.livePrices,
+          blackMarketPrices: v.first.blackMarketPrices,
+          bankPrices: v.first.bankPrices);
       latestCurrencyList.addAll(currencies);
     } else {
       return;

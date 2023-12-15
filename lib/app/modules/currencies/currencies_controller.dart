@@ -106,9 +106,7 @@ class CurrenciesController extends GetxController {
 
   @override
   void onInit() {
-    getHistoricalCurrencyLivePrices().then(
-      (value) => getData(),
-    );
+    
     //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((value) {
@@ -116,6 +114,9 @@ class CurrenciesController extends GetxController {
         selectedCurrencyId = latestCurrencyList[0].id!;
         getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
         getCurrencyInBank(latestCurrencyList[0].id!);
+        getHistoricalCurrencyLivePrices().then(
+       (value) => getData(),
+    );
         // update();
       }
     });
@@ -126,7 +127,7 @@ class CurrenciesController extends GetxController {
   List<List<String>> getData() {
     livePricesMap.forEach(
       (currency, livePricesList) {
-        // log('العملة: $currency');
+        log('العملة: $currency');
 
         // الدوران عبر قائمة كائنات LivePrices
         for (var livePrice in livePricesList) {
@@ -144,9 +145,9 @@ class CurrenciesController extends GetxController {
           log('معرف التاريخ:$y');
           log(':$doubleValue');
 
-          // log(': ${livePrice.price}');
-          // log('التاريخ: ${livePrice.date}');
-          // log('--------------');
+          log(': ${livePrice.price}');
+          log('التاريخ: ${livePrice.date}');
+          log('--------------');
         }
       },
     );
