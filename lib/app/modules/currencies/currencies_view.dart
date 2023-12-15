@@ -305,7 +305,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   height: 20.h,
                 ),
                 Chart(
-                  result: controller.result,
+                  livePricesMap: controller.livePricesMap,
                 ),
                 Container(
                   height: 100.h,

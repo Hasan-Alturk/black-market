@@ -11,7 +11,6 @@ import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class CurrenciesController extends GetxController {
   CurrenciesController({required this.currencyRepo});
@@ -33,7 +32,22 @@ class CurrenciesController extends GetxController {
 
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
-  List<List<String>> result = [];
+
+  @override
+  void onInit() {
+    //   getHistoricalCurrencyBlackPrices();
+    getBanksFromPrefs();
+    getLatestCurrenciesFromPrefs().then((value) {
+      if (latestCurrencyList.isNotEmpty) {
+        selectedCurrencyId = latestCurrencyList[0].id!;
+        getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
+        getCurrencyInBank(latestCurrencyList[0].id!);
+        getHistoricalCurrencyLivePrices();
+      }
+    });
+    getNameAndAvatar();
+    super.onInit();
+  }
 
   Future<Map<String, List<LivePrices>>>
       getHistoricalCurrencyLivePrices() async {
@@ -102,57 +116,6 @@ class CurrenciesController extends GetxController {
 
   void goToNotification() {
     Get.toNamed("/notifications");
-  }
-
-  @override
-  void onInit() {
-    
-    //   getHistoricalCurrencyBlackPrices();
-    getBanksFromPrefs();
-    getLatestCurrenciesFromPrefs().then((value) {
-      if (latestCurrencyList.isNotEmpty) {
-        selectedCurrencyId = latestCurrencyList[0].id!;
-        getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
-        getCurrencyInBank(latestCurrencyList[0].id!);
-        getHistoricalCurrencyLivePrices().then(
-       (value) => getData(),
-    );
-        // update();
-      }
-    });
-    getNameAndAvatar();
-    super.onInit();
-  }
-
-  List<List<String>> getData() {
-    livePricesMap.forEach(
-      (currency, livePricesList) {
-        log('العملة: $currency');
-
-        // الدوران عبر قائمة كائنات LivePrices
-        for (var livePrice in livePricesList) {
-          String x = livePrice.price.toString();
-          String y = livePrice.date;
-          DateTime date = DateFormat('yyyy-MM-dd').parse(y);
-
-          // تحويل التاريخ إلى double باستخدام الأيام كقيمة
-          double doubleValue =
-              date.difference(DateTime(1970, 1, 1)).inDays.toDouble();
-
-          result.add([x, doubleValue.toString()]);
-
-          log('معرف السعر:$x');
-          log('معرف التاريخ:$y');
-          log(':$doubleValue');
-
-          log(': ${livePrice.price}');
-          log('التاريخ: ${livePrice.date}');
-          log('--------------');
-        }
-      },
-    );
-
-    return result;
   }
 
   Future<void> getBanksFromPrefs() async {
