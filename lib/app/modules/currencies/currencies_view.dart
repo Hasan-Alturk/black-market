@@ -24,6 +24,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
             onRefresh: () async {
               // عند سحب الشاشة، قم بجلب البيانات الجديدة
             },
+            
             child: ListView(
               children: [
                 Stack(alignment: Alignment.bottomCenter, children: [

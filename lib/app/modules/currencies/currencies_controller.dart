@@ -105,11 +105,11 @@ class CurrenciesController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     
     //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
-    getLatestCurrenciesFromPrefs().then((value) {
+   await getLatestCurrenciesFromPrefs().then((value) {
       if (latestCurrencyList.isNotEmpty) {
         selectedCurrencyId = latestCurrencyList[0].id!;
         getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
