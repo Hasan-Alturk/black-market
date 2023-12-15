@@ -32,15 +32,13 @@ class Chart extends GetView<CurrenciesController> {
               right: 35,
               left: 35,
             ),
-            // child: GetBuilder<CurrenciesController>(builder: (_) {
-            //   return Container();
-            // }),
+            child: Container(),
 
-            child: GetBuilder<CurrenciesController>(builder: (_) {
-              return LineChart(
-                mainData(),
-              );
-            }),
+            // child: GetBuilder<CurrenciesController>(builder: (_) {
+            //   return LineChart(
+            //     mainData(),
+            //   );
+            // }),
           ),
         ),
       ],
