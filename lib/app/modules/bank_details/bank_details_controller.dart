@@ -19,7 +19,7 @@ class BankDetailsController extends GetxController {
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> bankData = [];
 
-   LatestCurrency? egyptCurrency;
+  LatestCurrency? egyptCurrency;
 
   @override
   void onInit() {
@@ -115,12 +115,12 @@ class BankDetailsController extends GetxController {
     bankData.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
-        var x = element.bankPrices!.where((value) =>
-            DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
-                Duration.zero &&
-            DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
-                const Duration(hours: 24));
-        for (var p in x) {
+        // var x = element.bankPrices!.where((value) =>
+        //     DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
+        //         Duration.zero &&
+        //     DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
+        //         const Duration(hours: 24));
+        for (var p in element.bankPrices!) {
           if (p.bankId == bankId) {
             var bank = bankList.where((w) => w.id == bankId);
             bankData.add(CurrencyInBank(
