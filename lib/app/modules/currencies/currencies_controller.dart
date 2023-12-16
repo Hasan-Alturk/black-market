@@ -54,29 +54,14 @@ class CurrenciesController extends GetxController {
     try {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
-        startDate: '2023-09-06',
+        startDate: '2023-01-06',
         currencyId: selectedCurrencyId,
         type: "live",
       );
 
       livePricesMap = currencyList.livePrices;
 
-      // livePricesMap.forEach(
-      //   (currency, livePricesList) {
-      //     log('العملة: $currency');
-
-      //     // الدوران عبر قائمة كائنات LivePrices
-      //     for (var livePrice in livePricesList) {
-      //       String x = livePrice.price.toString();
-      //       String y = livePrice.date;
-
-      //       log('معرف العملة: ${livePrice.currencyId}');
-      //       log('السعر: ${livePrice.price}');
-      //       log('التاريخ: ${livePrice.date}');
-      //       log('--------------');
-      //     }
-      //   },
-      // );
+      update(["Chart"]);
       return livePricesMap;
     } on ExceptionHandler catch (e) {
       log("Error: $e");

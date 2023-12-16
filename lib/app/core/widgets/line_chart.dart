@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
@@ -36,6 +34,7 @@ class Chart extends GetView<CurrenciesController> {
 
             child: LineChart(
               mainData(),
+              curve: Curves.easeInBack,
             ),
           ),
         ),
@@ -47,23 +46,11 @@ class Chart extends GetView<CurrenciesController> {
     List<FlSpot> spots = [];
     livePricesMap.forEach(
       (currency, livePricesList) {
-        log('العملة: $currency');
-
-        // الدوران عبر قائمة كائنات LivePrices
         for (var livePrice in livePricesList) {
           var y = livePrice.price;
           var x = livePrice.date;
-
           DateTime apiDate = DateTime.parse(x);
-
-          log('معرف العملة: ${livePrice.currencyId}');
-          log('السعر: ${livePrice.price}');
-          log('التاريخ: ${livePrice.date}');
-          log('--------------');
-          log(x);
-          log(y.toString());
-
-          spots.add(FlSpot(apiDate.day.toDouble(), y as double));
+          spots.add(FlSpot(apiDate.month.toDouble(), y as double));
         }
       },
     );
@@ -105,19 +92,29 @@ class Chart extends GetView<CurrenciesController> {
         show: true,
         border: Border.all(color: const Color(0xff37434d)),
       ),
+      baselineX: 5.5,
+      baselineY: 5,
       minX: 0,
-      maxX: 31,
+      maxX: 14,
       minY: 0,
       maxY: 50,
       lineBarsData: [
         LineChartBarData(
           spots: spots,
-          isCurved: true,
+          isCurved: false,
+          curveSmoothness: 5,
+          isStrokeJoinRound: true,
           gradient: LinearGradient(
             colors: gradientYellowColors,
           ),
           barWidth: 3,
           isStrokeCapRound: true,
+          preventCurveOverShooting: true,
+          isStepLineChart: true,
+          lineChartStepData: const LineChartStepData(),
+          color: Colors.white,
+          aboveBarData: BarAreaData(applyCutOffY: true),
+          show: true,
           dotData: const FlDotData(
             show: false,
           ),
@@ -141,10 +138,10 @@ class Chart extends GetView<CurrenciesController> {
       case 2:
         text = Text('Nov 15', style: style);
         break;
-      case 5:
+      case 12:
         text = Text('Nov 29', style: style);
         break;
-      case 8:
+      case 20:
         text = Text('Dec15', style: style);
         break;
       default:
@@ -169,10 +166,10 @@ class Chart extends GetView<CurrenciesController> {
       case 1:
         text = '13';
         break;
-      case 3:
+      case 9:
         text = '15';
         break;
-      case 5:
+      case 20:
         text = '20';
         break;
       default:

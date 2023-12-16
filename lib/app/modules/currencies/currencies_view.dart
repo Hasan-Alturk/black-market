@@ -161,6 +161,8 @@ class CurrenciesView extends GetView<CurrenciesController> {
                                                         .selectedCurrencyId);
                                             controller
                                                 .getCurrencyInBank(currencyId);
+                                            controller
+                                                .getHistoricalCurrencyLivePrices();
                                             Get.back();
                                           },
                                         );
@@ -304,9 +306,13 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Chart(
-                  livePricesMap: controller.livePricesMap,
-                ),
+                GetBuilder<CurrenciesController>(
+                    id: "Chart",
+                    builder: (_) {
+                      return Chart(
+                        livePricesMap: controller.livePricesMap,
+                      );
+                    }),
                 Container(
                   height: 100.h,
                   width: 350.w,
