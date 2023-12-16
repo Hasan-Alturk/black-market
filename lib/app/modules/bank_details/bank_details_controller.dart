@@ -24,8 +24,9 @@ class BankDetailsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getBanksFromPrefs();
     getLatestCurrenciesFromPrefs().then((_) async {
+       await   getBanksFromPrefs();
+
       await getBankData(bankId);
       await getCurrencyInBank(selectedCurrencyId).then((value) {
         if (currency.isNotEmpty) {
@@ -42,7 +43,7 @@ class BankDetailsController extends GetxController {
     } else {
       return;
     }
-    update(["bankList"]);
+    // update(["bankList"]);
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
@@ -115,14 +116,12 @@ class BankDetailsController extends GetxController {
     bankData.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
-        // var x = element.bankPrices!.where((value) =>
-        //     DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
-        //         Duration.zero &&
-        //     DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
-        //         const Duration(hours: 24));
-        for (var p in element.bankPrices!) {
+        var x = element.bankPrices!.where((value) =>
+            DateTime.parse(value.updatedAt).day == DateTime.now().day);
+        var bank = bankList.where((w) => w.id == bankId);
+
+        for (var p in x) {
           if (p.bankId == bankId) {
-            var bank = bankList.where((w) => w.id == bankId);
             bankData.add(CurrencyInBank(
                 currencyId: element.id!.toInt(),
                 currencyIcon: element.icon.toString(),

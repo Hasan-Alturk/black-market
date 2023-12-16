@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
@@ -50,81 +52,84 @@ class Chart extends GetView<CurrenciesController> {
           var y = livePrice.price;
           var x = livePrice.date;
           DateTime apiDate = DateTime.parse(x);
-          spots.add(FlSpot(apiDate.month.toDouble(), y as double));
+          spots.add(FlSpot(apiDate.month.toDouble(), y as double ));
         }
       },
     );
-
-    return LineChartData(
-      gridData: const FlGridData(
-        show: true,
-        drawHorizontalLine: false,
-        drawVerticalLine: false,
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        rightTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            interval: 1,
-            reservedSize: 22,
-            getTitlesWidget: rightTitleWidgets,
-          ),
-        ),
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            getTitlesWidget: bottomTitleWidgets,
-            interval: 1,
-          ),
-        ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        leftTitles: const AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: false,
-          ),
-        ),
-      ),
-      borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d)),
-      ),
-      baselineX: 5.5,
-      baselineY: 5,
-      minX: 0,
-      maxX: 14,
-      minY: 0,
-      maxY: 50,
-      lineBarsData: [
-        LineChartBarData(
-          spots: spots,
-          isCurved: false,
-          curveSmoothness: 5,
-          isStrokeJoinRound: true,
-          gradient: LinearGradient(
-            colors: gradientYellowColors,
-          ),
-          barWidth: 3,
-          isStrokeCapRound: true,
-          preventCurveOverShooting: true,
-          isStepLineChart: true,
-          lineChartStepData: const LineChartStepData(),
-          color: Colors.white,
-          aboveBarData: BarAreaData(applyCutOffY: true),
+    if (spots.isNotEmpty) {
+      return LineChartData(
+        gridData: const FlGridData(
           show: true,
-          dotData: const FlDotData(
-            show: false,
+          drawHorizontalLine: false,
+          drawVerticalLine: false,
+        ),
+        titlesData: FlTitlesData(
+          show: true,
+          rightTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              interval: 1,
+              reservedSize: 22,
+              getTitlesWidget: rightTitleWidgets,
+            ),
           ),
-          belowBarData: BarAreaData(
-            show: true,
-            gradient: LinearGradient(colors: gradientRedColors),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 30,
+              getTitlesWidget: bottomTitleWidgets,
+              interval: 1,
+            ),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          leftTitles: const AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: false,
+            ),
           ),
         ),
-      ],
-    );
+        borderData: FlBorderData(
+          show: true,
+          border: Border.all(color: const Color(0xff37434d)),
+        ),
+        baselineX: 5.5,
+        baselineY: 5,
+        minX: 0,
+        maxX: 14,
+        minY: 0,
+        maxY: 50,
+        lineBarsData: [
+          LineChartBarData(
+            spots: spots,
+            isCurved: false,
+            curveSmoothness: 5,
+            isStrokeJoinRound: true,
+            gradient: LinearGradient(
+              colors: gradientYellowColors,
+            ),
+            barWidth: 3,
+            isStrokeCapRound: true,
+            preventCurveOverShooting: true,
+            isStepLineChart: true,
+            lineChartStepData: const LineChartStepData(),
+            color: Colors.white,
+            aboveBarData: BarAreaData(applyCutOffY: true),
+            show: true,
+            dotData: const FlDotData(
+              show: false,
+            ),
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(colors: gradientRedColors),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return LineChartData();
+    }
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
