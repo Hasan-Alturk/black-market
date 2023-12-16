@@ -245,33 +245,4 @@ class CurrenciesController extends GetxController {
       }
     }
   }
-
-  // void getBankData(int bankId) {
-  //   for (var element in latestCurrencyList) {
-  //     var x = element.bankPrices!.where((value) =>
-  //         DateTime.parse(value.createdAt).difference(DateTime.now()).abs() >
-  //             Duration.zero &&
-  //         DateTime.parse(value.createdAt).difference(DateTime.now()).abs() <
-  //             const Duration(hours: 24));
-  //     for (var p in x) {
-  //       if (p.bankId == bankId) {
-  //         var bank = bankList.where((w) => w.id == bankId);
-  //         bankData.add(CurrencyInBank(
-  //             currencyId: element.id!.toInt(),
-  //             currencyIcon: element.icon.toString(),
-  //             currencyName: element.name.toString(),
-  //             currencyCode: element.code.toString(),
-  //             bankId: bankId,
-  //             bankIcon: bank.first.icon!,
-  //             bankName: bank.first.name!,
-  //             sellPrice: p.sellPrice,
-  //             buyPrice: p.buyPrice,
-  //             createdAt: p.createdAt,
-  //             lastUpdate: element.lastUpdate.toString(),
-  //             blackMarketBuyPrice: element.blackMarketPrices!.last.buyPrice,
-  //             updatedAt: p.updatedAt));
-  //       }
-  //     }
-  //   }
-  // }
 }
