@@ -20,8 +20,10 @@ class GoldView extends GetView<MainGoldController> {
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                  ),
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 5),
                   itemCount: controller.goldList.length,
                   itemBuilder: (ctx, i) => GestureDetector(
                     child: GoldCardItem(

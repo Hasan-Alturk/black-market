@@ -2,7 +2,6 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +22,7 @@ class GoldCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 156.w,
-      height: 135.h,
+      height: 160.h,
       margin: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.gray,

@@ -32,13 +32,11 @@ class Chart extends GetView<CurrenciesController> {
               right: 35,
               left: 35,
             ),
-            child: Container(),
+            // child: Container(),
 
-            // child: GetBuilder<CurrenciesController>(builder: (_) {
-            //   return LineChart(
-            //     mainData(),
-            //   );
-            // }),
+            child: LineChart(
+              mainData(),
+            ),
           ),
         ),
       ],
@@ -114,7 +112,7 @@ class Chart extends GetView<CurrenciesController> {
       lineBarsData: [
         LineChartBarData(
           spots: spots,
-          isCurved: false,
+          isCurved: true,
           gradient: LinearGradient(
             colors: gradientYellowColors,
           ),
