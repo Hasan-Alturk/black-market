@@ -116,7 +116,7 @@ class CurrenciesController extends GetxController {
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     latestCurrencyList.clear();
-    var currencies = await SharedStorage.getCurrencies();
+    var currencies = await SharedStorage.getCurrenciesSorted();
     if (currencies.isNotEmpty) {
       currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
