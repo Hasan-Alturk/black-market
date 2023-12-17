@@ -99,6 +99,7 @@ class SplashController extends GetxController {
 
   Future<void> getLatestCurrency() async {
     try {
+      await SharedStorage.deleteCurrencies();
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
       await SharedStorage.saveCurrencies(latestCurrencies);
@@ -124,12 +125,11 @@ class SplashController extends GetxController {
       log("Error: $e");
     }
   }
-   Future<void> getSortedBanks() async {
+
+  Future<void> getSortedBanks() async {
     try {
-      List<Bank> banks =
-          await SharedStorage.getBanks();
-      List<Bank> sortedBanks =
-          await SharedStorage.getSortedBanks();
+      List<Bank> banks = await SharedStorage.getBanks();
+      List<Bank> sortedBanks = await SharedStorage.getSortedBanks();
       for (var element1 in banks) {
         for (var element2 in sortedBanks) {
           if (element1.sort != element2.sort) {

@@ -116,9 +116,8 @@ class CurrenciesController extends GetxController {
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     latestCurrencyList.clear();
-    var currencies = await SharedStorage.getCurrenciesSorted();
+    var currencies = await SharedStorage.getCurrencies();
     if (currencies.isNotEmpty) {
-      latestCurrencyList.clear();
       currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
     } else {
@@ -144,8 +143,11 @@ class CurrenciesController extends GetxController {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
-        var x = element.bankPrices!.where((value) =>
-            DateTime.parse(value.updatedAt).day == DateTime.now().day);
+        var x = element.bankPrices!.where((value) {
+          log("value getBanksAccordingToSelectedCurrency${value.date}");
+          return DateTime.parse(value.updatedAt).day == DateTime.now().day;
+        });
+
         for (var bank in x) {
           innerLoop:
           for (var b in bankList) {

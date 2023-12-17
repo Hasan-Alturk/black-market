@@ -92,11 +92,18 @@ class SharedStorage {
     await prefs.setStringList("currencies", currenciesJsonList);
     log("log 2 ");
   }
+
+  static Future<void> deleteCurrencies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("currencies");
+  }
+
   // Retrieve Currency List from SharedPreferences
 
   static Future<List<LatestCurrency>> getCurrencies() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? currenciesJsonList = prefs.getStringList("currencies");
+
     if (currenciesJsonList == null) {
       return [];
     }
@@ -122,7 +129,18 @@ class SharedStorage {
     List<String>? currenciesJsonList = prefs.getStringList("currencies_sorted");
     if (currenciesJsonList == null) {
       return getCurrencies();
-    }
+    }  
+      // var x = currenciesJsonList
+      //     .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))
+      //     .toList();
+      // for (var element in x) {
+      //   if (DateTime.parse(element.updatedAt!).day == DateTime.now().day) {
+      //     return x;
+      //   } else {
+      //     return getCurrencies();
+      //   }
+      // }
+    
     return currenciesJsonList
         .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))
         .toList();
