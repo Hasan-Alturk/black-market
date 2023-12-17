@@ -313,6 +313,9 @@ class CurrenciesView extends GetView<CurrenciesController> {
                         livePricesMap: controller.livePricesMap,
                       );
                     }),
+                SizedBox(
+                  height: 5.h,
+                ),
                 Container(
                   height: 100.h,
                   width: 350.w,

@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class Chart extends GetView<CurrenciesController> {
   List<Color> gradientYellowColors = [
@@ -27,17 +26,9 @@ class Chart extends GetView<CurrenciesController> {
       children: <Widget>[
         AspectRatio(
           aspectRatio: 1.2,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: 35,
-              left: 35,
-            ),
-            // child: Container(),
-
-            child: LineChart(
-              mainData(),
-              curve: Curves.easeInBack,
-            ),
+          child: LineChart(
+            mainData(),
+            curve: Curves.easeInBack,
           ),
         ),
       ],
@@ -49,10 +40,10 @@ class Chart extends GetView<CurrenciesController> {
     livePricesMap.forEach(
       (currency, livePricesList) {
         for (var livePrice in livePricesList) {
-          var y = livePrice.price;
+          double y = livePrice.price as double;
           var x = livePrice.date;
           DateTime apiDate = DateTime.parse(x);
-          spots.add(FlSpot(apiDate.month.toDouble(), y as double ));
+          spots.add(FlSpot(apiDate.day.toDouble(), y));
         }
       },
     );
@@ -65,14 +56,6 @@ class Chart extends GetView<CurrenciesController> {
         ),
         titlesData: FlTitlesData(
           show: true,
-          rightTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              interval: 1,
-              reservedSize: 22,
-              getTitlesWidget: rightTitleWidgets,
-            ),
-          ),
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -81,44 +64,46 @@ class Chart extends GetView<CurrenciesController> {
               interval: 1,
             ),
           ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
           leftTitles: const AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
-            ),
+            sideTitles: SideTitles(showTitles: false),
           ),
         ),
-        borderData: FlBorderData(
-          show: true,
-          border: Border.all(color: const Color(0xff37434d)),
-        ),
-        baselineX: 5.5,
-        baselineY: 5,
-        minX: 0,
-        maxX: 14,
-        minY: 0,
-        maxY: 50,
+        minX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr < next ? curr : next - 1),
+        maxX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr > next ? curr : next + 1),
+        minY: spots
+                .map((spot) => spot.y)
+                .reduce((curr, next) => curr < next ? curr : next) -
+            5,
+        maxY: spots
+                .map((spot) => spot.y)
+                .reduce((curr, next) => curr > next ? curr : next) +
+            5,
         lineBarsData: [
           LineChartBarData(
+            show: true,
             spots: spots,
-            isCurved: false,
-            curveSmoothness: 5,
+            isCurved: true,
+            curveSmoothness: 1,
             isStrokeJoinRound: true,
-            gradient: LinearGradient(
-              colors: gradientYellowColors,
-            ),
             barWidth: 3,
             isStrokeCapRound: true,
-            preventCurveOverShooting: true,
+            preventCurveOverShooting: false,
             isStepLineChart: true,
-            lineChartStepData: const LineChartStepData(),
-            color: Colors.white,
-            aboveBarData: BarAreaData(applyCutOffY: true),
-            show: true,
             dotData: const FlDotData(
               show: false,
+            ),
+            gradient: LinearGradient(
+              colors: gradientYellowColors,
             ),
             belowBarData: BarAreaData(
               show: true,
@@ -138,49 +123,41 @@ class Chart extends GetView<CurrenciesController> {
       fontSize: 16,
       color: AppColors.graylight,
     );
-    Widget text;
+
+    // حساب تاريخ اليوم
+    DateTime today = DateTime.now();
+
+    // حساب تاريخ اليوم قبل 7 أيام
+    DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
+
+    // حساب التاريخ الذي يتم عرضه على المحور
+    DateTime displayedDate = sevenDaysAgo.add(Duration(days: value.toInt()));
+
+    // تنسيق التاريخ باستخدام intl
+    String formattedDate = DateFormat('MMM d').format(displayedDate);
+
+    // قرر أي تواريخ ترغب في عرضها بناءً على value
     switch (value.toInt()) {
-      case 2:
-        text = Text('Nov 15', style: style);
+      case 11:
+        formattedDate = DateFormat('MMM d')
+            .format(sevenDaysAgo.add(const Duration(days: 1)));
         break;
-      case 12:
-        text = Text('Nov 29', style: style);
+      case 14:
+        formattedDate = DateFormat('MMM d')
+            .format(sevenDaysAgo.add(const Duration(days: 3)));
         break;
-      case 20:
-        text = Text('Dec15', style: style);
+      case 17:
+        formattedDate = DateFormat('MMM d')
+            .format(sevenDaysAgo.add(const Duration(days: 7)));
         break;
       default:
-        text = Text('', style: style);
+        formattedDate = ""; // إعادة تعيين للأيام غير المحددة
         break;
     }
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: text,
+      child: Text(formattedDate, style: style),
     );
-  }
-
-  Widget rightTitleWidgets(double value, TitleMeta meta) {
-    var style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-      color: AppColors.greyMoreLight,
-    );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '13';
-        break;
-      case 9:
-        text = '15';
-        break;
-      case 20:
-        text = '20';
-        break;
-      default:
-        return const SizedBox();
-    }
-
-    return Text(text, style: style, textAlign: TextAlign.left);
   }
 }

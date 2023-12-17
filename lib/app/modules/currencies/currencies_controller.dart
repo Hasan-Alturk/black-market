@@ -54,7 +54,7 @@ class CurrenciesController extends GetxController {
     try {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
-        startDate: '2023-01-06',
+        startDate: DateTime.now().subtract(const Duration(days: 7)).toString(),
         currencyId: selectedCurrencyId,
         type: "live",
       );
