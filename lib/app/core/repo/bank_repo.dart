@@ -15,6 +15,7 @@ class BankRepo {
       Response response = await dio.get("$baseUrl/banks");
 
       List<Bank> bankList = Bank.bankList(response.data);
+      log("GetBanksFromRemote");
 
       return bankList;
     } on DioException catch (e) {

@@ -18,6 +18,7 @@ class CurrencyRepo {
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);
+      log("GetLatestCurrencyFromRemote");
 
       return latestCurrencyList;
     } on DioException catch (e) {

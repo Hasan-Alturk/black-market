@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
@@ -87,7 +88,9 @@ class SharedStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> currenciesJsonList =
         currencies.map((currency) => jsonEncode(currency.toJson())).toList();
+    log("log 1 ");
     await prefs.setStringList("currencies", currenciesJsonList);
+    log("log 2 ");
   }
   // Retrieve Currency List from SharedPreferences
 
@@ -125,7 +128,7 @@ class SharedStorage {
         .toList();
   }
 
- // Save Bank Sorted List in SharedPreferences
+  // Save Bank Sorted List in SharedPreferences
 
   static Future<void> saveSortedBanks(List<Bank> banks) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -25,7 +25,7 @@ class BankDetailsController extends GetxController {
   void onInit() {
     super.onInit();
     getLatestCurrenciesFromPrefs().then((_) async {
-       await   getBanksFromPrefs();
+      await getBanksFromPrefs();
 
       await getBankData(bankId);
       await getCurrencyInBank(selectedCurrencyId).then((value) {
@@ -116,8 +116,13 @@ class BankDetailsController extends GetxController {
     bankData.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
-        var x = element.bankPrices!.where((value) =>
-            DateTime.parse(value.updatedAt).day == DateTime.now().day);
+        // for (var e in element.bankPrices!) {
+        //   print("currencyName: ${element.name} + bankName: ${e.bankId}+ sellPrice :  ${e.sellPrice} + date : ${e.date.toString()}");
+        // }
+
+        var x = element.bankPrices!.where((value) {
+          return DateTime.parse(value.date).day == DateTime.now().day;
+        });
         var bank = bankList.where((w) => w.id == bankId);
 
         for (var p in x) {
