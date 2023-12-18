@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends GetView<CurrenciesController> {
+  List<FlSpot> spots = [];
+
   List<Color> gradientYellowColors = [
     AppColors.startYellowGrad,
     AppColors.endYellowGrad,
@@ -36,14 +38,13 @@ class Chart extends GetView<CurrenciesController> {
   }
 
   LineChartData mainData() {
-    List<FlSpot> spots = [];
     livePricesMap.forEach(
       (currency, livePricesList) {
         for (var livePrice in livePricesList) {
-          double y = livePrice.price as double;
-          var x = livePrice.date;
-          DateTime apiDate = DateTime.parse(x);
-          spots.add(FlSpot(apiDate.day.toDouble(), y));
+          double y = livePrice.price.toDouble();
+          String apiDate = livePrice.date;
+          DateTime x = DateTime.parse(apiDate);
+          spots.add(FlSpot(x.day.toDouble(), y));
         }
       },
     );
@@ -75,11 +76,13 @@ class Chart extends GetView<CurrenciesController> {
           ),
         ),
         minX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr < next ? curr : next - 1),
+                .map((spot) => spot.x)
+                .reduce((curr, next) => curr < next ? curr : next) -
+            1,
         maxX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr > next ? curr : next + 1),
+                .map((spot) => spot.x)
+                .reduce((curr, next) => curr > next ? curr : next) +
+            1,
         minY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr < next ? curr : next) -
@@ -123,6 +126,10 @@ class Chart extends GetView<CurrenciesController> {
       fontSize: 16,
       color: AppColors.graylight,
     );
+    value = spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr < next ? curr : next) -
+        1;
 
     // حساب تاريخ اليوم
     DateTime today = DateTime.now();
@@ -130,23 +137,20 @@ class Chart extends GetView<CurrenciesController> {
     // حساب تاريخ اليوم قبل 7 أيام
     DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
 
-    // حساب التاريخ الذي يتم عرضه على المحور
-    DateTime displayedDate = sevenDaysAgo.add(Duration(days: value.toInt()));
-
     // تنسيق التاريخ باستخدام intl
-    String formattedDate = DateFormat('MMM d').format(displayedDate);
+    String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
 
     // قرر أي تواريخ ترغب في عرضها بناءً على value
     switch (value.toInt()) {
-      case 11:
+      case 1:
         formattedDate = DateFormat('MMM d')
-            .format(sevenDaysAgo.add(const Duration(days: 1)));
+            .format(sevenDaysAgo.add(const Duration(days: 0)));
         break;
-      case 14:
+      case 3:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 3)));
         break;
-      case 17:
+      case 4:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 7)));
         break;
