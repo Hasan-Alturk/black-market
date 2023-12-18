@@ -37,10 +37,10 @@ class CurrenciesController extends GetxController {
   void onInit() {
     //   getHistoricalCurrencyBlackPrices();
     getBanksFromPrefs();
-    getLatestCurrenciesFromPrefs().then((value) {
+    getLatestCurrenciesFromPrefs().then((value) async {
       if (latestCurrencyList.isNotEmpty) {
         selectedCurrencyId = latestCurrencyList[0].id!;
-        getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
+        await getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
         getCurrencyInBank(latestCurrencyList[0].id!);
         getHistoricalCurrencyLivePrices();
       }
@@ -112,6 +112,7 @@ class CurrenciesController extends GetxController {
     } else {
       return;
     }
+    update();
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
@@ -124,7 +125,6 @@ class CurrenciesController extends GetxController {
       return;
     }
     log("message");
-    update();
   }
 
   Future<void> getNameAndAvatar() async {
@@ -139,12 +139,12 @@ class CurrenciesController extends GetxController {
     update(["name_and_avatar"]);
   }
 
-  void getBanksAccordingToSelectedCurrency(int currencyId) {
+  Future<void> getBanksAccordingToSelectedCurrency(int currencyId) async {
     currencyInBankList.clear();
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
-          log("value getBanksAccordingToSelectedCurrency${value.date}");
+          log(value.date);
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
 
