@@ -27,10 +27,13 @@ class Chart extends GetView<CurrenciesController> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1.2,
-          child: LineChart(
-            mainData(),
-            curve: Curves.easeInBack,
+          aspectRatio: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: LineChart(
+              mainData(),
+              curve: Curves.easeInBack,
+            ),
           ),
         ),
       ],
@@ -48,6 +51,17 @@ class Chart extends GetView<CurrenciesController> {
         }
       },
     );
+    List<Color> lineColors = [];
+
+    for (int i = 0; i < spots.length; i++) {
+      FlSpot currentSpot = spots[i];
+
+      if (i == 0 || currentSpot.y > spots[i - 1].y) {
+        lineColors.add(AppColors.yellowDark);
+      } else {
+        lineColors.add(AppColors.endRedGrad);
+      }
+    }
     if (spots.isNotEmpty) {
       return LineChartData(
         gridData: const FlGridData(
@@ -59,11 +73,10 @@ class Chart extends GetView<CurrenciesController> {
           show: true,
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 30,
-              getTitlesWidget: bottomTitleWidgets,
-              interval: 1,
-            ),
+                showTitles: true,
+                reservedSize: 30,
+                getTitlesWidget: bottomTitleWidgets,
+                interval: 1),
           ),
           rightTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
@@ -76,41 +89,38 @@ class Chart extends GetView<CurrenciesController> {
           ),
         ),
         minX: spots
-                .map((spot) => spot.x)
-                .reduce((curr, next) => curr < next ? curr : next) -
-            1,
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr < next ? curr : next),
         maxX: spots
-                .map((spot) => spot.x)
-                .reduce((curr, next) => curr > next ? curr : next) +
-            1,
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr > next ? curr : next),
         minY: spots
-                .map((spot) => spot.y)
-                .reduce((curr, next) => curr < next ? curr : next) -
-            5,
+            .map((spot) => spot.y)
+            .reduce((curr, next) => curr < next ? curr : next),
         maxY: spots
-                .map((spot) => spot.y)
-                .reduce((curr, next) => curr > next ? curr : next) +
-            5,
+            .map((spot) => spot.y)
+            .reduce((curr, next) => curr > next ? curr : next),
         lineBarsData: [
           LineChartBarData(
             show: true,
             spots: spots,
             isCurved: true,
-            curveSmoothness: 1,
-            isStrokeJoinRound: true,
+            curveSmoothness: 0,
+            isStrokeJoinRound: false,
             barWidth: 3,
-            isStrokeCapRound: true,
-            preventCurveOverShooting: false,
-            isStepLineChart: true,
+            preventCurveOverShooting: true,
+            isStepLineChart: false,
             dotData: const FlDotData(
               show: false,
             ),
             gradient: LinearGradient(
-              colors: gradientYellowColors,
+              colors: lineColors,
             ),
             belowBarData: BarAreaData(
               show: true,
-              gradient: LinearGradient(colors: gradientRedColors),
+              gradient: LinearGradient(
+                colors: lineColors,
+              ),
             ),
           ),
         ],
@@ -126,31 +136,27 @@ class Chart extends GetView<CurrenciesController> {
       fontSize: 16,
       color: AppColors.graylight,
     );
-    value = spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr < next ? curr : next) -
-        1;
-
     // حساب تاريخ اليوم
     DateTime today = DateTime.now();
 
     // حساب تاريخ اليوم قبل 7 أيام
     DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
+    int dayNumber = sevenDaysAgo.day;
 
     // تنسيق التاريخ باستخدام intl
     String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
 
     // قرر أي تواريخ ترغب في عرضها بناءً على value
     switch (value.toInt()) {
-      case 1:
+      case 13:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 0)));
         break;
-      case 3:
+      case 15:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 3)));
         break;
-      case 4:
+      case 18:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 7)));
         break;
@@ -161,6 +167,11 @@ class Chart extends GetView<CurrenciesController> {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
+      fitInside: const SideTitleFitInsideData(
+          enabled: true,
+          axisPosition: 0,
+          parentAxisSize: 1,
+          distanceFromEdge: 0),
       child: Text(formattedDate, style: style),
     );
   }
