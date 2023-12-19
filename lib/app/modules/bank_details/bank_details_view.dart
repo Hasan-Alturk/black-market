@@ -3,7 +3,6 @@ import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/select_currency_dialog.dart';
 import 'package:black_market/app/modules/bank_details/bank_details_controller.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +27,16 @@ class BankDetailsView extends GetView<BankDetailsController> {
                   Container(
                     decoration: BoxDecoration(
                         color: AppColors.gray,
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.elliptical(120, 20),
-                            bottomRight: Radius.elliptical(120, 20))),
-                    height: context.screenHeight * 0.35,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(120.r, 20.r),
+                            bottomRight: Radius.elliptical(120.r, 20.r))),
+                    height: 280.h,
                     child: Padding(
-                        padding: EdgeInsets.all(context.screenWidth * 0.03),
+                        padding: const EdgeInsets.all(5),
                         child: Column(
                           children: [
                             Padding(
-                              padding:
-                                  EdgeInsets.all(context.screenWidth * 0.02),
+                              padding: const EdgeInsets.all(15),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -56,7 +54,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                               ),
                             ),
                             SizedBox(
-                              height: context.screenHeight * 0.04,
+                              height: 15.h,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -65,22 +63,22 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                 Text(
                                   AppStrings.blackMarketInEng,
                                   style: TextStyle(
-                                      fontSize: 28,
+                                      fontSize: 28.sp,
                                       color: AppColors.yellowNormal,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  height: context.screenHeight * 0.01,
+                                  height: 5.h,
                                 ),
                                 Text(
                                   AppStrings.howMuchInBlackMarket,
                                   style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       color: AppColors.yellowLightActive,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  height: context.screenHeight * 0.01,
+                                  height: 5.h,
                                 ),
                               ],
                             ),
@@ -91,11 +89,10 @@ class BankDetailsView extends GetView<BankDetailsController> {
                       id: "bankInfo",
                       builder: (_) {
                         return Container(
-                            // height: context.screenHeight * 0.15,
-                            width: context.screenWidth * 0.87,
+                            width: 350.w,
                             decoration: BoxDecoration(
                               color: AppColors.yellowLight,
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(24.r),
                             ),
                             child: Column(
                               children: [
@@ -117,21 +114,18 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                       controller.bankData.isEmpty
                                           ? Image.asset(
                                               AppAssetImage.bankMasr,
-                                              height: 25,
-                                              width: 25,
+                                              height: 25.h,
+                                              width: 25.w,
                                             )
                                           : Image.network(
                                               BaseUrls.storageUrl +
                                                   controller
                                                       .bankData.first.bankIcon,
-                                              height: 25,
-                                              width: 25,
+                                              height: 25.h,
+                                              width: 25.w,
                                             ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.001,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -162,7 +156,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                         ],
                                       ),
                                       Container(
-                                        height: context.screenHeight * 0.04,
+                                        height: 45.h,
                                         width: 1,
                                         color: AppColors.lighterGrey,
                                       ),
@@ -189,7 +183,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                         ],
                                       ),
                                       Container(
-                                        height: context.screenHeight * 0.03,
+                                        height: 45.h,
                                         width: 1,
                                         color: AppColors.lighterGrey,
                                       ),
@@ -224,16 +218,14 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 ],
               ),
               SizedBox(
-                height: context.screenHeight * 0.01,
+                height: 15.h,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.w),
                 child: Container(
-                  width: context.screenWidth * 0.80,
                   decoration: BoxDecoration(
                     color: AppColors.yellowNormal,
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                   ),
                   child: Column(
                     children: [
@@ -292,7 +284,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                             }),
                       ),
                       SizedBox(
-                        height: context.screenHeight * 0.01,
+                        height: 10.h,
                       ),
                       GetBuilder<BankDetailsController>(
                           id: "bankPrices",
@@ -327,7 +319,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                                     ],
                                   ),
                                   Container(
-                                    height: context.screenHeight * 0.04,
+                                    height: 40.h,
                                     width: 1,
                                     color: AppColors.yellowDark,
                                   ),
@@ -364,7 +356,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 ),
               ),
               SizedBox(
-                height: context.screenHeight * 0.009,
+                height: 5.h,
               ),
               Padding(
                 padding:
@@ -373,10 +365,9 @@ class BankDetailsView extends GetView<BankDetailsController> {
                     id: "calculatorView",
                     builder: (_) {
                       return Container(
-                        width: context.screenWidth * 0.80,
                         decoration: BoxDecoration(
                           color: AppColors.gray,
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(24.r),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -398,16 +389,16 @@ class BankDetailsView extends GetView<BankDetailsController> {
                     }),
               ),
               SizedBox(
-                height: context.screenHeight * 0.009,
+                height: 20.h,
               ),
               Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                   child: Container(
-                    width: context.screenWidth,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColors.gray,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                     ),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
@@ -507,11 +498,11 @@ class BankDetailsView extends GetView<BankDetailsController> {
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8.r)),
               child: Row(
                 children: [
                   SizedBox(
-                    width: context.screenWidth * 0.008,
+                    width: 15.w,
                   ),
                   Text(
                     controller.bankData.isNotEmpty
@@ -523,29 +514,29 @@ class BankDetailsView extends GetView<BankDetailsController> {
                         fontSize: 12.sp),
                   ),
                   SizedBox(
-                    width: context.screenWidth * 0.008,
+                    width: 15.w,
                   ),
                   controller.latestCurrencyList.isNotEmpty
                       ? Image.network(
                           BaseUrls.storageUrl +
                               controller.egyptCurrency!.icon.toString(),
-                          height: 15,
-                          width: 15,
+                          height: 15.h,
+                          width: 15.w,
                         )
                       : Image.asset(
                           AppAssetImage.bankMasr,
-                          height: 15,
-                          width: 15,
+                          height: 15.h,
+                          width: 15.w,
                         ),
                 ],
               ),
             ),
             SizedBox(
-              width: context.screenWidth * 0.02,
+              width: 10.w,
             ),
             Image.asset(AppAssetIcons.yellowDollar),
             SizedBox(
-              width: context.screenWidth * 0.02,
+              width: 10.w,
             ),
             GestureDetector(
               onTap: () {
@@ -571,7 +562,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                   children: [
                     Image.asset(AppAssetIcons.arrowDown),
                     SizedBox(
-                      width: context.screenWidth * 0.008,
+                      width: 10.w,
                     ),
                     Text(
                       controller.currency.isNotEmpty
@@ -583,19 +574,19 @@ class BankDetailsView extends GetView<BankDetailsController> {
                           fontSize: 12.sp),
                     ),
                     SizedBox(
-                      width: context.screenWidth * 0.008,
+                      width: 10.w,
                     ),
                     controller.currency.isNotEmpty
                         ? Image.network(
                             BaseUrls.storageUrl +
                                 controller.currency.first.currencyIcon,
-                            width: 15,
-                            height: 15,
+                            width: 15.w,
+                            height: 15.h,
                           )
                         : Image.asset(
                             AppAssetImage.avatar,
-                            height: 15,
-                            width: 15,
+                            height: 15.h,
+                            width: 15.w,
                           )
                   ],
                 ),
@@ -607,7 +598,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
           padding: const EdgeInsets.all(9),
           decoration: BoxDecoration(
             color: AppColors.yellowNormal,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -618,7 +609,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                     color: AppColors.blackNormal, fontWeight: FontWeight.w700),
               ),
               SizedBox(
-                width: context.screenWidth * 0.007,
+                width: 5.w,
               ),
               Image.asset(AppAssetIcons.calculator),
             ],
@@ -630,13 +621,13 @@ class BankDetailsView extends GetView<BankDetailsController> {
 
   Widget _buildCalculateText(BuildContext context) {
     return Container(
-      height: context.screenHeight * 0.045,
-      width: context.screenWidth * 0.5,
+      height: 35.h,
+      width: 200.w,
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.greyNormal,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(children: [
         ElevatedButton(
@@ -647,11 +638,11 @@ class BankDetailsView extends GetView<BankDetailsController> {
             padding: const MaterialStatePropertyAll(EdgeInsets.all(4)),
             backgroundColor: MaterialStatePropertyAll(AppColors.yellowNormal),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              const RoundedRectangleBorder(
+              RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
+                    topLeft: Radius.circular(8.r),
                     topRight: Radius.zero,
-                    bottomLeft: Radius.circular(8),
+                    bottomLeft: Radius.circular(8.r),
                     bottomRight: Radius.zero),
               ),
             ),
@@ -663,14 +654,14 @@ class BankDetailsView extends GetView<BankDetailsController> {
           ),
         ),
         SizedBox(
-          width: context.screenWidth * 0.24,
+          width: 100.w,
           child: TextField(
             controller: controller.amountController.value,
             keyboardType: TextInputType.number,
             cursorColor: AppColors.yellowNormal,
             style: TextStyle(
                 fontWeight: FontWeight.w400,
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: AppColors.greyNormalActive),
             textAlign: TextAlign.right,
             decoration: InputDecoration(
@@ -678,7 +669,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 hintText: AppStrings.enterAmount,
                 hintStyle: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: AppColors.greyNormalActive)),
           ),
         ),
@@ -695,7 +686,7 @@ class BankDetailsView extends GetView<BankDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: context.screenWidth * 0.35,
+                width: 150.w,
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(8))),
@@ -712,17 +703,17 @@ class BankDetailsView extends GetView<BankDetailsController> {
                 ),
               ),
               SizedBox(
-                width: context.screenWidth * 0.02,
+                width: 10.w,
               ),
               Image.asset(AppAssetIcons.equal),
               SizedBox(
-                width: context.screenWidth * 0.02,
+                width: 10.w,
               ),
               Container(
-                width: context.screenWidth * 0.35,
+                width: 100.w,
                 decoration: BoxDecoration(
                     color: AppColors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(8))),
+                    borderRadius: BorderRadius.all(Radius.circular(8.r))),
                 padding: const EdgeInsets.all(5),
                 child: Text(
                   controller.amountController.value.text.isNotEmpty

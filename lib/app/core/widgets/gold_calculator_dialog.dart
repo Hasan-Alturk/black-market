@@ -1,13 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:black_market/app/core/constants/app_asset_icons.dart';
+import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'package:black_market/app/core/constants/app_asset_icons.dart';
-import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 
 class GoldCalculatorDialog extends GetView<MainGoldController> {
   List<String> karat;
@@ -32,11 +30,11 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: context.screenHeight * 0.39,
-        width: context.screenWidth * 0.92,
+        height: 320.h,
+        width: 380.w,
         decoration: BoxDecoration(
           color: AppColors.gray,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -54,7 +52,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                   ),
                 ),
                 SizedBox(
-                  height: context.screenHeight * 0.015,
+                  height: 15.h,
                 ),
                 Card(
                   elevation: 0,
@@ -67,7 +65,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                       cursorColor: AppColors.yellowNormal,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: AppColors.yellowNormal),
                       textAlign: TextAlign.right,
                       decoration: InputDecoration(
@@ -75,15 +73,15 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                           focusedBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: AppColors.yellowNormal),
-                              borderRadius: BorderRadius.circular(12)),
+                              borderRadius: BorderRadius.circular(12.r)),
                           border: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: AppColors.greyNormal),
-                              borderRadius: BorderRadius.circular(12)),
+                              borderRadius: BorderRadius.circular(12.r)),
                           labelText: AppStrings.totalPaidAmount,
                           labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: AppColors.greyNormalActive)),
                     ),
                   ),
@@ -92,7 +90,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: context.screenWidth * 0.4,
+                      width: 180.w,
                       child: Card(
                           elevation: 0,
                           color: AppColors.gray,
@@ -104,16 +102,16 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: AppColors.yellowNormal),
-                                    borderRadius: BorderRadius.circular(12)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                                 border: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: AppColors.greyNormal),
-                                    borderRadius: BorderRadius.circular(12)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                               ),
                               hint: Text(AppStrings.caliber,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       color: AppColors.greyNormalActive)),
                               focusColor: AppColors.yellowNormal,
                               value: null,
@@ -138,7 +136,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                           )),
                     ),
                     SizedBox(
-                      width: context.screenWidth * 0.45,
+                      width: 170.w,
                       child: Card(
                         elevation: 0,
                         color: AppColors.gray,
@@ -150,7 +148,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                             cursorColor: AppColors.yellowNormal,
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: AppColors.yellowNormal),
                             textAlign: TextAlign.right,
                             decoration: InputDecoration(
@@ -158,11 +156,11 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: AppColors.yellowNormal),
-                                    borderRadius: BorderRadius.circular(12)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                                 border: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: AppColors.greyNormal),
-                                    borderRadius: BorderRadius.circular(12)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                                 labelText: AppStrings.totalWeightInGram,
                                 labelStyle: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -174,20 +172,14 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: context.screenHeight * 0.02,
-                ),
+                SizedBox(height: 25.h),
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(AppColors.yellowNormal),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8)),
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8.r)),
                         ),
                       ),
                     ),
@@ -198,9 +190,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                           color: AppColors.blackNormal,
                           fontWeight: FontWeight.w700),
                     )),
-                SizedBox(
-                  height: context.screenHeight * 0.01,
-                ),
+                const SizedBox(height: 10),
                 GetBuilder<MainGoldController>(
                     id: "workshipContainer",
                     builder: (context) {

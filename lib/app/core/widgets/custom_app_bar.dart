@@ -1,7 +1,7 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             text,
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 18 * context.textScale,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w700,
             ),
           ),

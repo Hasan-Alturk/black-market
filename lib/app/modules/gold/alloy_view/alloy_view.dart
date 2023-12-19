@@ -1,7 +1,6 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +18,7 @@ class AlloyView extends GetView<MainGoldController> {
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.all(context.screenHeight * 0.01),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             SizedBox(
@@ -53,7 +52,7 @@ class AlloyView extends GetView<MainGoldController> {
                                               .goldCompanyList[index].image)),
                                 ),
                                 SizedBox(
-                                  height: context.screenHeight * 0.005,
+                                  height: 15.h,
                                 ),
                                 Text(
                                   key: Key(index.toString()), //attention
@@ -101,8 +100,8 @@ class AlloyView extends GetView<MainGoldController> {
                                       shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               color: AppColors.yellowNormal),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(12))),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12.r))),
                                       iconColor: AppColors.white,
                                       collapsedIconColor: AppColors.white,
                                       title: Text(

@@ -29,7 +29,7 @@ class Chart extends GetView<CurrenciesController> {
         AspectRatio(
           aspectRatio: 1,
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 35, right: 35),
             child: LineChart(
               mainData(),
               curve: Curves.easeInBack,
@@ -104,11 +104,8 @@ class Chart extends GetView<CurrenciesController> {
           LineChartBarData(
             show: true,
             spots: spots,
-            isCurved: true,
-            curveSmoothness: 0,
-            isStrokeJoinRound: false,
+            isCurved: false,
             barWidth: 3,
-            preventCurveOverShooting: true,
             isStepLineChart: false,
             dotData: const FlDotData(
               show: false,
@@ -117,7 +114,7 @@ class Chart extends GetView<CurrenciesController> {
               colors: lineColors,
             ),
             belowBarData: BarAreaData(
-              show: true,
+              show: false,
               gradient: LinearGradient(
                 colors: lineColors,
               ),
@@ -152,11 +149,11 @@ class Chart extends GetView<CurrenciesController> {
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 0)));
         break;
-      case 15:
+      case 16:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 3)));
         break;
-      case 18:
+      case 19:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 7)));
         break;

@@ -1,9 +1,8 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
-import 'package:black_market/app/core/widgets/card_item.dart';
 import 'package:black_market/app/modules/favourite/favourite_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class FavouriteView extends GetView<FavouriteController> {
@@ -17,7 +16,7 @@ class FavouriteView extends GetView<FavouriteController> {
           child: Text(
             AppStrings.favourite,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
@@ -30,7 +29,7 @@ class FavouriteView extends GetView<FavouriteController> {
           child: ListView(
         children: [
           SizedBox(
-            height: context.screenHeight * 0.08,
+            height: 15.h,
           ),
           GridView.builder(
             scrollDirection: Axis.vertical,
@@ -38,12 +37,12 @@ class FavouriteView extends GetView<FavouriteController> {
             physics: const ScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
-                childAspectRatio: 1.1,
+                childAspectRatio: 1,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 10),
             itemCount: 6,
             itemBuilder: (ctx, i) => GestureDetector(
-              //  child:  CardItem(),
+                //  child:  CardItem(),
                 onTap: () => controller.goToBankDetails()),
           )
         ],

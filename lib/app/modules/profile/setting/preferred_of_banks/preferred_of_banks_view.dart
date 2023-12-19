@@ -1,7 +1,6 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/plugin/plugin_media_que.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_drag.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
@@ -23,7 +22,7 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(context.screenWidth * 0.03),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -66,12 +65,12 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
                 ),
               ),
               SizedBox(
-                height: context.screenHeight * 0.05,
+                height: 15.h,
               ),
               Text(
                 AppStrings.dragBank,
                 style: TextStyle(
-                  fontSize: 16 * context.textScale,
+                  fontSize: 16.sp,
                   color: AppColors.white,
                   fontWeight: FontWeight.w700,
                 ),

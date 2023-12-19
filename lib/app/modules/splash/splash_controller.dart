@@ -47,8 +47,7 @@ class SplashController extends GetxController {
   Future<void> checkToken() async {
     await getSetting();
     await getBanks().then((value) => getSortedBanks());
-    await getLatestCurrency();
-    // .then((value) => getLatestCurrencySorted());
+    await getLatestCurrency().then((value) => getLatestCurrencySorted());
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -100,62 +99,31 @@ class SplashController extends GetxController {
 
   Future<void> getLatestCurrency() async {
     try {
-      await SharedStorage.deleteCurrencies();
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
       await SharedStorage.saveCurrencies(latestCurrencies);
-      List<LatestCurrency> latestCurrenciesSorted =
-          await SharedStorage.getCurrenciesSorted();
-      List<LatestCurrency> temp = [];
-      for (var element in latestCurrenciesSorted) {
-        for (var element2 in latestCurrencies) {
-          if (element.name == element2.name) {
-            temp.add(LatestCurrency(
-                id: element2.id,
-                banner: element2.banner,
-                icon: element2.icon,
-                name: element2.name,
-                code: element2.code,
-                canBeMain: element2.canBeMain,
-                sort: element.sort,
-                showNetworkImage: element2.showNetworkImage,
-                lastUpdate: element2.lastUpdate,
-                createdAt: element2.createdAt,
-                updatedAt: element2.updatedAt,
-                livePrices: element2.livePrices,
-                blackMarketPrices: element2.blackMarketPrices,
-                bankPrices: element2.bankPrices));
-          }
-        }
-        log(element.sort.toString());
-      }
-      for (var element in temp) {
-        log(element.sort.toString() + element.name.toString());
-      }
-      await SharedStorage.saveCurrenciesSorted(temp);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
   }
 
-  // Future<void> getLatestCurrencySorted() async {
-  //   try {
-  //     List<LatestCurrency> latestCurrencies =
-  //         await SharedStorage.getCurrencies();
-  //     List<LatestCurrency> latestCurrenciesSorted =
-  //         await SharedStorage.getCurrenciesSorted();
-  //     // for (var element1 in latestCurrencies) {
-  //     //   for (var element2 in latestCurrenciesSorted) {
-  //     //     if (element1.sort != element2.sort) {
-  //     //       element1.sort = element2.sort;
-  //     //     }
-  //     //   }
-  //     // }
-  //     await SharedStorage.saveCurrenciesSorted(latestCurrencies);
-  //   } on ExceptionHandler catch (e) {
-  //     log("Error: $e");
-  //   }
-  // }
+  Future<void> getLatestCurrencySorted() async {
+    try {
+      List<LatestCurrency> latestCurrencies =
+          await SharedStorage.getCurrencies();
+      List<LatestCurrency> latestCurrenciesSorted =
+          await SharedStorage.getCurrenciesSorted();
+      for (var element1 in latestCurrencies) {
+        for (var element2 in latestCurrenciesSorted) {
+          if (element1.sort != element2.sort) {
+            element1.sort = element2.sort;
+          }
+        }
+      }
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
 
   Future<void> getSortedBanks() async {
     try {

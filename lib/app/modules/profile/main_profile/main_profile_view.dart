@@ -17,129 +17,132 @@ class MainProfileView extends GetView<MainProfileController> {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20.h,
-            ),
-            Center(
-              child: Text(
-                AppStrings.profile,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20.h,
+              ),
+              Center(
+                child: Text(
+                  AppStrings.profile,
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
-            GetBuilder<MainProfileController>(
-                id: "name_and_avatar",
-                builder: (_) {
-                  return Column(
-                    children: [
-                      controller.avatar == ""
-                          ? const SizedBox()
-                          : CircleAvatar(
-                              radius: 35.r,
-                              child: Image.network(
-                                BaseUrls.storageUrl + controller.avatar,
-                              ),
-                            ),
-                      SizedBox(height: 15.h),
-                      Text(
-                        controller.name,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: AppColors.yellowNormal,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-            SizedBox(
-              height: 80.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.shareTheApp,
-              stringIcon: AppAssetIcons.share,
-              onTap: () {},
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.aboutApp,
-              stringIcon: AppAssetIcons.info,
-              onTap: () {
-                controller.goToAboutApp();
-              },
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.mainCurrency,
-              stringIcon: AppAssetIcons.dollar,
-              onTap: () => controller.goToMainCuurency(),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.setting,
-              stringIcon: AppAssetIcons.setting,
-              onTap: () {
-                controller.goToMainSetting();
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return GetBuilder<MainProfileController>(
-                      id: "LogOut",
-                      builder: (context) {
-                        return CustomAlarteDialog(
-                          text: AppStrings.areYouSureToLogout,
-                          contentButton: AppStrings.logout,
-                          isLoading: controller.isLoading,
-                          onTap: Get.back,
-                          onPressed: () => controller.logOut(),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppStrings.logout,
-                    style: TextStyle(
-                      color: AppColors.red,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Image.asset(
-                    AppAssetIcons.logout,
-                  ),
-                ],
+              SizedBox(
+                height: 30.h,
               ),
-            )
-          ],
+              GetBuilder<MainProfileController>(
+                  id: "name_and_avatar",
+                  builder: (_) {
+                    return Column(
+                      children: [
+                        controller.avatar == ""
+                            ? const SizedBox()
+                            : CircleAvatar(
+                                radius: 35.r,
+                                child: Image.network(
+                                  BaseUrls.storageUrl + controller.avatar,
+                                ),
+                              ),
+                        SizedBox(height: 15.h),
+                        Text(
+                          controller.name,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: AppColors.yellowNormal,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(
+                height: 80.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.shareTheApp,
+                stringIcon: AppAssetIcons.share,
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.aboutApp,
+                stringIcon: AppAssetIcons.info,
+                onTap: () {
+                  controller.goToAboutApp();
+                },
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.mainCurrency,
+                stringIcon: AppAssetIcons.dollar,
+                onTap: () => controller.goToMainCuurency(),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.setting,
+                stringIcon: AppAssetIcons.setting,
+                onTap: () {
+                  controller.goToMainSetting();
+                },
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return GetBuilder<MainProfileController>(
+                        id: "LogOut",
+                        builder: (context) {
+                          return CustomAlarteDialog(
+                            text: AppStrings.areYouSureToLogout,
+                            contentButton: AppStrings.logout,
+                            isLoading: controller.isLoading,
+                            onTap: Get.back,
+                            onPressed: () => controller.logOut(),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.logout,
+                      style: TextStyle(
+                        color: AppColors.red,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Image.asset(
+                      AppAssetIcons.logout,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
