@@ -165,11 +165,11 @@ class Chart extends GetView<CurrenciesController> {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      fitInside: const SideTitleFitInsideData(
-          enabled: true,
-          axisPosition: 0,
-          parentAxisSize: 1,
-          distanceFromEdge: 0),
+      // fitInside: const SideTitleFitInsideData(
+      //     enabled: true,
+      //     axisPosition: 1,
+      //     parentAxisSize: 1,
+      //     distanceFromEdge: 0),
       child: Text(formattedDate, style: style),
     );
   }
