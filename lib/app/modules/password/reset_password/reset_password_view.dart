@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class ResetPasswordView extends GetView<ResetPasswordController> {
   ResetPasswordView({Key? key}) : super(key: key);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

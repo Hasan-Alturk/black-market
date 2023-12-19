@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
 
@@ -138,7 +139,7 @@ class Chart extends GetView<CurrenciesController> {
 
     // حساب تاريخ اليوم قبل 7 أيام
     DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
-    int dayNumber = sevenDaysAgo.day;
+    //int dayNumber = sevenDaysAgo.day;
 
     // تنسيق التاريخ باستخدام intl
     String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);

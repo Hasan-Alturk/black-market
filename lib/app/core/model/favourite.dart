@@ -24,13 +24,13 @@ class Favourite {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['user_id'] = userId;
-    _data['currency_id'] = currencyId;
-    _data['bank_id'] = bankId;
-    _data['updated_at'] = updatedAt;
-    _data['created_at'] = createdAt;
-    _data['id'] = id;
-    return _data;
+    final data = <String, dynamic>{};
+    data['user_id'] = userId;
+    data['currency_id'] = currencyId;
+    data['bank_id'] = bankId;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
+    data['id'] = id;
+    return data;
   }
 }

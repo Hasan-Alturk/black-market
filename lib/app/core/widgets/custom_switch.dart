@@ -2,6 +2,7 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: must_be_immutable
 class CustomSwitch extends StatelessWidget {
   CustomSwitch({
     super.key,
