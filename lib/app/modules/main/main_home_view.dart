@@ -4,19 +4,26 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/modules/currencies/currencies_view.dart';
 import 'package:black_market/app/modules/favourite/favourite_view.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_view.dart';
+import 'package:black_market/app/modules/login/login_view.dart';
 import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainHomeView extends GetView<MainHomeController> {
- const MainHomeView({super.key});
+  MainHomeView({super.key});
 
-  final screens =const [
-     MainProfileView(),
-     FavouriteView(),
-     MainGoldView(),
-     CurrenciesView(),
+  final screens1 = [
+    LoginView(),
+    const FavouriteView(),
+    const MainGoldView(),
+    const CurrenciesView(),
+  ];
+  final screens2 = [
+    const MainProfileView(),
+    const FavouriteView(),
+    const MainGoldView(),
+    const CurrenciesView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,9 @@ class MainHomeView extends GetView<MainHomeController> {
       body: GetBuilder<MainHomeController>(
           id: "MainHomeViewScreenGetBuilder",
           builder: (_) {
-            return screens[controller.pageIndex];
+            return controller.tokenChecked
+                ? screens1[controller.pageIndex]
+                : screens2[controller.pageIndex];
           }),
 
       // PageView(
@@ -47,7 +56,6 @@ class MainHomeView extends GetView<MainHomeController> {
                   label: AppStrings.profile,
                   backgroundColor: AppColors.gray,
                   activeIcon: Image.asset(AppAssetIcons.yellowProfile)),
-             
               BottomNavigationBarItem(
                 icon: Image.asset(AppAssetIcons.heart),
                 label: AppStrings.favourite,
@@ -60,7 +68,7 @@ class MainHomeView extends GetView<MainHomeController> {
                 activeIcon: Image.asset(AppAssetIcons.yellowGold),
                 backgroundColor: AppColors.gray,
               ),
-                   BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Image.asset(AppAssetIcons.dollar),
                 label: AppStrings.coins,
                 activeIcon: Image.asset(AppAssetIcons.yellowDollar),

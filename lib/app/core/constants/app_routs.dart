@@ -82,7 +82,7 @@ List<GetPage> approuts = [
   ),
   GetPage(
     name: "/main_home",
-    page: () => const MainHomeView(),
+    page: () =>  MainHomeView(),
     binding: MainHomeBinding(),
   ),
   GetPage(
