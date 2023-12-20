@@ -1,9 +1,6 @@
 import 'dart:developer';
 
-import 'package:black_market/app/core/model/user_setting.dart';
-import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
-import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:black_market/app/modules/currencies/currencies_binding.dart';
 import 'package:black_market/app/modules/favourite/favourite_binding.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_binding.dart';
@@ -58,29 +55,29 @@ class MainHomeController extends GetxController {
     }
   }
 
-  Future<UserSetting> getUserSetting() async {
-    try {
-      String? token = await SharedStorage.getToken();
+  // Future<UserSetting> getUserSetting() async {
+  //   try {
+  //     String? token = await SharedStorage.getToken();
 
-      UserSetting userSetting = await settingRepo.getUserSetting(
-        token: token.toString(),
-      );
+  //     UserSetting userSetting = await settingRepo.getUserSetting(
+  //       token: token.toString(),
+  //     );
 
-      await SharedStorage.saveUserSetting(userSetting);
-      return userSetting;
-    } on ExceptionHandler catch (e) {
-      log("Error: $e");
+  //     await SharedStorage.saveUserSetting(userSetting);
+  //     return userSetting;
+  //   } on ExceptionHandler catch (e) {
+  //     log("Error: $e");
 
-      throw ExceptionHandler("Unknown error");
-    }
-  }
+  //     throw ExceptionHandler("Unknown error");
+  //   }
+  // }
 
   Future<bool> checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
     if (token != null && token.isNotEmpty) {
-      await getUserSetting();
+      //  await getUserSetting();
       return false;
     } else {
       return true;

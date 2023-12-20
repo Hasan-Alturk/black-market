@@ -34,10 +34,12 @@ class LoginController extends GetxController {
         password: passwordController.text,
       );
       SharedStorage.saveTokenAndRememberMe(
-          mainUser.accessToken, rememberMe.value);
+        mainUser.accessToken,
+        rememberMe.value,
+      );
       await getUserSetting();
 
-      Get.offAllNamed("/main_home");
+      Get.toNamed("/main_profile");
 
       isLoading = false;
       update(["TextError", "ElevatedButton"]);
@@ -70,10 +72,6 @@ class LoginController extends GetxController {
 
   void goToRegister() {
     Get.toNamed("/register");
-  }
-
-  void goToHome() {
-    Get.offAllNamed("/main_home");
   }
 
   void goToSendOtp() {
