@@ -10,21 +10,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainHomeView extends GetView<MainHomeController> {
-  const MainHomeView({super.key});
+ const MainHomeView({super.key});
 
+  final screens =const [
+     MainProfileView(),
+     FavouriteView(),
+     MainGoldView(),
+     CurrenciesView(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: controller.pageController,
-        children: const [
-          CurrenciesView(),
-          MainGoldView(),
-          FavouriteView(),
-          MainProfileView(),
-        ],
-      ),
+      body: GetBuilder<MainHomeController>(
+          id: "MainHomeViewScreenGetBuilder",
+          builder: (_) {
+            return screens[controller.pageIndex];
+          }),
+
+      // PageView(
+      //   physics: const NeverScrollableScrollPhysics(),
+      //   controller: controller.pageController,
+      //   children: const [
+
+      //   ],
+      // ),
       bottomNavigationBar: GetBuilder<MainHomeController>(
         id: "MainHomeViewGetBuilder",
         builder: (_) {
@@ -34,9 +43,15 @@ class MainHomeView extends GetView<MainHomeController> {
             selectedItemColor: AppColors.yellowNormalActive,
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssetIcons.dollar),
-                label: AppStrings.coins,
-                activeIcon: Image.asset(AppAssetIcons.yellowDollar),
+                  icon: Image.asset(AppAssetIcons.profile),
+                  label: AppStrings.profile,
+                  backgroundColor: AppColors.gray,
+                  activeIcon: Image.asset(AppAssetIcons.yellowProfile)),
+             
+              BottomNavigationBarItem(
+                icon: Image.asset(AppAssetIcons.heart),
+                label: AppStrings.favourite,
+                activeIcon: Image.asset(AppAssetIcons.yellowHeart),
                 backgroundColor: AppColors.gray,
               ),
               BottomNavigationBarItem(
@@ -45,17 +60,12 @@ class MainHomeView extends GetView<MainHomeController> {
                 activeIcon: Image.asset(AppAssetIcons.yellowGold),
                 backgroundColor: AppColors.gray,
               ),
-              BottomNavigationBarItem(
-                icon: Image.asset(AppAssetIcons.heart),
-                label: AppStrings.favourite,
-                activeIcon: Image.asset(AppAssetIcons.yellowHeart),
+                   BottomNavigationBarItem(
+                icon: Image.asset(AppAssetIcons.dollar),
+                label: AppStrings.coins,
+                activeIcon: Image.asset(AppAssetIcons.yellowDollar),
                 backgroundColor: AppColors.gray,
               ),
-              BottomNavigationBarItem(
-                  icon: Image.asset(AppAssetIcons.profile),
-                  label: AppStrings.profile,
-                  backgroundColor: AppColors.gray,
-                  activeIcon: Image.asset(AppAssetIcons.yellowProfile)),
             ],
           );
         },

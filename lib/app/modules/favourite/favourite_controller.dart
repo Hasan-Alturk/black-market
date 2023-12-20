@@ -4,4 +4,5 @@ class FavouriteController extends GetxController {
   void goToBankDetails() {
     Get.offNamed("/bank_details");
   }
+  
 }

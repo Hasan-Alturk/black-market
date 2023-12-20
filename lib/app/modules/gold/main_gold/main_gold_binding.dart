@@ -11,4 +11,7 @@ class MainGoldBinding extends Bindings {
       goldRepo: Get.find<GoldRepo>(),
     ));
   }
+  void deleteController() {
+    Get.delete<MainGoldController>();
+  }
 }

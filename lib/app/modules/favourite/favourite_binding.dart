@@ -6,4 +6,7 @@ class FavouriteBinding extends Bindings {
   void dependencies() {
     Get.put(FavouriteController());
   }
+  void deleteController() {
+    Get.delete<FavouriteController>();
+  }
 }

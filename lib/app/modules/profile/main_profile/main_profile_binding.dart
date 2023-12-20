@@ -9,4 +9,8 @@ class MainProfileBinding extends Bindings {
       settingRepo: Get.find<SettingRepo>(),
     ));
   }
+
+  void deleteController() {
+    Get.delete<MainProfileController>();
+  }
 }
