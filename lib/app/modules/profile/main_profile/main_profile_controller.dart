@@ -19,7 +19,7 @@ class MainProfileController extends GetxController {
 
   @override
   void onInit() async {
-   // await getNameAndAvatar();
+   await getNameAndAvatar();
     super.onInit();
   }
 
@@ -47,7 +47,7 @@ class MainProfileController extends GetxController {
       await prefs.remove('token');
       await prefs.remove('user_setting');
 
-      Get.offAllNamed("/login");
+      Get.offAllNamed("/main_home");
       isLoading = false;
 
       update(["LogOut"]);

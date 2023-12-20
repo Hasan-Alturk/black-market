@@ -1,25 +1,32 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/model/user_setting.dart';
+import 'package:black_market/app/core/plugin/shared_storage.dart';
+import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:black_market/app/modules/currencies/currencies_binding.dart';
 import 'package:black_market/app/modules/favourite/favourite_binding.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_binding.dart';
 import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainHomeController extends GetxController {
   // PageController pageController = PageController();
+  final SettingRepo settingRepo;
 
   int pageIndex = 3;
   bool tokenChecked = false;
-@override
+
+  MainHomeController({required this.settingRepo});
+  @override
   Future<void> onInit() async {
     super.onInit();
-   tokenChecked = await checkToken();
+    pageIndex = 3;
+    tokenChecked = await checkToken();
   }
+
   Future<void> changePage(int pageIndex) async {
     this.pageIndex = pageIndex;
     // pageController.jumpToPage(pageIndex);
@@ -42,18 +49,29 @@ class MainHomeController extends GetxController {
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
     } else if (pageIndex == 0) {
-      log("token ${tokenChecked}");
-      if(tokenChecked){
-      LoginBinding().dependencies();
-
-      }else{
-      MainProfileBinding().dependencies();
-
+      log("token $tokenChecked");
+      if (tokenChecked) {
+        LoginBinding().dependencies();
+      } else {
+        MainProfileBinding().dependencies();
       }
-      // MainProfileBinding().dependencies();
-      // MainGoldBinding().deleteController();
-      // FavouriteBinding().deleteController();
-      // CurrenciesBinding().deleteController();
+    }
+  }
+
+  Future<UserSetting> getUserSetting() async {
+    try {
+      String? token = await SharedStorage.getToken();
+
+      UserSetting userSetting = await settingRepo.getUserSetting(
+        token: token.toString(),
+      );
+
+      await SharedStorage.saveUserSetting(userSetting);
+      return userSetting;
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+
+      throw ExceptionHandler("Unknown error");
     }
   }
 
@@ -62,13 +80,9 @@ class MainHomeController extends GetxController {
     String? token = prefs.getString('token');
 
     if (token != null && token.isNotEmpty) {
-      // await getUserSetting();
+      await getUserSetting();
       return false;
-
-      // Get.offAllNamed("/main_home");
     } else {
-      // Get.offAllNamed("/main_home");
-      // Get.offAllNamed("/login");
       return true;
     }
   }
