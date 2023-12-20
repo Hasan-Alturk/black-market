@@ -21,7 +21,8 @@ class CurrenciesView extends GetView<CurrenciesController> {
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
-              // عند سحب الشاشة، قم بجلب البيانات الجديدة
+              await controller.getLatestCurrency();
+              await controller.getBanks();
             },
             child: ListView(
               children: [
@@ -29,16 +30,16 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   Container(
                     decoration: BoxDecoration(
                         color: AppColors.gray,
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.elliptical(120, 20),
-                            bottomRight: Radius.elliptical(120, 20))),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(120.r, 20.r),
+                            bottomRight: Radius.elliptical(120.r, 20.r))),
                     height: 280.h,
                     child: Padding(
-                      padding: EdgeInsets.all(8.w),
+                      padding: const EdgeInsets.all(8),
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.w),
+                            padding: const EdgeInsets.all(8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -402,7 +403,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   height: 20.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.h),
+                  padding: const EdgeInsets.all(12),
                   child: GetBuilder<CurrenciesController>(
                       id: "bankList",
                       builder: (_) {

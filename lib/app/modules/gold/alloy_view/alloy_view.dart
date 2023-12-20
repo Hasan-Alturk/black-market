@@ -18,11 +18,11 @@ class AlloyView extends GetView<MainGoldController> {
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             SizedBox(
-              height: 90.h,
+              height: 100.h,
               child: GetBuilder<MainGoldController>(
                   id: "goldCompanyInIngots",
                   builder: (_) {
@@ -69,6 +69,9 @@ class AlloyView extends GetView<MainGoldController> {
                           );
                         });
                   }),
+            ),
+            SizedBox(
+              height: 15.h,
             ),
             GetBuilder<MainGoldController>(
                 id: "ingotListView",

@@ -8,23 +8,23 @@ import 'package:black_market/app/core/model/historical_currency_live_prices.dart
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
+import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
-  CurrenciesController({required this.currencyRepo});
-
+  CurrenciesController({required this.currencyRepo, required this.bankRepo});
   final CurrencyRepo currencyRepo;
+  final BankRepo bankRepo;
 
+  String? error;
   int selectedCurrencyId = 19;
   String name = "";
   String avatar = "";
-  List<CurrencyInHome> currency = [];
   num avgBuyPrice = 0;
   num avgSellPrice = 0;
-
-  String? error;
+  List<CurrencyInHome> currency = [];
   List<Bank> bankList = [];
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> currencyInBankList = [];
@@ -34,18 +34,18 @@ class CurrenciesController extends GetxController {
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
   @override
-  void onInit() {
+  void onInit() async {
     //   getHistoricalCurrencyBlackPrices();
-    getBanksFromPrefs();
-    getLatestCurrenciesFromPrefs().then((value) async {
+    await getBanksFromPrefs();
+    await getLatestCurrenciesFromPrefs().then((value) async {
       if (latestCurrencyList.isNotEmpty) {
         selectedCurrencyId = latestCurrencyList[0].id!;
         await getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
         getCurrencyInBank(latestCurrencyList[0].id!);
-        getHistoricalCurrencyLivePrices();
+        await getHistoricalCurrencyLivePrices();
       }
     });
-    getNameAndAvatar();
+    //getNameAndAvatar();
     super.onInit();
   }
 
@@ -104,8 +104,9 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> getBanksFromPrefs() async {
-    bankList.clear();
-    var banks = await SharedStorage.getSortedBanks();
+    // bankList.clear();
+    // var banks = await SharedStorage.getSortedBanks();
+    List<Bank> banks = await SharedStorage.getBanks();
     if (banks.isNotEmpty) {
       bankList.clear();
       bankList.addAll(banks);
@@ -116,15 +117,15 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
-    latestCurrencyList.clear();
-    var currencies = await SharedStorage.getCurrenciesSorted();
+    // latestCurrencyList.clear();
+    //List<LatestCurrency> currencies = await SharedStorage.getCurrenciesSorted();
+    List<LatestCurrency> currencies = await SharedStorage.getCurrencies();
     if (currencies.isNotEmpty) {
       currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
     } else {
       return;
     }
-    log("message");
   }
 
   Future<void> getNameAndAvatar() async {
@@ -230,6 +231,27 @@ class CurrenciesController extends GetxController {
         update(["averageContainer"]);
         // log("Average = ${avgBuyPrice / e.bankPrices!.length}");
       }
+    }
+  }
+
+  Future<void> getBanks() async {
+    try {
+      List<Bank> banks = await bankRepo.getBanks();
+      await SharedStorage.saveBanks(banks);
+      // update();
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
+    }
+  }
+
+  Future<void> getLatestCurrency() async {
+    try {
+      List<LatestCurrency> latestCurrencies =
+          await currencyRepo.getLatestCurrencies();
+      await SharedStorage.saveCurrencies(latestCurrencies);
+      // update();
+    } on ExceptionHandler catch (e) {
+      log("Error: $e");
     }
   }
 }

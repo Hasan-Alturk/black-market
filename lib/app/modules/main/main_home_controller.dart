@@ -23,5 +23,4 @@ class MainHomeController extends GetxController {
       MainProfileBinding().dependencies();
     }
   }
-
 }

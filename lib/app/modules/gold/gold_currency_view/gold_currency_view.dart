@@ -22,10 +22,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
         child: Column(
           children: [
             SizedBox(
-              height: 24.h,
-            ),
-            SizedBox(
-              height: 90.h,
+              height: 100.h,
               child: GetBuilder<MainGoldController>(
                 id: "goldCompanyInCoins",
                 builder: (_) {
@@ -54,7 +51,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
                                   )),
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 15.h,
                             ),
                             Text(
                               key: Key(index.toString()), //attention
@@ -75,7 +72,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
               ),
             ),
             SizedBox(
-              height: 24.h,
+              height: 15.h,
             ),
             GetBuilder<MainGoldController>(
                 id: "coinsListView",

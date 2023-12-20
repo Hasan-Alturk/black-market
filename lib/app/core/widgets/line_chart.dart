@@ -143,10 +143,8 @@ class Chart extends GetView<CurrenciesController> {
 
     // تنسيق التاريخ باستخدام intl
     String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
-
-    // قرر أي تواريخ ترغب في عرضها بناءً على value
     switch (value.toInt()) {
-      case 13:
+      case 14:
         formattedDate = DateFormat('MMM d')
             .format(sevenDaysAgo.add(const Duration(days: 0)));
         break;

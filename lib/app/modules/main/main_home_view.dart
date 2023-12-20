@@ -28,18 +28,9 @@ class MainHomeView extends GetView<MainHomeController> {
       bottomNavigationBar: GetBuilder<MainHomeController>(
         id: "MainHomeViewGetBuilder",
         builder: (_) {
-          //  ClipRRect(
-          //   borderRadius: const BorderRadius.only(
-          //     topRight: Radius.circular(18),
-          //     topLeft: Radius.circular(18),
-          //   ),
-          //   child:
           return BottomNavigationBar(
             onTap: controller.changePage,
-
             currentIndex: controller.pageIndex,
-
-            //  selectedLabelStyle: ,
             selectedItemColor: AppColors.yellowNormalActive,
             items: [
               BottomNavigationBarItem(

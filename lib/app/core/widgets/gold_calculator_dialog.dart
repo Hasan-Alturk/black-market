@@ -30,7 +30,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: 320.h,
+        height: 300.h,
         width: 380.w,
         decoration: BoxDecoration(
           color: AppColors.gray,
@@ -172,7 +172,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                     ),
                   ],
                 ),
-                SizedBox(height: 25.h),
+                SizedBox(height: 15.h),
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
@@ -190,7 +190,7 @@ class GoldCalculatorDialog extends GetView<MainGoldController> {
                           color: AppColors.blackNormal,
                           fontWeight: FontWeight.w700),
                     )),
-                const SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 GetBuilder<MainGoldController>(
                     id: "workshipContainer",
                     builder: (context) {

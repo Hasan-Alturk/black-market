@@ -23,13 +23,13 @@ class CardItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.gray,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 15.h,
+            height: 10.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,6 +74,9 @@ class CardItem extends StatelessWidget {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w700),
           ),
+          SizedBox(
+            height: 10.h,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -89,6 +92,9 @@ class CardItem extends StatelessWidget {
                           fontSize: 9.sp,
                           fontWeight: FontWeight.w700),
                     ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
                     Text(
                       "$sellPriceج.م",
                       style: TextStyle(
@@ -99,7 +105,7 @@ class CardItem extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height:18.h,
+                  height: 25.h,
                   width: 1,
                   color: AppColors.darkGrey,
                 ),
@@ -112,6 +118,9 @@ class CardItem extends StatelessWidget {
                           color: AppColors.white,
                           fontSize: 9.sp,
                           fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(
+                      height: 5.h,
                     ),
                     Text(
                       "$buyPriceج.م",
