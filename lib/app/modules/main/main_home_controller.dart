@@ -30,7 +30,6 @@ class MainHomeController extends GetxController {
       FavouriteBinding().dependencies();
       MainGoldBinding().deleteController();
       CurrenciesBinding().deleteController();
-
       MainProfileBinding().deleteController();
     } else if (pageIndex == 2) {
       MainGoldBinding().dependencies();
