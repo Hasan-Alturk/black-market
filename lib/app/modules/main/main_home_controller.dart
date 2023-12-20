@@ -18,25 +18,24 @@ class MainHomeController extends GetxController {
 
     if (pageIndex == 1) {
       FavouriteBinding().dependencies();
-      MainGoldBinding().deleteController();
-      CurrenciesBinding().deleteController();
-
-      MainProfileBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // CurrenciesBinding().deleteController();
+      // MainProfileBinding().deleteController();
     } else if (pageIndex == 2) {
       MainGoldBinding().dependencies();
-      MainProfileBinding().deleteController();
-      FavouriteBinding().deleteController();
-      CurrenciesBinding().deleteController();
+      // MainProfileBinding().deleteController();
+      // FavouriteBinding().deleteController();
+      // CurrenciesBinding().deleteController();
     } else if (pageIndex == 3) {
       CurrenciesBinding().dependencies();
-      MainProfileBinding().deleteController();
-      MainGoldBinding().deleteController();
-      FavouriteBinding().deleteController();
+      // MainProfileBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // FavouriteBinding().deleteController();
     } else if (pageIndex == 0) {
       MainProfileBinding().dependencies();
-      MainGoldBinding().deleteController();
-      FavouriteBinding().deleteController();
-      CurrenciesBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // FavouriteBinding().deleteController();
+      // CurrenciesBinding().deleteController();
     }
   }
 }
