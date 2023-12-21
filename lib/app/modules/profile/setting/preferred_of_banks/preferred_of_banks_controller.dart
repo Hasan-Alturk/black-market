@@ -27,7 +27,7 @@ class PreferredOfBanksController extends GetxController {
     final Bank tile = bankList.removeAt(oldIndex);
     // place the tile in the new position
     bankList.insert(newIndex, tile);
-     for (int i = 0; i < bankList.length; i++) {
+    for (int i = 0; i < bankList.length; i++) {
       bankList[i].sort = i;
     }
     update(["bankList"]);
@@ -38,7 +38,9 @@ class PreferredOfBanksController extends GetxController {
     if (banks.isNotEmpty) {
       bankList.addAll(banks);
     } else {
-      return;
+      banks = await SharedStorage.getBanks();
+      bankList.addAll(banks);
+      // return;
     }
     update(["bankList"]);
   }
