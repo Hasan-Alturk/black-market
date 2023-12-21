@@ -110,9 +110,9 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> getBanksFromPrefs() async {
-    // bankList.clear();
-    // var banks = await SharedStorage.getSortedBanks();
-    List<Bank> banks = await SharedStorage.getBanks();
+    bankList.clear();
+    var banks = await SharedStorage.getSortedBanks();
+    // List<Bank> banks = await SharedStorage.getBanks();
     if (banks.isNotEmpty) {
       bankList.clear();
       bankList.addAll(banks);

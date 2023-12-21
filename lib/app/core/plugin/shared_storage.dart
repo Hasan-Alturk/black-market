@@ -140,7 +140,7 @@ class SharedStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? banksJsonList = prefs.getStringList("sorted_banks");
     if (banksJsonList == null) {
-      return getBanks();
+      return [];
     }
     return banksJsonList
         .map((jsonString) => Bank.fromJson(jsonDecode(jsonString)))
