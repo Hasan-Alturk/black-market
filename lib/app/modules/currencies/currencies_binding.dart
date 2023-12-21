@@ -7,9 +7,8 @@ class CurrenciesBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(CurrenciesController(
-      currencyRepo: Get.find<CurrencyRepo>(),
-      bankRepo: Get.find<BankRepo>(),
-    ));
+        currencyRepo: Get.find<CurrencyRepo>(),
+        bankRepo: Get.find<BankRepo>()));
   }
 
   void deleteController() {

@@ -58,7 +58,7 @@ class MainProfileController extends GetxController {
   }
 
   void goToLogin() {
-    Get.offAllNamed("/login");
+    Get.toNamed("/login");
   }
 
   void goToMainCuurency() {
