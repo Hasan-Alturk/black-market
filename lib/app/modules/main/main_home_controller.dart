@@ -49,14 +49,8 @@ class MainHomeController extends GetxController {
       log("token $tokenChecked");
       if (tokenChecked) {
         LoginBinding().dependencies();
-        CurrenciesBinding().deleteController();
-        MainGoldBinding().deleteController();
-        FavouriteBinding().deleteController();
       } else {
         MainProfileBinding().dependencies();
-        CurrenciesBinding().deleteController();
-        MainGoldBinding().deleteController();
-        FavouriteBinding().deleteController();
       }
     }
   }

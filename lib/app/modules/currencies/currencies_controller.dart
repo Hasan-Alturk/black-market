@@ -17,6 +17,7 @@ class CurrenciesController extends GetxController {
   CurrenciesController({required this.currencyRepo, required this.bankRepo});
   final CurrencyRepo currencyRepo;
   final BankRepo bankRepo;
+  bool isLoading = false;
 
   String? error;
   int selectedCurrencyId = 19;
@@ -36,15 +37,17 @@ class CurrenciesController extends GetxController {
   @override
   void onInit() async {
     //   getHistoricalCurrencyBlackPrices();
+
     await getBanksFromPrefs();
     await getLatestCurrenciesFromPrefs().then((value) async {
       if (latestCurrencyList.isNotEmpty) {
         selectedCurrencyId = latestCurrencyList[0].id!;
         await getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
         getCurrencyInBank(latestCurrencyList[0].id!);
-        await getHistoricalCurrencyLivePrices();
       }
     });
+    await getHistoricalCurrencyLivePrices();
+
     //getNameAndAvatar();
     super.onInit();
   }
@@ -52,6 +55,8 @@ class CurrenciesController extends GetxController {
   Future<Map<String, List<LivePrices>>>
       getHistoricalCurrencyLivePrices() async {
     try {
+      isLoading = true;
+
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
         startDate: DateTime.now().subtract(const Duration(days: 7)).toString(),
@@ -60,10 +65,11 @@ class CurrenciesController extends GetxController {
       );
 
       livePricesMap = currencyList.livePrices;
-
+      isLoading = false;
       update(["Chart"]);
       return livePricesMap;
     } on ExceptionHandler catch (e) {
+      isLoading = false;
       log("Error: $e");
       throw ExceptionHandler("Unknown error");
     }

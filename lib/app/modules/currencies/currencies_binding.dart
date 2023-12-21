@@ -11,6 +11,7 @@ class CurrenciesBinding extends Bindings {
       bankRepo: Get.find<BankRepo>(),
     ));
   }
+
   void deleteController() {
     Get.delete<CurrenciesController>();
   }

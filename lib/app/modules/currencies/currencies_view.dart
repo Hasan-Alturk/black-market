@@ -309,9 +309,21 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 GetBuilder<CurrenciesController>(
                     id: "Chart",
                     builder: (_) {
-                      return Chart(
-                        livePricesMap: controller.livePricesMap,
-                      );
+                      if (controller.isLoading) {
+                        return SizedBox(
+                          height: 380.h,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AppColors.yellowDark,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Chart(
+                          livePricesMap: controller.livePricesMap,
+                        );
+                      }
                     }),
                 SizedBox(
                   height: 5.h,
