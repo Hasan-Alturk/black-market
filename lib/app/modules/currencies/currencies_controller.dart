@@ -48,7 +48,7 @@ class CurrenciesController extends GetxController {
     });
     await getHistoricalCurrencyLivePrices();
 
-    //getNameAndAvatar();
+    getNameAndAvatar();
     super.onInit();
   }
 

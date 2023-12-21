@@ -32,10 +32,11 @@ class SharedStorage {
   static Future<UserSetting?> getUserSettingFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userSettingJson = prefs.getString('user_setting');
-
-    if (userSettingJson!.isNotEmpty) {
-      Map<String, dynamic> userSettingMap = json.decode(userSettingJson);
-      return UserSetting.fromJson(userSettingMap);
+    if (userSettingJson != null) {
+      if (userSettingJson.isNotEmpty) {
+        Map<String, dynamic> userSettingMap = json.decode(userSettingJson);
+        return UserSetting.fromJson(userSettingMap);
+      }
     }
 
     return null;
