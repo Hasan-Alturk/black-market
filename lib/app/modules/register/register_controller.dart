@@ -41,7 +41,7 @@ class RegisterController extends GetxController {
       await saveTokenAndRememberMe(mainUser.accessToken, true);
       await getUserSetting();
 
-      Get.toNamed("/main_profile");
+      Get.offAllNamed("/main_home");
       isLoading = false;
       update(["TextError", "ElevatedButton"]);
     } on ExceptionHandler catch (e) {
