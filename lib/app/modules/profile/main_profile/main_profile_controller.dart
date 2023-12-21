@@ -46,7 +46,6 @@ class MainProfileController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
       await prefs.remove('user_setting');
-
       Get.offAllNamed("/main_home");
       isLoading = false;
 

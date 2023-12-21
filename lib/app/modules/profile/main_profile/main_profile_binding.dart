@@ -7,7 +7,9 @@ class MainProfileBinding extends Bindings {
   void dependencies() {
     Get.put(MainProfileController(
       settingRepo: Get.find<SettingRepo>(),
-    ));
+    )
+    
+    );
   }
 
   void deleteController() {

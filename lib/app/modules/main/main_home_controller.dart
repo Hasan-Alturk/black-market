@@ -35,21 +35,21 @@ class MainHomeController extends GetxController {
       FavouriteBinding().dependencies();
       MainGoldBinding().deleteController();
       CurrenciesBinding().deleteController();
-      MainProfileBinding().deleteController();
+      // MainProfileBinding().deleteController();
     } else if (pageIndex == 2) {
       MainGoldBinding().dependencies();
-      MainProfileBinding().deleteController();
+      // MainProfileBinding().deleteController();
       FavouriteBinding().deleteController();
       CurrenciesBinding().deleteController();
     } else if (pageIndex == 3) {
       CurrenciesBinding().dependencies();
-      MainProfileBinding().deleteController();
+      // MainProfileBinding().deleteController();
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
     } else if (pageIndex == 0) {
-      CurrenciesBinding().deleteController();
-      MainGoldBinding().deleteController();
-      FavouriteBinding().deleteController();
+      // CurrenciesBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // FavouriteBinding().deleteController();
       log("token $tokenChecked");
       if (tokenChecked) {
         LoginBinding().dependencies();
