@@ -47,7 +47,7 @@ class MainHomeController extends GetxController {
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
     } else if (pageIndex == 0) {
-       CurrenciesBinding().deleteController();
+      CurrenciesBinding().deleteController();
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
       log("token $tokenChecked");
@@ -59,29 +59,11 @@ class MainHomeController extends GetxController {
     }
   }
 
-  // Future<UserSetting> getUserSetting() async {
-  //   try {
-  //     String? token = await SharedStorage.getToken();
-
-  //     UserSetting userSetting = await settingRepo.getUserSetting(
-  //       token: token.toString(),
-  //     );
-
-  //     await SharedStorage.saveUserSetting(userSetting);
-  //     return userSetting;
-  //   } on ExceptionHandler catch (e) {
-  //     log("Error: $e");
-
-  //     throw ExceptionHandler("Unknown error");
-  //   }
-  // }
-
   Future<bool> checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
     if (token != null && token.isNotEmpty) {
-      //  await getUserSetting();
       return false;
     } else {
       return true;
