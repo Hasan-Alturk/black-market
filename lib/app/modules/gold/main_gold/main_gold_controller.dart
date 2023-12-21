@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 class MainGoldController extends GetxController {
   final GoldRepo goldRepo;
   String? error;
+  bool isLoading = false;
   List<Gold> goldList = [];
   List<GoldCompany> goldCompanyList = [];
   List<Ingots> ingots = [];
@@ -269,6 +270,7 @@ class MainGoldController extends GetxController {
   Future<void> getGold() async {
     try {
       error = null;
+      isLoading = true;
       update(["goldCard"]);
       List<Gold> gold = await goldRepo.getGold();
 
@@ -278,9 +280,11 @@ class MainGoldController extends GetxController {
           karatList.add("${element.karat}k");
         }
       }
+      isLoading = false;
 
       update(["goldCard", "goldDialog"]);
     } on ExceptionHandler catch (e) {
+      isLoading = false;
       log("Error: $e");
       error = e.error;
       log(error!);

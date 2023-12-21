@@ -15,27 +15,37 @@ class GoldView extends GetView<MainGoldController> {
           child: GetBuilder<MainGoldController>(
               id: "goldCard",
               builder: (_) {
-                return GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 1,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 5),
-                  itemCount: controller.goldList.length,
-                  itemBuilder: (ctx, i) => GestureDetector(
-                    child: GoldCardItem(
-                      goldName: controller.goldList[i].name,
-                      buyPrice:
-                          controller.goldList[i].price.buyPrice.toString(),
-                      price: controller.goldList[i].price.price.toString(),
-                      goldImage: controller.goldList[i].icon,
+                if (controller.isLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: AppColors.yellowDark,
                     ),
-                    // onTap: () => controller.goToBankDetails(),
-                  ),
-                );
+                  );
+                } else {
+                  return GridView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            childAspectRatio: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 5),
+                    itemCount: controller.goldList.length,
+                    itemBuilder: (ctx, i) => GestureDetector(
+                      child: GoldCardItem(
+                        goldName: controller.goldList[i].name,
+                        buyPrice:
+                            controller.goldList[i].price.buyPrice.toString(),
+                        price: controller.goldList[i].price.price.toString(),
+                        goldImage: controller.goldList[i].icon,
+                      ),
+                      // onTap: () => controller.goToBankDetails(),
+                    ),
+                  );
+                }
               })),
     );
   }
