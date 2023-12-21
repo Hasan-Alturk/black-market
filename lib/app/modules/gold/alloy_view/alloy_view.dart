@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
@@ -13,7 +15,6 @@ class AlloyView extends GetView<MainGoldController> {
   Widget build(BuildContext context) {
     bool filteredByCompany = false;
     controller.selectCompany(true, 0);
-
     return Scaffold(
       backgroundColor: AppColors.blackNormal,
       body: SafeArea(

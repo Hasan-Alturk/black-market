@@ -83,7 +83,6 @@ class MainGoldController extends GetxController {
     for (var element in ingots) {
       for (var company in element.companiesData!) {
         if (company.companyId == 1) {
-          log("elements ${element.name}");
           btcIngotInfo.add(IngotCompany(
               id: element.id,
               baseGoldItem: element.baseGoldItem,
@@ -121,7 +120,6 @@ class MainGoldController extends GetxController {
     for (var element in coins) {
       for (var company in element.companiesData!) {
         if (company.companyId == 1) {
-          log("elements ${element.name}");
           btcCoinsInfo.add(IngotCompany(
               id: element.id,
               baseGoldItem: element.baseGoldItem,
@@ -159,7 +157,6 @@ class MainGoldController extends GetxController {
     for (var element in ingots) {
       for (var company in element.companiesData!) {
         if (company.companyId == companyID) {
-          log("elements ${element.name}");
           filteredIngotsByCompany.add(IngotCompany(
             id: element.id,
             baseGoldItem: element.baseGoldItem,
@@ -184,10 +181,6 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    for (var element in filteredIngotsByCompany) {
-      log("TestFilter${element!.name}");
-    }
-    log("TestFilter${filteredIngotsByCompany.length}");
     update(["ingotListView"]);
   }
 // To update coins list view on clicking on a specific company
@@ -197,7 +190,6 @@ class MainGoldController extends GetxController {
     for (var element in coins) {
       for (var company in element.companiesData!) {
         if (company.companyId == companyID) {
-          log("elements ${element.name}");
           filteredCoinsByCompany.add(IngotCompany(
               id: element.id,
               baseGoldItem: element.baseGoldItem,
@@ -222,10 +214,7 @@ class MainGoldController extends GetxController {
         }
       }
     }
-    for (var element in filteredCoinsByCompany) {
-      log("TestFilter${element!.name}");
-    }
-    log("TestFilter${filteredCoinsByCompany.length}");
+
     update(["coinsListView"]);
   }
 
@@ -298,7 +287,6 @@ class MainGoldController extends GetxController {
       if ("${element.karat}k" == selectedKarat) {
         totalWorkShip = num.parse(totalPaidAmountController.value.text) -
             (num.parse(totalgramsController.value.text) * element.price.price);
-        log(totalWorkShip.toString());
         update(["goldDialog", "workshipContainer"]);
       }
     }
@@ -306,6 +294,5 @@ class MainGoldController extends GetxController {
 
   void selectKarat(String karatValue) {
     selectedKarat = karatValue;
-    log(selectedKarat);
   }
 }

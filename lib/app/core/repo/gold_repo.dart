@@ -15,11 +15,9 @@ class GoldRepo {
   Future<AlloyCoinResponse> getAlloyCoin() async {
     try {
       var response = await dio.get("$baseUrl/ingots-coins");
-      log(response.data.toString());
 
       AlloyCoinResponse alloyCoinResponse =
           AlloyCoinResponse.fromJson(response.data);
-      // log(alloyCoinResponse.ingots..name);
 
       return alloyCoinResponse;
     } on DioException catch (e) {
@@ -37,7 +35,6 @@ class GoldRepo {
   Future<List<GoldCompany>> getGoldCompanies() async {
     try {
       var response = await dio.get("$baseUrl/companies");
-      log(response.data.toString());
 
       List<GoldCompany> goldCompany =
           GoldCompany.goldCompanyList(response.data);
@@ -58,7 +55,6 @@ class GoldRepo {
   Future<List<Gold>> getGold() async {
     try {
       var response = await dio.get("$baseUrl/gold");
-      // log(response.data.toString());
 
       List<Gold> gold = Gold.goldList(response.data);
 

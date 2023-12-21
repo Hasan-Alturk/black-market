@@ -74,6 +74,7 @@ class GoldCurrencyView extends GetView<MainGoldController> {
             SizedBox(
               height: 15.h,
             ),
+
             GetBuilder<MainGoldController>(
                 id: "coinsListView",
                 builder: (_) {
