@@ -39,8 +39,10 @@ class NotificationsView extends GetView<NotificationController> {
                   itemBuilder: (context, index) {
                     if (index == controller.notifications.length) {
                       return controller.isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(),
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.yellowDark,
+                              ),
                             )
                           : const SizedBox.shrink();
                     } else if (index == 0 ||
