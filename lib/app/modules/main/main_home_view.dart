@@ -19,7 +19,7 @@ class MainHomeView extends GetView<MainHomeController> {
     const MainGoldView(),
     const CurrenciesView(),
   ];
-  final screens2 = [
+  final screens = [
     const MainProfileView(),
     const FavouriteView(),
     const MainGoldView(),
@@ -32,9 +32,10 @@ class MainHomeView extends GetView<MainHomeController> {
       body: GetBuilder<MainHomeController>(
           id: "MainHomeViewScreenGetBuilder",
           builder: (_) {
-            return controller.tokenChecked
-                ? screens1[controller.pageIndex]
-                : screens2[controller.pageIndex];
+            return screens[controller.pageIndex];
+            //  controller.tokenChecked
+            //     ? screens1[controller.pageIndex]
+            //     : screens[controller.pageIndex];
           }),
 
       // PageView(

@@ -43,7 +43,11 @@ class MainProfileView extends GetView<MainProfileController> {
                     return Column(
                       children: [
                         controller.avatar == ""
-                            ? const SizedBox()
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  controller.goToLogin();
+                                },
+                                child: Text("Login"))
                             : CircleAvatar(
                                 radius: 35.r,
                                 child: Image.network(

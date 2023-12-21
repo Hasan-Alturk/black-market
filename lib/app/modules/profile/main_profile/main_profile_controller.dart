@@ -40,7 +40,7 @@ class MainProfileController extends GetxController {
       isLoading = true;
       update(["LogOut"]);
       String? token = await SharedStorage.getToken();
-
+      log(token.toString());
       await settingRepo.logOut(token: token.toString());
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -55,6 +55,10 @@ class MainProfileController extends GetxController {
       log("Error: $e");
       update(["LogOut"]);
     }
+  }
+
+  void goToLogin() {
+    Get.offAllNamed("/login");
   }
 
   void goToMainCuurency() {

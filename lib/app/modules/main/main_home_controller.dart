@@ -21,8 +21,8 @@ class MainHomeController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     pageIndex = 3;
-    changePage(pageIndex);
-    tokenChecked = await checkToken();
+    await changePage(pageIndex);
+    // tokenChecked = await checkToken();
   }
 
   Future<void> changePage(int pageIndex) async {
@@ -32,16 +32,19 @@ class MainHomeController extends GetxController {
     update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
 
     if (pageIndex == 1) {
+      log("Favourite");
       FavouriteBinding().dependencies();
       MainGoldBinding().deleteController();
       CurrenciesBinding().deleteController();
       // MainProfileBinding().deleteController();
     } else if (pageIndex == 2) {
+      log("gold");
       MainGoldBinding().dependencies();
       // MainProfileBinding().deleteController();
       FavouriteBinding().deleteController();
       CurrenciesBinding().deleteController();
     } else if (pageIndex == 3) {
+      log("currencies");
       CurrenciesBinding().dependencies();
       // MainProfileBinding().deleteController();
       MainGoldBinding().deleteController();
@@ -50,12 +53,16 @@ class MainHomeController extends GetxController {
       CurrenciesBinding().deleteController();
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
-      log("token $tokenChecked");
-      if (tokenChecked) {
-        LoginBinding().dependencies();
-      } else {
-        MainProfileBinding().dependencies();
-      }
+      MainProfileBinding().dependencies();
+
+      // log("token $tokenChecked");
+      // if (tokenChecked) {
+      //   LoginBinding().dependencies();
+      //   //     CurrenciesBinding().dependencies();
+      // } else {
+      //   MainProfileBinding().dependencies();
+      //   log("Profile");
+      // }
     }
   }
 
