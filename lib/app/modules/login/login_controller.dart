@@ -39,7 +39,7 @@ class LoginController extends GetxController {
       );
       await getUserSetting();
 
-      Get.toNamed("/main_profile");
+      Get.offAllNamed("/main_home");
 
       isLoading = false;
       update(["TextError", "ElevatedButton"]);

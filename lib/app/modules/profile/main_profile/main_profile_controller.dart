@@ -19,7 +19,7 @@ class MainProfileController extends GetxController {
 
   @override
   void onInit() async {
-   await getNameAndAvatar();
+    await getNameAndAvatar();
     super.onInit();
   }
 
