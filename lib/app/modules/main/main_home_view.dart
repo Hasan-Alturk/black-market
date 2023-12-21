@@ -24,6 +24,7 @@ class MainHomeView extends GetView<MainHomeController> {
     const FavouriteView(),
     const MainGoldView(),
     const CurrenciesView(),
+
   ];
   @override
   Widget build(BuildContext context) {
