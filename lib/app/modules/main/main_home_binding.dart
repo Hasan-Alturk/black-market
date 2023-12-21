@@ -9,6 +9,6 @@ class MainHomeBinding extends Bindings {
   void dependencies() {
     Get.put(SettingRepo(Dio()));
     Get.put(MainHomeController(settingRepo: Get.find<SettingRepo>()));
-    CurrenciesBinding().dependencies();
+    // CurrenciesBinding().dependencies();
   }
 }

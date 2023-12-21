@@ -119,7 +119,7 @@ class SharedStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? currenciesJsonList = prefs.getStringList("currencies_sorted");
     if (currenciesJsonList == null) {
-      return getCurrencies();
+      return [];
     }
     return currenciesJsonList
         .map((jsonString) => LatestCurrency.fromJson(jsonDecode(jsonString)))

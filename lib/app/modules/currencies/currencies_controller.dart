@@ -123,15 +123,20 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
-    // latestCurrencyList.clear();
-    //List<LatestCurrency> currencies = await SharedStorage.getCurrenciesSorted();
-    List<LatestCurrency> currencies = await SharedStorage.getCurrencies();
+    latestCurrencyList.clear();
+    List<LatestCurrency> currencies = await SharedStorage.getCurrenciesSorted();
+    // List<LatestCurrency> currencies = await SharedStorage.getCurrencies();
     if (currencies.isNotEmpty) {
       currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
+      sortLatestCurrency();
     } else {
       return;
     }
+  }
+
+  void sortLatestCurrency() {
+    latestCurrencyList.sort((a, b) => a.sort!.compareTo(b.sort!));
   }
 
   Future<void> getNameAndAvatar() async {

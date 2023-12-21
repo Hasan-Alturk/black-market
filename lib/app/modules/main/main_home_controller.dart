@@ -21,6 +21,7 @@ class MainHomeController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     pageIndex = 3;
+    changePage(pageIndex);
     tokenChecked = await checkToken();
   }
 
@@ -46,6 +47,9 @@ class MainHomeController extends GetxController {
       MainGoldBinding().deleteController();
       FavouriteBinding().deleteController();
     } else if (pageIndex == 0) {
+       CurrenciesBinding().deleteController();
+      MainGoldBinding().deleteController();
+      FavouriteBinding().deleteController();
       log("token $tokenChecked");
       if (tokenChecked) {
         LoginBinding().dependencies();

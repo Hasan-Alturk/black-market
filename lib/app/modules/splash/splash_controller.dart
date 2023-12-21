@@ -104,29 +104,57 @@ class SplashController extends GetxController {
     try {
       List<LatestCurrency> latestCurrencies =
           await currencyRepo.getLatestCurrencies();
-      await SharedStorage.saveCurrencies(latestCurrencies);
+      List<LatestCurrency> sortedLatestCurrencies =
+          await SharedStorage.getCurrenciesSorted();
+      if (sortedLatestCurrencies.isNotEmpty) {
+        List<LatestCurrency> sortedList = await sortingLatestCurrency(
+            latestCurrencies, sortedLatestCurrencies);
+        await SharedStorage.saveCurrenciesSorted(sortedList);
+      } else {
+        await SharedStorage.saveCurrencies(latestCurrencies);
+        await SharedStorage.saveCurrenciesSorted(latestCurrencies);
+      }
+      // getLatestCurrencySorted();
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
   }
 
-  // Future<void> getLatestCurrencySorted() async {
-  //   try {
-  //     List<LatestCurrency> latestCurrencies =
-  //         await SharedStorage.getCurrencies();
-  //     List<LatestCurrency> latestCurrenciesSorted =
-  //         await SharedStorage.getCurrenciesSorted();
-  //     for (var element1 in latestCurrencies) {
-  //       for (var element2 in latestCurrenciesSorted) {
-  //         if (element1.sort != element2.sort) {
-  //           element1.sort = element2.sort;
-  //         }
-  //       }
-  //     }
-  //   } on ExceptionHandler catch (e) {
-  //     log("Error: $e");
-  //   }
-  // }
+  Future<List<LatestCurrency>> sortingLatestCurrency(
+      List<LatestCurrency> latestCurrencies,
+      List<LatestCurrency> latestCurrenciesSorted) async {
+
+      // List<LatestCurrency> latestCurrencies =
+      //     await SharedStorage.getCurrencies();
+      // List<LatestCurrency> latestCurrenciesSorted =
+      //     await SharedStorage.getCurrenciesSorted();
+      for (var element1 in latestCurrencies) {
+        for (var element2 in latestCurrenciesSorted) {
+          if (element1.name == element2.name) {
+            if (element1.sort != element2.sort) {
+              element2.bankPrices = element1.bankPrices;
+              element2.banner = element1.banner;
+              element2.blackMarketPrices = element1.blackMarketPrices;
+              element2.canBeMain = element1.canBeMain;
+              element2.code = element1.code;
+              element2.createdAt = element1.createdAt;
+              element2.icon = element1.icon;
+              element2.id = element1.id;
+              element2.lastUpdate = element1.lastUpdate;
+              element2.livePrices = element1.livePrices;
+              element2.showNetworkImage = element1.showNetworkImage;
+              element2.updatedAt = element1.updatedAt;
+              element2.name = element1.name;
+            }
+          }
+        }
+      }
+      return latestCurrenciesSorted;
+      // for (var element in latestCurrencies) {
+      //   log("Sorting: ${element.name! + element.sort.toString()}");
+      // }
+  
+  }
 
   // Future<void> getSortedBanks() async {
   //   try {
