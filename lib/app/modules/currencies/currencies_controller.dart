@@ -84,18 +84,17 @@ class CurrenciesController extends GetxController {
         type: "black",
       );
       blackPricesMap = currencyList.blackPrices;
-      blackPricesMap.forEach((currency, blackPrices) {
-        log('العملة: $currency');
+      // blackPricesMap.forEach((currency, blackPrices) {
 
         // الدوران عبر قائمة كائنات LivePrices
-        for (var e in blackPrices) {
-          log('معرف العملة: ${e.currencyId}');
-          log('السعر: ${e.buyPrice}');
-          log('السعر: ${e.sellPrice}');
-          log('التاريخ: ${e.date}');
-          log('--------------');
-        }
-      });
+        // for (var e in blackPrices) {
+        //   log('معرف العملة: ${e.currencyId}');
+        //   log('السعر: ${e.buyPrice}');
+        //   log('السعر: ${e.sellPrice}');
+        //   log('التاريخ: ${e.date}');
+        //   log('--------------');
+        // }
+      // });
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
@@ -156,7 +155,7 @@ class CurrenciesController extends GetxController {
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
-          log(value.date);
+          // log(value.date);
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
 
@@ -192,9 +191,9 @@ class CurrenciesController extends GetxController {
         }
       }
     }
-    for (var element in currencyInBankList) {
-      log(element.bankName);
-    }
+    // for (var element in currencyInBankList) {
+    //   log(element.bankName);
+    // }
     sortBanks();
     update(["bankList", "currencies", "currencyList"]);
   }

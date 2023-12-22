@@ -8,7 +8,6 @@ class MainProfileBinding extends Bindings {
     Get.put(MainProfileController(
       settingRepo: Get.find<SettingRepo>(),
     )
-    
     );
   }
 

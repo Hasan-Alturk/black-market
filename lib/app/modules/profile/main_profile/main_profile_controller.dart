@@ -4,6 +4,7 @@ import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ class MainProfileController extends GetxController {
 
   @override
   void onInit() async {
+    update(["name_and_avatar"]);
     await getNameAndAvatar();
     super.onInit();
   }
@@ -47,6 +49,7 @@ class MainProfileController extends GetxController {
       await prefs.remove('token');
       await prefs.remove('user_setting');
       Get.offAllNamed("/main_home");
+      Get.find<MainHomeController>().onInit();
       isLoading = false;
 
       update(["LogOut"]);

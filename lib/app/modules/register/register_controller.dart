@@ -6,6 +6,7 @@ import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/auth_repo.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +43,8 @@ class RegisterController extends GetxController {
       await getUserSetting();
 
       Get.offAllNamed("/main_home");
+      Get.find<MainHomeController>().onInit();
+      
       isLoading = false;
       update(["TextError", "ElevatedButton"]);
     } on ExceptionHandler catch (e) {

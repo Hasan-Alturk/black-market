@@ -4,7 +4,6 @@ import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/modules/currencies/currencies_binding.dart';
 import 'package:black_market/app/modules/favourite/favourite_binding.dart';
 import 'package:black_market/app/modules/gold/main_gold/main_gold_binding.dart';
-import 'package:black_market/app/modules/login/login_binding.dart';
 import 'package:black_market/app/modules/profile/main_profile/main_profile_binding.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,26 +33,31 @@ class MainHomeController extends GetxController {
     if (pageIndex == 1) {
       log("Favourite");
       FavouriteBinding().dependencies();
-      MainGoldBinding().deleteController();
-      CurrenciesBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // CurrenciesBinding().deleteController();
       // MainProfileBinding().deleteController();
+      update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
     } else if (pageIndex == 2) {
       log("gold");
       MainGoldBinding().dependencies();
       // MainProfileBinding().deleteController();
-      FavouriteBinding().deleteController();
-      CurrenciesBinding().deleteController();
+      // FavouriteBinding().deleteController();
+      // CurrenciesBinding().deleteController();
+      update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
     } else if (pageIndex == 3) {
       log("currencies");
       CurrenciesBinding().dependencies();
       // MainProfileBinding().deleteController();
-      MainGoldBinding().deleteController();
-      FavouriteBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // FavouriteBinding().deleteController();
+      update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
     } else if (pageIndex == 0) {
-      CurrenciesBinding().deleteController();
-      MainGoldBinding().deleteController();
-      FavouriteBinding().deleteController();
+      log("Profile");
+      // CurrenciesBinding().deleteController();
+      // MainGoldBinding().deleteController();
+      // FavouriteBinding().deleteController();
       MainProfileBinding().dependencies();
+      update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
 
       // log("token $tokenChecked");
       // if (tokenChecked) {

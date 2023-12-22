@@ -9,11 +9,17 @@ import 'package:get/get.dart';
 class MainHomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(CurrenciesController(
-        currencyRepo: Get.find<CurrencyRepo>(),
-        bankRepo: Get.find<BankRepo>()));
-
     Get.put(SettingRepo(Dio()));
-    Get.put(MainHomeController(settingRepo: Get.find<SettingRepo>()));
+    Get.put(MainHomeController(settingRepo: Get.find<SettingRepo>()),
+        permanent: true);
+    Get.put(
+      CurrenciesController(
+          currencyRepo: Get.find<CurrencyRepo>(),
+          bankRepo: Get.find<BankRepo>()),
+    );
+  }
+
+  void deleteController() {
+    Get.delete<MainHomeController>();
   }
 }

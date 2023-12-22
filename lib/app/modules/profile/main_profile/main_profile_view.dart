@@ -47,7 +47,7 @@ class MainProfileView extends GetView<MainProfileController> {
                                 onPressed: () {
                                   controller.goToLogin();
                                 },
-                                child: Text("Login"))
+                                child: Text(AppStrings.login))
                             : CircleAvatar(
                                 radius: 35.r,
                                 child: Image.network(
