@@ -64,6 +64,10 @@ class MainProfileController extends GetxController {
     Get.toNamed("/login");
   }
 
+  void goToRegister() {
+    Get.toNamed("/register");
+  }
+
   void goToMainCuurency() {
     Get.toNamed("/main_cuurency");
   }

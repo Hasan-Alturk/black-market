@@ -326,7 +326,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                       }
                     }),
                 SizedBox(
-                  height: 5.h,
+                  height: 15.h,
                 ),
                 Container(
                   height: 100.h,

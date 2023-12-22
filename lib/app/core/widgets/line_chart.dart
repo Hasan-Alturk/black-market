@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
@@ -9,6 +11,7 @@ import 'package:intl/intl.dart';
 // ignore: must_be_immutable
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
+  List axisX = [];
 
   List<Color> gradientYellowColors = [
     AppColors.startYellowGrad,
@@ -128,33 +131,50 @@ class Chart extends GetView<CurrenciesController> {
     }
   }
 
+  // Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  //   // ...
+  //   for (int i = 1; i < spots.length - 1; i++) {
+  //     return SideTitleWidget(
+  //       axisSide: meta.axisSide,
+  //       fitInside: const SideTitleFitInsideData(
+  //           enabled: true,
+  //           axisPosition: 1,
+  //           parentAxisSize: 1,
+  //           distanceFromEdge: 0),
+  //       child: Text(DateFormat('Y').format(spots[i].x), style: style),
+  //     );
+  //   }
+  // }
+
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
       color: AppColors.graylight,
     );
-    // حساب تاريخ اليوم
-    DateTime today = DateTime.now();
 
-    // حساب تاريخ اليوم قبل 7 أيام
-    DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
-    //int dayNumber = sevenDaysAgo.day;
+    livePricesMap.forEach(
+      (currency, livePricesList) {
+        for (var livePrice in livePricesList) {
+          String apiDate = livePrice.date;
+          DateTime x = DateTime.parse(apiDate);
+          log(x.toString());
+          axisX.add(x);
+        }
+      },
+    );
 
-    // تنسيق التاريخ باستخدام intl
-    String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
+    String formattedDate;
+
     switch (value.toInt()) {
-      case 14:
-        formattedDate = DateFormat('MMM d')
-            .format(sevenDaysAgo.add(const Duration(days: 0)));
+      case 17:
+        formattedDate = DateFormat('MMM d').format(axisX[0]);
         break;
-      case 16:
-        formattedDate = DateFormat('MMM d')
-            .format(sevenDaysAgo.add(const Duration(days: 3)));
+      case 20:
+        formattedDate = DateFormat('MMM d').format(axisX[3]);
         break;
-      case 19:
-        formattedDate = DateFormat('MMM d')
-            .format(sevenDaysAgo.add(const Duration(days: 7)));
+      case 22:
+        formattedDate = DateFormat('MMM d').format(axisX[6]);
         break;
       default:
         formattedDate = ""; // إعادة تعيين للأيام غير المحددة
@@ -163,12 +183,47 @@ class Chart extends GetView<CurrenciesController> {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      // fitInside: const SideTitleFitInsideData(
-      //     enabled: true,
-      //     axisPosition: 1,
-      //     parentAxisSize: 1,
-      //     distanceFromEdge: 0),
+      space: 10,
       child: Text(formattedDate, style: style),
     );
   }
+
+  // Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  //   var style = TextStyle(
+  //     fontWeight: FontWeight.bold,
+  //     fontSize: 16,
+  //     color: AppColors.graylight,
+  //   );
+  //   // حساب تاريخ اليوم
+  //   DateTime today = DateTime.now();
+
+  //   // حساب تاريخ اليوم قبل 7 أيام
+  //   DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
+  //   //int dayNumber = sevenDaysAgo.day;
+
+  //   // تنسيق التاريخ باستخدام intl
+  //   String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
+  //   switch (value.toInt()) {
+  //     case 14:
+  //       formattedDate = DateFormat('MMM d')
+  //           .format(sevenDaysAgo.add(const Duration(days: 0)));
+  //       break;
+  //     case 16:
+  //       formattedDate = DateFormat('MMM d')
+  //           .format(sevenDaysAgo.add(const Duration(days: 3)));
+  //       break;
+  //     case 19:
+  //       formattedDate = DateFormat('MMM d')
+  //           .format(sevenDaysAgo.add(const Duration(days: 7)));
+  //       break;
+  //     default:
+  //       formattedDate = ""; // إعادة تعيين للأيام غير المحددة
+  //       break;
+  //   }
+
+  //   return SideTitleWidget(
+  //     axisSide: meta.axisSide,
+  //     child: Text(formattedDate, style: style),
+  //   );
+  // }
 }

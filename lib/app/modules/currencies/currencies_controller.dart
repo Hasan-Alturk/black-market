@@ -86,14 +86,14 @@ class CurrenciesController extends GetxController {
       blackPricesMap = currencyList.blackPrices;
       // blackPricesMap.forEach((currency, blackPrices) {
 
-        // الدوران عبر قائمة كائنات LivePrices
-        // for (var e in blackPrices) {
-        //   log('معرف العملة: ${e.currencyId}');
-        //   log('السعر: ${e.buyPrice}');
-        //   log('السعر: ${e.sellPrice}');
-        //   log('التاريخ: ${e.date}');
-        //   log('--------------');
-        // }
+      // الدوران عبر قائمة كائنات LivePrices
+      // for (var e in blackPrices) {
+      //   log('معرف العملة: ${e.currencyId}');
+      //   log('السعر: ${e.buyPrice}');
+      //   log('السعر: ${e.sellPrice}');
+      //   log('التاريخ: ${e.date}');
+      //   log('--------------');
+      // }
       // });
     } on ExceptionHandler catch (e) {
       log("Error: $e");

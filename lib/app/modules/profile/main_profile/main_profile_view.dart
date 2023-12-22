@@ -42,12 +42,52 @@ class MainProfileView extends GetView<MainProfileController> {
                   builder: (_) {
                     return Column(
                       children: [
+                        SizedBox(
+                          height: 15.h,
+                        ),
                         controller.avatar == ""
-                            ? ElevatedButton(
-                                onPressed: () {
-                                  controller.goToLogin();
-                                },
-                                child: Text(AppStrings.login))
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.grey,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.r),
+                                      ),
+                                    ),
+                                    onPressed: controller.goToRegister,
+                                    child: Text(
+                                      AppStrings.createAccount,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: AppColors.yellowNormalActive,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.grey,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.r),
+                                      ),
+                                    ),
+                                    onPressed: controller.goToLogin,
+                                    child: Text(
+                                      AppStrings.login,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: AppColors.yellowNormalActive,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
                             : CircleAvatar(
                                 radius: 35.r,
                                 child: Image.network(
@@ -67,7 +107,7 @@ class MainProfileView extends GetView<MainProfileController> {
                     );
                   }),
               SizedBox(
-                height: 80.h,
+                height: 40.h,
               ),
               CustomContainerProfile(
                 text: AppStrings.shareTheApp,
@@ -103,48 +143,50 @@ class MainProfileView extends GetView<MainProfileController> {
                 },
               ),
               SizedBox(
-                height: 20.h,
+                height: 30.h,
               ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return GetBuilder<MainProfileController>(
-                        id: "LogOut",
-                        builder: (context) {
-                          return CustomAlarteDialog(
-                            text: AppStrings.areYouSureToLogout,
-                            contentButton: AppStrings.logout,
-                            isLoading: controller.isLoading,
-                            onTap: Get.back,
-                            onPressed: () => controller.logOut(),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.logout,
-                      style: TextStyle(
-                        color: AppColors.red,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
+              controller.avatar == ""
+                  ? const SizedBox()
+                  : GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return GetBuilder<MainProfileController>(
+                              id: "LogOut",
+                              builder: (context) {
+                                return CustomAlarteDialog(
+                                  text: AppStrings.areYouSureToLogout,
+                                  contentButton: AppStrings.logout,
+                                  isLoading: controller.isLoading,
+                                  onTap: Get.back,
+                                  onPressed: () => controller.logOut(),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.logout,
+                            style: TextStyle(
+                              color: AppColors.red,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12.w,
+                          ),
+                          Image.asset(
+                            AppAssetIcons.logout,
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Image.asset(
-                      AppAssetIcons.logout,
-                    ),
-                  ],
-                ),
-              )
+                    )
             ],
           ),
         ),

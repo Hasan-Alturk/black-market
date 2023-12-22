@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_text_field.dart';
 import 'package:black_market/app/core/widgets/state_button.dart';
 import 'package:black_market/app/modules/login/login_controller.dart';
@@ -20,6 +21,10 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
+      appBar: CustomAppBar(
+        text: "",
+        onTap: () => Get.back(),
+      ),
       body: Form(
         key: formKey,
         child: SafeArea(
@@ -29,7 +34,7 @@ class LoginView extends GetView<LoginController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 120.h,
+                  height: 60.h,
                 ),
                 SizedBox(
                   height: 78.h,
