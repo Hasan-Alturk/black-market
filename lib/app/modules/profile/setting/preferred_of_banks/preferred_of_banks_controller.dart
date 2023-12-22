@@ -1,6 +1,7 @@
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
+import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:get/get.dart';
 
 class PreferredOfBanksController extends GetxController {
@@ -52,5 +53,7 @@ class PreferredOfBanksController extends GetxController {
     await SharedStorage.saveSortedBanks(banks);
     isLoading = false;
     update(["saveNewBanks"]);
+    Get.offAllNamed("/main_home");
+    Get.find<MainHomeController>().onInit();
   }
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
+import 'package:black_market/app/modules/main/main_home_controller.dart';
 import 'package:get/get.dart';
 
 class PreferredOfCurrenciesController extends GetxController {
@@ -59,6 +60,10 @@ class PreferredOfCurrenciesController extends GetxController {
     isLoading = false;
 
     update(["saveNewCurrencies"]);
+
+    Get.offAllNamed("/main_home");
+    Get.find<MainHomeController>().onInit();
+
     // isLoading = false;
   }
 }
