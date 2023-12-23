@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
@@ -12,6 +10,7 @@ import 'package:intl/intl.dart';
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
+  List<int> valueX = [];
 
   List<Color> gradientYellowColors = [
     AppColors.startYellowGrad,
@@ -52,6 +51,9 @@ class Chart extends GetView<CurrenciesController> {
           String apiDate = livePrice.date;
           DateTime x = DateTime.parse(apiDate);
           spots.add(FlSpot(x.day.toDouble(), y));
+          int date = int.parse(DateFormat('d').format(x));
+          axisX.add(x);
+          valueX.add(date);
         }
       },
     );
@@ -66,6 +68,7 @@ class Chart extends GetView<CurrenciesController> {
         lineColors.add(AppColors.endRedGrad);
       }
     }
+
     if (spots.isNotEmpty) {
       return LineChartData(
         gridData: const FlGridData(
@@ -131,21 +134,6 @@ class Chart extends GetView<CurrenciesController> {
     }
   }
 
-  // Widget bottomTitleWidgets(double value, TitleMeta meta) {
-  //   // ...
-  //   for (int i = 1; i < spots.length - 1; i++) {
-  //     return SideTitleWidget(
-  //       axisSide: meta.axisSide,
-  //       fitInside: const SideTitleFitInsideData(
-  //           enabled: true,
-  //           axisPosition: 1,
-  //           parentAxisSize: 1,
-  //           distanceFromEdge: 0),
-  //       child: Text(DateFormat('Y').format(spots[i].x), style: style),
-  //     );
-  //   }
-  // }
-
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
@@ -153,31 +141,23 @@ class Chart extends GetView<CurrenciesController> {
       color: AppColors.graylight,
     );
 
-    livePricesMap.forEach(
-      (currency, livePricesList) {
-        for (var livePrice in livePricesList) {
-          String apiDate = livePrice.date;
-          DateTime x = DateTime.parse(apiDate);
-          log(x.toString());
-          axisX.add(x);
-        }
-      },
-    );
-
     String formattedDate;
-
+    // int i = valueX[0];
     switch (value.toInt()) {
       case 17:
         formattedDate = DateFormat('MMM d').format(axisX[0]);
         break;
+
       case 20:
         formattedDate = DateFormat('MMM d').format(axisX[3]);
         break;
-      case 22:
+
+      case 23:
         formattedDate = DateFormat('MMM d').format(axisX[6]);
         break;
+
       default:
-        formattedDate = ""; // إعادة تعيين للأيام غير المحددة
+        formattedDate = "";
         break;
     }
 
@@ -187,43 +167,4 @@ class Chart extends GetView<CurrenciesController> {
       child: Text(formattedDate, style: style),
     );
   }
-
-  // Widget bottomTitleWidgets(double value, TitleMeta meta) {
-  //   var style = TextStyle(
-  //     fontWeight: FontWeight.bold,
-  //     fontSize: 16,
-  //     color: AppColors.graylight,
-  //   );
-  //   // حساب تاريخ اليوم
-  //   DateTime today = DateTime.now();
-
-  //   // حساب تاريخ اليوم قبل 7 أيام
-  //   DateTime sevenDaysAgo = today.subtract(const Duration(days: 7));
-  //   //int dayNumber = sevenDaysAgo.day;
-
-  //   // تنسيق التاريخ باستخدام intl
-  //   String formattedDate = DateFormat('MMM d').format(sevenDaysAgo);
-  //   switch (value.toInt()) {
-  //     case 14:
-  //       formattedDate = DateFormat('MMM d')
-  //           .format(sevenDaysAgo.add(const Duration(days: 0)));
-  //       break;
-  //     case 16:
-  //       formattedDate = DateFormat('MMM d')
-  //           .format(sevenDaysAgo.add(const Duration(days: 3)));
-  //       break;
-  //     case 19:
-  //       formattedDate = DateFormat('MMM d')
-  //           .format(sevenDaysAgo.add(const Duration(days: 7)));
-  //       break;
-  //     default:
-  //       formattedDate = ""; // إعادة تعيين للأيام غير المحددة
-  //       break;
-  //   }
-
-  //   return SideTitleWidget(
-  //     axisSide: meta.axisSide,
-  //     child: Text(formattedDate, style: style),
-  //   );
-  // }
 }
