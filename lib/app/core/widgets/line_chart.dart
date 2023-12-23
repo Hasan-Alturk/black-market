@@ -80,10 +80,10 @@ class Chart extends GetView<CurrenciesController> {
           show: true,
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 30,
-                getTitlesWidget: bottomTitleWidgets,
-                interval: 1),
+              showTitles: true,
+              reservedSize: 30,
+              getTitlesWidget: bottomTitleWidgets,
+            ),
           ),
           rightTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
@@ -95,22 +95,22 @@ class Chart extends GetView<CurrenciesController> {
             sideTitles: SideTitles(showTitles: false),
           ),
         ),
-        // minX: spots
-        //     .map((spot) => spot.x)
-        //     .reduce((curr, next) => curr < next ? curr : next),
-        minX: valueX[0],
-        maxX: valueX[6],
-        // maxX: spots
-        //     .map((spot) => spot.x)
-        //     .reduce((curr, next) => curr > next ? curr : next),
+        minX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr < next ? curr : next),
+        // minX: valueX[0],
+        // maxX: valueX[6],
+        maxX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr > next ? curr : next),
         minY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr < next ? curr : next) -
-            1,
+            0.05,
         maxY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr > next ? curr : next) +
-            1,
+            0.05,
         lineBarsData: [
           LineChartBarData(
             show: true,
