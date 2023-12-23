@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Black Market',
           theme: ThemeData(
-              fontFamily: 'Almarai',
-              useMaterial3: true,
-              canvasColor: AppColors.gray),
+            fontFamily: 'Almarai',
+            useMaterial3: true,
+            canvasColor: AppColors.gray,
+          ),
           initialRoute: "/splash",
           getPages: approuts,
         );

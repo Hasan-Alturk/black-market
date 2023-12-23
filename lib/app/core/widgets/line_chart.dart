@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
-  List<int> valueX = [];
+  List<double> valueX = [];
 
   List<Color> gradientYellowColors = [
     AppColors.startYellowGrad,
@@ -51,7 +51,7 @@ class Chart extends GetView<CurrenciesController> {
           String apiDate = livePrice.date;
           DateTime x = DateTime.parse(apiDate);
           spots.add(FlSpot(x.day.toDouble(), y));
-          int date = int.parse(DateFormat('d').format(x));
+          double date = double.parse(DateFormat('d').format(x));
           axisX.add(x);
           valueX.add(date);
         }
@@ -62,7 +62,7 @@ class Chart extends GetView<CurrenciesController> {
     for (int i = 0; i < spots.length; i++) {
       FlSpot currentSpot = spots[i];
 
-      if (i == 0 || currentSpot.y > spots[i - 1].y) {
+      if (i == 0 || currentSpot.y >= spots[i - 1].y) {
         lineColors.add(AppColors.yellowDark);
       } else {
         lineColors.add(AppColors.endRedGrad);
@@ -95,18 +95,22 @@ class Chart extends GetView<CurrenciesController> {
             sideTitles: SideTitles(showTitles: false),
           ),
         ),
-        minX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr < next ? curr : next),
-        maxX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr > next ? curr : next),
+        // minX: spots
+        //     .map((spot) => spot.x)
+        //     .reduce((curr, next) => curr < next ? curr : next),
+        minX: valueX[0],
+        maxX: valueX[6],
+        // maxX: spots
+        //     .map((spot) => spot.x)
+        //     .reduce((curr, next) => curr > next ? curr : next),
         minY: spots
-            .map((spot) => spot.y)
-            .reduce((curr, next) => curr < next ? curr : next),
+                .map((spot) => spot.y)
+                .reduce((curr, next) => curr < next ? curr : next) -
+            1,
         maxY: spots
-            .map((spot) => spot.y)
-            .reduce((curr, next) => curr > next ? curr : next),
+                .map((spot) => spot.y)
+                .reduce((curr, next) => curr > next ? curr : next) +
+            1,
         lineBarsData: [
           LineChartBarData(
             show: true,
@@ -142,8 +146,8 @@ class Chart extends GetView<CurrenciesController> {
     );
 
     String formattedDate;
-    // int i = valueX[0];
-    switch (value.toInt()) {
+    // double i = valueX[0];
+    switch (value) {
       case 17:
         formattedDate = DateFormat('MMM d').format(axisX[0]);
         break;
