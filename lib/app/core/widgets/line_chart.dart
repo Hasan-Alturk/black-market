@@ -106,11 +106,11 @@ class Chart extends GetView<CurrenciesController> {
         minY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr < next ? curr : next) -
-            0.05,
+            0.2,
         maxY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr > next ? curr : next) +
-            0.05,
+            0.2,
         lineBarsData: [
           LineChartBarData(
             show: true,
@@ -145,19 +145,21 @@ class Chart extends GetView<CurrenciesController> {
       color: AppColors.graylight,
     );
 
+    // int middleIndex = axisX.length ~/ 2; // يستخدم ~/ للحصول على القسمة الصحيحة
+
     String formattedDate;
-    // double i = valueX[0];
-    switch (value) {
-      case 17:
-        formattedDate = DateFormat('MMM d').format(axisX[0]);
+
+    switch (value.toInt()) {
+      case 1:
+        formattedDate = DateFormat('MMM d').format(axisX.first);
         break;
 
-      case 20:
-        formattedDate = DateFormat('MMM d').format(axisX[3]);
-        break;
+      // case 15:
+      //   formattedDate = DateFormat('MMM d').format(axisX[middleIndex]);
+      //   break;
 
-      case 23:
-        formattedDate = DateFormat('MMM d').format(axisX[6]);
+      case 24:
+        formattedDate = DateFormat('MMM d').format(axisX.last);
         break;
 
       default:

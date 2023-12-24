@@ -56,10 +56,13 @@ class CurrenciesController extends GetxController {
       getHistoricalCurrencyLivePrices() async {
     try {
       isLoading = true;
+      
+      DateTime currentDate = DateTime.now();
+      int dayOfMonth = currentDate.day;
 
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
-        startDate: DateTime.now().subtract(const Duration(days: 7)).toString(),
+        startDate: currentDate.subtract(Duration(days: dayOfMonth)).toString(),
         currencyId: selectedCurrencyId,
         type: "live",
       );
@@ -79,8 +82,8 @@ class CurrenciesController extends GetxController {
     try {
       HistoricalCurrencyBlackPrices currencyList =
           await currencyRepo.getHistoricalCurrencyBlackPrices(
-        startDate: '2023-09-06',
-        currencyId: 15,
+        startDate: DateTime.now().subtract(const Duration(days: 30)).toString(),
+        currencyId: selectedCurrencyId,
         type: "black",
       );
       blackPricesMap = currencyList.blackPrices;
