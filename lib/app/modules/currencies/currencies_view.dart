@@ -132,7 +132,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                     width: 350.w,
                     decoration: BoxDecoration(
                       color: AppColors.yellowLight,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                     ),
                     child: Column(
                       children: [
@@ -304,7 +304,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   )
                 ]),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 GetBuilder<CurrenciesController>(
                     id: "Chart",
@@ -320,13 +320,37 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           ),
                         );
                       } else {
-                        return Chart(
-                          livePricesMap: controller.livePricesMap,
+                        return Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 35.w, top: 35.h),
+                              child: GetBuilder<CurrenciesController>(
+                                  id: "text_chart",
+                                  builder: (_) {
+                                    return Text(
+                                      controller.textChart,
+                                      style: TextStyle(
+                                        color: AppColors.yellowDark,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    );
+                                  }),
+                            ),
+                            Chart(
+                              livePricesMap: controller.livePricesMap,
+                            ),
+                          ],
                         );
                       }
                     }),
+                // const DraggableHome(
+                //   title: Text("data"),
+                //   headerWidget: Text("اضغط لأسفل لعرض المزيد"),
+                //   body: [],
+                // ),
                 SizedBox(
-                  height: 15.h,
+                  height: 25.h,
                 ),
                 Container(
                   height: 100.h,

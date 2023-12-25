@@ -3,14 +3,13 @@ import 'package:black_market/app/core/model/historical_currency_live_prices.dart
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
-  List<double> valueX = [];
 
   List<Color> gradientYellowColors = [
     AppColors.startYellowGrad,
@@ -35,7 +34,7 @@ class Chart extends GetView<CurrenciesController> {
             padding: const EdgeInsets.only(left: 35, right: 35),
             child: LineChart(
               mainData(),
-              curve: Curves.easeInBack,
+              curve: Curves.linear,
             ),
           ),
         ),
@@ -51,9 +50,7 @@ class Chart extends GetView<CurrenciesController> {
           String apiDate = livePrice.date;
           DateTime x = DateTime.parse(apiDate);
           spots.add(FlSpot(x.day.toDouble(), y));
-          double date = double.parse(DateFormat('d').format(x));
           axisX.add(x);
-          valueX.add(date);
         }
       },
     );
@@ -65,7 +62,7 @@ class Chart extends GetView<CurrenciesController> {
       if (i == 0 || currentSpot.y >= spots[i - 1].y) {
         lineColors.add(AppColors.yellowDark);
       } else {
-        lineColors.add(AppColors.endRedGrad);
+        lineColors.add(AppColors.startRedGrad);
       }
     }
 
@@ -83,6 +80,7 @@ class Chart extends GetView<CurrenciesController> {
               showTitles: true,
               reservedSize: 30,
               getTitlesWidget: bottomTitleWidgets,
+              interval: 1,
             ),
           ),
           rightTitles: const AxisTitles(
@@ -95,11 +93,47 @@ class Chart extends GetView<CurrenciesController> {
             sideTitles: SideTitles(showTitles: false),
           ),
         ),
+        lineTouchData: LineTouchData(
+          touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: AppColors.gray,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((LineBarSpot touchedSpot) {
+                TextStyle textStyle = TextStyle(
+                  color: AppColors.yellowNormal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
+                );
+
+                return LineTooltipItem(
+                  '${touchedSpot.y}',
+                  textStyle,
+                );
+              }).toList();
+            },
+          ),
+          touchCallback: (event, touchResponse) {
+            if (touchResponse != null &&
+                touchResponse.lineBarSpots != null &&
+                touchResponse.lineBarSpots!.isNotEmpty) {
+              const int selectedSpotIndex = 0;
+              if (selectedSpotIndex < touchResponse.lineBarSpots!.length) {
+                final TouchLineBarSpot touchedSpot =
+                    touchResponse.lineBarSpots!.elementAt(selectedSpotIndex);
+                final String xValue = touchedSpot.x.toInt().toString();
+                final String yValue = touchedSpot.y.toString();
+                String data = DateFormat('MMM').format(axisX[0]);
+                controller.getTextChart('EGP\t $yValue\n$data\t\t\t\t$xValue');
+              }
+            }
+          },
+          handleBuiltInTouches: true,
+        ),
+        // minX: 0,
+        // maxX: 30,
+
         minX: spots
             .map((spot) => spot.x)
             .reduce((curr, next) => curr < next ? curr : next),
-        // minX: valueX[0],
-        // maxX: valueX[6],
         maxX: spots
             .map((spot) => spot.x)
             .reduce((curr, next) => curr > next ? curr : next),
@@ -110,12 +144,12 @@ class Chart extends GetView<CurrenciesController> {
         maxY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr > next ? curr : next) +
-            0.2,
+            0.3,
         lineBarsData: [
           LineChartBarData(
             show: true,
             spots: spots,
-            isCurved: false,
+            isCurved: true,
             barWidth: 3,
             isStepLineChart: false,
             dotData: const FlDotData(
@@ -147,25 +181,14 @@ class Chart extends GetView<CurrenciesController> {
 
     // int middleIndex = axisX.length ~/ 2; // يستخدم ~/ للحصول على القسمة الصحيحة
 
-    String formattedDate;
-
-    switch (value.toInt()) {
-      case 1:
-        formattedDate = DateFormat('MMM d').format(axisX.first);
-        break;
-
-      // case 15:
-      //   formattedDate = DateFormat('MMM d').format(axisX[middleIndex]);
-      //   break;
-
-      case 24:
-        formattedDate = DateFormat('MMM d').format(axisX.last);
-        break;
-
-      default:
-        formattedDate = "";
-        break;
-    }
+    String formattedDate = switch (value.toInt()) {
+      1 => DateFormat('MMM d').format(axisX[0]),
+      6 => DateFormat('MMM d').format(axisX[5]),
+      15 => DateFormat('MMM d').format(axisX[14]),
+      24 => DateFormat('MMM d').format(axisX[23]),
+      30 => DateFormat('MMM d').format(axisX[29]),
+      _ => ""
+    };
 
     return SideTitleWidget(
       axisSide: meta.axisSide,

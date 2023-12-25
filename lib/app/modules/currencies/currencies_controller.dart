@@ -34,6 +34,10 @@ class CurrenciesController extends GetxController {
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
+  DateTime currentDate = DateTime.now();
+  late int dayOfMonth = currentDate.day;
+  String textChart = "";
+
   @override
   void onInit() async {
     //   getHistoricalCurrencyBlackPrices();
@@ -56,9 +60,6 @@ class CurrenciesController extends GetxController {
       getHistoricalCurrencyLivePrices() async {
     try {
       isLoading = true;
-      
-      DateTime currentDate = DateTime.now();
-      int dayOfMonth = currentDate.day;
 
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
@@ -151,6 +152,12 @@ class CurrenciesController extends GetxController {
       return;
     }
     update(["name_and_avatar"]);
+  }
+
+  Future<String> getTextChart(String t) async {
+    textChart = t;
+    update(["text_chart"]);
+    return textChart;
   }
 
   Future<void> getBanksAccordingToSelectedCurrency(int currencyId) async {
