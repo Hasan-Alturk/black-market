@@ -96,14 +96,15 @@ class SplashController extends GetxController {
       List<Bank> banks = await bankRepo.getBanks();
       List<Bank> sortedBanks = await SharedStorage.getSortedBanks();
       if (sortedBanks.isNotEmpty) {
-        List<Bank> sortedList = await sortingBanks(banks, sortedBanks);
-        await SharedStorage.saveSortedBanks(sortedList);
-        await SharedStorage.saveBanks(banks);
+            await sortingBanks(banks, sortedBanks).then((value) async {
+          await SharedStorage.saveSortedBanks(value);
+          return value;
+        });
+
       } else {
         await SharedStorage.saveBanks(banks);
-        await SharedStorage.saveSortedBanks(sortedBanks);
+        await SharedStorage.saveSortedBanks(banks);
       }
-      // await SharedStorage.saveBanks(banks);
     } on ExceptionHandler catch (e) {
       log("Error: $e");
     }
@@ -116,9 +117,11 @@ class SplashController extends GetxController {
       List<LatestCurrency> sortedLatestCurrencies =
           await SharedStorage.getCurrenciesSorted();
       if (sortedLatestCurrencies.isNotEmpty) {
-        List<LatestCurrency> sortedList = await sortingLatestCurrency(
-            latestCurrencies, sortedLatestCurrencies);
-        await SharedStorage.saveCurrenciesSorted(sortedList);
+        await sortingLatestCurrency(latestCurrencies, sortedLatestCurrencies)
+            .then((value) {
+          SharedStorage.saveCurrenciesSorted(value);
+          return value;
+        });
       } else {
         await SharedStorage.saveCurrencies(latestCurrencies);
         await SharedStorage.saveCurrenciesSorted(latestCurrencies);

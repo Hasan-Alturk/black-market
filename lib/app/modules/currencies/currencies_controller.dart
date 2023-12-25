@@ -165,14 +165,18 @@ class CurrenciesController extends GetxController {
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
-          // log(value.date);
+        // log(value.date);
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
-
         for (var bank in x) {
+
           innerLoop:
           for (var b in bankList) {
-            if (bank.currencyId == currencyId && b.id == bank.bankId) {
+                              // log(b.name.toString());
+
+            if (bank.currencyId == currencyId 
+            && b.id == bank.bankId
+            ) {
               var c = CurrencyInBank(
                   currencyId: currencyId,
                   currencyIcon: element.icon.toString(),
