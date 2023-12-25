@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class Chart extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
