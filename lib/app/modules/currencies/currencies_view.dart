@@ -325,21 +325,23 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           children: [
                             Align(
                               alignment: Alignment.center,
-                              child: SizedBox(
+                              child: Container(
                                 width: 250.w,
                                 height: 30.h,
+                                decoration: BoxDecoration(
+                                    color: AppColors.yellowNormal,
+                                    borderRadius: BorderRadius.circular(30)),
                                 child: DefaultTabController(
                                     length: 2,
                                     child: TabBar(
-                                      labelColor: AppColors.gray,
-                                      unselectedLabelColor:
-                                          AppColors.yellowNormal,
+                                      labelColor: AppColors.yellowNormal,
+                                      unselectedLabelColor: AppColors.gray,
                                       tabs: const [Text("Live"), Text("Black")],
                                       indicatorSize: TabBarIndicatorSize.tab,
                                       dividerColor: Colors.transparent,
                                       indicator: BubbleTabIndicator(
                                         indicatorHeight: 25.0,
-                                        indicatorColor: AppColors.yellowNormal,
+                                        indicatorColor: AppColors.gray,
                                         tabBarIndicatorSize:
                                             TabBarIndicatorSize.tab,
                                         // Other flags
