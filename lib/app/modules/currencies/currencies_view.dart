@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
@@ -5,6 +7,7 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/widgets/card_item.dart';
 import 'package:black_market/app/core/widgets/line_chart.dart';
+import 'package:black_market/app/core/widgets/line_chart_black.dart';
 import 'package:black_market/app/core/widgets/select_currency_dialog.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
@@ -321,69 +324,95 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           ),
                         );
                       } else {
-                        return Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                width: 250.w,
-                                height: 30.h,
-                                decoration: BoxDecoration(
-                                    color: AppColors.yellowNormal,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: DefaultTabController(
-                                    length: 2,
-                                    child: TabBar(
-                                      labelColor: AppColors.yellowNormal,
-                                      unselectedLabelColor: AppColors.gray,
-                                      tabs: const [Text("Live"), Text("Black")],
-                                      indicatorSize: TabBarIndicatorSize.tab,
-                                      dividerColor: Colors.transparent,
-                                      indicator: BubbleTabIndicator(
-                                        indicatorHeight: 25.0,
-                                        indicatorColor: AppColors.gray,
-                                        tabBarIndicatorSize:
-                                            TabBarIndicatorSize.tab,
-                                        // Other flags
-                                        // indicatorRadius: 1,
-                                        // insets: EdgeInsets.all(1),
-                                        // padding: EdgeInsets.all(10)
+                        return GetBuilder<CurrenciesController>(
+                            id: "Chart",
+                            builder: (_) {
+                              return Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      width: 250.w,
+                                      height: 30.h,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.yellowNormal,
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: DefaultTabController(
+                                          length: 2,
+                                          child: TabBar(
+                                            labelColor: AppColors.yellowNormal,
+                                            unselectedLabelColor:
+                                                AppColors.gray,
+                                            tabs: const [
+                                              Text("Live"),
+                                              Text("Black")
+                                            ],
+                                            indicatorSize:
+                                                TabBarIndicatorSize.tab,
+                                            dividerColor: Colors.transparent,
+                                            onTap: (value) {
+                                              if (value == 0) {
+                                                controller.value = value;
+                                                controller
+                                                    .getHistoricalCurrencyLivePrices();
+                                                Chart(
+                                                  livePricesMap:
+                                                      controller.livePricesMap,
+                                                );
+                                                log(value.toString());
+                                              } else {
+                                                controller.value = value;
+                                                controller
+                                                    .getHistoricalCurrencyBlackPrices();
+                                                ChartBlack(
+                                                    blackPricesMap: controller
+                                                        .blackPricesMap);
+
+                                                log(value.toString());
+                                              }
+                                            },
+                                            indicator: BubbleTabIndicator(
+                                              indicatorHeight: 25.0,
+                                              indicatorColor: AppColors.gray,
+                                              tabBarIndicatorSize:
+                                                  TabBarIndicatorSize.tab,
+                                              // Other flags
+                                              // indicatorRadius: 1,
+                                              // insets: EdgeInsets.all(1),
+                                              // padding: EdgeInsets.all(10)
+                                            ),
+                                          )),
+                                    ),
+                                  ),
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 35.w, top: 35.h),
+                                        child: GetBuilder<CurrenciesController>(
+                                            id: "text_chart",
+                                            builder: (_) {
+                                              return Text(
+                                                controller.textChart,
+                                                style: TextStyle(
+                                                  color: AppColors.yellowDark,
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              );
+                                            }),
                                       ),
-                                    )),
-                              ),
-                            ),
-                            Stack(
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 35.w, top: 35.h),
-                                  child: GetBuilder<CurrenciesController>(
-                                      id: "text_chart",
-                                      builder: (_) {
-                                        return Text(
-                                          controller.textChart,
-                                          style: TextStyle(
-                                            color: AppColors.yellowDark,
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        );
-                                      }),
-                                ),
-                                Chart(
-                                  livePricesMap: controller.livePricesMap,
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
+                                      // Chart(
+                                      //   livePricesMap: controller.livePricesMap,
+                                      // ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            });
                       }
-                    }),
-                // const DraggableHome(
-                //   title: Text("data"),
-                //   headerWidget: Text("اضغط لأسفل لعرض المزيد"),
-                //   body: [],
-                // ),
+                    }),            
                 SizedBox(
                   height: 25.h,
                 ),

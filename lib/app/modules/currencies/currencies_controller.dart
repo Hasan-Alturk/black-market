@@ -37,6 +37,7 @@ class CurrenciesController extends GetxController {
   DateTime currentDate = DateTime.now();
   late int dayOfMonth = currentDate.day;
   String textChart = "";
+  int value = 0;
 
   @override
   void onInit() async {
@@ -74,33 +75,33 @@ class CurrenciesController extends GetxController {
       return livePricesMap;
     } on ExceptionHandler catch (e) {
       isLoading = false;
+      update(["Chart"]);
       log("Error: $e");
       throw ExceptionHandler("Unknown error");
     }
   }
 
-  Future<void> getHistoricalCurrencyBlackPrices() async {
+  Future<Map<String, List<BlackPrices>>>
+      getHistoricalCurrencyBlackPrices() async {
     try {
+      isLoading = true;
+
       HistoricalCurrencyBlackPrices currencyList =
           await currencyRepo.getHistoricalCurrencyBlackPrices(
-        startDate: DateTime.now().subtract(const Duration(days: 30)).toString(),
+        startDate:
+            DateTime.now().subtract(Duration(days: dayOfMonth)).toString(),
         currencyId: selectedCurrencyId,
         type: "black",
       );
       blackPricesMap = currencyList.blackPrices;
-      // blackPricesMap.forEach((currency, blackPrices) {
-
-      // الدوران عبر قائمة كائنات LivePrices
-      // for (var e in blackPrices) {
-      //   log('معرف العملة: ${e.currencyId}');
-      //   log('السعر: ${e.buyPrice}');
-      //   log('السعر: ${e.sellPrice}');
-      //   log('التاريخ: ${e.date}');
-      //   log('--------------');
-      // }
-      // });
+      isLoading = false;
+      update(["Chart"]);
+      return blackPricesMap;
     } on ExceptionHandler catch (e) {
+      isLoading = false;
+      update(["Chart"]);
       log("Error: $e");
+      throw ExceptionHandler("Unknown error");
     }
   }
 
@@ -165,18 +166,15 @@ class CurrenciesController extends GetxController {
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
-        // log(value.date);
+          // log(value.date);
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
         for (var bank in x) {
-
           innerLoop:
           for (var b in bankList) {
-                              // log(b.name.toString());
+            // log(b.name.toString());
 
-            if (bank.currencyId == currencyId 
-            && b.id == bank.bankId
-            ) {
+            if (bank.currencyId == currencyId && b.id == bank.bankId) {
               var c = CurrencyInBank(
                   currencyId: currencyId,
                   currencyIcon: element.icon.toString(),

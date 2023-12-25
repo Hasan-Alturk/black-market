@@ -1,6 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
-import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class Chart extends GetView<CurrenciesController> {
+class ChartBlack extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
 
@@ -22,9 +21,9 @@ class Chart extends GetView<CurrenciesController> {
     AppColors.startRedGrad,
     AppColors.endRedGrad,
   ];
-  Map<String, List<LivePrices>> livePricesMap = {};
+  Map<String, List<BlackPrices>> blackPricesMap = {};
 
-  Chart({super.key, required this.livePricesMap});
+  ChartBlack({super.key, required this.blackPricesMap});
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +44,12 @@ class Chart extends GetView<CurrenciesController> {
   }
 
   LineChartData mainData() {
-    livePricesMap.forEach(
+    blackPricesMap.forEach(
       (currency, livePricesList) {
         for (var livePrice in livePricesList) {
-          double y = livePrice.price.toDouble();
-          String apiDate = livePrice.date;
-          DateTime x = DateTime.parse(apiDate);
+          double y = livePrice.buyPrice.toDouble();
+          String? apiDate = livePrice.date;
+          DateTime x = DateTime.parse(apiDate!);
           spots.add(FlSpot(x.day.toDouble(), y));
           axisX.add(x);
         }
