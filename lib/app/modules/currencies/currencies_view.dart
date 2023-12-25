@@ -7,6 +7,7 @@ import 'package:black_market/app/core/widgets/card_item.dart';
 import 'package:black_market/app/core/widgets/line_chart.dart';
 import 'package:black_market/app/core/widgets/select_currency_dialog.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -320,25 +321,57 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           ),
                         );
                       } else {
-                        return Stack(
+                        return Column(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 35.w, top: 35.h),
-                              child: GetBuilder<CurrenciesController>(
-                                  id: "text_chart",
-                                  builder: (_) {
-                                    return Text(
-                                      controller.textChart,
-                                      style: TextStyle(
-                                        color: AppColors.yellowDark,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.normal,
+                            Align(
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                width: 250.w,
+                                height: 30.h,
+                                child: DefaultTabController(
+                                    length: 2,
+                                    child: TabBar(
+                                      labelColor: AppColors.gray,
+                                      unselectedLabelColor:
+                                          AppColors.yellowNormal,
+                                      tabs: const [Text("Live"), Text("Black")],
+                                      indicatorSize: TabBarIndicatorSize.tab,
+                                      dividerColor: Colors.transparent,
+                                      indicator: BubbleTabIndicator(
+                                        indicatorHeight: 25.0,
+                                        indicatorColor: AppColors.yellowNormal,
+                                        tabBarIndicatorSize:
+                                            TabBarIndicatorSize.tab,
+                                        // Other flags
+                                        // indicatorRadius: 1,
+                                        // insets: EdgeInsets.all(1),
+                                        // padding: EdgeInsets.all(10)
                                       ),
-                                    );
-                                  }),
+                                    )),
+                              ),
                             ),
-                            Chart(
-                              livePricesMap: controller.livePricesMap,
+                            Stack(
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 35.w, top: 35.h),
+                                  child: GetBuilder<CurrenciesController>(
+                                      id: "text_chart",
+                                      builder: (_) {
+                                        return Text(
+                                          controller.textChart,
+                                          style: TextStyle(
+                                            color: AppColors.yellowDark,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                Chart(
+                                  livePricesMap: controller.livePricesMap,
+                                ),
+                              ],
                             ),
                           ],
                         );
