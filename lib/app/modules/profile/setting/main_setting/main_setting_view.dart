@@ -21,87 +21,90 @@ class MainSettingView extends GetView<MainSettingController> {
         onTap: () => Get.back(),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 38.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.preferredBanks,
-              stringIcon: AppAssetIcons.bank,
-              onTap: () {
-                controller.goToPreferredOfBanks();
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.preferredCurrencies,
-              stringIcon: AppAssetIcons.dollar,
-              onTap: () {
-                controller.goToPreferredOfCurrencies();
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.language,
-              stringIcon: AppAssetIcons.global,
-              onTap: () {
-                controller.goToLanguage();
-              },
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            CustomContainerProfile(
-              text: AppStrings.notificationsSetting,
-              stringIcon: AppAssetIcons.note,
-              onTap: () {
-                controller.goToNotificationsSetting();
-              },
-            ),
-            SizedBox(
-              height: 30.h,
-            ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CustomAlarteDialog(
-                      isLoading: false,
-                      text: AppStrings.areYouSureTodDeleteAccount,
-                      contentButton: AppStrings.deleteAccount,
-                      onTap: Get.back,
-                      onPressed: () => (),
-                    );
-                  },
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppStrings.deleteAccount,
-                    style: TextStyle(
-                      color: AppColors.red,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Image.asset(
-                    AppAssetIcons.delete,
-                  ),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 38.h,
               ),
-            )
-          ],
+              CustomContainerProfile(
+                text: AppStrings.preferredBanks,
+                stringIcon: AppAssetIcons.bank,
+                onTap: () {
+                  controller.goToPreferredOfBanks();
+                },
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.preferredCurrencies,
+                stringIcon: AppAssetIcons.dollar,
+                onTap: () {
+                  controller.goToPreferredOfCurrencies();
+                },
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.language,
+                stringIcon: AppAssetIcons.global,
+                onTap: () {
+                  controller.goToLanguage();
+                },
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomContainerProfile(
+                text: AppStrings.notificationsSetting,
+                stringIcon: AppAssetIcons.note,
+                onTap: () {
+                  controller.goToNotificationsSetting();
+                },
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CustomAlarteDialog(
+                        isLoading: false,
+                        text: AppStrings.areYouSureTodDeleteAccount,
+                        contentButton: AppStrings.deleteAccount,
+                        onTap: Get.back,
+                        onPressed: () => (),
+                      );
+                    },
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.deleteAccount,
+                      style: TextStyle(
+                        color: AppColors.red,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Image.asset(
+                      AppAssetIcons.delete,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
