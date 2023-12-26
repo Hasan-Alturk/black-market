@@ -360,6 +360,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                       builder: (_) {
                         if (controller.valueTapBar == 0) {
                           controller.getHistoricalCurrencyLivePrices();
+                          controller.textChart = "";
                           return Chart(
                             livePricesMap: controller.livePricesMap,
                           );

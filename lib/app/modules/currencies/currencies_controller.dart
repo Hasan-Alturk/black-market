@@ -56,9 +56,6 @@ class CurrenciesController extends GetxController {
   Future<Map<String, List<LivePrices>>>
       getHistoricalCurrencyLivePrices() async {
     try {
-      isLoading = true;
-      update(["chart"]);
-
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
         startDate: currentDate.subtract(Duration(days: dayOfMonth)).toString(),
@@ -68,7 +65,6 @@ class CurrenciesController extends GetxController {
 
       livePricesMap = currencyList.livePrices;
 
-      isLoading = false;
       update(["chart"]);
 
       return livePricesMap;
@@ -83,9 +79,6 @@ class CurrenciesController extends GetxController {
   Future<Map<String, List<BlackPrices>>>
       getHistoricalCurrencyBlackPrices() async {
     try {
-      isLoading = true;
-      update(["chart"]);
-
       HistoricalCurrencyBlackPrices currencyList =
           await currencyRepo.getHistoricalCurrencyBlackPrices(
         startDate:
@@ -95,8 +88,8 @@ class CurrenciesController extends GetxController {
       );
       blackPricesMap = currencyList.blackPrices;
 
-      isLoading = false;
       update(["chart"]);
+      update(["text_chart"]);
 
       return blackPricesMap;
     } on ExceptionHandler catch (e) {
