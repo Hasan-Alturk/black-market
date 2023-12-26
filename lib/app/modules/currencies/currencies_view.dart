@@ -369,13 +369,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                             blackPricesMap: controller.blackPricesMap,
                           );
                         } else {
-                          return SizedBox(
-                            height: 300.h,
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              color: AppColors.yellowDark,
-                            )),
-                          );
+                          return const SizedBox();
                         }
                       },
                     ),
