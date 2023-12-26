@@ -321,7 +321,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                         tabs: const [Text("Live"), Text("Black")],
                         indicatorSize: TabBarIndicatorSize.tab,
                         dividerColor: Colors.transparent,
-                        onTap: (value) async {
+                        onTap: (value) {
                           if (value == 0) {
                             controller.valueTapBar = value;
                           } else {
