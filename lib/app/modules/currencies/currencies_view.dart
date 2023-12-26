@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
@@ -201,108 +199,104 @@ class CurrenciesView extends GetView<CurrenciesController> {
                           height: 10.h,
                         ),
                         GetBuilder<CurrenciesController>(
-                            id: "lastUpdateContainer",
-                            builder: (_) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    if (controller.currency.isNotEmpty)
-                                      controller.currency.first
-                                                  .blackMarketBuyPrice !=
-                                              null
-                                          ? Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  AppStrings.blackMarket,
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color:
-                                                          AppColors.lightGrey),
-                                                ),
-                                                Text(
-                                                  controller.currency.isNotEmpty
-                                                      ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
-                                                      : "",
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color:
-                                                          AppColors.yellowDark),
-                                                ),
-                                              ],
-                                            )
-                                          : const SizedBox.shrink(),
-                                    if (controller.currency.isNotEmpty)
-                                      controller.currency.first
-                                                  .blackMarketBuyPrice !=
-                                              null
-                                          ? Container(
-                                              height: 30.h,
-                                              width: 1,
-                                              color: AppColors.lighterGrey,
-                                            )
-                                          : const SizedBox.shrink(),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.lastUpdate,
-                                          style: TextStyle(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w700,
-                                              color: AppColors.lightGrey),
-                                        ),
-                                        Text(
-                                          controller.currency.isNotEmpty
-                                              ? " منذ ${controller.currency.first.lastUpdate} دقيقة "
-                                              : "",
-                                          style: TextStyle(
-                                              fontSize: 10.sp,
-                                              color: AppColors.darkGrey,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 30.h,
-                                      width: 1,
-                                      color: AppColors.lighterGrey,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.bankPrice,
-                                          style: TextStyle(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w700,
-                                              color: AppColors.lightGrey),
-                                        ),
-                                        Text(
-                                          controller.currency.isNotEmpty
-                                              ? "${controller.currency.first.livePrice} ج.م"
-                                              : "",
-                                          style: TextStyle(
-                                              fontSize: 10.sp,
-                                              color: AppColors.darkGrey,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
+                          id: "lastUpdateContainer",
+                          builder: (_) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  if (controller.currency.isNotEmpty)
+                                    controller.currency.first
+                                                .blackMarketBuyPrice !=
+                                            null
+                                        ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                AppStrings.blackMarket,
+                                                style: TextStyle(
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppColors.lightGrey),
+                                              ),
+                                              Text(
+                                                controller.currency.isNotEmpty
+                                                    ? "${controller.currency.first.blackMarketBuyPrice} ج.م"
+                                                    : "",
+                                                style: TextStyle(
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w700,
+                                                    color:
+                                                        AppColors.yellowDark),
+                                              ),
+                                            ],
+                                          )
+                                        : const SizedBox.shrink(),
+                                  if (controller.currency.isNotEmpty)
+                                    controller.currency.first
+                                                .blackMarketBuyPrice !=
+                                            null
+                                        ? Container(
+                                            height: 30.h,
+                                            width: 1,
+                                            color: AppColors.lighterGrey,
+                                          )
+                                        : const SizedBox.shrink(),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        AppStrings.lastUpdate,
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.lightGrey),
+                                      ),
+                                      Text(
+                                        controller.currency.isNotEmpty
+                                            ? " منذ ${controller.currency.first.lastUpdate} دقيقة "
+                                            : "",
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: AppColors.darkGrey,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 30.h,
+                                    width: 1,
+                                    color: AppColors.lighterGrey,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        AppStrings.bankPrice,
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppColors.lightGrey),
+                                      ),
+                                      Text(
+                                        controller.currency.isNotEmpty
+                                            ? "${controller.currency.first.livePrice} ج.م"
+                                            : "",
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: AppColors.darkGrey,
+                                            fontWeight: FontWeight.w700),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   )
@@ -310,109 +304,83 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: 10.h,
                 ),
-                GetBuilder<CurrenciesController>(
-                    id: "Chart",
-                    builder: (_) {
-                      if (controller.isLoading) {
-                        return SizedBox(
-                          height: 380.h,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 250.w,
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                        color: AppColors.yellowNormal,
+                        borderRadius: BorderRadius.circular(30.r)),
+                    child: DefaultTabController(
+                      length: 2,
+                      initialIndex: 0,
+                      child: TabBar(
+                        labelColor: AppColors.yellowNormal,
+                        unselectedLabelColor: AppColors.gray,
+                        tabs: const [Text("Live"), Text("Black")],
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: Colors.transparent,
+                        onTap: (value) async {
+                          if (value == 0) {
+                            controller.valueTapBar = value;
+                          } else {
+                            controller.valueTapBar = value;
+                          }
+                        },
+                        indicator: BubbleTabIndicator(
+                          indicatorHeight: 25.0.h,
+                          indicatorColor: AppColors.gray,
+                          tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 35.w, top: 35.h),
+                      child: GetBuilder<CurrenciesController>(
+                        id: "text_chart",
+                        builder: (_) {
+                          return Text(
+                            controller.textChart,
+                            style: TextStyle(
                               color: AppColors.yellowDark,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.normal,
                             ),
-                          ),
-                        );
-                      } else {
-                        return GetBuilder<CurrenciesController>(
-                            id: "Chart",
-                            builder: (_) {
-                              return Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      width: 250.w,
-                                      height: 30.h,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.yellowNormal,
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: DefaultTabController(
-                                          length: 2,
-                                          child: TabBar(
-                                            labelColor: AppColors.yellowNormal,
-                                            unselectedLabelColor:
-                                                AppColors.gray,
-                                            tabs: const [
-                                              Text("Live"),
-                                              Text("Black")
-                                            ],
-                                            indicatorSize:
-                                                TabBarIndicatorSize.tab,
-                                            dividerColor: Colors.transparent,
-                                            onTap: (value) {
-                                              if (value == 0) {
-                                                controller.value = value;
-                                                controller
-                                                    .getHistoricalCurrencyLivePrices();
-                                                Chart(
-                                                  livePricesMap:
-                                                      controller.livePricesMap,
-                                                );
-                                                log(value.toString());
-                                              } else {
-                                                controller.value = value;
-                                                controller
-                                                    .getHistoricalCurrencyBlackPrices();
-                                                ChartBlack(
-                                                    blackPricesMap: controller
-                                                        .blackPricesMap);
-
-                                                log(value.toString());
-                                              }
-                                            },
-                                            indicator: BubbleTabIndicator(
-                                              indicatorHeight: 25.0,
-                                              indicatorColor: AppColors.gray,
-                                              tabBarIndicatorSize:
-                                                  TabBarIndicatorSize.tab,
-                                              // Other flags
-                                              // indicatorRadius: 1,
-                                              // insets: EdgeInsets.all(1),
-                                              // padding: EdgeInsets.all(10)
-                                            ),
-                                          )),
-                                    ),
-                                  ),
-                                  Stack(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 35.w, top: 35.h),
-                                        child: GetBuilder<CurrenciesController>(
-                                            id: "text_chart",
-                                            builder: (_) {
-                                              return Text(
-                                                controller.textChart,
-                                                style: TextStyle(
-                                                  color: AppColors.yellowDark,
-                                                  fontSize: 18.sp,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              );
-                                            }),
-                                      ),
-                                      // Chart(
-                                      //   livePricesMap: controller.livePricesMap,
-                                      // ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            });
-                      }
-                    }),            
+                          );
+                        },
+                      ),
+                    ),
+                    GetBuilder<CurrenciesController>(
+                      id: "chart",
+                      builder: (_) {
+                        if (controller.valueTapBar == 0) {
+                          controller.getHistoricalCurrencyLivePrices();
+                          return Chart(
+                            livePricesMap: controller.livePricesMap,
+                          );
+                        } else if (controller.valueTapBar == 1) {
+                          controller.getHistoricalCurrencyBlackPrices();
+                          return ChartBlack(
+                            blackPricesMap: controller.blackPricesMap,
+                          );
+                        } else {
+                          return SizedBox(
+                            height: 300.h,
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: AppColors.yellowDark,
+                            )),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 25.h,
                 ),

@@ -1,5 +1,4 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -36,7 +35,7 @@ class Chart extends GetView<CurrenciesController> {
             padding: const EdgeInsets.only(left: 35, right: 35),
             child: LineChart(
               mainData(),
-              curve: Curves.linear,
+              curve: Curves.easeInToLinear,
             ),
           ),
         ),

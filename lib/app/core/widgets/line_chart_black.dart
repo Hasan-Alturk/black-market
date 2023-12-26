@@ -35,7 +35,7 @@ class ChartBlack extends GetView<CurrenciesController> {
             padding: const EdgeInsets.only(left: 35, right: 35),
             child: LineChart(
               mainData(),
-              curve: Curves.linear,
+              curve: Curves.easeInToLinear,
             ),
           ),
         ),

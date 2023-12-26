@@ -37,12 +37,11 @@ class CurrenciesController extends GetxController {
   DateTime currentDate = DateTime.now();
   late int dayOfMonth = currentDate.day;
   String textChart = "";
-  int value = 0;
+  int valueTapBar = 0;
 
   @override
   void onInit() async {
-    //   getHistoricalCurrencyBlackPrices();
-
+    await getNameAndAvatar();
     await getBanksFromPrefs();
     await getLatestCurrenciesFromPrefs().then((value) async {
       if (latestCurrencyList.isNotEmpty) {
@@ -51,9 +50,6 @@ class CurrenciesController extends GetxController {
         getCurrencyInBank(latestCurrencyList[0].id!);
       }
     });
-    await getHistoricalCurrencyLivePrices();
-
-    getNameAndAvatar();
     super.onInit();
   }
 
@@ -61,6 +57,7 @@ class CurrenciesController extends GetxController {
       getHistoricalCurrencyLivePrices() async {
     try {
       isLoading = true;
+      update(["chart"]);
 
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
@@ -70,12 +67,14 @@ class CurrenciesController extends GetxController {
       );
 
       livePricesMap = currencyList.livePrices;
+
       isLoading = false;
-      update(["Chart"]);
+      update(["chart"]);
+
       return livePricesMap;
     } on ExceptionHandler catch (e) {
       isLoading = false;
-      update(["Chart"]);
+      update(["chart"]);
       log("Error: $e");
       throw ExceptionHandler("Unknown error");
     }
@@ -85,6 +84,7 @@ class CurrenciesController extends GetxController {
       getHistoricalCurrencyBlackPrices() async {
     try {
       isLoading = true;
+      update(["chart"]);
 
       HistoricalCurrencyBlackPrices currencyList =
           await currencyRepo.getHistoricalCurrencyBlackPrices(
@@ -94,12 +94,14 @@ class CurrenciesController extends GetxController {
         type: "black",
       );
       blackPricesMap = currencyList.blackPrices;
+
       isLoading = false;
-      update(["Chart"]);
+      update(["chart"]);
+
       return blackPricesMap;
     } on ExceptionHandler catch (e) {
       isLoading = false;
-      update(["Chart"]);
+      update(["chart"]);
       log("Error: $e");
       throw ExceptionHandler("Unknown error");
     }
