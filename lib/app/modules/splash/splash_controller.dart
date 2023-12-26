@@ -60,7 +60,6 @@ class SplashController extends GetxController {
       Get.offAllNamed("/main_home");
     } else {
       Get.offAllNamed("/main_home");
-      //   Get.offAllNamed("/login");
     }
   }
 
@@ -184,19 +183,4 @@ class SplashController extends GetxController {
     return bankListSorted;
   }
 
-  // Future<void> getSortedBanks() async {
-  //   try {
-  //     List<Bank> banks = await SharedStorage.getBanks();
-  //     List<Bank> sortedBanks = await SharedStorage.getSortedBanks();
-  //     for (var element1 in banks) {
-  //       for (var element2 in sortedBanks) {
-  //         if (element1.sort != element2.sort) {
-  //           element1.sort = element2.sort;
-  //         }
-  //       }
-  //     }
-  //   } on ExceptionHandler catch (e) {
-  //     log("Error: $e");
-  //   }
-  // }
 }

@@ -3,7 +3,7 @@
     <application
         android:label="black_market"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/on_boarding">
         <activity
             android:name=".MainActivity"
             android:exported="true"

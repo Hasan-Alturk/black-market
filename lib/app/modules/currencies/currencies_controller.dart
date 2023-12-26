@@ -18,7 +18,6 @@ class CurrenciesController extends GetxController {
   final CurrencyRepo currencyRepo;
   final BankRepo bankRepo;
 
-
   bool isLoading = false;
   String? error;
   int selectedCurrencyId = 19;
@@ -159,6 +158,7 @@ class CurrenciesController extends GetxController {
 
   Future<void> getBanksAccordingToSelectedCurrency(int currencyId) async {
     currencyInBankList.clear();
+    textChart = "";
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
@@ -203,7 +203,7 @@ class CurrenciesController extends GetxController {
     //   log(element.bankName);
     // }
     sortBanks();
-    update(["bankList", "currencies", "currencyList"]);
+    update(["bankList", "currencies", "currencyList", "text_chart"]);
   }
 
   void sortBanks() {

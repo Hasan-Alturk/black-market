@@ -105,4 +105,5 @@ abstract class AppStrings {
 
   static String dragBank = "إختر الترتيب المفضل للبنوك";
   static String dragCurrency = "إختر الترتيب المفضل للعملات";
+
 }

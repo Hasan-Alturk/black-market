@@ -1,5 +1,6 @@
 import 'package:black_market/app/core/constants/app_asset_image.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/modules/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,12 +19,22 @@ class SplashView extends GetView<SplashController> {
           children: [
             Center(
               child: SizedBox(
-                height: 279.h,
-                width: 279.w,
+                height: 140.h,
+                width: 140.w,
                 child: Image.asset(
                   AppAssetImage.imageOnBoarding,
                 ),
               ),
+            ),
+            Text(
+              AppStrings.blackMarketInEng,
+              style: TextStyle(
+                  color: AppColors.blackDark,
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 15.h,
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -34,8 +45,7 @@ class SplashView extends GetView<SplashController> {
                       color: AppColors.blackDark,
                     );
                   } else {
-                    return const SizedBox
-                        .shrink(); // يمكنك استخدام أي عنصر بديل غير مرئي
+                    return const SizedBox();
                   }
                 },
               ),
