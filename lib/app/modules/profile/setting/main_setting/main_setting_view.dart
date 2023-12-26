@@ -1,7 +1,6 @@
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
-import 'package:black_market/app/core/widgets/custom_alarte_dialog.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
 import 'package:black_market/app/modules/profile/setting/main_setting/main_profile_controller.dart';
@@ -68,41 +67,6 @@ class MainSettingView extends GetView<MainSettingController> {
               SizedBox(
                 height: 30.h,
               ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CustomAlarteDialog(
-                        isLoading: false,
-                        text: AppStrings.areYouSureTodDeleteAccount,
-                        contentButton: AppStrings.deleteAccount,
-                        onTap: Get.back,
-                        onPressed: () => (),
-                      );
-                    },
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.deleteAccount,
-                      style: TextStyle(
-                        color: AppColors.red,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Image.asset(
-                      AppAssetIcons.delete,
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ),
