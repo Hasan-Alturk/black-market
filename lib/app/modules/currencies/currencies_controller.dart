@@ -17,8 +17,9 @@ class CurrenciesController extends GetxController {
   CurrenciesController({required this.currencyRepo, required this.bankRepo});
   final CurrencyRepo currencyRepo;
   final BankRepo bankRepo;
-  bool isLoading = false;
 
+
+  bool isLoading = false;
   String? error;
   int selectedCurrencyId = 19;
   String name = "";
