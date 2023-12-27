@@ -95,11 +95,10 @@ class SplashController extends GetxController {
       List<Bank> banks = await bankRepo.getBanks();
       List<Bank> sortedBanks = await SharedStorage.getSortedBanks();
       if (sortedBanks.isNotEmpty) {
-            await sortingBanks(banks, sortedBanks).then((value) async {
+        await sortingBanks(banks, sortedBanks).then((value) async {
           await SharedStorage.saveSortedBanks(value);
           return value;
         });
-
       } else {
         await SharedStorage.saveBanks(banks);
         await SharedStorage.saveSortedBanks(banks);
@@ -136,7 +135,7 @@ class SplashController extends GetxController {
     for (var element1 in latestCurrencies) {
       for (var element2 in latestCurrenciesSorted) {
         if (element1.name == element2.name) {
-          if (element1.sort != element2.sort) {
+          if (element1.sort != element2.sort || element1.lastUpdate != element2.lastUpdate) {
             element2.bankPrices = element1.bankPrices;
             element2.banner = element1.banner;
             element2.blackMarketPrices = element1.blackMarketPrices;
@@ -153,6 +152,9 @@ class SplashController extends GetxController {
           }
         }
       }
+    }
+    for (var element in latestCurrenciesSorted) {
+      log(element.updatedAt! +element.updatedAt.toString());
     }
     return latestCurrenciesSorted;
   }
@@ -182,5 +184,4 @@ class SplashController extends GetxController {
     }
     return bankListSorted;
   }
-
 }
