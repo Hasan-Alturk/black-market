@@ -11,13 +11,6 @@ import 'package:get/get.dart';
 
 class MainHomeView extends GetView<MainHomeController> {
   MainHomeView({super.key});
-
-  // final screens1 = [
-  //   LoginView(),
-  //   const FavouriteView(),
-  //   const MainGoldView(),
-  //   const CurrenciesView(),
-  // ];
   final screens = [
     const MainProfileView(),
     const FavouriteView(),
@@ -31,18 +24,8 @@ class MainHomeView extends GetView<MainHomeController> {
           id: "MainHomeViewScreenGetBuilder",
           builder: (_) {
             return screens[controller.pageIndex];
-            //  controller.tokenChecked
-            //     ? screens1[controller.pageIndex]
-            //     : screens[controller.pageIndex];
           }),
 
-      // PageView(
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   controller: controller.pageController,
-      //   children: const [
-
-      //   ],
-      // ),
       bottomNavigationBar: GetBuilder<MainHomeController>(
         id: "MainHomeViewGetBuilder",
         builder: (_) {
