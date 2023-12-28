@@ -105,5 +105,10 @@ abstract class AppStrings {
 
   static String dragBank = "إختر الترتيب المفضل للبنوك";
   static String dragCurrency = "إختر الترتيب المفضل للعملات";
-
+  static String live = "Live";
+  static String black = "Black";
+  static String week = "اسبوع";
+  static String day = "يوم";
+  static String month = "شهر";
+  static String year = "سنة";
 }

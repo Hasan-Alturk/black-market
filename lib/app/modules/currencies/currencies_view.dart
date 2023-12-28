@@ -318,7 +318,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                       child: TabBar(
                         labelColor: AppColors.yellowNormal,
                         unselectedLabelColor: AppColors.gray,
-                        tabs: const [Text("Live"), Text("Black")],
+                        tabs: [Text(AppStrings.live), Text(AppStrings.black)],
                         indicatorSize: TabBarIndicatorSize.tab,
                         dividerColor: Colors.transparent,
                         onTap: (value) {
@@ -375,6 +375,47 @@ class CurrenciesView extends GetView<CurrenciesController> {
                       },
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 290.w,
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                        color: AppColors.yellowNormal,
+                        borderRadius: BorderRadius.circular(30.r)),
+                    child: DefaultTabController(
+                      length: 4,
+                      initialIndex: 0,
+                      child: TabBar(
+                        labelColor: AppColors.yellowNormal,
+                        unselectedLabelColor: AppColors.gray,
+                        tabs: [
+                          Text(AppStrings.day),
+                          Text(AppStrings.week),
+                          Text(AppStrings.month),
+                          Text(AppStrings.year)
+                        ],
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: Colors.transparent,
+                        onTap: (value) {
+                          // if (value == 0) {
+                          //   controller.valueTapBar = value;
+                          // } else {
+                          //   controller.valueTapBar = value;
+                          // }
+                        },
+                        indicator: BubbleTabIndicator(
+                          indicatorHeight: 25.0.h,
+                          indicatorColor: AppColors.gray,
+                          tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 25.h,
