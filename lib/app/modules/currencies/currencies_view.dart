@@ -30,6 +30,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   height: 10.h,
                 ),
                 HomeChartTabBar(
+                  //     key: const Key("1"),
                   length: 2,
                   tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
                 ),
@@ -38,6 +39,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   height: 25.h,
                 ),
                 HomeChartTabBar(
+                  //  key: const Key("2"),
                   length: 2,
                   tabs: [
                     Text(AppStrings.week),
