@@ -34,8 +34,7 @@ class CurrenciesController extends GetxController {
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
-  DateTime currentDate = DateTime.now();
-  late int dayOfMonth = currentDate.day;
+ 
   String textChart = "";
   int valueTapBar = 0;
 
@@ -53,12 +52,12 @@ class CurrenciesController extends GetxController {
     super.onInit();
   }
 
-  Future<Map<String, List<LivePrices>>>
-      getHistoricalCurrencyLivePrices() async {
+  Future<Map<String, List<LivePrices>>> getHistoricalCurrencyLivePrices(
+      String date) async {
     try {
       HistoricalCurrencyLivePrices currencyList =
           await currencyRepo.getHistoricalCurrenciesLivePrices(
-        startDate: currentDate.subtract(Duration(days: dayOfMonth)).toString(),
+        startDate: date,
         currencyId: selectedCurrencyId,
         type: "live",
       );
@@ -76,13 +75,12 @@ class CurrenciesController extends GetxController {
     }
   }
 
-  Future<Map<String, List<BlackPrices>>>
-      getHistoricalCurrencyBlackPrices() async {
+  Future<Map<String, List<BlackPrices>>> getHistoricalCurrencyBlackPrices(
+      String date) async {
     try {
       HistoricalCurrencyBlackPrices currencyList =
           await currencyRepo.getHistoricalCurrencyBlackPrices(
-        startDate:
-            DateTime.now().subtract(Duration(days: dayOfMonth)).toString(),
+        startDate: date,
         currencyId: selectedCurrencyId,
         type: "black",
       );

@@ -33,7 +33,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   length: 2,
                   tabs: [Text(AppStrings.live), Text(AppStrings.black)],
                 ),
-                const ChartStack(),
+                ChartStack(),
                 SizedBox(
                   height: 25.h,
                 ),

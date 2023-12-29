@@ -7,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CurrenciesContainer extends GetView<CurrenciesController> {
-  const CurrenciesContainer({super.key});
+  CurrenciesContainer({super.key});
+  DateTime currentDate = DateTime.now();
+  late int dayOfMonth = currentDate.day;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,9 @@ class CurrenciesContainer extends GetView<CurrenciesController> {
                         controller.getBanksAccordingToSelectedCurrency(
                             controller.selectedCurrencyId);
                         controller.getCurrencyInBank(currencyId);
-                        controller.getHistoricalCurrencyLivePrices();
+                        controller.getHistoricalCurrencyLivePrices(currentDate
+                            .subtract(Duration(days: dayOfMonth))
+                            .toString());
                         Get.back();
                       },
                     );

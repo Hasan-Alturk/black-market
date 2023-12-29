@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class Chart extends GetView<CurrenciesController> {
+class ChartLive extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
 
@@ -23,7 +23,7 @@ class Chart extends GetView<CurrenciesController> {
   ];
   Map<String, List<LivePrices>> livePricesMap = {};
 
-  Chart({super.key, required this.livePricesMap});
+  ChartLive({super.key, required this.livePricesMap});
 
   @override
   Widget build(BuildContext context) {
