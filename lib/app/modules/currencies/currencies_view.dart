@@ -30,20 +30,20 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   height: 10.h,
                 ),
                 HomeChartTabBar(
+                  //     key: const Key("1"),
                   length: 2,
-                  tabs: [Text(AppStrings.live), Text(AppStrings.black)],
+                  tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
                 ),
                 ChartStack(),
                 SizedBox(
                   height: 25.h,
                 ),
                 HomeChartTabBar(
-                  length: 4,
+                  //  key: const Key("2"),
+                  length: 2,
                   tabs: [
-                    Text(AppStrings.day),
                     Text(AppStrings.week),
                     Text(AppStrings.month),
-                    Text(AppStrings.year)
                   ],
                 ),
                 SizedBox(

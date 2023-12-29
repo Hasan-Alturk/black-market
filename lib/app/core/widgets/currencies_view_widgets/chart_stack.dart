@@ -16,7 +16,7 @@ class ChartStack extends GetView<CurrenciesController> {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 35.w, top: 35.h),
+          padding: EdgeInsets.only(left: 50.w, top: 35.h),
           child: GetBuilder<CurrenciesController>(
             id: "text_chart",
             builder: (_) {
@@ -36,7 +36,7 @@ class ChartStack extends GetView<CurrenciesController> {
           builder: (_) {
             if (controller.valueTapBar == 0) {
               controller.getHistoricalCurrencyLivePrices(
-                  currentDate.subtract(Duration(days: dayOfMonth)).toString());
+                  currentDate.subtract(const Duration(days: 7)).toString());
               controller.textChart = "";
               return ChartLive(
                 livePricesMap: controller.livePricesMap,

@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 // ignore: must_be_immutable
 class ChartLive extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
+  List<Color> lineColors = [];
   List axisX = [];
 
   List<Color> gradientYellowColors = [
@@ -30,9 +31,9 @@ class ChartLive extends GetView<CurrenciesController> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: 1.1,
           child: Padding(
-            padding: const EdgeInsets.only(left: 35, right: 35),
+            padding: EdgeInsets.only(right: 20.w),
             child: LineChart(
               mainData(),
               curve: Curves.easeInToLinear,
@@ -50,12 +51,14 @@ class ChartLive extends GetView<CurrenciesController> {
           double y = livePrice.price.toDouble();
           String apiDate = livePrice.date;
           DateTime x = DateTime.parse(apiDate);
-          spots.add(FlSpot(x.day.toDouble(), y));
-          axisX.add(x);
+
+          if (!axisX.contains(x)) {
+            axisX.add(x);
+            spots.add(FlSpot(x.day.toDouble(), y));
+          }
         }
       },
     );
-    List<Color> lineColors = [];
 
     for (int i = 0; i < spots.length; i++) {
       FlSpot currentSpot = spots[i];
@@ -80,7 +83,7 @@ class ChartLive extends GetView<CurrenciesController> {
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 30,
-              getTitlesWidget: bottomTitleWidgets,
+              getTitlesWidget: bottomTitleWidget,
               interval: 1,
             ),
           ),
@@ -90,8 +93,13 @@ class ChartLive extends GetView<CurrenciesController> {
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
-          leftTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 30,
+              getTitlesWidget: leftTitleWidgets,
+              interval: 1,
+            ),
           ),
         ),
         lineTouchData: LineTouchData(
@@ -129,9 +137,13 @@ class ChartLive extends GetView<CurrenciesController> {
           },
           handleBuiltInTouches: true,
         ),
-        // minX: 0,
-        // maxX: 30,
-
+        borderData: FlBorderData(
+          show: true,
+          border: Border(
+            bottom: BorderSide(color: AppColors.gray),
+            left: BorderSide(color: AppColors.gray),
+          ),
+        ),
         minX: spots
             .map((spot) => spot.x)
             .reduce((curr, next) => curr < next ? curr : next),
@@ -173,28 +185,45 @@ class ChartLive extends GetView<CurrenciesController> {
     }
   }
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  Widget bottomTitleWidget(double value, TitleMeta meta) {
+    var style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+      color: AppColors.graylight,
+    );
+    // String formattedDate = switch (value.toInt()) {
+    //   23 => DateFormat('MMM d').format(axisX[24]),
+    //   25 => DateFormat('MMM d').format(axisX[2]),
+    //   27 => DateFormat('MMM d').format(axisX[4]),
+    //   29 => DateFormat('MMM d').format(axisX[6]),
+    //   _ => ""
+    // };
+    if (value % 3 == 0) {
+      return SideTitleWidget(
+        axisSide: meta.axisSide,
+        space: 10,
+        child: Text("${value.toInt()}", style: style),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
       color: AppColors.graylight,
     );
 
-    // int middleIndex = axisX.length ~/ 2; // يستخدم ~/ للحصول على القسمة الصحيحة
-
-    String formattedDate = switch (value.toInt()) {
-      1 => DateFormat('MMM d').format(axisX[0]),
-      8 => DateFormat('MMM d').format(axisX[7]),
-      15 => DateFormat('MMM d').format(axisX[14]),
-      24 => DateFormat('MMM d').format(axisX[23]),
-      30 => DateFormat('MMM d').format(axisX[29]),
-      _ => ""
-    };
-
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 10,
-      child: Text(formattedDate, style: style),
-    );
+    if (value % 2 == 0) {
+      return SideTitleWidget(
+        axisSide: meta.axisSide,
+        space: 5.w,
+        child: Text("${value.toInt()}", style: style),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

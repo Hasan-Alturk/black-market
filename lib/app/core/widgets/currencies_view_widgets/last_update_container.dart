@@ -14,7 +14,7 @@ class LastUpdateContainer extends GetView<CurrenciesController> {
       id: "lastUpdateContainer",
       builder: (_) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
