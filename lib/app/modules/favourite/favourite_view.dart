@@ -1,5 +1,6 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
+import 'package:black_market/app/core/widgets/currencies_view_widgets/card_item.dart';
 import 'package:black_market/app/modules/favourite/favourite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,19 +32,30 @@ class FavouriteView extends GetView<FavouriteController> {
           SizedBox(
             height: 15.h,
           ),
-          GridView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 1,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 10),
-            itemCount: 6,
-            itemBuilder: (ctx, i) => GestureDetector(
-                //  child:  CardItem(),
-                onTap: () => controller.goToBankDetails()),
+          GetBuilder<FavouriteController>(
+            id: "favouriteList",
+            builder: (_) {
+            
+              return GridView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 1,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 10),
+                itemCount: controller.favouriteBankList.length,
+                itemBuilder: (ctx, i) => GestureDetector(
+                    child: CardItem(
+                        bankName: controller.favouriteBankList[i].name!,
+                      bankImage:
+                              controller.favouriteBankList[i].icon.toString(),
+                          sellPrice: controller.favouriteBankList[i].id!,
+                          buyPrice: controller.favouriteBankList[i].id!,),
+                    onTap: () => controller.goToBankDetails()),
+              );
+            }
           )
         ],
       )),

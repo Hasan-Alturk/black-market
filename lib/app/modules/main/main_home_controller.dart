@@ -49,7 +49,7 @@ class MainHomeController extends GetxController {
       CurrenciesBinding().dependencies();
       // MainProfileBinding().deleteController();
       // MainGoldBinding().deleteController();
-      // FavouriteBinding().deleteController();
+      FavouriteBinding().deleteController();
       update(["MainHomeViewGetBuilder", "MainHomeViewScreenGetBuilder"]);
     } else if (pageIndex == 0) {
       log("Profile");

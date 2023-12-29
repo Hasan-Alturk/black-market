@@ -34,7 +34,6 @@ class CurrenciesController extends GetxController {
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
- 
   String textChart = "";
   int valueTapBar = 0;
 
@@ -118,6 +117,13 @@ class CurrenciesController extends GetxController {
     }
     update();
   }
+
+  Future<void> addToFavourite(int bankId) async {
+   var bank =  bankList.firstWhere((element) => element.id == bankId);
+    await SharedStorage.saveFavouriteBank(bank);
+  }
+
+ 
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     latestCurrencyList.clear();

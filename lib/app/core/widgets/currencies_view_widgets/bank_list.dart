@@ -31,6 +31,7 @@ class BankList extends GetView<CurrenciesController> {
                           controller.currencyInBankList[i].bankIcon.toString(),
                       sellPrice: controller.currencyInBankList[i].sellPrice,
                       buyPrice: controller.currencyInBankList[i].buyPrice,
+                      onFavouriteTapped: () => controller.addToFavourite(controller.currencyInBankList[i].bankId),
                     ),
                     onTap: () => controller.goToBankDetails(
                         controller.currencyInBankList[i].bankId)));

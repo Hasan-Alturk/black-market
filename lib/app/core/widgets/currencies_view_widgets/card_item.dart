@@ -10,13 +10,14 @@ class CardItem extends StatelessWidget {
   final String bankImage;
   final num sellPrice;
   final num buyPrice;
+  final Function()? onFavouriteTapped;
 
   const CardItem(
       {super.key,
       required this.bankName,
       required this.bankImage,
       required this.sellPrice,
-      required this.buyPrice});
+      required this.buyPrice, this.onFavouriteTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,13 @@ class CardItem extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.blackDark),
                 ),
-                child: CircleAvatar(
-                  backgroundColor: AppColors.darkGrey,
-                  radius: 15.r,
-                  child: Image.asset(AppAssetIcons.heart),
+                child: GestureDetector(
+                  onTap: onFavouriteTapped,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.darkGrey,
+                    radius: 15.r,
+                    child: Image.asset(AppAssetIcons.heart),
+                  ),
                 ),
               ),
               CircleAvatar(
