@@ -20,13 +20,13 @@ class HomeTopContainer extends GetView<CurrenciesController> {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.elliptical(120.r, 20.r),
                 bottomRight: Radius.elliptical(120.r, 20.r))),
-        height: 280.h,
+        height: 250.h,
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.h),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -75,7 +75,7 @@ class HomeTopContainer extends GetView<CurrenciesController> {
         ),
       ),
       Container(
-        height: 100.h,
+        height: 90.h,
         width: 350.w,
         decoration: BoxDecoration(
           color: AppColors.yellowLight,

@@ -31,19 +31,17 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 ),
                 HomeChartTabBar(
                   length: 2,
-                  tabs: [Text(AppStrings.live), Text(AppStrings.black)],
+                  tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
                 ),
                 ChartStack(),
                 SizedBox(
                   height: 25.h,
                 ),
                 HomeChartTabBar(
-                  length: 4,
+                  length: 2,
                   tabs: [
-                    Text(AppStrings.day),
                     Text(AppStrings.week),
                     Text(AppStrings.month),
-                    Text(AppStrings.year)
                   ],
                 ),
                 SizedBox(
