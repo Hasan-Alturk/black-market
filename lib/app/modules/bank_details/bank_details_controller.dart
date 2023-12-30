@@ -69,6 +69,7 @@ class BankDetailsController extends GetxController {
     } else {
       return;
     }
+    update(["egypt_currency"]);
   }
 
   void calculateTotalPrice() {
@@ -106,7 +107,8 @@ class BankDetailsController extends GetxController {
           "bankPrices",
           "bankInfo",
           "calculatorView",
-          "totalAmount"
+          "totalAmount",
+          "selected_currency"
         ]);
       }
     }

@@ -117,7 +117,6 @@ class CurrenciesController extends GetxController {
   Future<void> getBanksFromPrefs() async {
     bankList.clear();
     var banks = await SharedStorage.getSortedBanks();
-    // List<Bank> banks = await SharedStorage.getBanks();
     if (banks.isNotEmpty) {
       bankList.clear();
       bankList.addAll(banks);
@@ -128,14 +127,33 @@ class CurrenciesController extends GetxController {
   }
 
   Future<void> addToFavourite(int bankId) async {
-    var bank = bankList.firstWhere((element) => element.id == bankId);
-    await SharedStorage.saveFavouriteBank(bank);
+    var found = false;
+    var favBanks = await SharedStorage.getFavouriteBanks();
+    var bank = currencyInBankList.firstWhere((element) => element.bankId == bankId);
+    if (favBanks.isEmpty) {
+      await SharedStorage.saveFavouriteBank(bank);
+    } else {
+      for (var element in favBanks) {
+        if (element.bankId == bankId) {
+          found = true;
+          break;
+        } else {
+          found = false;
+        }
+      }
+      if (found) {
+        await SharedStorage.deleteFavouriteItem(bank);
+      } else {
+        await SharedStorage.saveFavouriteBank(bank);
+      }
+      log("$found");
+    }
+
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
     latestCurrencyList.clear();
     List<LatestCurrency> currencies = await SharedStorage.getCurrenciesSorted();
-    // List<LatestCurrency> currencies = await SharedStorage.getCurrencies();
     if (currencies.isNotEmpty) {
       currencies.removeWhere((element) => element.id == 21);
       latestCurrencyList.addAll(currencies);
@@ -173,14 +191,11 @@ class CurrenciesController extends GetxController {
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
         var x = element.bankPrices!.where((value) {
-          // log(value.date);
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
         for (var bank in x) {
           innerLoop:
           for (var b in bankList) {
-            // log(b.name.toString());
-
             if (bank.currencyId == currencyId && b.id == bank.bankId) {
               var c = CurrencyInBank(
                   currencyId: currencyId,

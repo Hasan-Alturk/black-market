@@ -33,30 +33,32 @@ class FavouriteView extends GetView<FavouriteController> {
             height: 15.h,
           ),
           GetBuilder<FavouriteController>(
-            id: "favouriteList",
-            builder: (_) {
-            
-              return GridView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 1,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 10),
-                itemCount: controller.favouriteBankList.length,
-                itemBuilder: (ctx, i) => GestureDetector(
-                    child: CardItem(
-                        bankName: controller.favouriteBankList[i].name!,
-                      bankImage:
-                              controller.favouriteBankList[i].icon.toString(),
-                          sellPrice: controller.favouriteBankList[i].id!,
-                          buyPrice: controller.favouriteBankList[i].id!,),
-                    onTap: () => controller.goToBankDetails()),
-              );
-            }
-          )
+              id: "favouriteList",
+              builder: (_) {
+                return GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 1,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 10),
+                  itemCount: controller.favouriteBankList.length,
+                  itemBuilder: (ctx, i) => GestureDetector(
+                      child: CardItem(
+                        bankName: controller.favouriteBankList[i].bankName,
+                        bankImage:
+                            controller.favouriteBankList[i].bankIcon.toString(),
+                        sellPrice: controller.favouriteBankList[i].sellPrice,
+                        buyPrice: controller.favouriteBankList[i].buyPrice,
+                        onFavouriteTapped: () =>
+                            controller.deleteFavouriteBanks(
+                                controller.favouriteBankList[i]),
+                      ),
+                      onTap: () => controller.goToBankDetails(controller.favouriteBankList[i].bankId)),
+                );
+              })
         ],
       )),
     );

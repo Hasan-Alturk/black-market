@@ -27,36 +27,45 @@ class CurrencyInBank {
       required this.createdAt,
       required this.updatedAt,
       required this.lastUpdate,
-      this.blackMarketBuyPrice , required this.bankSort});
+      this.blackMarketBuyPrice,
+      required this.bankSort});
 
-  // static List<CurrencyInBank> currencyInBankList(List data) => data
-  //     .map((currencyInBank) => CurrencyInBank.fromJson(currencyInBank))
-  //     .toList();
-  // factory CurrencyInBank.fromJson(Map<String, dynamic> json) => CurrencyInBank(
-  //       currencyId: json['id'],
-  //       currencyIcon: json['icon'],
-  //       currencyName: json['name'],
-  //       currencyCode: json['code'],
-  //       bankId: json['bank_id'],
-  //       bankIcon: json['icon'],
-  //       bankName: json['name'],
-  //       sellPrice: json['sell_price'],
-  //       buyPrice: json['buy_price'],
-  //       createdAt: json['createdAt'],
-  //       updatedAt: json['updated_at'],
-  //     );
+  static List<CurrencyInBank> currencyInBankList(List data) => data
+      .map((currencyInBank) => CurrencyInBank.fromJson(currencyInBank))
+      .toList();
+  factory CurrencyInBank.fromJson(Map<String, dynamic> json) => CurrencyInBank(
+        currencyId: json['currency_id'],
+        currencyIcon: json['currency_icon'],
+        currencyName: json['currency_name'],
+        currencyCode: json['currency_code'],
+        bankId: json['bank_id'],
+        bankIcon: json['bank_icon'],
+        bankName: json['bank_name'],
+        sellPrice: json['sell_price'],
+        buyPrice: json['buy_price'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
+        lastUpdate: json['last_update'],
+        bankSort: json['bank_sort'],
+        blackMarketBuyPrice: json['black_market_buy_price'],
+      );
 
-  // Map<String, dynamic> toJson() {
-  //   final data = <String, dynamic>{};
-  //   data['id'] = currencyId;
-  //   data['icon'] = currencyIcon;
-  //   data['name'] = currencyName;
-  //   data['code'] = currencyCode;
-  //   data['bank_id'] = bankId;
-  //   data['sell_price'] = sellPrice;
-  //   data['buy_price'] = buyPrice;
-  //   data['created_at'] = createdAt;
-  //   data['updated_at'] = updatedAt;
-  //   return data;
-  // }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['currency_id'] = currencyId;
+    data['currency_icon'] = currencyIcon;
+    data['currency_name'] = currencyName;
+    data['currency_code'] = currencyCode;
+    data['bank_id'] = bankId;
+    data['bank_icon'] = bankIcon;
+    data['bank_name'] = bankName;
+    data['sell_price'] = sellPrice;
+    data['buy_price'] = buyPrice;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['last_update'] = lastUpdate;
+    data['bank_sort'] = bankSort;
+    data['black_market_buy_price'] = blackMarketBuyPrice;
+    return data;
+  }
 }
