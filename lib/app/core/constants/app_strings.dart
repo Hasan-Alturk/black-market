@@ -108,9 +108,10 @@ abstract class AppStrings {
   static String bank = "البنك";
   static String week = "اسبوع";
   static String month = "شهر";
-    static String loginFirst = "Please Register or Login First";
-  static String goLogin = "Go Login";
- static String addedToFavourite = "تم الاضافة الى المفضلة";
+  static String loginFirst = "يجب عليك تسجيل الدخول اولا";
+  static String goLogin = "سجل الدخول";
+  static String addedToFavourite = "تم الاضافة الى المفضلة";
   static String removedToFavourite = "تم الحذف من المفضلة";
-
+  static String pageForRegistedUsersOnly =
+      "هذه الصفحة متاحة للمستخدمين المسجلين فقط";
 }
