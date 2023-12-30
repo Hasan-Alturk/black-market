@@ -86,7 +86,7 @@ class HomeTopContainer extends GetView<CurrenciesController> {
             SizedBox(
               height: 12.h,
             ),
-            CurrenciesContainer(),
+            const CurrenciesContainer(),
             SizedBox(
               height: 10.h,
             ),

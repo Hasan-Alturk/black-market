@@ -8,9 +8,7 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class CurrenciesContainer extends GetView<CurrenciesController> {
-  CurrenciesContainer({super.key});
-  DateTime currentDate = DateTime.now();
-  late int dayOfMonth = currentDate.day;
+  const CurrenciesContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,8 @@ class CurrenciesContainer extends GetView<CurrenciesController> {
                         controller.getBanksAccordingToSelectedCurrency(
                             controller.selectedCurrencyId);
                         controller.getCurrencyInBank(currencyId);
-                        controller.getHistoricalCurrencyLivePrices(currentDate
+                        controller.getHistoricalCurrencyLivePrices(controller
+                            .time
                             .subtract(const Duration(days: 7))
                             .toString());
                         Get.back();

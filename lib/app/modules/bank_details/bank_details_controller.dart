@@ -98,7 +98,7 @@ class BankDetailsController extends GetxController {
             currencyCode: b.currencyCode,
             blackMarketBuyPrice: b.blackMarketBuyPrice,
             lastUpdate: DateTime.now()
-                .difference(DateTime.parse(b.lastUpdate!))
+                .difference(DateTime.parse(b.lastUpdate))
                 .inMinutes));
         calculateTotalPrice();
         update([

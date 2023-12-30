@@ -9,9 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ChartStack extends GetView<CurrenciesController> {
-  ChartStack({super.key});
-  final DateTime currentDate = DateTime.now();
-  late int dayOfMonth = currentDate.day;
+  const ChartStack({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,29 +38,37 @@ class ChartStack extends GetView<CurrenciesController> {
                 controller.valueTapBarDate == 0) {
               controller.textChart = "";
               controller.getHistoricalCurrencyLivePrices(
-                  currentDate.subtract(const Duration(days: 7)).toString());
+                controller.time.subtract(const Duration(days: 7)).toString(),
+              );
               return ChartLive(
                 livePricesMap: controller.livePricesMap,
               );
             } else if (controller.valueTapBarPrice == 0 &&
                 controller.valueTapBarDate == 1) {
               controller.textChart = "";
-              controller.getHistoricalCurrencyLivePrices(
-                  currentDate.subtract(Duration(days: dayOfMonth)).toString());
+              controller.getHistoricalCurrencyLivePrices(controller.time
+                  .subtract(
+                    Duration(days: controller.time.day),
+                  )
+                  .toString());
               return ChartLive(
                 livePricesMap: controller.livePricesMap,
               );
             } else if (controller.valueTapBarPrice == 1 &&
                 controller.valueTapBarDate == 0) {
               controller.getHistoricalCurrencyBlackPrices(
-                  currentDate.subtract(const Duration(days: 7)).toString());
+                controller.time.subtract(const Duration(days: 7)).toString(),
+              );
               return ChartBlack(
                 blackPricesMap: controller.blackPricesMap,
               );
             } else if (controller.valueTapBarPrice == 1 &&
                 controller.valueTapBarDate == 1) {
               controller.getHistoricalCurrencyBlackPrices(
-                  currentDate.subtract(Duration(days: dayOfMonth)).toString());
+                controller.time
+                    .subtract(Duration(days: controller.time.day))
+                    .toString(),
+              );
               return ChartBlack(
                 blackPricesMap: controller.blackPricesMap,
               );

@@ -34,7 +34,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                   length: 2,
                   tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
                 ),
-                ChartStack(),
+                const ChartStack(),
                 SizedBox(
                   height: 25.h,
                 ),
