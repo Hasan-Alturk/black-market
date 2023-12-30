@@ -19,7 +19,10 @@ class PageForRegistedUsersOnly extends GetView<FavouriteController> {
         // ),
         Text(
           AppStrings.pageForRegistedUsersOnly,
-          style: TextStyle(color: AppColors.lighterGrey, fontSize: 15.sp),
+          style: TextStyle(
+              color: AppColors.lighterGrey,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w700),
         ),
         SizedBox(
           height: 15.h,

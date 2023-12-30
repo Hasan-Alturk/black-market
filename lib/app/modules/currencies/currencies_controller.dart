@@ -160,7 +160,11 @@ class CurrenciesController extends GetxController {
           await SharedStorage.deleteFavouriteItem(bank);
           Get.showSnackbar(
             GetSnackBar(
-              message: AppStrings.removedToFavourite,
+              messageText: Text(
+                AppStrings.removedToFavourite,
+                textAlign: TextAlign.right,
+                style: TextStyle(color: AppColors.graylight),
+              ),
               duration: const Duration(seconds: 1),
             ),
           );
@@ -168,7 +172,11 @@ class CurrenciesController extends GetxController {
           await SharedStorage.saveFavouriteBank(bank);
           Get.showSnackbar(
             GetSnackBar(
-              message: AppStrings.addedToFavourite,
+              messageText: Text(
+                AppStrings.addedToFavourite,
+                textAlign: TextAlign.right,
+                style: TextStyle(color: AppColors.graylight),
+              ),
               duration: const Duration(seconds: 1),
             ),
           );
