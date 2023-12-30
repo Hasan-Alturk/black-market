@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_black.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_live.dart';
@@ -8,7 +10,7 @@ import 'package:get/get.dart';
 
 class ChartStack extends GetView<CurrenciesController> {
   ChartStack({super.key});
-  DateTime currentDate = DateTime.now();
+  final DateTime currentDate = DateTime.now();
   late int dayOfMonth = currentDate.day;
 
   @override
@@ -24,7 +26,7 @@ class ChartStack extends GetView<CurrenciesController> {
                 controller.textChart,
                 style: TextStyle(
                   color: AppColors.yellowDark,
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.normal,
                 ),
               );
@@ -34,21 +36,40 @@ class ChartStack extends GetView<CurrenciesController> {
         GetBuilder<CurrenciesController>(
           id: "chart",
           builder: (_) {
-            if (controller.valueTapBar == 0) {
+            if (controller.valueTapBarPrice == 0 &&
+                controller.valueTapBarDate == 0) {
+              controller.textChart = "";
               controller.getHistoricalCurrencyLivePrices(
                   currentDate.subtract(const Duration(days: 7)).toString());
-              controller.textChart = "";
               return ChartLive(
                 livePricesMap: controller.livePricesMap,
               );
-            } else if (controller.valueTapBar == 1) {
+            } else if (controller.valueTapBarPrice == 0 &&
+                controller.valueTapBarDate == 1) {
+              controller.textChart = "";
+              controller.getHistoricalCurrencyLivePrices(
+                  currentDate.subtract(Duration(days: dayOfMonth)).toString());
+              return ChartLive(
+                livePricesMap: controller.livePricesMap,
+              );
+            } else if (controller.valueTapBarPrice == 1 &&
+                controller.valueTapBarDate == 0) {
+              controller.getHistoricalCurrencyBlackPrices(
+                  currentDate.subtract(const Duration(days: 7)).toString());
+              return ChartBlack(
+                blackPricesMap: controller.blackPricesMap,
+              );
+            } else if (controller.valueTapBarPrice == 1 &&
+                controller.valueTapBarDate == 1) {
               controller.getHistoricalCurrencyBlackPrices(
                   currentDate.subtract(Duration(days: dayOfMonth)).toString());
               return ChartBlack(
                 blackPricesMap: controller.blackPricesMap,
               );
             } else {
-              return const SizedBox();
+              return CircularProgressIndicator(
+                color: AppColors.yellowDark,
+              );
             }
           },
         ),

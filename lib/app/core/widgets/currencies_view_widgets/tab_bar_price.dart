@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class HomeChartTabBar extends GetView<CurrenciesController> {
-  const HomeChartTabBar({required this.length, required this.tabs, super.key});
+class TabBarPrice extends GetView<CurrenciesController> {
+  const TabBarPrice({required this.length, required this.tabs, super.key});
   final int length;
   final List<Widget> tabs;
   @override
@@ -30,9 +30,9 @@ class HomeChartTabBar extends GetView<CurrenciesController> {
             dividerColor: Colors.transparent,
             onTap: (value) {
               if (value == 0) {
-                controller.valueTapBar = value;
+                controller.valueTapBarPrice = value;
               } else {
-                controller.valueTapBar = value;
+                controller.valueTapBarPrice = value;
               }
             },
             indicator: BubbleTabIndicator(

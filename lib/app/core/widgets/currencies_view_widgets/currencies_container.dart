@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CurrenciesContainer extends GetView<CurrenciesController> {
   CurrenciesContainer({super.key});
   DateTime currentDate = DateTime.now();
@@ -31,7 +32,7 @@ class CurrenciesContainer extends GetView<CurrenciesController> {
                             controller.selectedCurrencyId);
                         controller.getCurrencyInBank(currencyId);
                         controller.getHistoricalCurrencyLivePrices(currentDate
-                            .subtract(Duration(days: 7))
+                            .subtract(const Duration(days: 7))
                             .toString());
                         Get.back();
                       },

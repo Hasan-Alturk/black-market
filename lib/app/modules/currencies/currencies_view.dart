@@ -3,8 +3,9 @@ import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/bank_list.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_stack.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/home_average_container.dart';
-import 'package:black_market/app/core/widgets/currencies_view_widgets/home_chart_tab_bar.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/home_top_container.dart';
+import 'package:black_market/app/core/widgets/currencies_view_widgets/tab_bar_date.dart';
+import 'package:black_market/app/core/widgets/currencies_view_widgets/tab_bar_price.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,8 +30,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: 10.h,
                 ),
-                HomeChartTabBar(
-                  //     key: const Key("1"),
+                TabBarPrice(
                   length: 2,
                   tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
                 ),
@@ -38,8 +38,7 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 SizedBox(
                   height: 25.h,
                 ),
-                HomeChartTabBar(
-                  //  key: const Key("2"),
+                TabBarDate(
                   length: 2,
                   tabs: [
                     Text(AppStrings.week),
