@@ -35,15 +35,15 @@ class MainHomeView extends GetView<MainHomeController> {
             decoration: BoxDecoration(
               color: AppColors.gray,
               borderRadius: const BorderRadius.only(
-                  bottomRight: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
+                  // bottomRight: Radius.circular(25),
+                  // bottomLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
                   topLeft: Radius.circular(25)),
             ),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(25),
-                bottomLeft: Radius.circular(25),
+                // bottomRight: Radius.circular(25),
+                // bottomLeft: Radius.circular(25),
                 topLeft: Radius.circular(25.0),
                 topRight: Radius.circular(25.0),
               ),

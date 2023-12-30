@@ -17,13 +17,13 @@ class BasicContainer extends GetView<BankDetailsController> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.elliptical(120.r, 20.r),
               bottomRight: Radius.elliptical(120.r, 20.r))),
-      height: 280.h,
+      height: 250.h,
       child: Padding(
-          padding: const EdgeInsets.all(5),
+          padding:  EdgeInsets.all(8.h),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(15),
+                padding:  EdgeInsets.all(8.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -41,7 +41,7 @@ class BasicContainer extends GetView<BankDetailsController> {
                 ),
               ),
               SizedBox(
-                height: 15.h,
+                height: 8.h,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class BasicContainer extends GetView<BankDetailsController> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 3.h,
                   ),
                   Text(
                     AppStrings.howMuchInBlackMarket,
