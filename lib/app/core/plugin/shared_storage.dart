@@ -168,4 +168,14 @@ class SharedStorage {
         .map((jsonString) => Bank.fromJson(jsonDecode(jsonString)))
         .toList();
   }
+
+  // un favourite bank Item
+  static Future<void> deleteFavouriteItem(Bank bank) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<Bank> list = await getFavouriteBanks();
+    list.removeWhere((item) => item.id == bank.id);
+    List<String> bankStrings =
+        list.map((bank) => jsonEncode(bank.toJson())).toList();
+    await prefs.setStringList('fav_bank', bankStrings);
+  }
 }

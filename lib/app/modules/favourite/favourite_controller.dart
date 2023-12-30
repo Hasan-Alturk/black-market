@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class FavouriteController extends GetxController {
   List<Bank> favouriteBankList = [];
-  
+
   @override
   void onInit() async {
     await getFavouriteBanks();
@@ -14,13 +14,22 @@ class FavouriteController extends GetxController {
   }
 
   Future<void> getFavouriteBanks() async {
+    favouriteBankList.clear();
     List<Bank> favBanks = await SharedStorage.getFavouriteBanks();
-    // List<LatestCurrency> currencies = await SharedStorage.getCurrencies();
     if (favBanks.isNotEmpty) {
       log("favBanks : ${favBanks.length.toString()}");
       favouriteBankList.addAll(favBanks);
       update(["favouriteList"]);
-      // sortLatestCurrency();
+    } else {
+      return;
+    }
+  }
+
+  Future<void> deleteFavouriteBanks(Bank bank) async {
+    if (favouriteBankList.isNotEmpty) {
+      await SharedStorage.deleteFavouriteItem(bank);
+      favouriteBankList.removeWhere((element) => element.id == bank.id);
+      update(["favouriteList"]);
     } else {
       return;
     }
