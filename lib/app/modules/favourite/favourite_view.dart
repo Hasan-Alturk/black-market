@@ -47,16 +47,16 @@ class FavouriteView extends GetView<FavouriteController> {
                   itemCount: controller.favouriteBankList.length,
                   itemBuilder: (ctx, i) => GestureDetector(
                       child: CardItem(
-                        bankName: controller.favouriteBankList[i].name!,
+                        bankName: controller.favouriteBankList[i].bankName,
                         bankImage:
-                            controller.favouriteBankList[i].icon.toString(),
-                        sellPrice: controller.favouriteBankList[i].id!,
-                        buyPrice: controller.favouriteBankList[i].id!,
+                            controller.favouriteBankList[i].bankIcon.toString(),
+                        sellPrice: controller.favouriteBankList[i].sellPrice,
+                        buyPrice: controller.favouriteBankList[i].buyPrice,
                         onFavouriteTapped: () =>
                             controller.deleteFavouriteBanks(
                                 controller.favouriteBankList[i]),
                       ),
-                      onTap: () => controller.goToBankDetails()),
+                      onTap: () => controller.goToBankDetails(controller.favouriteBankList[i].bankId)),
                 );
               })
         ],

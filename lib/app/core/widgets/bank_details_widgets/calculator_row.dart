@@ -24,36 +24,41 @@ class CalculatorRow extends GetView<BankDetailsController> {
               decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(8.r)),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  Text(
-                    controller.bankData.isNotEmpty
-                        ? controller.egyptCurrency!.code!.toUpperCase()
-                        : "",
-                    style: TextStyle(
-                        color: AppColors.gray,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12.sp),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  controller.latestCurrencyList.isNotEmpty
-                      ? Image.network(
-                          BaseUrls.storageUrl +
-                              controller.egyptCurrency!.icon.toString(),
-                          height: 15.h,
-                          width: 15.w,
-                        )
-                      : Image.asset(
-                          AppAssetImage.bankMasr,
-                          height: 15.h,
-                          width: 15.w,
-                        ),
-                ],
+              child: GetBuilder<BankDetailsController>(
+                id: "egypt_currency",
+                builder: (context) {
+                  return Row(
+                    children: [
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      Text(
+                        controller.bankData.isNotEmpty
+                            ? controller.egyptCurrency!.code!.toUpperCase()
+                            : "",
+                        style: TextStyle(
+                            color: AppColors.gray,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                      ),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      controller.latestCurrencyList.isNotEmpty
+                          ? Image.network(
+                              BaseUrls.storageUrl +
+                                  controller.egyptCurrency!.icon.toString(),
+                              height: 15.h,
+                              width: 15.w,
+                            )
+                          : Image.asset(
+                              AppAssetImage.bankMasr,
+                              height: 15.h,
+                              width: 15.w,
+                            ),
+                    ],
+                  );
+                }
               ),
             ),
             SizedBox(
@@ -83,37 +88,42 @@ class CalculatorRow extends GetView<BankDetailsController> {
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(8)),
-                child: Row(
-                  children: [
-                    Image.asset(AppAssetIcons.arrowDown),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      controller.currency.isNotEmpty
-                          ? controller.currency.first.currencyCode.toUpperCase()
-                          : "",
-                      style: TextStyle(
-                          color: AppColors.gray,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    controller.currency.isNotEmpty
-                        ? Image.network(
-                            BaseUrls.storageUrl +
-                                controller.currency.first.currencyIcon,
-                            width: 15.w,
-                            height: 15.h,
-                          )
-                        : Image.asset(
-                            AppAssetImage.avatar,
-                            height: 15.h,
-                            width: 15.w,
-                          )
-                  ],
+                child: GetBuilder<BankDetailsController>(
+                  id: "selected_currency",
+                  builder: (context) {
+                    return Row(
+                      children: [
+                        Image.asset(AppAssetIcons.arrowDown),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          controller.currency.isNotEmpty
+                              ? controller.currency.first.currencyCode.toUpperCase()
+                              : "",
+                          style: TextStyle(
+                              color: AppColors.gray,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12.sp),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        controller.currency.isNotEmpty
+                            ? Image.network(
+                                BaseUrls.storageUrl +
+                                    controller.currency.first.currencyIcon,
+                                width: 15.w,
+                                height: 15.h,
+                              )
+                            : Image.asset(
+                                AppAssetImage.avatar,
+                                height: 15.h,
+                                width: 15.w,
+                              )
+                      ],
+                    );
+                  }
                 ),
               ),
             ),

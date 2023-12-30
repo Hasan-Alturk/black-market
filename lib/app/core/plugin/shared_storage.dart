@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/setting.dart';
@@ -148,9 +149,9 @@ class SharedStorage {
   }
 
   // Save Favorite Bank
-  static Future<void> saveFavouriteBank(Bank bank) async {
+  static Future<void> saveFavouriteBank(CurrencyInBank bank) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<Bank> list = await getFavouriteBanks();
+    List<CurrencyInBank> list = await getFavouriteBanks();
     list.add(bank);
     List<String> bankStrings =
         list.map((bank) => jsonEncode(bank.toJson())).toList();
@@ -158,22 +159,22 @@ class SharedStorage {
   }
 
   // Retrieve Favorite Bank
-  static Future<List<Bank>> getFavouriteBanks() async {
+  static Future<List<CurrencyInBank>> getFavouriteBanks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? favBanks = prefs.getStringList("fav_bank");
     if (favBanks == null) {
       return [];
     }
     return favBanks
-        .map((jsonString) => Bank.fromJson(jsonDecode(jsonString)))
+        .map((jsonString) => CurrencyInBank.fromJson(jsonDecode(jsonString)))
         .toList();
   }
 
   // un favourite bank Item
-  static Future<void> deleteFavouriteItem(Bank bank) async {
+  static Future<void> deleteFavouriteItem(CurrencyInBank bank) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<Bank> list = await getFavouriteBanks();
-    list.removeWhere((item) => item.id == bank.id);
+    List<CurrencyInBank> list = await getFavouriteBanks();
+    list.removeWhere((item) => item.bankId == bank.bankId);
     List<String> bankStrings =
         list.map((bank) => jsonEncode(bank.toJson())).toList();
     await prefs.setStringList('fav_bank', bankStrings);

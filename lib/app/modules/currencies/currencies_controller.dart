@@ -129,12 +129,12 @@ class CurrenciesController extends GetxController {
   Future<void> addToFavourite(int bankId) async {
     var found = false;
     var favBanks = await SharedStorage.getFavouriteBanks();
-    var bank = bankList.firstWhere((element) => element.id == bankId);
+    var bank = currencyInBankList.firstWhere((element) => element.bankId == bankId);
     if (favBanks.isEmpty) {
       await SharedStorage.saveFavouriteBank(bank);
     } else {
       for (var element in favBanks) {
-        if (element.id == bankId) {
+        if (element.bankId == bankId) {
           found = true;
           break;
         } else {
