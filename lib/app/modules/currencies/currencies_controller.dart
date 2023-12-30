@@ -10,13 +10,19 @@ import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
+import 'package:black_market/app/core/repo/time_zone_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
-  CurrenciesController({required this.currencyRepo, required this.bankRepo});
+  CurrenciesController({
+    required this.timeRepo,
+    required this.currencyRepo,
+    required this.bankRepo,
+  });
   final CurrencyRepo currencyRepo;
   final BankRepo bankRepo;
+  final TimeZoneRepo timeRepo;
 
   bool isLoading = false;
   String? error;
@@ -35,10 +41,14 @@ class CurrenciesController extends GetxController {
   Map<String, List<BlackPrices>> blackPricesMap = {};
 
   String textChart = "";
-  int valueTapBar = 0;
+  int valueTapBarPrice = 0;
+  int valueTapBarDate = 0;
+
+  DateTime time = DateTime.now();
 
   @override
   void onInit() async {
+    time = (await timeRepo.getTime())!;
     await getNameAndAvatar();
     await getBanksFromPrefs();
     await getLatestCurrenciesFromPrefs().then((value) async {
@@ -85,8 +95,7 @@ class CurrenciesController extends GetxController {
       );
       blackPricesMap = currencyList.blackPrices;
 
-      update(["chart"]);
-      update(["text_chart"]);
+      update(["chart", "text_chart"]);
 
       return blackPricesMap;
     } on ExceptionHandler catch (e) {
@@ -139,6 +148,7 @@ class CurrenciesController extends GetxController {
       }
       log("$found");
     }
+
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
