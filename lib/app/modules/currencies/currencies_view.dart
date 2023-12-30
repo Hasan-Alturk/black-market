@@ -32,7 +32,10 @@ class CurrenciesView extends GetView<CurrenciesController> {
                 ),
                 TabBarPrice(
                   length: 2,
-                  tabs: [Text(AppStrings.bank), Text(AppStrings.blackMarket)],
+                  tabs: [
+                    Text(AppStrings.bank),
+                    Text(AppStrings.blackMarket),
+                  ],
                 ),
                 const ChartStack(),
                 SizedBox(

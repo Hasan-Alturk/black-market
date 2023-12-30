@@ -2,7 +2,7 @@
 
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_black.dart';
-import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_live.dart';
+import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_price.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,18 +40,20 @@ class ChartStack extends GetView<CurrenciesController> {
               controller.getHistoricalCurrencyLivePrices(
                 controller.time.subtract(const Duration(days: 7)).toString(),
               );
-              return ChartLive(
+              return ChartPrice(
                 livePricesMap: controller.livePricesMap,
               );
             } else if (controller.valueTapBarPrice == 0 &&
                 controller.valueTapBarDate == 1) {
               controller.textChart = "";
-              controller.getHistoricalCurrencyLivePrices(controller.time
-                  .subtract(
-                    Duration(days: controller.time.day),
-                  )
-                  .toString());
-              return ChartLive(
+              controller.getHistoricalCurrencyLivePrices(
+                controller.time
+                    .subtract(
+                      Duration(days: controller.time.day),
+                    )
+                    .toString(),
+              );
+              return ChartPrice(
                 livePricesMap: controller.livePricesMap,
               );
             } else if (controller.valueTapBarPrice == 1 &&

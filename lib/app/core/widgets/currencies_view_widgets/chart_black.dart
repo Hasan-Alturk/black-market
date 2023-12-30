@@ -95,7 +95,6 @@ class ChartBlack extends GetView<CurrenciesController> {
               showTitles: true,
               reservedSize: 30,
               getTitlesWidget: leftTitleWidgets,
-              interval: 1,
             ),
           ),
         ),
@@ -185,7 +184,7 @@ class ChartBlack extends GetView<CurrenciesController> {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 16.sp,
       color: AppColors.graylight,
     );
 
@@ -200,7 +199,7 @@ class ChartBlack extends GetView<CurrenciesController> {
     if (value % 3 == 0) {
       return SideTitleWidget(
         axisSide: meta.axisSide,
-        space: 10,
+        space: 10.h,
         child: Text("${value.toInt()}", style: style),
       );
     } else {
@@ -211,7 +210,7 @@ class ChartBlack extends GetView<CurrenciesController> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 16.sp,
       color: AppColors.graylight,
     );
 

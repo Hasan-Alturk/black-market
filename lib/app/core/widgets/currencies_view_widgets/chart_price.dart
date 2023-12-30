@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class ChartLive extends GetView<CurrenciesController> {
+class ChartPrice extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List<Color> lineColors = [];
   List axisX = [];
@@ -24,7 +24,7 @@ class ChartLive extends GetView<CurrenciesController> {
   ];
   Map<String, List<LivePrices>> livePricesMap = {};
 
-  ChartLive({super.key, required this.livePricesMap});
+  ChartPrice({super.key, required this.livePricesMap});
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +188,7 @@ class ChartLive extends GetView<CurrenciesController> {
   Widget bottomTitleWidget(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 16.sp,
       color: AppColors.graylight,
     );
     // String formattedDate = switch (value.toInt()) {
@@ -212,7 +212,7 @@ class ChartLive extends GetView<CurrenciesController> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 16.sp,
       color: AppColors.graylight,
     );
 
