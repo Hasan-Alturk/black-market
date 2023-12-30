@@ -7,10 +7,12 @@ import 'package:get/get.dart';
 class FavouriteController extends GetxController {
   List<CurrencyInBank> favouriteBankList = [];
   int selectedCurrencyId = 19;
+  String? token;
 
   @override
   void onInit() async {
-    await getFavouriteBanks();
+    await getToken();
+//    await getFavouriteBanks();
     super.onInit();
   }
 
@@ -37,7 +39,23 @@ class FavouriteController extends GetxController {
     }
   }
 
+  Future<void> getToken() async {
+    token = await SharedStorage.getToken();
+    if (token != null) {
+      await getFavouriteBanks();
+    }
+    update(["favouriteList"]);
+  }
+
   void goToBankDetails(int bankId) {
     Get.toNamed("/bank_details", arguments: [bankId, selectedCurrencyId]);
+  }
+
+   void goToLogin() {
+    Get.toNamed("/login");
+  }
+
+  void goToRegister() {
+    Get.toNamed("/register");
   }
 }

@@ -3,7 +3,7 @@ import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/widgets/custom_app_bar.dart';
 import 'package:black_market/app/core/widgets/custom_container_profile.dart';
-import 'package:black_market/app/modules/profile/setting/main_setting/main_profile_controller.dart';
+import 'package:black_market/app/modules/profile/setting/main_setting/main_setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

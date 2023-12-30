@@ -25,14 +25,16 @@ class BankList extends GetView<CurrenciesController> {
                 itemCount: controller.currencyInBankList.length,
                 itemBuilder: (ctx, i) => GestureDetector(
                     child: CardItem(
-                      bankName:
-                          controller.currencyInBankList[i].bankName.toString(),
-                      bankImage:
-                          controller.currencyInBankList[i].bankIcon.toString(),
-                      sellPrice: controller.currencyInBankList[i].sellPrice,
-                      buyPrice: controller.currencyInBankList[i].buyPrice,
-                      onFavouriteTapped: () => controller.addToFavourite(controller.currencyInBankList[i].bankId),
-                    ),
+                        bankName: controller.currencyInBankList[i].bankName
+                            .toString(),
+                        bankImage: controller.currencyInBankList[i].bankIcon
+                            .toString(),
+                        sellPrice: controller.currencyInBankList[i].sellPrice,
+                        buyPrice: controller.currencyInBankList[i].buyPrice,
+                        onFavouriteTapped: () {
+                          controller.addToFavourite(
+                              controller.currencyInBankList[i].bankId);
+                        }),
                     onTap: () => controller.goToBankDetails(
                         controller.currencyInBankList[i].bankId)));
           }),

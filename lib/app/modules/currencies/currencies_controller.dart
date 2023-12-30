@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/app_colors.dart';
+import 'package:black_market/app/core/constants/app_strings.dart';
 import 'package:black_market/app/core/mapper/currency_in_bank.dart';
 import 'package:black_market/app/core/mapper/currency_in_home.dart';
 import 'package:black_market/app/core/model/bank.dart';
@@ -12,6 +14,7 @@ import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/currency_repo.dart';
 import 'package:black_market/app/core/repo/time_zone_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CurrenciesController extends GetxController {
@@ -36,6 +39,7 @@ class CurrenciesController extends GetxController {
   List<LatestCurrency> latestCurrencyList = [];
   List<CurrencyInBank> currencyInBankList = [];
   List<CurrencyInBank> bankData = [];
+  String? token;
 
   Map<String, List<LivePrices>> livePricesMap = {};
   Map<String, List<BlackPrices>> blackPricesMap = {};
@@ -126,29 +130,66 @@ class CurrenciesController extends GetxController {
     update();
   }
 
-  Future<void> addToFavourite(int bankId) async {
-    var found = false;
-    var favBanks = await SharedStorage.getFavouriteBanks();
-    var bank = currencyInBankList.firstWhere((element) => element.bankId == bankId);
-    if (favBanks.isEmpty) {
-      await SharedStorage.saveFavouriteBank(bank);
-    } else {
-      for (var element in favBanks) {
-        if (element.bankId == bankId) {
-          found = true;
-          break;
-        } else {
-          found = false;
-        }
-      }
-      if (found) {
-        await SharedStorage.deleteFavouriteItem(bank);
-      } else {
-        await SharedStorage.saveFavouriteBank(bank);
-      }
-      log("$found");
-    }
+  Future<void> getToken() async {
+    token = await SharedStorage.getToken();
+  }
 
+  void goToLogin() {
+    Get.toNamed("/login");
+  }
+
+  Future<void> addToFavourite(int bankId) async {
+    token = await SharedStorage.getToken();
+    if (token != null) {
+      var found = false;
+      var favBanks = await SharedStorage.getFavouriteBanks();
+      var bank =
+          currencyInBankList.firstWhere((element) => element.bankId == bankId);
+      if (favBanks.isEmpty) {
+        await SharedStorage.saveFavouriteBank(bank);
+      } else {
+        for (var element in favBanks) {
+          if (element.bankId == bankId) {
+            found = true;
+            break;
+          } else {
+            found = false;
+          }
+        }
+        if (found) {
+          await SharedStorage.deleteFavouriteItem(bank);
+          Get.showSnackbar(
+            GetSnackBar(
+              message: AppStrings.removedToFavourite,
+              duration: const Duration(seconds: 1),
+            ),
+          );
+        } else {
+          await SharedStorage.saveFavouriteBank(bank);
+          Get.showSnackbar(
+            GetSnackBar(
+              message: AppStrings.addedToFavourite,
+              duration: const Duration(seconds: 1),
+            ),
+          );
+        }
+        log("$found");
+      }
+    } else {
+      Get.showSnackbar(
+        GetSnackBar(
+          message: AppStrings.loginFirst,
+          mainButton: TextButton(
+            onPressed: () {
+              goToLogin();
+            },
+            child: Text(AppStrings.goLogin,
+                style: TextStyle(color: AppColors.yellowNormal)),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
   Future<void> getLatestCurrenciesFromPrefs() async {
