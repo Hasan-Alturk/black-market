@@ -231,6 +231,9 @@ class CurrenciesController extends GetxController {
     textChart = "";
     for (var element in latestCurrencyList) {
       if (element.bankPrices != null) {
+        //  if (!latestCurrencyList.contains(x)) {
+        //     latestCurrencyList.add(x);
+        //   }
         var x = element.bankPrices!.where((value) {
           return DateTime.parse(value.updatedAt).day == DateTime.now().day;
         });
