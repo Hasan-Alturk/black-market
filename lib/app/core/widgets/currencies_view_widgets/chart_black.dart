@@ -33,7 +33,7 @@ class ChartBlack extends GetView<CurrenciesController> {
         AspectRatio(
           aspectRatio: 1.1,
           child: Padding(
-            padding: EdgeInsets.only(right: 20.w),
+            padding: EdgeInsets.only(left: 5.w, right: 20.w),
             child: LineChart(
               mainData(),
               curve: Curves.easeInToLinear,
@@ -184,7 +184,7 @@ class ChartBlack extends GetView<CurrenciesController> {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.graylight,
     );
 
@@ -210,7 +210,7 @@ class ChartBlack extends GetView<CurrenciesController> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.graylight,
     );
 

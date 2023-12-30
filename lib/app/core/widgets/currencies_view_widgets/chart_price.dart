@@ -33,7 +33,7 @@ class ChartPrice extends GetView<CurrenciesController> {
         AspectRatio(
           aspectRatio: 1.1,
           child: Padding(
-            padding: EdgeInsets.only(right: 20.w),
+            padding: EdgeInsets.only(left: 5.w, right: 20.w),
             child: LineChart(
               mainData(),
               curve: Curves.easeInToLinear,
@@ -188,7 +188,7 @@ class ChartPrice extends GetView<CurrenciesController> {
   Widget bottomTitleWidget(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.graylight,
     );
     // String formattedDate = switch (value.toInt()) {
@@ -212,7 +212,7 @@ class ChartPrice extends GetView<CurrenciesController> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     var style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.graylight,
     );
 
