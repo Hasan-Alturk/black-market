@@ -51,8 +51,11 @@ class ChartBlack extends GetView<CurrenciesController> {
           double y = livePrice.buyPrice.toDouble();
           String? apiDate = livePrice.date;
           DateTime x = DateTime.parse(apiDate!);
-          spots.add(FlSpot(x.day.toDouble(), y));
-          axisX.add(x);
+
+          if (!axisX.contains(x)) {
+            axisX.add(x);
+            spots.add(FlSpot(x.day.toDouble(), y));
+          }
         }
       },
     );

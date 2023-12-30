@@ -43,6 +43,7 @@ class ChartPrice extends GetView<CurrenciesController> {
       ],
     );
   }
+  
 
   LineChartData mainData() {
     livePricesMap.forEach(
