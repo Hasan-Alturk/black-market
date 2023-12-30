@@ -178,13 +178,20 @@ class CurrenciesController extends GetxController {
     } else {
       Get.showSnackbar(
         GetSnackBar(
-          message: AppStrings.loginFirst,
-          mainButton: TextButton(
-            onPressed: () {
-              goToLogin();
-            },
-            child: Text(AppStrings.goLogin,
-                style: TextStyle(color: AppColors.yellowNormal)),
+          messageText: Text(
+            AppStrings.loginFirst,
+            style: TextStyle(color: AppColors.graylight),
+            textAlign: TextAlign.right,
+          ),
+          mainButton: Directionality(
+            textDirection: TextDirection.rtl,
+            child: TextButton(
+              onPressed: () {
+                goToLogin();
+              },
+              child: Text(AppStrings.goLogin,
+                  style: TextStyle(color: AppColors.yellowNormal)),
+            ),
           ),
           duration: const Duration(seconds: 3),
         ),

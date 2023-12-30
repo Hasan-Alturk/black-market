@@ -19,11 +19,11 @@ class BasicContainer extends GetView<BankDetailsController> {
               bottomRight: Radius.elliptical(120.r, 20.r))),
       height: 250.h,
       child: Padding(
-          padding:  EdgeInsets.all(8.h),
+          padding: EdgeInsets.all(8.h),
           child: Column(
             children: [
               Padding(
-                padding:  EdgeInsets.all(8.h),
+                padding: EdgeInsets.all(8.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -64,9 +64,7 @@ class BasicContainer extends GetView<BankDetailsController> {
                         color: AppColors.yellowLightActive,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
+                
                 ],
               ),
             ],
