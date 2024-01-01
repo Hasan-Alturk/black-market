@@ -259,7 +259,7 @@ class CurrenciesController extends GetxController {
         //     latestCurrencyList.add(x);
         //   }
         var x = element.bankPrices!.where((value) {
-          return DateTime.parse(value.updatedAt).day == DateTime.now().day;
+          return DateTime.parse(value.updatedAt).day == time.day;
         });
         for (var bank in x) {
           innerLoop:

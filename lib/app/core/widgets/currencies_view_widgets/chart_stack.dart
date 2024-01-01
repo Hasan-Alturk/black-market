@@ -41,7 +41,7 @@ class ChartStack extends GetView<CurrenciesController> {
               log(
                 controller.time
                     .subtract(
-                      const Duration(days: 7),
+                      Duration(days: controller.time.day),
                     )
                     .toString(),
               );
