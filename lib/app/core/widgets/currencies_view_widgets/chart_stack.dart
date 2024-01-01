@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_black.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_price.dart';
@@ -36,6 +38,13 @@ class ChartStack extends GetView<CurrenciesController> {
           builder: (_) {
             if (controller.valueTapBarPrice == 0 &&
                 controller.valueTapBarDate == 0) {
+              log(
+                controller.time
+                    .subtract(
+                      const Duration(days: 7),
+                    )
+                    .toString(),
+              );
               controller.textChart = "";
               controller.getHistoricalCurrencyLivePrices(
                 controller.time.subtract(const Duration(days: 7)).toString(),
@@ -53,6 +62,7 @@ class ChartStack extends GetView<CurrenciesController> {
                     )
                     .toString(),
               );
+
               return ChartPrice(
                 livePricesMap: controller.livePricesMap,
               );
