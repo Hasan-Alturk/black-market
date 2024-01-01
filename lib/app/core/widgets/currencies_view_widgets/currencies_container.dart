@@ -13,7 +13,7 @@ class CurrenciesContainer extends GetView<CurrenciesController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 15.h,
+      height: 20.h,
       child: GetBuilder<CurrenciesController>(
           id: "currencies",
           builder: (_) {
