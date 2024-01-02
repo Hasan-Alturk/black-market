@@ -31,7 +31,7 @@ class CurrenciesContainer extends GetView<CurrenciesController> {
                         controller.getCurrencyInBank(currencyId);
                         controller.getHistoricalCurrencyLivePrices(controller
                             .time
-                            .subtract(const Duration(days: 7))
+                            .subtract(Duration(days: controller.time.weekday))
                             .toString());
                         Get.back();
                       },

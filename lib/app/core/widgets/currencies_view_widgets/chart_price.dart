@@ -43,7 +43,6 @@ class ChartPrice extends GetView<CurrenciesController> {
       ],
     );
   }
-  
 
   LineChartData mainData() {
     livePricesMap.forEach(
@@ -60,6 +59,16 @@ class ChartPrice extends GetView<CurrenciesController> {
         }
       },
     );
+    //axisX.sort((a, b) => b.compareTo(a));
+    // log(axisX[0].toString());
+    // log(axisX[1].toString());
+
+// Print the sorted dates.
+    // for (var i = 0; i < 1; i++) {
+    //   for (DateTime date in axisX) {
+    //     log(date.toString());
+    //   }
+    // }
 
     for (int i = 0; i < spots.length; i++) {
       FlSpot currentSpot = spots[i];
