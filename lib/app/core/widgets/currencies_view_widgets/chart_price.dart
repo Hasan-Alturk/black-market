@@ -208,7 +208,7 @@ class ChartPrice extends GetView<CurrenciesController> {
     //   29 => DateFormat('MMM d').format(axisX[6]),
     //   _ => ""
     // };
-    if (value % 3 == 0) {
+    if (value % 3 == 0 || value == 1) {
       return SideTitleWidget(
         axisSide: meta.axisSide,
         space: 10,
