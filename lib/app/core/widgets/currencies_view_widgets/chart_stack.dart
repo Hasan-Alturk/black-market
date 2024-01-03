@@ -38,9 +38,7 @@ class ChartStack extends GetView<CurrenciesController> {
                 controller.valueTapBarDate == 0) {
               controller.textChart = "";
               controller.getHistoricalCurrencyLivePrices(
-                controller.time
-                    .subtract(Duration(days: controller.time.weekday))
-                    .toString(),
+                controller.time.subtract(const Duration(days: 7)).toString(),
               );
               return ChartPrice(
                 livePricesMap: controller.livePricesMap,
@@ -63,7 +61,7 @@ class ChartStack extends GetView<CurrenciesController> {
                 controller.valueTapBarDate == 0) {
               controller.getHistoricalCurrencyBlackPrices(
                 controller.time
-                    .subtract(Duration(days: controller.time.weekday))
+                    .subtract(Duration(days: controller.time.day))
                     .toString(),
               );
               return ChartBlack(
