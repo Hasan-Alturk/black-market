@@ -72,6 +72,7 @@ class ChartBlack extends GetView<CurrenciesController> {
 
     if (spots.isNotEmpty) {
       return LineChartData(
+        extraLinesData: const ExtraLinesData(),
         gridData: const FlGridData(
           show: true,
           drawHorizontalLine: false,
@@ -143,12 +144,12 @@ class ChartBlack extends GetView<CurrenciesController> {
             left: BorderSide(color: AppColors.gray),
           ),
         ),
-        minX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr < next ? curr : next),
-        maxX: spots
-            .map((spot) => spot.x)
-            .reduce((curr, next) => curr > next ? curr : next),
+        // minX: spots
+        //     .map((spot) => spot.x)
+        //     .reduce((curr, next) => curr < next ? curr : next),
+        // maxX: spots
+        //     .map((spot) => spot.x)
+        // .reduce((curr, next) => curr > next ? curr : next),
         minY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr < next ? curr : next) -
