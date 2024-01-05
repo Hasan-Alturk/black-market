@@ -1,5 +1,5 @@
 import 'package:black_market/app/core/constants/app_colors.dart';
-import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
+import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/modules/currencies/currencies_controller.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +8,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class ChartBlack extends GetView<CurrenciesController> {
+class ChartLive extends GetView<CurrenciesController> {
   List<FlSpot> spots = [];
   List axisX = [];
   List<Color> lineColors = [];
-  Map<String, List<BlackPrices>> blackPricesMap = {};
+  Map<String, List<LivePrices>> livePricesMap = {};
 
-  ChartBlack({super.key, required this.blackPricesMap});
+  ChartLive({super.key, required this.livePricesMap});
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +35,15 @@ class ChartBlack extends GetView<CurrenciesController> {
   }
 
   LineChartData mainData() {
-    blackPricesMap.forEach(
+    livePricesMap.forEach(
       (currency, livePricesList) {
         if (livePricesList.isNotEmpty) {
-          DateTime startDate = DateTime.parse(livePricesList[0].date!);
+          DateTime startDate = DateTime.parse(livePricesList[0].date);
 
-          for (BlackPrices livePrice in livePricesList) {
-            double y = livePrice.buyPrice.toDouble();
+          for (LivePrices livePrice in livePricesList) {
+            double y = livePrice.price.toDouble();
             String? apiDate = livePrice.date;
-            DateTime x = DateTime.parse(apiDate!);
+            DateTime x = DateTime.parse(apiDate);
             String formattedDate = DateFormat('d MMM').format(x);
 
             int days = x.difference(startDate).inDays;
@@ -214,7 +214,9 @@ Widget leftTitleWidgets(double value, TitleMeta meta) {
       value % 3 == 0 ||
       value % 4 == 0 ||
       value % 5 == 0 ||
-      value % 6 == 0) {
+      value % 6 == 0 ||
+      value % 7 == 0 ||
+      value % 8 == 0) {
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 5.w,

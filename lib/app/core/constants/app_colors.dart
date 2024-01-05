@@ -47,11 +47,5 @@ abstract class AppColors {
   static Color yellowDarkActive = const Color(0xff726300);
   static Color yellowDarker = const Color(0xff594d00);
 
-// yellow Gradient
-  static Color startYellowGrad = const Color.fromARGB(255, 183, 177, 3);
-  static Color endYellowGrad = const Color(0xffb3dfa1);
-
-// red Gradient
-  static Color startRedGrad = const Color.fromARGB(255, 133, 3, 3);
-  static Color endRedGrad = const Color.fromARGB(255, 118, 13, 13);
+  static Color redGrad = const Color.fromARGB(255, 185, 9, 9);
 }
