@@ -47,18 +47,42 @@ class ChartBlack extends GetView<CurrenciesController> {
   LineChartData mainData() {
     blackPricesMap.forEach(
       (currency, livePricesList) {
-        for (var livePrice in livePricesList) {
-          double y = livePrice.buyPrice.toDouble();
-          String? apiDate = livePrice.date;
-          DateTime x = DateTime.parse(apiDate!);
+        // تحقق من أن القائمة ليست فارغة
+        if (livePricesList.isNotEmpty) {
+          // تحديد تاريخ البداية بناءً على أول عنصر في القائمة
+          DateTime startDate = DateTime.parse(livePricesList[0].date!);
 
-          if (!axisX.contains(x)) {
-            axisX.add(x);
-            spots.add(FlSpot(x.day.toDouble(), y));
+          for (var livePrice in livePricesList) {
+            double y = livePrice.buyPrice.toDouble();
+            String? apiDate = livePrice.date;
+            DateTime x = DateTime.parse(apiDate!);
+
+            // تحويل التاريخ إلى عدد الأيام من تاريخ البداية
+            int days = x.difference(startDate).inDays;
+
+            if (!axisX.contains(x)) {
+              axisX.add(x);
+              spots.add(FlSpot(days.toDouble(), y));
+            }
           }
         }
       },
     );
+
+    // blackPricesMap.forEach(
+    //   (currency, livePricesList) {
+    //     for (var livePrice in livePricesList) {
+    //       double y = livePrice.buyPrice.toDouble();
+    //       String? apiDate = livePrice.date;
+    //       DateTime x = DateTime.parse(apiDate!);
+
+    //       if (!axisX.contains(x)) {
+    //         axisX.add(x);
+    //         spots.add(FlSpot(x.day.toDouble(), y));
+    //       }
+    //     }
+    //   },
+    // );
 
     for (int i = 0; i < spots.length; i++) {
       FlSpot currentSpot = spots[i];
@@ -94,7 +118,7 @@ class ChartBlack extends GetView<CurrenciesController> {
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
-          leftTitles: AxisTitles(
+          leftTitles: const AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 30,
@@ -128,10 +152,15 @@ class ChartBlack extends GetView<CurrenciesController> {
               if (selectedSpotIndex < touchResponse.lineBarSpots!.length) {
                 final TouchLineBarSpot touchedSpot =
                     touchResponse.lineBarSpots!.elementAt(selectedSpotIndex);
-                final String xValue = touchedSpot.x.toInt().toString();
+                final int xValue = touchedSpot.x.toInt();
                 final String yValue = touchedSpot.y.toString();
-                String data = DateFormat('MMM').format(axisX[0]);
-                controller.getTextChart('EGP\t $yValue\n$data\t\t\t\t$xValue');
+
+                // تحقق من أن xValue لا يتجاوز طول القائمة axisX
+                if (xValue < axisX.length) {
+                  String data = DateFormat('MMM').format(axisX[xValue]);
+                  controller
+                      .getTextChart('EGP\t $yValue\n$data\t\t\t\t$xValue');
+                }
               }
             }
           },
@@ -144,12 +173,12 @@ class ChartBlack extends GetView<CurrenciesController> {
             left: BorderSide(color: AppColors.gray),
           ),
         ),
-        // minX: spots
-        //     .map((spot) => spot.x)
-        //     .reduce((curr, next) => curr < next ? curr : next),
-        // maxX: spots
-        //     .map((spot) => spot.x)
-        // .reduce((curr, next) => curr > next ? curr : next),
+        minX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr < next ? curr : next),
+        maxX: spots
+            .map((spot) => spot.x)
+            .reduce((curr, next) => curr > next ? curr : next),
         minY: spots
                 .map((spot) => spot.y)
                 .reduce((curr, next) => curr < next ? curr : next) -
@@ -162,11 +191,11 @@ class ChartBlack extends GetView<CurrenciesController> {
           LineChartBarData(
             show: true,
             spots: spots,
-            isCurved: true,
+            isCurved: false,
             barWidth: 3,
             isStepLineChart: false,
             dotData: const FlDotData(
-              show: false,
+              show: true,
             ),
             gradient: LinearGradient(
               colors: lineColors,
@@ -194,12 +223,13 @@ class ChartBlack extends GetView<CurrenciesController> {
 
     // String formattedDate = switch (value.toInt()) {
     //   1 => DateFormat('MMM d').format(axisX[0]),
-    //   8 => DateFormat('MMM d').format(axisX[7]),
-    //   15 => DateFormat('MMM d').format(axisX[14]),
-    //   24 => DateFormat('MMM d').format(axisX[23]),
-    //   30 => DateFormat('MMM d').format(axisX[29]),
+    //   10 => DateFormat('MMM d').format(axisX[1]),
+    //   20 => DateFormat('MMM d').format(axisX[2]),
+    //   30 => DateFormat('MMM d').format(axisX[3]),
+    //   40 => DateFormat('MMM d').format(axisX[4]),
     //   _ => ""
     // };
+
     if (value % 3 == 0 || value == 1) {
       return SideTitleWidget(
         axisSide: meta.axisSide,
@@ -210,22 +240,22 @@ class ChartBlack extends GetView<CurrenciesController> {
       return const SizedBox.shrink();
     }
   }
+}
 
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    var style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14.sp,
-      color: AppColors.graylight,
+Widget leftTitleWidgets(double value, TitleMeta meta) {
+  var style = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 14.sp,
+    color: AppColors.graylight,
+  );
+
+  if (value % 2 == 0) {
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 5.w,
+      child: Text("${value.toInt()}", style: style),
     );
-
-    if (value % 2 == 0) {
-      return SideTitleWidget(
-        axisSide: meta.axisSide,
-        space: 5.w,
-        child: Text("${value.toInt()}", style: style),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+  } else {
+    return const SizedBox.shrink();
   }
 }
