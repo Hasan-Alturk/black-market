@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
@@ -32,9 +30,6 @@ class PreferredOfCurrenciesController extends GetxController {
       latestCurrencyList[i].sort = i;
     }
 
-    for (var element in latestCurrencyList) {
-      log("${element.sort}updateMyTiles");
-    }
     update(["currency"]);
   }
 
@@ -44,9 +39,6 @@ class PreferredOfCurrenciesController extends GetxController {
       latestCurrencyList.addAll(currencies);
     } else {
       return;
-    }
-    for (var element in latestCurrencyList) {
-      log("${element.sort}Prefs");
     }
 
     update(["currency"]);

@@ -19,7 +19,7 @@ class AboutAppView extends GetView<AboutAppController> {
         onTap: () => Get.back(),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0.w),
         child: Column(
           children: [
             SizedBox(

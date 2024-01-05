@@ -18,7 +18,7 @@ class MainProfileView extends GetView<MainProfileController> {
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.w),
           child: Column(
             children: [
               SizedBox(

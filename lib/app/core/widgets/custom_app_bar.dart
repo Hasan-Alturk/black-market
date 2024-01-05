@@ -15,30 +15,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      actions: [
-        GestureDetector(
-          onTap: onTap,
-          child: Image.asset(AppAssetIcons.back),
-        ),
-      ],
-      automaticallyImplyLeading: false,
-      centerTitle: true,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-            ),
+    return Padding(
+      padding: EdgeInsets.all(8.0.w),
+      child: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: onTap,
+            child: Image.asset(AppAssetIcons.back),
           ),
         ],
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: AppColors.blackNormalHover,
       ),
-      backgroundColor: AppColors.blackNormalHover,
     );
   }
 

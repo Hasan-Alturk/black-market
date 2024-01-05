@@ -104,6 +104,7 @@ abstract class AppStrings {
       "إضغط مطولاً علي أي عملة لتغيير ترتيبها.\nيمكنك تعديل هذه القائمة لاحقاََ.";
 
   static String dragBank = "إختر الترتيب المفضل للبنوك";
+
   static String dragCurrency = "إختر الترتيب المفضل للعملات";
   static String bank = "البنك";
   static String week = "اسبوع";

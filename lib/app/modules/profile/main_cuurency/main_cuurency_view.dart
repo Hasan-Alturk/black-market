@@ -21,7 +21,7 @@ class MainCurencyView extends GetView<MainCurencyController> {
       backgroundColor: AppColors.blackNormalHover,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -40,9 +40,6 @@ class MainCurencyView extends GetView<MainCurencyController> {
                   return ListView.builder(
                     itemCount: controller.latestCurrencyList.length,
                     itemBuilder: (context, index) {
-                      // String currencyName =
-                      //     controller.latestCurrencyList[index].name.toString();
-
                       return Column(
                         children: [
                           CustomContainerDrag(

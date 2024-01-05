@@ -17,12 +17,12 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
-        text: AppStrings.setting,
+        text: AppStrings.preferredBanks,
         onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(8.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -31,8 +31,8 @@ class PreferredOfBanksView extends GetView<PreferredOfBanksController> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                height: 80.h,
-                width: 340.w,
+                height: 85.h,
+                width: 350.w,
                 decoration: BoxDecoration(
                   color: AppColors.gray,
                   border: Border.all(color: AppColors.gray),

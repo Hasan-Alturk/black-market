@@ -18,12 +18,12 @@ class PreferredOfCurrenciesView
     return Scaffold(
       backgroundColor: AppColors.blackNormalHover,
       appBar: CustomAppBar(
-        text: AppStrings.setting,
+        text: AppStrings.preferredCurrencies,
         onTap: () => Get.back(),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(8.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -31,9 +31,9 @@ class PreferredOfCurrenciesView
                 height: 20.h,
               ),
               Container(
-                padding: const EdgeInsets.all(12),
-                height: 80.h,
-                width: 340.w,
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                height: 85.h,
+                width: 350.w,
                 decoration: BoxDecoration(
                   color: AppColors.gray,
                   border: Border.all(color: AppColors.gray),

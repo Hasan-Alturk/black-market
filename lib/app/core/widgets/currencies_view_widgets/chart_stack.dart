@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/widgets/currencies_view_widgets/chart_black.dart';

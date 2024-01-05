@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:black_market/app/core/constants/app_asset_icons.dart';
 import 'package:black_market/app/core/constants/app_colors.dart';
 import 'package:black_market/app/core/constants/app_strings.dart';
@@ -101,7 +103,14 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                 textColor: AppColors.blackDark,
                 isLoading: controller.isLoading,
                 text: AppStrings.complete,
-                onPressed: () => controller.goToNewPasswordSuccessfully(),
+                onPressed: () {
+                  isChanged = true;
+                  if (formKey.currentState!.validate()) {
+                    controller.goToNewPasswordSuccessfully();
+                  } else {
+                    log("Error From validate");
+                  }
+                },
                 buttonColor: AppColors.yellowNormal,
                 radius: 14.r,
               );
