@@ -8,6 +8,7 @@ import 'package:black_market/app/core/plugin/shared_storage.dart';
 import 'package:black_market/app/core/repo/bank_repo.dart';
 import 'package:black_market/app/core/repo/setting_repo.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +32,24 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
+  Future<void> requestPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log(message.notification!.title.toString());
+      log(message.notification!.body.toString());
+    });
+  }
+
   Future<void> onStartSplash() async {
     try {
       isLoading = true;
@@ -45,6 +64,7 @@ class SplashController extends GetxController {
   }
 
   Future<void> checkToken() async {
+    await requestPermission();
     await getSetting();
     await getBanks();
     // await getBanks().then((value) => getSortedBanks());
@@ -135,7 +155,8 @@ class SplashController extends GetxController {
     for (var element1 in latestCurrencies) {
       for (var element2 in latestCurrenciesSorted) {
         if (element1.name == element2.name) {
-          if (element1.sort != element2.sort || element1.lastUpdate != element2.lastUpdate) {
+          if (element1.sort != element2.sort ||
+              element1.lastUpdate != element2.lastUpdate) {
             element2.bankPrices = element1.bankPrices;
             element2.banner = element1.banner;
             element2.blackMarketPrices = element1.blackMarketPrices;
@@ -154,7 +175,7 @@ class SplashController extends GetxController {
       }
     }
     for (var element in latestCurrenciesSorted) {
-      log(element.updatedAt! +element.updatedAt.toString());
+      log(element.updatedAt! + element.updatedAt.toString());
     }
     return latestCurrenciesSorted;
   }

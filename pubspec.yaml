@@ -47,6 +47,8 @@ dependencies:
   draggable_home: ^1.0.2
   bubble_tab_indicator: "^0.1.5"
   firebase_messaging: ^14.7.9
+  firebase_core: ^2.24.2
+
 
 
 
