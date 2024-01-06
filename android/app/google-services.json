@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "947492197474",
+    "project_id": "hasan-alturk",
+    "storage_bucket": "hasan-alturk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947492197474:android:8f728c765c06b0ed6bed3b",
+        "android_client_info": {
+          "package_name": "com.example.black_market"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDddPzoAwVrFF0HbDCVBtSIn4lShQ9Gg28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
