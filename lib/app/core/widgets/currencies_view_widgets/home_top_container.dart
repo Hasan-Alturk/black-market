@@ -75,7 +75,7 @@ class HomeTopContainer extends GetView<CurrenciesController> {
         ),
       ),
       Container(
-        height: 90.h,
+        height: 92.h,
         width: 350.w,
         decoration: BoxDecoration(
           color: AppColors.yellowLight,
@@ -84,11 +84,11 @@ class HomeTopContainer extends GetView<CurrenciesController> {
         child: Column(
           children: [
             SizedBox(
-              height: 12.h,
+              height: 10.h,
             ),
             const CurrenciesContainer(),
             SizedBox(
-              height: 10.h,
+              height: 5.h,
             ),
             const LastUpdateContainer()
           ],

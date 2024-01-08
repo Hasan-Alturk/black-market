@@ -1,4 +1,4 @@
-package com.example.black_market
+package com.hasan_alturk.black_market
 
 import io.flutter.embedding.android.FlutterActivity
 

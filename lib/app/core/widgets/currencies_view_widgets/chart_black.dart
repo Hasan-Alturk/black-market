@@ -91,7 +91,7 @@ class ChartBlack extends GetView<CurrenciesController> {
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
-          leftTitles: const AxisTitles(
+          leftTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 30,
@@ -201,26 +201,29 @@ class ChartBlack extends GetView<CurrenciesController> {
       return const SizedBox.shrink();
     }
   }
-}
 
-Widget leftTitleWidgets(double value, TitleMeta meta) {
-  var style = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 14.sp,
-    color: AppColors.graylight,
-  );
-
-  if (value % 2 == 0 ||
-      value % 3 == 0 ||
-      value % 4 == 0 ||
-      value % 5 == 0 ||
-      value % 6 == 0) {
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 5.w,
-      child: Text("${value.toInt()}", style: style),
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
+    var style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 14.sp,
+      color: AppColors.graylight,
     );
-  } else {
-    return const SizedBox.shrink();
+
+    if (value % 2 == 0 ||
+        value % 3 == 0 ||
+        value % 4 == 0 ||
+        value % 5 == 0 ||
+        value % 6 == 0 ||
+        value % 7 == 0 ||
+        value % 8 == 0 ||
+        value % 9 == 0) {
+      return SideTitleWidget(
+        axisSide: meta.axisSide,
+        space: 5.w,
+        child: Text("${value.toInt()}", style: style),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }
