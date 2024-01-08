@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCxoq8qtiUfw7RYhPzP3HltR0CZ6fNQX68',
-    appId: '1:947492197474:web:3140468d6719a19c6bed3b',
-    messagingSenderId: '947492197474',
-    projectId: 'hasan-alturk',
-    authDomain: 'hasan-alturk.firebaseapp.com',
-    storageBucket: 'hasan-alturk.appspot.com',
-    measurementId: 'G-L7D8E1HEFW',
+    apiKey: 'AIzaSyCRSZnb_B5RKb9uU9LQgyzuRD5ST8VF3P4',
+    appId: '1:829943681282:web:e829a3f3456f37d167f21b',
+    messagingSenderId: '829943681282',
+    projectId: 'blackmarketalturk',
+    authDomain: 'blackmarketalturk.firebaseapp.com',
+    storageBucket: 'blackmarketalturk.appspot.com',
+    measurementId: 'G-WVLK2DNSJ7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDddPzoAwVrFF0HbDCVBtSIn4lShQ9Gg28',
-    appId: '1:947492197474:android:8f728c765c06b0ed6bed3b',
-    messagingSenderId: '947492197474',
-    projectId: 'hasan-alturk',
-    storageBucket: 'hasan-alturk.appspot.com',
+    apiKey: 'AIzaSyCVcuwpHz5fgtsepj8Zu8aph1gTn6NmGcg',
+    appId: '1:829943681282:android:4a72be359c9698ed67f21b',
+    messagingSenderId: '829943681282',
+    projectId: 'blackmarketalturk',
+    storageBucket: 'blackmarketalturk.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCM5Upl9kUwLsB73duJ7IJznyupEIiPJN8',
-    appId: '1:947492197474:ios:0ed77e86f6c9f9916bed3b',
-    messagingSenderId: '947492197474',
-    projectId: 'hasan-alturk',
-    storageBucket: 'hasan-alturk.appspot.com',
+    apiKey: 'AIzaSyB8OQDBYpp3XkpuZNw0hNcEic1I_bCcsjY',
+    appId: '1:829943681282:ios:1053c0bcd3a1e88a67f21b',
+    messagingSenderId: '829943681282',
+    projectId: 'blackmarketalturk',
+    storageBucket: 'blackmarketalturk.appspot.com',
     iosBundleId: 'com.example.blackMarket',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCM5Upl9kUwLsB73duJ7IJznyupEIiPJN8',
-    appId: '1:947492197474:ios:03da11cac28c45686bed3b',
-    messagingSenderId: '947492197474',
-    projectId: 'hasan-alturk',
-    storageBucket: 'hasan-alturk.appspot.com',
+    apiKey: 'AIzaSyB8OQDBYpp3XkpuZNw0hNcEic1I_bCcsjY',
+    appId: '1:829943681282:ios:c21d92d830a0958b67f21b',
+    messagingSenderId: '829943681282',
+    projectId: 'blackmarketalturk',
+    storageBucket: 'blackmarketalturk.appspot.com',
     iosBundleId: 'com.example.blackMarket.RunnerTests',
   );
 }
