@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/model/setting.dart';
@@ -7,7 +8,6 @@ import 'package:black_market/app/core/model/user_setting.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
 
 class SettingRepo {
   SettingRepo(this.dio);
@@ -18,7 +18,7 @@ class SettingRepo {
       log("logOut repo:");
 
       Response res = await dio.get(
-        "$baseUrl/logout",
+        "${BaseUrls.baseUrl}/logout",
         options: Options(headers: {"Authorization": "Bearer $token"}),
       );
       log("Response Data: ${res.data}");
@@ -36,7 +36,7 @@ class SettingRepo {
   Future<UserSetting> getUserSetting({required String token}) async {
     try {
       Response response = await dio.get(
-        "$baseUrl/me",
+        "${BaseUrls.baseUrl}/me",
         options: Options(headers: {"Authorization": "Bearer $token"}),
       );
       UserSetting userSetting = UserSetting.fromJson(response.data);
@@ -54,7 +54,7 @@ class SettingRepo {
 
   Future<List<Bank>> getBanks() async {
     try {
-      Response response = await dio.get("$baseUrl/banks");
+      Response response = await dio.get("${BaseUrls.baseUrl}/banks");
 
       List<Bank> bankList = Bank.bankList(response.data);
 
@@ -73,7 +73,7 @@ class SettingRepo {
 
   Future<List<LatestCurrency>> getLatestCurrencies() async {
     try {
-      Response response = await dio.get("$baseUrl/currencies/latest");
+      Response response = await dio.get("${BaseUrls.baseUrl}/currencies/latest");
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);
@@ -95,7 +95,7 @@ class SettingRepo {
   Future<Setting> getSetting() async {
     try {
       Response response = await dio.get(
-        "$baseUrl/settings/banners.home_global_banner,banners.home_global_yellow_banner,banners.banks_global_banner,banners.banks_global_yellow_banner,banners.above_banks_card,banners.above_banks_card_yellow,app.enable_rate_dialog,app.about_text,app.dealing_caution,ads.display_views_counter,app.min_android_version",
+        "${BaseUrls.baseUrl}/settings/banners.home_global_banner,banners.home_global_yellow_banner,banners.banks_global_banner,banners.banks_global_yellow_banner,banners.above_banks_card,banners.above_banks_card_yellow,app.enable_rate_dialog,app.about_text,app.dealing_caution,ads.display_views_counter,app.min_android_version",
       );
 
       Setting setting = Setting.fromJson(response.data);

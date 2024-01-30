@@ -1,12 +1,12 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/historical_currency_black_prices.dart';
 import 'package:black_market/app/core/model/historical_currency_live_prices.dart';
 import 'package:black_market/app/core/model/latest_currency.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
 
 class CurrencyRepo {
   CurrencyRepo(this.dio);
@@ -14,7 +14,7 @@ class CurrencyRepo {
 
   Future<List<LatestCurrency>> getLatestCurrencies() async {
     try {
-      Response response = await dio.get("$baseUrl/currencies/latest");
+      Response response = await dio.get("${BaseUrls.baseUrl}/currencies/latest");
 
       List<LatestCurrency> latestCurrencyList =
           LatestCurrency.latestCurrencyList(response.data);
@@ -45,7 +45,7 @@ class CurrencyRepo {
         "type": type,
       };
       Response response = await dio.get(
-        "$baseUrl/currencies/historical",
+        "${BaseUrls.baseUrl}/currencies/historical",
         queryParameters: queryParameters,
       );
       HistoricalCurrencyLivePrices historicalCurrencyLivePrices =
@@ -76,7 +76,7 @@ class CurrencyRepo {
         "type": type,
       };
       Response response = await dio.get(
-        "$baseUrl/currencies/historical",
+        "${BaseUrls.baseUrl}/currencies/historical",
         queryParameters: queryParameters,
       );
       HistoricalCurrencyBlackPrices historicalCurrencyBlackPrices =

@@ -1,10 +1,10 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/bank.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
 
 class BankRepo {
   BankRepo(this.dio);
@@ -12,7 +12,7 @@ class BankRepo {
 
   Future<List<Bank>> getBanks() async {
     try {
-      Response response = await dio.get("$baseUrl/banks");
+      Response response = await dio.get("${BaseUrls.baseUrl}/banks");
 
       List<Bank> bankList = Bank.bankList(response.data);
       log("GetBanksFromRemote");

@@ -1,12 +1,12 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/html_article.dart';
 import 'package:black_market/app/core/model/articles.dart';
 import 'package:black_market/app/core/model/notifications.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
 
 class NotificationRepo {
   NotificationRepo(this.dio);
@@ -24,7 +24,7 @@ class NotificationRepo {
         "page": page,
       };
       Response response = await dio.get(
-        "$baseUrl/notifications",
+        "${BaseUrls.baseUrl}/notifications",
         queryParameters: queryParameters,
       );
 
@@ -52,7 +52,7 @@ class NotificationRepo {
         "page": page,
       };
       Response response =
-          await dio.get("$baseUrl/articles", queryParameters: queryParameters);
+          await dio.get("${BaseUrls.baseUrl}/articles", queryParameters: queryParameters);
 
       Articles articles = Articles.fromJson(response.data);
       return articles;
@@ -70,7 +70,7 @@ class NotificationRepo {
 
   Future<HtmlArticle> getHtmlArticle(String id) async {
     try {
-      Response response = await dio.get("$baseUrl/articles/$id");
+      Response response = await dio.get("${BaseUrls.baseUrl}/articles/$id");
 
       HtmlArticle htmlarticle = HtmlArticle.fromJson(response.data);
       log(htmlarticle.firstPageUrl);

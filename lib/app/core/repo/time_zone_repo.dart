@@ -1,21 +1,22 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/time_zone.dart';
+import 'package:black_market/app/core/model/time_zone_new.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://worldtimeapi.org/api/timezone/Africa/Cairo";
 
 class TimeZoneRepo {
   final Dio dio;
 
   TimeZoneRepo({required this.dio});
 
-  Future<DateTime?> getTime() async {
+  Future<DateTime> getTime() async {
     try {
-      Response response = await dio.get(baseUrl);
-      Time data = Time.fromJson(response.data);
-      DateTime? time = data.datetime;
+      Response response = await dio.get(BaseUrls.timeZoneUrl);
+      TimeZone data = TimeZone.fromJson(response.data);
+      DateTime? time = DateTime.parse(data.dateTime!);
       return time;
     } on DioException catch (e) {
       log(e.response!.statusCode.toString());

@@ -52,11 +52,11 @@ class CurrenciesController extends GetxController {
 
   @override
   void onInit() async {
-    time = (await timeRepo.getTime())!;
     await getNameAndAvatar();
     await getBanksFromPrefs();
     await getLatestCurrenciesFromPrefs().then((value) async {
       if (latestCurrencyList.isNotEmpty) {
+        time = await timeRepo.getTime();
         selectedCurrencyId = latestCurrencyList[0].id!;
         await getBanksAccordingToSelectedCurrency(latestCurrencyList[0].id!);
         getCurrencyInBank(latestCurrencyList[0].id!);

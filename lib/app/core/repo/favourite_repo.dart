@@ -1,10 +1,10 @@
 import 'dart:developer';
 
+import 'package:black_market/app/core/constants/base_urls.dart';
 import 'package:black_market/app/core/model/favourite.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
 
 class FavouriteRepo {
   final Dio dio;
@@ -17,7 +17,7 @@ class FavouriteRepo {
       required String token}) async {
     try {
       Response response = await dio.post(
-        "$baseUrl/favorites/add",
+        "${BaseUrls.baseUrl}/favorites/add",
         data: {
           "bank_id": bankId,
           "currency_id": currencyId,
@@ -46,7 +46,7 @@ class FavouriteRepo {
       required String token}) async {
     try {
       Response response = await dio.post(
-        "$baseUrl/favorites/add",
+        "${BaseUrls.baseUrl}/favorites/add",
         data: {
           "bank_id": bankId,
           "currency_id": currencyId,

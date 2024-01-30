@@ -4,7 +4,8 @@ import 'package:black_market/app/core/model/user.dart';
 import 'package:black_market/app/core/services/error_handler.dart';
 import 'package:dio/dio.dart';
 
-String baseUrl = "https://voipsys.space/api";
+import '../constants/base_urls.dart';
+
 
 class AuthRepo {
   AuthRepo(this.dio);
@@ -14,7 +15,7 @@ class AuthRepo {
       {required String email, required String password}) async {
     try {
       Response response = await dio.post(
-        "$baseUrl/login",
+        "${BaseUrls.baseUrl}/login",
         data: {
           "email": email,
           "password": password,
@@ -43,7 +44,7 @@ class AuthRepo {
   }) async {
     try {
       Response response = await dio.post(
-        "$baseUrl/register",
+        "${BaseUrls.baseUrl}/register",
         data: {
           "name": name,
           "email": email,
@@ -69,7 +70,7 @@ class AuthRepo {
   Future<void> sendOtp({required String email}) async {
     try {
       Response response = await dio.post(
-        "$baseUrl/forget_password",
+        "${BaseUrls.baseUrl}/forget_password",
         data: {
           "email": email,
         },
@@ -94,7 +95,7 @@ class AuthRepo {
   }) async {
     try {
       var response = await dio.post(
-        "$baseUrl/update_forgotten_password",
+        "${BaseUrls.baseUrl}/update_forgotten_password",
         data: {
           "password": password,
           "password_confirmation": passwordConfirmation,
